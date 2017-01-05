@@ -1,17 +1,9 @@
 language: node_js
 node_js: node
-#services:
-#- mongodb
-#addons:
-#  apt:
-#    sources:
-#    - mongodb-3.2-precise
-#    packages:
-#    - mongodb-org-server
 deploy:
   provider: heroku
   api_key:
-    secure: ijESDJ33cq6C97Ea3XFqaFtbiSQZxSP/XEaNgCa6eH4ZsAVdRbmLupStTNG7s0nMKk1MTB6o2MeBHzmcTik5NfKl3dYZrXK3FAzDcnkwcewVTwLLlqougZWT+s8fFXcvbun6MpOC757c3qvL58bIz7cfMH5J4fRm7IBDyLtjV5R9Vo3x3b+Mhh6mD0m9mJ8ee9RSa8owZtVBNohMV/o5byDWb70lvSceO75/qM/Cqh0ZJxHuhJj7biDd5HCkcadlk64Sec0Jas4SpwzBoc9TanKoufZJ2DbI9Xg4uFLeX5zuNb71YYmK9/iDv87QRLutqgDDGL+6jNSiej0QcL6ikG8etVfdmUL71vEywAXWSGtx4/jqp5oEZK5oMU5UOzdQUX4Um/ASbyDY6V4p79AFRX9JcKXWN5vgv4mdihQOdv2nM3jYOA/S0pD2X6HZqepKqBfDg0R5DKwEeWYZ3lW3kbDnzuFtZTKDiXg6WzCdXd0zjsiXIIc5eKWX6xgYYslj7wZPTuJ7PaUbB+qh3euvK/Od+M2AtkEQ5zylRiSa+tAdYCprfGDQAzGlrZcxse2hhzpnvoJ+kiBGcZ0PdCuYJwIJHDfQO76jfrrFfFQYB+U319IHJX73XwgTIWwsFEfJubpD4OgqHmFdU04cL+8VwTj+U5GwtZjB4nk24BYeQ2E=
+    secure: nAPNrctl6cS5L6TuqaP19xtPVBNZnmxTv3Wxmiup1S30wPPubNI5VSXtKBVMRfdGS7selwdccqnYlII6SN7z2Kr2uFjuaSK/4sab3/gMBGsdX4gVvAowtBiD1FLokW21WrYQdYYUPvlHse1sD6Bt9DZ6sjrt9thBNrNh/EHypfmCb0EN08wtGO4x5FLMcdsZbYF282H50b62Jz71Geh4iJxkjN/yKxwOBNS01oz4qIaLQ4GFEOmQ2s+fCQpDUdT2OSwgJwxZmnV/x7nwGytqfcdwh13n2hjtZBdb1IAlY5dEDCM1ZGfBMxoRKKddypmGpon3ZMPcf5omNbaFOopIwbQBtR1AtUmiq9LDNlsBh3VAOUlKQdPpV/3C7LNXVyvi2E3zIQgI+9e4cYjKPBZnsrdi9793jdqhqyKka12jPywG/vRaxQA0BeJAkvbF0nLLvoiBtQf9P8B05urvBIF38SZT/GMby5T29E0AW5F+gyrRdjqfGb7njbJ4KRXr6v0t1/4NZ5dCtkQRNWm+Q4rGduuXdEgzxfhykNXcweh+5odlaNypChc6wo+yi4N4onehpmH8w56WQa7YllVhEzwx1pNv3MrFU0WSCNljvfpQnK6oehOJoxepL3+0143MGr7NEd4aR+lcoRO36Uk3kUirLQT8FD59O6r8nnmeSzmPLuU=
   app: dry-mountain-79844
   on:
     repo: morettisf/bbq-tracker
