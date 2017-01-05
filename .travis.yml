@@ -8,3 +8,10 @@ node_js: node
 #    - mongodb-3.2-precise
 #    packages:
 #    - mongodb-org-server
+deploy:
+  provider: heroku
+  api_key:
+    secure: ijESDJ33cq6C97Ea3XFqaFtbiSQZxSP/XEaNgCa6eH4ZsAVdRbmLupStTNG7s0nMKk1MTB6o2MeBHzmcTik5NfKl3dYZrXK3FAzDcnkwcewVTwLLlqougZWT+s8fFXcvbun6MpOC757c3qvL58bIz7cfMH5J4fRm7IBDyLtjV5R9Vo3x3b+Mhh6mD0m9mJ8ee9RSa8owZtVBNohMV/o5byDWb70lvSceO75/qM/Cqh0ZJxHuhJj7biDd5HCkcadlk64Sec0Jas4SpwzBoc9TanKoufZJ2DbI9Xg4uFLeX5zuNb71YYmK9/iDv87QRLutqgDDGL+6jNSiej0QcL6ikG8etVfdmUL71vEywAXWSGtx4/jqp5oEZK5oMU5UOzdQUX4Um/ASbyDY6V4p79AFRX9JcKXWN5vgv4mdihQOdv2nM3jYOA/S0pD2X6HZqepKqBfDg0R5DKwEeWYZ3lW3kbDnzuFtZTKDiXg6WzCdXd0zjsiXIIc5eKWX6xgYYslj7wZPTuJ7PaUbB+qh3euvK/Od+M2AtkEQ5zylRiSa+tAdYCprfGDQAzGlrZcxse2hhzpnvoJ+kiBGcZ0PdCuYJwIJHDfQO76jfrrFfFQYB+U319IHJX73XwgTIWwsFEfJubpD4OgqHmFdU04cL+8VwTj+U5GwtZjB4nk24BYeQ2E=
+  app: dry-mountain-79844
+  on:
+    repo: morettisf/bbq-tracker
