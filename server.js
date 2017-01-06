@@ -6,7 +6,8 @@ const routes = require('./routes/routes')
 const app = express()
 
 
-app.use(express.static('public'))
+//app.use(express.static('public'))
+app.set('view engine', 'ejs') // enabling view engine templates
 app.use(bodyParser.json())
 
 routes(app)

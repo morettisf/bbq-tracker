@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+</head>
+<body>
+  <p><%= message %></p>
+  <ul>
+    <% logs.forEach(function (log) { %>
+      <li><%= log.title %></li>
+    <% }) %>
+  </ul>
+</body>
+</html>
+
