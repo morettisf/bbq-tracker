@@ -1,8 +1,15 @@
 module.exports = (app) => {
   app.get('/', function(req, res) {
-//    res.json({hi: 'there'})
-  var logs = [{ title: 'Log A' }, { title: 'Log B' }, { title: 'Log C' }]
-  res.render('index', { title: 'Hey', message: 'Hello there!', logs: logs }) // pug dynamic content
+    var logs = [{ title: 'Log A' }, { title: 'Log B' }, { title: 'Log C' }]
+    res.render('index', { title: 'Hey', message: 'Hello there!', logs: logs }) // pug dynamic content
+  })
+
+  app.get('/create-log', function(req, res) {
+    res.render('create-log', { title: 'BBQ Tracker | Create New BBQ Log', message: 'NEW LOG content' })
+  })
+
+  app.get('/log-history', function(req, res) {
+    res.render('log-history', { title: 'BBQ Tracker | Log History', message: 'LOG HISTORY content' })
   })
 }
 
