@@ -7,6 +7,11 @@
 <body>
   <%- include header.ejs -%>
   <p><%= message %></p>
+  <ul>
+    <% logs.forEach(function (log) { %>
+      <li><%= log.title %></li>
+    <% }) %>
+  </ul>
 </body>
 </html>
 

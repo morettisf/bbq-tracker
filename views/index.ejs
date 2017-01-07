@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href='../css/home.css'>
   <title><%= title %></title>
 </head>
 <body>
-  <p><%= message %></p>
-  <ul>
-    <% logs.forEach(function (log) { %>
-      <li><%= log.title %></li>
-    <% }) %>
-  </ul>
+  <header>
+    <h1>BBQ Tracker</h1>
+  </header>
+  <main>
+    <div id='menu-wrapper'>
+      <a href='/create-log'><input id='create' type='button' value='Create a Log'></a>
+      <input id='sign-in' type='button' value='Sign In'>
+    </div>
+  </main>
 </body>
 </html>
 

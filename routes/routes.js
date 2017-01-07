@@ -1,7 +1,6 @@
 module.exports = (app) => {
   app.get('/', function(req, res) {
-    var logs = [{ title: 'Log A' }, { title: 'Log B' }, { title: 'Log C' }]
-    res.render('index', { title: 'Hey', message: 'Hello there!', logs: logs }) // pug dynamic content
+    res.render('index', { title: 'BBQ Tracker', message: 'HOMEPAGE content' })
   })
 
   app.get('/create-log', function(req, res) {
@@ -9,7 +8,8 @@ module.exports = (app) => {
   })
 
   app.get('/log-history', function(req, res) {
-    res.render('log-history', { title: 'BBQ Tracker | Log History', message: 'LOG HISTORY content' })
+    var logs = [{ title: 'Log A' }, { title: 'Log B' }, { title: 'Log C' }]
+    res.render('log-history', { title: 'BBQ Tracker | Log History', message: 'LOG HISTORY content', logs: logs }) // pug dynamic content
   })
 }
 
