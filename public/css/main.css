@@ -27,3 +27,39 @@ header li {
   float: left;
   margin-left: 25px;
 }
+
+main {
+  margin: 0 20px;
+}
+
+.step-box {
+  border: 1px solid black;
+  padding: 25px;
+  overflow: hidden;
+}
+
+.step-notes {
+  float: left;
+  width: 100%;
+}
+
+.step-notes textarea {
+  width: 100%;
+  height: 50px;
+}
+
+.complete {
+  float: left;
+  width: 25%;
+}
+
+.complete-notes {
+  float: left;
+  width: 75%;
+}
+
+.complete-notes textarea {
+  width: 100%;
+  height: 50px;
+
+}

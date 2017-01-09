@@ -10,72 +10,80 @@
 </head>
 <body>
   <%- include header.ejs -%>
-  <h1><%= message %></h1>
-  <section>
-    <div id='date'>
-      <label for='date'>Date</label>
-      <input type='text' name='date' id='date-select'>
-    </div>
-    <div id='session-name'>
-      <label for='session-name'>Session Name</label>
-      <input type='text' name='date' placeholder='Brisket in May'>
-    </div>
-    <div id='bbq-cooker'>
-      <label for='bbq-cooker'>Cooking Device</label>
-      <select>
-        <option value='bge'>Big Green Egg</option>
-        <option value='wsm'>Weber Smokey Mountain</option>
-        <option value='kettle'>Kettle Grill</option>
-        <option value='kettle'>Oven</option>
-        <option value='kettle'>Custom</option>
-      </select>
-    </div>
-    <div id='meat'>
-      <label for='meat'>Meat</label>
-      <select>
-        <option value='brisket'>Beef Brisket</option>
-        <option value='beef-ribs'>Beef Ribs</option>
-        <option value='beef-tri-tip'>Beef Tri-tip</option>
-        <option value='pork-shoulder'>Pork Shoulder</option>
-        <option value='pork-ribs'>Pork Ribs (baby backs)</option>
-        <option value='pork-ribs'>Pork Ribs (spares)</option>
-      </select>
-      <label for='meat-weight'>Weight</label>
-      <input type='text' name='meat-weight' placeholder='5 lbs'>
-      <label for='meat-notes'>Notes</label>
-      <input type='text' name='meat-notes' placeholder='Prime cut of meat'>
-    </div>
-    <div id='target-temperature'>
-      <label for='target-temperature'>Target Temperature</label>
-    INSERT TEMPERATURE SLIDER
-    </div>
-    <div id='estimated-time'>
-      <label for='estimated-time'>Estimated Time</label>
-      <input type='text' name='estimated-time' placeholder='10 hours'>
-    </div>
-    <div id='fuel'>
-      <label for='fuel'>Fuel</label>
-      <select>
-        <option value='lump'>Lump Charcoal</option>
-        <option value='Briquettes'>Briquettes</option>
-        <option value='Wood'>Wood</option>
-      </select>
-      <label for='fuel-brand'>Brand</label>
-      <input type='text' name='fuel-brand' placeholder='Stubbs'>
-    </div>
-    <div id='wood'>
-      <label for='wood'>Wood</label>
-      <select>
-        <option value='hickory'>Hickory</option>
-        <option value='mesquite'>Mesquite</option>
-        <option value='oak'>Oak</option>
-        <option value='pecan'>Pecan</option>
-        <option value='cherry'>Cherry</option>
-        <option value='apple'>Apple</option>
-        <option value='none'>None</option>
-      </select>
-    </div>
-  </section>
+  <main>
+    <h1><%= message %></h1>
+    <section>
+      <h1>New BBQ Log Entry</h1>
+      <div id='date'>
+        <label for='date'>Date</label>
+        <input type='text' name='date' id='date-select'>
+      </div>
+      <div id='session-name'>
+        <label for='session-name'>Session Name</label>
+        <input type='text' name='date' placeholder='Brisket in May'>
+      </div>
+      <div id='bbq-cooker'>
+        <label for='bbq-cooker'>Cooking Device</label>
+        <select>
+          <option value='bge'>Big Green Egg</option>
+          <option value='wsm'>Weber Smokey Mountain</option>
+          <option value='kettle'>Kettle Grill</option>
+          <option value='kettle'>Oven</option>
+          <option value='kettle'>Custom</option>
+        </select>
+      </div>
+      <div id='meat'>
+        <label for='meat'>Meat</label>
+        <select>
+          <option value='brisket'>Beef Brisket</option>
+          <option value='beef-ribs'>Beef Ribs</option>
+          <option value='beef-tri-tip'>Beef Tri-tip</option>
+          <option value='pork-shoulder'>Pork Shoulder</option>
+          <option value='pork-ribs'>Pork Ribs (baby backs)</option>
+          <option value='pork-ribs'>Pork Ribs (spares)</option>
+        </select>
+        <label for='meat-weight'>Weight</label>
+        <input type='text' name='meat-weight' placeholder='5 lbs'>
+        <label for='meat-notes'>Notes</label>
+        <input type='text' name='meat-notes' placeholder='Prime cut of meat'>
+      </div>
+      <div id='target-temperature'>
+        <label for='target-temperature'>Target Temperature</label>
+      INSERT TEMPERATURE SLIDER
+      </div>
+      <div id='estimated-time'>
+        <label for='estimated-time'>Estimated Time</label>
+        <input type='text' name='estimated-time' placeholder='10 hours'>
+      </div>
+      <div id='fuel'>
+        <label for='fuel'>Fuel</label>
+        <select>
+          <option value='lump'>Lump Charcoal</option>
+          <option value='Briquettes'>Briquettes</option>
+          <option value='Wood'>Wood</option>
+        </select>
+        <label for='fuel-brand'>Brand</label>
+        <input type='text' name='fuel-brand' placeholder='Stubbs'>
+      </div>
+      <div id='wood'>
+        <label for='wood'>Wood</label>
+        <select>
+          <option value='hickory'>Hickory</option>
+          <option value='mesquite'>Mesquite</option>
+          <option value='oak'>Oak</option>
+          <option value='pecan'>Pecan</option>
+          <option value='cherry'>Cherry</option>
+          <option value='apple'>Apple</option>
+          <option value='none'>None</option>
+        </select>
+      </div>
+    </section>
+    <section id='recipe-area'>
+      <h2>Recipe Steps</h2>
+      <button type='button' id='add-step'>Add Step</button>
+      <div id='recipe-list'></div>
+    </section>
+  </main>
   <script src='../jquery/dist/jquery.min.js'></script>
   <script src='../jquery-ui-npm/jquery-ui.min.js'></script>
   <script src='../js/app.js'></script>
