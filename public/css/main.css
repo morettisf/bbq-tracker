@@ -5,25 +5,25 @@ html, body {
   background-color: #3CB255;
 }
 
-header {
+nav {
   height: 125px;
   background-color: #FFD7A6;
   overflow: hidden;
 }
 
-header img {
+nav img {
   float: left;
   margin-top: 18px;
   width: 100px;
   height: 100px;
 }
 
-header ul {  
+nav ul {  
   list-style: none;
   margin-top: 55px;
 }
 
-header li {
+nav li {
   float: left;
   margin-left: 25px;
 }
@@ -61,5 +61,16 @@ main {
 .complete-notes textarea {
   width: 100%;
   height: 50px;
+}
 
+#save {
+  margin-top: 25px;
+}
+
+#sign-in input {
+  display: block;
+}
+
+#register input {
+  display: block;
 }

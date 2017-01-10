@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href='../css/main.css'>
+  <title><%= title %></title>
+</head>
+<body>
+  <%- include header.ejs -%>
+  <h1>Accounts</h1>
+  <main>
+    <section id='sign-in'>
+      <h2>Sign In</h2>
+      <form>
+        <label for='email'>Email</label>
+        <input type='text' for='email' placeholder='you@email.com'>
+        <label for='password'>Password</label>
+        <input type='password' for='password'>
+        <input id='sign-in-btn' type='submit' for='submit' value='Submit'>
+      </form>
+    </section>
+    <section id='register'>
+      <h2>Register New User</h2>
+      <form id='new-user'>
+        <label for='email'>Email</label>
+        <input id='reg-email' type='text' for='email' placeholder='you@email.com'>
+        <label for='password'>Password</label>
+        <input id='reg-pw' type='password' for='password'>
+        <label for='confirm password'>Confirm Password</label>
+        <input id='confirm-pw' type='password' for='confirmpassword'>
+        <input id='reg-btn' type='submit' for='submit' value='Submit'>
+      </form>
+    </section>
+  </main>
+  <script src='../jquery/dist/jquery.min.js'></script>
+  <script src='../jquery-ui-npm/jquery-ui.min.js'></script>
+  <script src='../js/app.js'></script>
+</body>
+</html>

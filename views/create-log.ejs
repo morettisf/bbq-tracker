@@ -47,8 +47,8 @@
         <label for='meat-notes'>Notes</label>
         <input type='text' name='meat-notes' placeholder='Prime cut of meat'>
       </div>
-      <div id='target-temperature'>
-        <label for='target-temperature'>Target Temperature</label>
+      <div id='cook-temperature'>
+        <label for='cook-temperature'>Cook Temperature</label>
       INSERT TEMPERATURE SLIDER
       </div>
       <div id='estimated-time'>
@@ -81,8 +81,13 @@
     <section id='recipe-area'>
       <h2>Recipe Steps</h2>
       <button type='button' id='add-step'>Add Step</button>
-      <div id='recipe-list'></div>
+      <div id='recipe-list'><ol></ol></div>
     </section>
+    <section id ='rating'>
+      <label for='rating'>Rating</label>
+      <img src='../images/5_stars.png'>
+    </section>
+    <button type='button' id='save'>Save Log</button>
   </main>
   <script src='../jquery/dist/jquery.min.js'></script>
   <script src='../jquery-ui-npm/jquery-ui.min.js'></script>
