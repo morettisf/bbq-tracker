@@ -7,7 +7,7 @@ const app = express()
 const mongoose = require('mongoose')
 
 mongoose.Promise = global.Promise
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test') { // package.json specifies a test database connection when running mocha
   mongoose.connect('mongodb://localhost/bbq-tracker') // mongoose connects into mongo
 }
 
