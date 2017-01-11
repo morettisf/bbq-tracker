@@ -12,7 +12,6 @@ if (process.env.NODE_ENV !== 'test') { // package.json specifies a test database
 }
 
 app.use(express.static('public'))
-app.use(express.static('node_modules')) // should i be doing this?
 app.set('view engine', 'ejs') // enabling view engine templates
 app.use(bodyParser.json())
 

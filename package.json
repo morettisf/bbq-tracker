@@ -4,7 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha"
+    "test-watch": "NODE_ENV=test nodemon --exec 'mocha'",
+    "test": "NODE_ENV=test mocha",
+    "build": "browserify client.js -o public/js/bundle.js",
+    "watch": "watchify client.js -o public/js/bundle.js --debug --verbose"
   },
   "author": "",
   "license": "ISC",
@@ -12,13 +15,15 @@
     "body-parser": "^1.15.2",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
-    "jquery": "^3.1.1",
-    "jquery-ui-npm": "^1.12.0",
     "mongoose": "^4.7.6"
   },
   "devDependencies": {
+    "browserify": "^13.3.0",
+    "jquery": "^3.1.1",
+    "jquery-ui-browserify": "^1.11.0-pre-seelio",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
-    "supertest": "^2.0.1"
+    "supertest": "^2.0.1",
+    "watchify": "^3.8.0"
   }
 }

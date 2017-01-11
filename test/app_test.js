@@ -7,7 +7,6 @@ describe('The express app', () => {
     request(app)
       .get('/')
       .end((err, response) => {
-//        assert(response.status === 200)
         assert(response.header['content-type'] === 'text/html; charset=utf-8')
         done()
       })
