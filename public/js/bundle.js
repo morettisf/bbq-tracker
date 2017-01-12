@@ -25372,7 +25372,31 @@ function registerUser(email, password) {
   })
 }
 
+$('#sign-in-btn').on('click', function(event) {
+  console.log('hi')
+  event.preventDefault()
+  var email = $('#sign-email').val()
+  var password = $('#sign-pw').val()
+  SignInUser(email, password)
+})
+
+function SignInUser(email, password) {
+  $.ajax({
+    method: 'POST',
+    url: '/sign-in',
+    dataType: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      email: email,
+      password: password
+    }),
+    success: response
+  })
+}
+
 function response(res) {
   console.log(res)
 }
+
+// create validation for inputs eventually
 },{}]},{},[1]);

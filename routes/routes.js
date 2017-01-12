@@ -1,4 +1,8 @@
-const UsersController = require('../controllers/users_controller')
+const User = require('../models/users')
+const bcrypt = require('bcryptjs')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+
 
 module.exports = (app) => {
   app.get('/', function(req, res) {
@@ -18,16 +22,58 @@ module.exports = (app) => {
     res.render('log-history', { title: 'Log History | BBQ Tracker', message: 'LOG HISTORY content', logs: logs }) // pug dynamic content
   })
 
-  // app.post('/register', function(req, res) {
-  //   console.log(req.body)
-  //   var email = req.body.email
-  //   var password = req.body.password
-  //   console.log(email, password)
-  //   UsersController.create
-  // })
+  app.post('/register', function(req, res, next) {
+    const userInfo = req.body
 
-  app.post('/register', UsersController.create)
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(userInfo.password, salt, function(err, hash) {
+        userInfo.password = hash
+        User.create(userInfo)
+          .then(user => res.send(user))
+          .catch(next)
+      })
+    })
+  })
 
+  passport.use('local-login', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true,
+    },
+    function(req, email, password, done) {
+      User.findOne({ 'email':  email }, function(err, user) {
+        if (err)
+          return done({message: 'Before User Auth'})
+        if (!user)
+          return done({message: 'Unknown User'})
+      
+        User.comparePassword(password, user.password, function(err, isMatch) {
+          if (err) throw err
+          if (isMatch) {
+            return done(null, user)
+          }
+          else {
+            return done({message: 'Invalid Password'})
+          }
+      })
+    })
+  }))
+
+  passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  })
+
+  passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+      done(err, user);
+    })
+  })
+
+  app.post('/sign-in', 
+    passport.authenticate('local-login'), 
+    function(req, res) {
+      res.redirect('/')
+    })
 }
 
 

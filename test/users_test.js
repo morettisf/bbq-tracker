@@ -17,4 +17,12 @@ describe('Creating records', () => {
         })
     })
   })
+  // it('logs in a user', (done) => {
+  //   request(app)
+  //     .post('/sign-in')
+  //     .send({ email: 'joe@test.com', password: 'bestpassword123' })
+  //     .end(() => {
+  //         assert()
+  //     })
+  // })
 })
