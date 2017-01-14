@@ -9,11 +9,11 @@ const UserSchema = new Schema({
 
 var User = mongoose.model('user', UserSchema)
 
-module.exports = User
-
-module.exports.comparePassword = function(candidatePassword, hash, callback) {
+User.comparePassword = function(candidatePassword, hash, callback) {
   bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
     if(err) throw err
     callback(null, isMatch)
   })
 }
+
+module.exports = User

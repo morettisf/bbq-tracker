@@ -3,6 +3,10 @@
   <ul>
     <a href='/create-log'><li>Create BBQ Log</li></a>
     <a href='/log-history'><li>Log History</li></a>
+    <% if (!user) { %>
     <a href='/sign-in'><li>Sign In / Register</li></a>
+    <% } else { %>
+    <a href='/logout'><li id='logout'>Logout</li></a>
+    <% } %>
   </ul>
 </nav>

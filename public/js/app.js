@@ -53,12 +53,17 @@ function SignInUser(email, password) {
       email: email,
       password: password
     }),
-    success: response
+    success: resSignIn,
+    error: resSignInError
   })
 }
 
-function response(res) {
-  console.log(res)
+function resSignIn(res) {
+  window.location = '/log-history'
+}
+
+function resSignInError(res) {
+  alert('Incorrect sign-in, please try again')
 }
 
 // create validation for inputs eventually
