@@ -11,42 +11,51 @@ module.exports = (app) => {
 
   app.get('/', function(req, res) {
     res.render('index', { title: 'BBQ Tracker', message: 'HOMEPAGE content', user: req.session.passport })
+    console.log(req.session.passport)
   })
 
   app.get('/sign-in', function(req, res) {
-    res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport })
+//    var reg = req.params.reg
+    res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, reg: null })
+  })
+
+  app.get('/register', function(req, res) {
+    res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport })
   })
 
   app.get('/create-log', function(req, res) {
     res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', message: 'NEW LOG content', user: req.session.passport  })
-      console.log(req.session)
-      console.log('Cookies: ', req.cookies)
   })
 
-  app.get('/log-history', function(req, res) {
+  app.get('/log-history', isLoggedIn, function(req, res) {
     var logs = [{ title: 'Log A' }, { title: 'Log B' }, { title: 'Log C' }]
     res.render('log-history', { title: 'Log History | BBQ Tracker', message: 'LOG HISTORY content', logs: logs, user: req.session.passport })
   })
 
   app.post('/register', function(req, res, next) {
-    const userInfo = req.body
+    var userInfo = req.body
+    var email = req.body.email
+    var password = req.body.password
+
+    // check Mongo to see if email is taken. If so, respond with something or figure out response code.
 
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(userInfo.password, salt, function(err, hash) {
         userInfo.password = hash
         User.create(userInfo)
-          .then(user => res.send(user))
+//          .then(res.redirect('sign-in/rs'))
+          .then(res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: null, reg: 'ok' }))
           .catch(next)
       })
     })
-  })
+   })
 
   app.post('/sign-in',
-    passport.authenticate('local', {session: true}),
+    passport.authenticate('local-sign-in', {session: true}),
     function(req, res) {
-      console.log(req.session)
-      console.log('Cookies: ', req.cookies)
-      return res.json({ message: 'good' })
+      console.log(req.body)
+//      return res.json({ message: 'good' })
+      return res.redirect('log-history')
   })
 
   app.get('/logout', function(req, res) {
@@ -58,8 +67,7 @@ module.exports = (app) => {
 }
 
 
-
-passport.use('local', new LocalStrategy({
+passport.use('local-sign-in', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true,
@@ -70,7 +78,6 @@ passport.use('local', new LocalStrategy({
         return done(err)
       if (!user)
         return done(null, false, { message: 'Incorrect username.' })
-        //return done({message: 'Unknown User'})
     
       User.comparePassword(password, user.password, function(err, isMatch) {
         if (err) throw err
@@ -93,6 +100,14 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   })
 })
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated())
+    return next()
+  else {
+    res.redirect('/')
+  }
+}
 
 // linking to new page template with dynamic log ID URL
 // <li><a href="/logs/<%= log.id %>"><%= log.title %></a></li> (ejs file)

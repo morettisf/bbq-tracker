@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href='../css/main.css'>
+  <title><%= title %></title>
+</head>
+<body>
+  <%- include header.ejs -%>
+  <h1>Register an Account</h1>
+  <main>
+    <section id='register'>
+      <form id='register-form' onSubmit='return window.checkReg()' action='/register' method='post'>
+        <label for='email'>Email</label>
+        <input id='reg-email' type='text' for='email' name='email' placeholder='you@email.com'>
+        <label for='password'>Password</label>
+        <input id='reg-pw' type='password' for='password' name='password'>
+        <label for='confirm password'>Confirm Password</label>
+        <input id='reg-pw2' type='password' for='confirmpassword'>
+        <input id='reg-btn' type='submit' for='submit' value='Submit'>
+      </form>
+    </section>
+  </main>
+  <script src='js/bundle.js'></script>
+</body>
+</html>
