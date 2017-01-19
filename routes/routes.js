@@ -15,12 +15,11 @@ module.exports = (app) => {
   })
 
   app.get('/sign-in', function(req, res) {
-//    var reg = req.params.reg
     res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, reg: null })
   })
 
   app.get('/register', function(req, res) {
-    res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport })
+    res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, message: null })
   })
 
   app.get('/create-log', function(req, res) {
@@ -34,27 +33,38 @@ module.exports = (app) => {
 
   app.post('/register', function(req, res, next) {
     var userInfo = req.body
-    var email = req.body.email
+    var emailReq = req.body.email
     var password = req.body.password
 
-    // check Mongo to see if email is taken. If so, respond with something or figure out response code.
+    User.findOne({ email: emailReq }, function(err, user) {
+      if (err) {
+        return done(err)
+      }
 
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(userInfo.password, salt, function(err, hash) {
-        userInfo.password = hash
-        User.create(userInfo)
-//          .then(res.redirect('sign-in/rs'))
-          .then(res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: null, reg: 'ok' }))
-          .catch(next)
-      })
+      if (user) {
+        res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, message: 'Email already taken, please try another' })
+      }
+
+      else {
+
+        bcrypt.genSalt(10, function(err, salt) {
+          bcrypt.hash(userInfo.password, salt, function(err, hash) {
+            userInfo.password = hash
+            User.create(userInfo)
+              .then(res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: null, reg: 'ok' }))
+              .catch(next)
+          })
+        })
+
+      }
+
     })
+
    })
 
   app.post('/sign-in',
     passport.authenticate('local-sign-in', {session: true}),
     function(req, res) {
-      console.log(req.body)
-//      return res.json({ message: 'good' })
       return res.redirect('log-history')
   })
 

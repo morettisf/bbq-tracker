@@ -1,10 +1,10 @@
 'use strict'
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  $('#date-select').datepicker()
-})
 
+window.outputUpdate = function (temp) {
+  document.querySelector('#temp-slider-output').value = temp;
+}
 
 var addStepBtn = document.querySelector('#add-step')
 var list = document.querySelector('ol')
@@ -13,7 +13,7 @@ var list = document.querySelector('ol')
 if (addStepBtn) {
   addStepBtn.addEventListener('click', function() {
     var li = document.createElement('li')
-    var stepHTML = "<div class='step-box'><div class='step-notes'><textarea placeholder='Write step here'></textarea></div><div class='complete'><input type='checkbox' name='step-complete'><input type='text' class='time' name='time' value='09:00 AM'></div><div class='complete-notes'><textarea placeholder='Write notes here'></textarea><button type='button' class='remove-step'>Remove Step</button></div></div>"
+    var stepHTML = "<div class='step-box'><div class='step-notes'><textarea placeholder='Write step here'></textarea></div><div class='complete'><input type='checkbox' name='step-complete'><input type='time' class='time' name='time' value='09:00'></div><div class='complete-notes'><textarea placeholder='Write notes here'></textarea><button type='button' class='remove-step'>Remove Step</button></div></div>"
     li.innerHTML = stepHTML
 
     list.appendChild(li)
@@ -94,22 +94,3 @@ window.checkSignIn = function() {
   }
 
 }
-
-
-function resSignIn(res) {
-  window.location = '/log-history'
-}
-
-function resSignInError(res) {
-  alert('Incorrect sign-in, please try again')
-}
-
-function resReg(res) {
-  window.location = '/sign-in'
-}
-
-function resRegError(res) {
-  alert('Problem registering, try again')
-}
-
-// create validation for inputs eventually

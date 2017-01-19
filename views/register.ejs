@@ -6,6 +6,9 @@
 </head>
 <body>
   <%- include header.ejs -%>
+  <% if (message) { %>
+    <div><%= message %></div>
+  <% } %>
   <h1>Register an Account</h1>
   <main>
     <section id='register'>
