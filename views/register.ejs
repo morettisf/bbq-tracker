@@ -6,19 +6,21 @@
 </head>
 <body>
   <%- include header.ejs -%>
-  <% if (message) { %>
-    <div><%= message %></div>
+  <% if (errors) { %>
+  <% errors.forEach(function(error) { %>
+    <div class='error'><%= error %></div>
+  <% }) %>
   <% } %>
   <h1>Register an Account</h1>
   <main>
     <section id='register'>
-      <form id='register-form' onSubmit='return window.checkReg()' action='/register' method='post'>
+      <form id='register-form' action='/register' method='post'>
         <label for='email'>Email</label>
         <input id='reg-email' type='text' for='email' name='email' placeholder='you@email.com'>
         <label for='password'>Password</label>
         <input id='reg-pw' type='password' for='password' name='password'>
         <label for='confirm password'>Confirm Password</label>
-        <input id='reg-pw2' type='password' for='confirmpassword'>
+        <input id='reg-pw2' type='password' for='confirmpassword' name='password2'>
         <input id='reg-btn' type='submit' for='submit' value='Submit'>
       </form>
     </section>

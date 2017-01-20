@@ -6,13 +6,16 @@
 </head>
 <body>
   <%- include header.ejs -%>
-  <% if (reg) { %>
-  <p>Registration successful, now log in</p>
+  <% if (message) { %>
+  <%= message %>
+  <% } %>
+  <% if (errorMessage) { %>
+  <%= errorMessage %>
   <% } %>
   <h1>Sign In</h1>
   <main>
     <section id='sign-in'>
-      <form id='sign-in-form' onSubmit='return window.checkSignIn()' action='/sign-in' method='post'>
+      <form id='sign-in-form' action='/sign-in' method='post'>
         <label for='email'>Email</label>
         <input id='sign-email' type='text' for='email' name='email' placeholder='you@email.com'>
         <label for='password'>Password</label>

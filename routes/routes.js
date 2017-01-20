@@ -15,11 +15,11 @@ module.exports = (app) => {
   })
 
   app.get('/sign-in', function(req, res) {
-    res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, reg: null })
+    res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errorMessage: null, message: req.session.message })
   })
 
   app.get('/register', function(req, res) {
-    res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, message: null })
+    res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: null })
   })
 
   app.get('/create-log', function(req, res) {
@@ -32,41 +32,104 @@ module.exports = (app) => {
   })
 
   app.post('/register', function(req, res, next) {
+
     var userInfo = req.body
     var emailReq = req.body.email
     var password = req.body.password
+    var password2 = req.body.password2
+    var errors = []
 
-    User.findOne({ email: emailReq }, function(err, user) {
-      if (err) {
-        return done(err)
-      }
 
-      if (user) {
-        res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, message: 'Email already taken, please try another' })
-      }
+    if (emailReq === '') {
+      errors.push('Supply an email address')
+    }
 
-      else {
+    if (emailReq.indexOf(' ') !== -1) {
+      errors.push('No spaces allowed in email address')
+    }
 
-        bcrypt.genSalt(10, function(err, salt) {
-          bcrypt.hash(userInfo.password, salt, function(err, hash) {
-            userInfo.password = hash
-            User.create(userInfo)
-              .then(res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: null, reg: 'ok' }))
-              .catch(next)
+    if (emailReq.indexOf('@') < 0) {
+      errors.push('Email does not contain @')
+    }
+
+    if (password === '') {
+      errors.push('Supply a password')
+    }
+
+    if (password2 === '') {
+      errors.push('Confirm your password')
+    }
+
+    if (password !== password2) {
+      errors.push('Passwords do not match')
+    }
+
+    if (errors) {
+      res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors })
+    }
+
+    else {
+
+      User.findOne({ email: emailReq }, function(err, user) {
+        if (err) {
+          return done(err)
+        }
+
+        if (user) {
+          res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, error: 'Email already taken, please try another' })
+        }
+
+        else {
+          bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(userInfo.password, salt, function(err, hash) {
+              userInfo.password = hash
+              User.create(userInfo)
+                .then(function(){
+                  req.session.message = 'Registration successful, now sign in'
+                  res.redirect('/sign-in')
+                })
+                .catch(next)
+            })
           })
-        })
+        }
 
-      }
+      })
 
-    })
+    }
 
-   })
+  })
+
+
+  // app.post('/sign-in',
+  //   passport.authenticate('local-sign-in', {session: true}),
+  //   function(req, res) {
+
+  //     return res.redirect('log-history')
+    
+  // })
 
   app.post('/sign-in',
-    passport.authenticate('local-sign-in', {session: true}),
-    function(req, res) {
-      return res.redirect('log-history')
-  })
+    passport.authenticate('local-sign-in', { successRedirect: 'log-history', failureRedirect: 'sign-in' }))
+
+
+    // if (email.indexOf(' ') !== -1) {
+    //   res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errorMessage: 'No spaces allowed in email address', message: null })
+    // }
+
+    // else if (email === '') {
+    //   res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errorMessage: 'Supply an email address', message: null })
+    // }
+
+    // else if (email.indexOf('@') < 0) {
+    //   res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errorMessage: 'Email does not contain @', message: null })
+    // }
+
+    // else if (password === '') {
+    //   res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errorMessage: 'Supply a password', message: null })
+    // }
+
+    // else {}
+
 
   app.get('/logout', function(req, res) {
     req.session.destroy(function(err) {
@@ -83,22 +146,32 @@ passport.use('local-sign-in', new LocalStrategy({
   passReqToCallback: true,
   },
   function(req, email, password, done) {
+
     User.findOne({ 'email':  email }, function(err, user) {
-      if (err)
+      if (err) {
         return done(err)
-      if (!user)
+      }
+
+      if (!user) {
         return done(null, false, { message: 'Incorrect username.' })
+      }
     
-      User.comparePassword(password, user.password, function(err, isMatch) {
-        if (err) throw err
-        if (isMatch) {
-          return done(null, user)
-        }
-        else {
-          return done(err)
-        }
-      })
+      else {
+
+        User.comparePassword(password, user.password, function(err, isMatch) {
+          if (err) throw err
+          if (isMatch) {
+            return done(null, user)
+          }
+          else {
+            return done(err)
+          }
+        })
+
+      }
+
     })
+
 }))
 
 passport.serializeUser(function(user, done) {
@@ -118,6 +191,3 @@ function isLoggedIn(req, res, next) {
     res.redirect('/')
   }
 }
-
-// linking to new page template with dynamic log ID URL
-// <li><a href="/logs/<%= log.id %>"><%= log.title %></a></li> (ejs file)
