@@ -33,10 +33,10 @@ module.exports = (app) => {
 
   app.post('/register', function(req, res, next) {
 
-    var userInfo = req.body
+    var userInfo = { email: req.body.email, password: req.body.password }
     var emailReq = req.body.email
-    var password = req.body.password
-    var password2 = req.body.password2
+    var passwordReq = req.body.password
+    var password2Req = req.body.password2
     var errors = []
 
 
@@ -52,25 +52,27 @@ module.exports = (app) => {
       errors.push('Email does not contain @')
     }
 
-    if (password === '') {
+    if (passwordReq === '') {
       errors.push('Supply a password')
     }
 
-    if (password2 === '') {
+    if (password2Req === '') {
       errors.push('Confirm your password')
     }
 
-    if (password !== password2) {
+    if (passwordReq !== password2Req) {
       errors.push('Passwords do not match')
     }
 
-    if (errors) {
+    if (errors.length > 0) {
+        console.log('hi')
       res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors })
     }
 
     else {
 
       User.findOne({ email: emailReq }, function(err, user) {
+
         if (err) {
           return done(err)
         }

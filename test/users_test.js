@@ -8,7 +8,8 @@ describe('Creating records', () => {
     User.count().then(count => {
       request(app)
         .post('/register')
-        .send({ email: 'joe@test.com', password: 'bestpassword123' })
+        .type('form')
+        .send({ email: 'joe@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
         .end(() => {
           User.count().then(newCount => {
             assert(count + 1 === newCount)
@@ -17,6 +18,20 @@ describe('Creating records', () => {
         })
     })
   })
+
+  // it('saves a new user', (done) => {
+  //   const joe = { email: 'joe@test.com', password: 'bestpassword123', password2: 'bestpassword123' }
+
+  //     request(app)
+  //       .post('/register')
+  //       .send(joe)
+  //       .end(() => {
+  //         assert(!joe.isNew)
+  //         done()
+  //       })
+  // })
+
+
   // it('logs in a user', (done) => {
   //   request(app)
   //     .post('/sign-in')
