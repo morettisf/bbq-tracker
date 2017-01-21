@@ -31,7 +31,7 @@ var save = document.querySelector('#save')
 save.addEventListener('click', function() {
 
   var basicData = {
-    date: document.querySelector('#data-select').value, // find a way to get this value
+    date: document.querySelector('#date-select').value, // find a way to get this value
     session_name: document.querySelector('#session-name').value,
     cooking_device: document.querySelector('#cooking-device').value,
     meat: document.querySelector('#meat-type').value,
@@ -42,7 +42,6 @@ save.addEventListener('click', function() {
     fuel: document.querySelector('#fuel').value,
     brand: document.querySelector('#brand').value,
     wood: document.querySelector('#wood').value,
-    // steps: array here
     rating: document.querySelector('#rating').value
   }
 
@@ -50,17 +49,17 @@ save.addEventListener('click', function() {
   var items = ol.getElementsByTagName('li')
   var stepInfo = []
   
-  items.forEach(function(item) {
+  Array.from(items).forEach(function(item) {
     var stepObject = {}
     stepObject.step = item.querySelector('.step-text').value
-    stepObject.completed = item.querySelector('.complete-check').value
+    stepObject.completed = item.querySelector('.complete-check').checked
     stepObject.time = item.querySelector('.time').value
     stepObject.notes = item.querySelector('.complete-notes').value
     stepInfo.push(stepObject)
   })
 
   var data = Object.assign({ steps: stepInfo }, basicData)
-console.log(data)
+  console.log(data)
 })
 
 

@@ -4,11 +4,9 @@
     https://github.com/joshsalverda/datepickr
 
     Copyright © 2014 Josh Salverda <josh.salverda@gmail.com>
-    This program is free software. It comes without any warranty, to
-    the extent permitted by applicable law. You can redistribute it
-    and/or modify it under the terms of the Do What The Fuck You Want
-    To Public License, Version 2, as published by Sam Hocevar. See
-    http://www.wtfpl.net/ for more details.
+    This work is free. You can redistribute it and/or modify it under the
+    terms of the Do What The Fuck You Want To Public License, Version 2,
+    as published by Sam Hocevar. See http://www.wtfpl.net/ for more details.
 */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -48,9 +46,6 @@ var datepickr = function (selector, config) {
     return instances;
 };
 
-/**
- * @constructor
- */
 datepickr.init = function (element, instanceConfig) {
     'use strict';
     var self = this,
@@ -81,6 +76,7 @@ datepickr.init = function (element, instanceConfig) {
         documentClick,
         calendarClick,
         buildCalendar,
+        getOpenEvent,
         bind,
         open,
         close,
@@ -371,25 +367,25 @@ datepickr.init = function (element, instanceConfig) {
         wrapperElement.appendChild(calendarContainer);
     };
 
-    bind = function () {
-        var openEvent = 'click';
-
+    getOpenEvent = function () {
         if (self.element.nodeName === 'INPUT') {
-            openEvent = 'focus';
-            self.addEventListener(self.element, 'blur', close, false);
+            return 'focus';
         }
+        return 'click';
+    };
 
-        self.addEventListener(self.element, openEvent, open, false);
-        self.addEventListener(calendarContainer, 'mousedown', calendarClick, false);
+    bind = function () {
+        self.addEventListener(self.element, getOpenEvent(), open);
+        self.addEventListener(calendarContainer, 'click', calendarClick);
     };
 
     open = function () {
-        self.addEventListener(document, 'click', documentClick, false);
+        self.addEventListener(document, 'click', documentClick);
         self.addClass(wrapperElement, 'open');
     };
 
     close = function () {
-        self.removeEventListener(document, 'click', documentClick, false);
+        self.removeEventListener(document, 'click', documentClick);
         self.removeClass(wrapperElement, 'open');
     };
 
@@ -397,10 +393,8 @@ datepickr.init = function (element, instanceConfig) {
         var parent,
             element;
 
-        self.removeEventListener(document, 'click', documentClick, false);
-        self.removeEventListener(self.element, 'focus', open, false);
-        self.removeEventListener(self.element, 'blur', close, false);
-        self.removeEventListener(self.element, 'click', open, false);
+        self.removeEventListener(document, 'click', documentClick);
+        self.removeEventListener(self.element, getOpenEvent(), open);
 
         parent = self.element.parentNode;
         parent.removeChild(calendarContainer);
