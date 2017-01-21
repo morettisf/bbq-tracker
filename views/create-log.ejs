@@ -20,11 +20,11 @@
       </div>
       <div id='session-name'>
         <label for='session-name'>Session Name</label>
-        <input type='text' name='date' placeholder='Brisket in May'>
+        <input type='text' id='session-name' placeholder='Brisket in May'>
       </div>
       <div id='bbq-cooker'>
-        <label for='bbq-cooker'>Cooking Device</label>
-        <select>
+        <label for='cooking-device'>Cooking Device</label>
+        <select id='cooking-device'>
           <option value='bge'>Big Green Egg</option>
           <option value='wsm'>Weber Smokey Mountain</option>
           <option value='kettle'>Kettle Grill</option>
@@ -34,7 +34,7 @@
       </div>
       <div id='meat'>
         <label for='meat'>Meat</label>
-        <select>
+        <select id='meat-type'>
           <option value='brisket'>Beef Brisket</option>
           <option value='beef-ribs'>Beef Ribs</option>
           <option value='beef-tri-tip'>Beef Tri-tip</option>
@@ -43,9 +43,9 @@
           <option value='pork-ribs'>Pork Ribs (spares)</option>
         </select>
         <label for='meat-weight'>Weight</label>
-        <input type='text' name='meat-weight' placeholder='5 lbs'>
+        <input type='text' name='meat-weight' id='weight' placeholder='5 lbs'>
         <label for='meat-notes'>Notes</label>
-        <input type='text' name='meat-notes' placeholder='Prime cut of meat'>
+        <input type='text' name='meat-notes' id='meat-notes' placeholder='Prime cut of meat'>
       </div>
       <div id='cook-temperature'>
         <label for='cook-temperature'>Cook Temperature</label>
@@ -54,21 +54,21 @@
       </div>
       <div id='estimated-time'>
         <label for='estimated-time'>Estimated Time</label>
-        <input type='text' name='estimated-time' placeholder='10 hours'>
+        <input type='text' name='estimated-time' id='estimated-time' placeholder='10 hours'>
       </div>
       <div id='fuel'>
         <label for='fuel'>Fuel</label>
-        <select>
+        <select id='fuel'>
           <option value='lump'>Lump Charcoal</option>
           <option value='Briquettes'>Briquettes</option>
           <option value='Wood'>Wood</option>
         </select>
         <label for='fuel-brand'>Brand</label>
-        <input type='text' name='fuel-brand' placeholder='Stubbs'>
+        <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs'>
       </div>
       <div id='wood'>
         <label for='wood'>Wood</label>
-        <select>
+        <select id='wood'>
           <option value='hickory'>Hickory</option>
           <option value='mesquite'>Mesquite</option>
           <option value='oak'>Oak</option>
@@ -84,7 +84,7 @@
       <button type='button' id='add-step'>Add Step</button>
       <div id='recipe-list'><ol></ol></div>
     </section>
-    <section id ='rating'>
+    <section id='rating' value='5'>
       <label for='rating'>Rating</label>
       <img src='../images/5_stars.png'>
     </section>

@@ -15,7 +15,7 @@ module.exports = (app) => {
   })
 
   app.get('/sign-in', function(req, res) {
-    res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errorMessage: null, message: req.session.message })
+    res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errors: null, message: req.session.message })
   })
 
   app.get('/register', function(req, res) {
@@ -65,7 +65,6 @@ module.exports = (app) => {
     }
 
     if (errors.length > 0) {
-        console.log('hi')
       res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors })
     }
 
@@ -102,35 +101,29 @@ module.exports = (app) => {
   })
 
 
-  // app.post('/sign-in',
-  //   passport.authenticate('local-sign-in', {session: true}),
-  //   function(req, res) {
+  app.post('/sign-in', function(req, res, next) {
+    passport.authenticate('local-sign-in', function(err, user, info) {
 
-  //     return res.redirect('log-history')
-    
-  // })
+      var emailReq = req.body.email
+      var passwordReq = req.body.password
 
-  app.post('/sign-in',
-    passport.authenticate('local-sign-in', { successRedirect: 'log-history', failureRedirect: 'sign-in' }))
+      if (info) {
+        res.render('sign-in', { title: 'Sign-In | BBQ Tracker', user: req.session.passport, errors: info.message, message: null })
+      }
+
+      else {
+        req.logIn(user, function(err) {
+          if (err) { return next(err) }
+          return res.redirect('log-history')
+        })
+      }
+    })(req, res, next)
+  })
 
 
-    // if (email.indexOf(' ') !== -1) {
-    //   res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errorMessage: 'No spaces allowed in email address', message: null })
-    // }
-
-    // else if (email === '') {
-    //   res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errorMessage: 'Supply an email address', message: null })
-    // }
-
-    // else if (email.indexOf('@') < 0) {
-    //   res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errorMessage: 'Email does not contain @', message: null })
-    // }
-
-    // else if (password === '') {
-    //   res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errorMessage: 'Supply a password', message: null })
-    // }
-
-    // else {}
+  app.post('/save-log', function(req, res, next) {
+    console.log(req)
+  })
 
 
   app.get('/logout', function(req, res) {

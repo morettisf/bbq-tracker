@@ -6,7 +6,7 @@ var list = document.querySelector('ol')
 if (addStepBtn) {
   addStepBtn.addEventListener('click', function() {
     var li = document.createElement('li')
-    var stepHTML = "<div class='step-box'><div class='step-notes'><textarea placeholder='Write step here'></textarea></div><div class='complete'><input type='checkbox' name='step-complete'><input type='time' class='time' name='time' value='09:00'></div><div class='complete-notes'><textarea placeholder='Write notes here'></textarea><button type='button' class='remove-step'>Remove Step</button></div></div>"
+    var stepHTML = "<div class='step-box'><div class='step-notes'><textarea class='step-text' placeholder='Write step here'></textarea></div><div class='complete-box'><input type='checkbox' class='complete-check' name='step-complete'><input type='time' class='time' name='time' value='09:00'></div><div class='complete-notes'><textarea class='complete-notes-text' placeholder='Write notes here'></textarea><button type='button' class='remove-step'>Remove Step</button></div></div>"
     li.innerHTML = stepHTML
 
     list.appendChild(li)
@@ -24,3 +24,51 @@ if (addStepBtn) {
 window.outputUpdate = function (temp) {
   document.querySelector('#temp-slider-output').value = temp;
 }
+
+// gather log data for saving to database
+
+var save = document.querySelector('#save')
+save.addEventListener('click', function() {
+
+  var basicData = {
+    date: document.querySelector('#data-select').value, // find a way to get this value
+    session_name: document.querySelector('#session-name').value,
+    cooking_device: document.querySelector('#cooking-device').value,
+    meat: document.querySelector('#meat-type').value,
+    weight: document.querySelector('#weight').value,
+    meat_notes: document.querySelector('#meat-notes').value,
+    cook_temperature: document.querySelector('#temp-slider').value,
+    estimated_time: document.querySelector('#estimated-time').value,
+    fuel: document.querySelector('#fuel').value,
+    brand: document.querySelector('#brand').value,
+    wood: document.querySelector('#wood').value,
+    // steps: array here
+    rating: document.querySelector('#rating').value
+  }
+
+  var ol = document.querySelector('ol')
+  var items = ol.getElementsByTagName('li')
+  var stepInfo = []
+  
+  items.forEach(function(item) {
+    var stepObject = {}
+    stepObject.step = item.querySelector('.step-text').value
+    stepObject.completed = item.querySelector('.complete-check').value
+    stepObject.time = item.querySelector('.time').value
+    stepObject.notes = item.querySelector('.complete-notes').value
+    stepInfo.push(stepObject)
+  })
+
+  var data = Object.assign({ steps: stepInfo }, basicData)
+console.log(data)
+})
+
+
+
+// create FETCH to post log
+
+
+
+
+
+
