@@ -23,12 +23,21 @@ module.exports = (app) => {
   })
 
   app.get('/create-log', function(req, res) {
+    console.log(req.session)
     res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', message: 'NEW LOG content', user: req.session.passport  })
   })
 
   app.get('/log-history', isLoggedIn, function(req, res) {
-    var logs = [{ title: 'Log A' }, { title: 'Log B' }, { title: 'Log C' }]
-    res.render('log-history', { title: 'Log History | BBQ Tracker', message: 'LOG HISTORY content', logs: logs, user: req.session.passport })
+
+    var logs
+    var userId = req.session.passport.user
+
+    User.findOne({ _id: userId }, function(err, user) {
+      var logs = user.logs
+      res.render('log-history', { title: 'Log History | BBQ Tracker', message: 'LOG HISTORY content', logList: logs, user: req.session.passport })
+    })
+
+//    res.render('log-history', { title: 'Log History | BBQ Tracker', message: 'LOG HISTORY content', logList: logs, user: req.session.passport })
   })
 
   app.post('/register', function(req, res, next) {
@@ -121,8 +130,21 @@ module.exports = (app) => {
   })
 
 
-  app.post('/save-log', function(req, res, next) {
-    console.log(req)
+  app.post('/create-log', function(req, res, next) {
+
+    var info = req.body
+    var userId = req.session.passport.user
+
+    console.log(info)
+    
+    User.findOne({ _id: userId }, function(err, user) {
+
+      user.logs.push(info)
+      user.save()
+
+      res.send('ok')
+    })
+
   })
 
 
