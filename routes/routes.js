@@ -24,7 +24,7 @@ module.exports = (app) => {
 
   app.get('/create-log', function(req, res) {
     console.log(req.session)
-    res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', message: 'NEW LOG content', user: req.session.passport  })
+    res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', user: req.session.passport })
   })
 
   app.get('/log-history', isLoggedIn, function(req, res) {
@@ -136,7 +136,7 @@ module.exports = (app) => {
     var userId = req.session.passport.user
 
     console.log(info)
-    
+
     User.findOne({ _id: userId }, function(err, user) {
 
       user.logs.push(info)

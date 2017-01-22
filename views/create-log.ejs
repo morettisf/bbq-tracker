@@ -11,14 +11,13 @@
 <body>
   <%- include header.ejs -%>
   <main>
-    <h1><%= message %></h1>
+    <h1>New BBQ Log Entry</h1>
     <section>
-      <h1>New BBQ Log Entry</h1>
       <div id='date'>
         <label for='date'>Date</label>
         <input type='text' name='date' id='date-select'>
       </div>
-      <div id='session-name'>
+      <div id='session-box'>
         <label for='session-name'>Session Name</label>
         <input type='text' id='session-name' placeholder='Brisket in May'>
       </div>
@@ -52,11 +51,11 @@
         <input id='temp-slider' type='range' min='100' max='500' step='5' value='225' oninput='window.outputUpdate(value)'>
         <output for='temp-slider' id='temp-slider-output'>225</output>
       </div>
-      <div id='estimated-time'>
+      <div id='estimated-time-box'>
         <label for='estimated-time'>Estimated Time</label>
         <input type='text' name='estimated-time' id='estimated-time' placeholder='10 hours'>
       </div>
-      <div id='fuel'>
+      <div id='fuel-box'>
         <label for='fuel'>Fuel</label>
         <select id='fuel'>
           <option value='lump'>Lump Charcoal</option>
@@ -66,7 +65,7 @@
         <label for='fuel-brand'>Brand</label>
         <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs'>
       </div>
-      <div id='wood'>
+      <div id='wood-box'>
         <label for='wood'>Wood</label>
         <select id='wood'>
           <option value='hickory'>Hickory</option>
@@ -84,10 +83,15 @@
       <button type='button' id='add-step'>Add Step</button>
       <div id='recipe-list'><ol></ol></div>
     </section>
-    <section id='rating' value='5'>
-      <label for='rating'>Rating</label>
-      <img src='../images/5_stars.png'>
-    </section>
+    <div id='rating'>
+      <fieldset class='rating'>
+        <input type='radio' id='star5' name='rating' value='5'><label class = 'full' for='star5'></label>
+        <input type='radio' id='star4' name='rating' value='4'><label class = 'full' for='star4'></label>
+        <input type='radio' id='star3' name='rating' value='3'><label class = 'full' for='star3'></label>
+        <input type='radio' id='star2' name='rating' value='2'><label class = 'full' for='star2'></label>
+        <input type='radio' id='star1' name='rating' value='1'><label class = 'full' for='star1'></label>
+      </fieldset>
+    </div>
     <button type='button' id='save'>Save Log</button>
   </main>
   <script src='js/bundle.js'></script>

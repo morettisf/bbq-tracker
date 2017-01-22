@@ -31,6 +31,14 @@ var save = document.querySelector('#save')
 if (save) {
   save.addEventListener('click', function() {
 
+    var radios = document.querySelectorAll('.rating input')
+    var ratingSelected
+    radios.forEach(function(radio) {
+      if (radio.checked) {
+        ratingSelected = radio.value
+      }
+    })
+
     var basicData = {
       date: document.querySelector('#date-select').value, // find a way to get this value
       session_name: document.querySelector('#session-name').value,
@@ -43,7 +51,7 @@ if (save) {
       fuel: document.querySelector('#fuel').value,
       brand: document.querySelector('#brand').value,
       wood: document.querySelector('#wood').value,
-      rating: document.querySelector('#rating').value
+      rating: ratingSelected
     }
 
     var ol = document.querySelector('ol')
@@ -61,6 +69,9 @@ if (save) {
 
     var logData = Object.assign({ steps: stepInfo }, basicData)
     
+    console.log('basic: ' + basicData)
+    console.log('logdata: ' + logData)
+
     sendLog(logData)
   })
 }
