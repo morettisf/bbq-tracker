@@ -7,14 +7,21 @@
 <body>
   <%- include header.ejs -%>
   <p><%= message %></p>
+  <section id='log-action'>
+    <select id='log-action-options'>
+      <option>Copy Selected</option>
+      <option>Delete Selected</option>
+    </select>
+    <button type='button' id='log-action-btn'>Modify</button>
+  </section>
   <table>
     <tr>
-      <th>Date</th><th>Session Name</th><th>Meat</th><th>Cook Temperature</th><th>Rating</th>
+      <th>Select</th><th>Date</th><th>Session Name</th><th>Meat</th><th>Cook Temperature</th><th>Rating</th>
     </tr>
     <% if (logList) { %>
       <% logList.forEach(function(log) { %>
         <tr id=<%= log._id %>>
-          <td><% if (log.date) { %><%= moment(log.date).format('MMMM Do YYYY') %><% } %></td>
+          <td><input type='checkbox' class='log-select' name='log-select'></td><td><% if (log.date) { %><%= moment(log.date).format('MMMM Do YYYY') %><% } %></td>
           <td><a href='/view-log/<%= log._id %>'>
           <% if (log.session_name === '') { %>
             Unnamed Session

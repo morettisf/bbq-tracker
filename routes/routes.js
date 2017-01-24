@@ -78,7 +78,7 @@ module.exports = (app) => {
         stepObj.notes = item.notes
         log.steps.push(stepObj)
       })
-      
+
       user.save()
 
     })
@@ -192,8 +192,6 @@ module.exports = (app) => {
     var info = req.body
     var userId = req.session.passport.user
 
-    console.log(info)
-
     User.findOne({ _id: userId }, function(err, user) {
 
       user.logs.push(info)
@@ -204,6 +202,55 @@ module.exports = (app) => {
 
   })
 
+  app.post('/copy-logs', function(req, res, next) {
+
+    var reqLogs = req.body
+    var userId = req.session.passport.user
+    var allLogs
+
+    User.findOne({ _id: userId }, function(err, user) {
+
+      allLogs = user.logs
+
+      reqLogs.forEach(function(item) {
+        var log = user.logs.id(item)
+        var newLog = {}
+
+        newLog.date = log.date
+        newLog.rating = log.rating
+        newLog.wood = log.wood
+        newLog.brand = log.brand
+        newLog.fuel = log.fuel
+        newLog.estimated_time = log.estimated_time
+        newLog.cook_temperature = log.cook_temperature
+        newLog.meat_notes = log.meat_notes
+        newLog.weight = log.weight
+        newLog.meat = log.meat
+        newLog.cooking_device = log.cooking_device
+        newLog.session_name = log.session_name
+        
+        newLog.steps = []
+        log.steps.forEach(function(itemStep) {
+          var stepObj = {}
+
+          stepObj.step = itemStep.step
+          stepObj.completed = itemStep.completed
+          stepObj.time = itemStep.time
+          stepObj.notes = itemStep.notes
+          newLog.steps.push(stepObj)
+        })
+
+        user.logs.push(newLog)
+        user.save()
+
+      })
+
+    })
+
+
+//    res.render('/log-history', { title: 'Log History | BBQ Tracker', message: 'LOG HISTORY content', logList: allLogs, user: req.session.passport, moment: moment })
+      res.json({ message: 'ok' })
+  })
 
   app.get('/logout', function(req, res) {
     req.session.destroy(function(err) {

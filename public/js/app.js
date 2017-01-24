@@ -158,7 +158,46 @@ function updateLog(logData) {
 }
 
 
+// log history controls
+var modify = document.querySelector('#log-action-btn')
+if (modify) {
+  modify.addEventListener('click', function() {
+    var modOption = document.querySelector('#log-action-options').value
+    var logs = document.querySelectorAll('.log-select')
+    var selectedLogs = []
 
+    logs.forEach(function(log) {
+      if (log.checked) {
+        var id = log.closest('tr').getAttribute('id')
+        selectedLogs.push(id)
+      }
+    })
 
+      if (modOption === 'Copy Selected') {
+        copyLogs(selectedLogs)
+      }
 
+      else {
+        deleteLogs(selectedLogs)
+      }
 
+  })
+}
+
+function copyLogs(selected) {
+  fetch('/copy-logs', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(selected),
+    mode: 'cors',
+    cache: 'default',
+    credentials: 'include'
+  })
+    .then(window.location = '/log-history')
+}
+
+function deleteLogs() {
+
+}
