@@ -69,6 +69,12 @@ main {
   margin-top: 75px;
 }
 
+#update {
+  display: block;
+  clear: both;
+  margin-top: 75px;
+}
+
 #sign-in input {
   display: block;
 }
@@ -113,3 +119,16 @@ main {
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+table  {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
+
+th, td {
+  padding: 10px;
+}
+

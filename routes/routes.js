@@ -2,7 +2,7 @@ const User = require('../models/users')
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-
+const moment = require('moment')
 
 module.exports = (app) => {
 
@@ -23,21 +23,78 @@ module.exports = (app) => {
   })
 
   app.get('/create-log', function(req, res) {
-    console.log(req.session)
     res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', user: req.session.passport })
+  })
+
+  app.get('/view-log/:log', function(req, res) {
+    var userId = req.session.passport.user
+    var logId = req.params.log
+
+//    console.log('target:' + logId)
+    var logInfo
+
+    User.findOne({ _id: userId }, function(err, user) {
+      user.logs.forEach(function(log) {
+        if (log._id == logId) {  // CONVERT TO SAME FORMAT
+          logInfo = log
+        }
+        //console.log(log._id)
+      })
+      
+      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport })
+
+    })
+
+  })
+
+  app.put('/update-log/:log', function(req, res) {
+    var userId = req.session.passport.user
+    var logId = req.params.log
+    var info = req.body
+
+    User.findOne({ _id: userId }, function(err, user) {
+      var log = user.logs.id(logId)
+
+      log.date = info.date
+      log.rating = info.rating
+      log.wood = info.wood
+      log.brand = info.brand
+      log.fuel = info.fuel
+      log.estimated_time = info.estimated_time
+      log.cook_temperature = info.cook_temperature
+      log.meat_notes = info.meat_notes
+      log.weight = info.weight
+      log.meat = info.meat
+      log.cooking_device = info.cooking_device
+      log.session_name = info.session_name
+      
+      log.steps = []
+      info.steps.forEach(function(item) {
+        var stepObj = {}
+
+        stepObj.step = item.step
+        stepObj.completed = item.completed
+        stepObj.time = item.time
+        stepObj.notes = item.notes
+        log.steps.push(stepObj)
+      })
+      
+      user.save()
+
+    })
+    res.send('ok')
+
   })
 
   app.get('/log-history', isLoggedIn, function(req, res) {
 
-    var logs
     var userId = req.session.passport.user
 
     User.findOne({ _id: userId }, function(err, user) {
       var logs = user.logs
-      res.render('log-history', { title: 'Log History | BBQ Tracker', message: 'LOG HISTORY content', logList: logs, user: req.session.passport })
+      console.log(logs)
+      res.render('log-history', { title: 'Log History | BBQ Tracker', message: 'LOG HISTORY content', logList: logs, user: req.session.passport, moment: moment })
     })
-
-//    res.render('log-history', { title: 'Log History | BBQ Tracker', message: 'LOG HISTORY content', logList: logs, user: req.session.passport })
   })
 
   app.post('/register', function(req, res, next) {

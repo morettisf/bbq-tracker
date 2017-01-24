@@ -7,13 +7,31 @@
 <body>
   <%- include header.ejs -%>
   <p><%= message %></p>
-  <ul>
+  <table>
+    <tr>
+      <th>Date</th><th>Session Name</th><th>Meat</th><th>Cook Temperature</th><th>Rating</th>
+    </tr>
     <% if (logList) { %>
       <% logList.forEach(function(log) { %>
-        <li><%= log.session_name %></li>
+        <tr id=<%= log._id %>>
+          <td><% if (log.date) { %><%= moment(log.date).format('MMMM Do YYYY') %><% } %></td>
+          <td><a href='/view-log/<%= log._id %>'>
+          <% if (log.session_name === '') { %>
+            Unnamed Session
+          <% } %>
+            <%= log.session_name %></a></td><td><%= log.meat %></td><td><%= log.cook_temperature %></td>
+          <td>
+            <fieldset class='rating'>
+              <input type='radio' id='star5' name='rating' value='5' disabled='disabled' <% if (log.rating === 5) { %> checked='checked'<% } %>><label class='full' for='star5'></label>
+              <input type='radio' id='star4' name='rating' value='4' disabled='disabled' <% if (log.rating === 4) { %> checked='checked'<% } %>><label class='full' for='star4'></label>
+              <input type='radio' id='star3' name='rating' value='3' disabled='disabled' <% if (log.rating === 3) { %> checked='checked'<% } %>><label class='full' for='star3'></label>
+              <input type='radio' id='star2' name='rating' value='2' disabled='disabled' <% if (log.rating === 2) { %> checked='checked'<% } %>><label class='full' for='star2'></label>
+              <input type='radio' id='star1' name='rating' value='1' disabled='disabled' <% if (log.rating === 1) { %> checked='checked'<% } %>><label class='full' for='star1'></label>
+            </fieldset>
+          </tr>
       <% }) %>
     <% } %>
-  </ul>
+  </table>
   <script src='js/bundle.js'></script>
 </body>
 </html>

@@ -8,7 +8,7 @@ const LogSchema = new Schema({
   cooking_device: { type: String },
   meat: { type: String },
   weight: { type: String },
-  notes: { type: String },
+  meat_notes: { type: String },
   cook_temperature: { type: String },
   estimated_time: { type: String },
   fuel: { type: String },

@@ -25,11 +25,76 @@ window.outputUpdate = function (temp) {
   document.querySelector('#temp-slider-output').value = temp;
 }
 
-// gather log data for saving to database
+// save log data to Mongo
 var save = document.querySelector('#save')
 
 if (save) {
   save.addEventListener('click', function() {
+
+    var radios = document.querySelectorAll('.rating input')
+    var ratingSelected
+    radios.forEach(function(radio) {
+      if (radio.checked) {
+        ratingSelected = radio.value
+      }
+    })
+
+    var basicData = {
+      date: document.querySelector('#date-select').value, // find a way to get this value
+      session_name: document.querySelector('#session-name').value,
+      cooking_device: document.querySelector('#cooking-device').value,
+      meat: document.querySelector('#meat-type').value,
+      weight: document.querySelector('#weight').value,
+      meat_notes: document.querySelector('#meat-notes').value,
+      cook_temperature: document.querySelector('#temp-slider').value,
+      estimated_time: document.querySelector('#estimated-time').value,
+      fuel: document.querySelector('#fuel').value,
+      brand: document.querySelector('#brand').value,
+      wood: document.querySelector('#wood').value,
+      rating: ratingSelected
+    }
+
+    var ol = document.querySelector('ol')
+    var items = ol.getElementsByTagName('li')
+    var stepInfo = []
+    
+    Array.from(items).forEach(function(item) {
+      var stepObject = {}
+      stepObject.step = item.querySelector('.step-text').value
+      stepObject.completed = item.querySelector('.complete-check').checked
+      stepObject.time = item.querySelector('.time').value
+      stepObject.notes = item.querySelector('.complete-notes-text').value
+      stepInfo.push(stepObject)
+    })
+
+    var logData = Object.assign({ steps: stepInfo }, basicData)
+
+    sendLog(logData)
+  })
+}
+
+
+function sendLog(logData) {
+  fetch('/create-log', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(logData),
+    mode: 'cors',
+    cache: 'default',
+    credentials: 'include'
+  })
+    .then(function() {
+      alert('saved')
+    })
+}
+
+// update log data to Mongo
+var update = document.querySelector('#update')
+
+if (update) {
+  update.addEventListener('click', function() {
 
     var radios = document.querySelectorAll('.rating input')
     var ratingSelected
@@ -68,18 +133,17 @@ if (save) {
     })
 
     var logData = Object.assign({ steps: stepInfo }, basicData)
-    
-    console.log('basic: ' + basicData)
-    console.log('logdata: ' + logData)
 
-    sendLog(logData)
+    updateLog(logData)
   })
 }
 
+var url = window.location.pathname
+var logId = url.split('/').pop()
 
-function sendLog(logData) {
-  fetch('/create-log', {
-    method: 'POST',
+function updateLog(logData) {
+  fetch('/update-log/' + logId, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -89,12 +153,9 @@ function sendLog(logData) {
     credentials: 'include'
   })
     .then(function() {
-      alert('saved')
+      alert('updated')
     })
 }
-
-
-// create FETCH to post log
 
 
 
