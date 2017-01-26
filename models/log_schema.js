@@ -15,7 +15,8 @@ const LogSchema = new Schema({
   brand: { type: String },
   wood: { type: String },
   steps: [stepSchema],
-  rating: { type: Number }
+  rating: { type: Number },
+  status: { type: String }
 })
 
 module.exports = LogSchema

@@ -6,17 +6,20 @@
 </head>
 <body>
   <%- include header.ejs -%>
+  <% if (message) { %>
   <p><%= message %></p>
+  <% } %>
   <section id='log-action'>
     <select id='log-action-options'>
-      <option>Copy Selected</option>
-      <option>Delete Selected</option>
+      <option>Copy</option>
+      <option>Delete</option>
+      <option>Switch Status</option>
     </select>
-    <button type='button' id='log-action-btn'>Modify</button>
+    <button type='button' id='log-action-btn'>Modify Selected</button>
   </section>
   <table>
     <tr>
-      <th>Select</th><th>Date</th><th>Session Name</th><th>Meat</th><th>Cook Temperature</th><th>Rating</th>
+      <th>Select</th><th>Date</th><th>Session Name</th><th>Meat</th><th>Cook Temperature</th><th>Rating</th><th>Status</th>
     </tr>
     <% if (logList) { %>
       <% logList.forEach(function(log) { %>
@@ -35,6 +38,7 @@
               <input type='radio' id='star2' name='rating' value='2' disabled='disabled' <% if (log.rating === 2) { %> checked='checked'<% } %>><label class='full' for='star2'></label>
               <input type='radio' id='star1' name='rating' value='1' disabled='disabled' <% if (log.rating === 1) { %> checked='checked'<% } %>><label class='full' for='star1'></label>
             </fieldset>
+          <td><%= log.status %></td>
           </tr>
       <% }) %>
     <% } %>

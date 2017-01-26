@@ -107,7 +107,6 @@
         </ol>
       </div>
     </section>
-    <div id='rating'>
       <fieldset class='rating'>
         <input type='radio' id='star5' name='rating' value='5' <% if (logInfo.rating === 5) { %> checked='checked'<% } %>><label class='full' for='star5'></label>
         <input type='radio' id='star4' name='rating' value='4' <% if (logInfo.rating === 4) { %> checked='checked'<% } %>><label class='full' for='star4'></label>
@@ -115,7 +114,10 @@
         <input type='radio' id='star2' name='rating' value='2' <% if (logInfo.rating === 2) { %> checked='checked'<% } %>><label class='full' for='star2'></label>
         <input type='radio' id='star1' name='rating' value='1' <% if (logInfo.rating === 1) { %> checked='checked'<% } %>><label class='full' for='star1'></label>
       </fieldset>
-    </div>
+      <fieldset id='status-box'>
+        <input type='radio' name='status' value='Private' checked='checked'>Private
+        <input type='radio' name='status' value='Public'>Public
+      </fieldset>
     <button type='button' id='update'>Update Log</button>
   </main>
   <script src='../js/bundle.js'></script>

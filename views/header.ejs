@@ -1,11 +1,11 @@
 <nav>
   <a href='/'><img src='../images/smoker.svg' alt='smoker icon'></a>
   <ul>
-    <a href='/create-log'><li>Create BBQ Log</li></a>
     <% if (!user) { %>
     <a href='/register'><li>Register</li></a>
     <a href='/sign-in'><li>Sign In</li></a>
     <% } else { %>
+    <a href='/create-log'><li>Create BBQ Log</li></a>
     <a href='/log-history'><li>Log History</li></a>
     <a href='/logout'><li id='logout'>Logout</li></a>
     <% } %>

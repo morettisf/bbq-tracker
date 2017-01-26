@@ -1,5 +1,56 @@
 'use strict'
 
+// route for registration
+// var regBtn = document.querySelector('#reg-btn')
+// if (regBtn) {
+//   regBtn.addEventListener('click', function(event) {
+//     event.preventDefault()
+//     var regData = {
+//       username: document.querySelector('#username').value,
+//       email: document.querySelector('#reg-email').value,
+//       password: document.querySelector('#reg-pw').value,
+//       password2: document.querySelector('#reg-pw2').value
+//     }
+
+//     register(regData)
+
+//   })
+// }
+
+// function register(regData) {
+//   fetch('/register', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(regData),
+//     mode: 'cors',
+//     cache: 'default',
+//     credentials: 'include'
+//   })
+//     .then(function(res) {
+
+//       var info = res.json()
+//       return info
+//     })
+//     .then(function(info) {
+//       fetch('/sign-in', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(info),
+//         mode: 'cors',
+//         cache: 'default',
+//         credentials: 'include'
+//       })
+//     })
+//     .then(function(res) {
+//       window.location = '/log-history'
+//     })
+// }
+
+
 var addStepBtn = document.querySelector('#add-step')
 var list = document.querySelector('ol')
 
@@ -39,6 +90,14 @@ if (save) {
       }
     })
 
+    var status = document.querySelectorAll('#status-box input')
+    var statusSelected
+    status.forEach(function(item) {
+      if (item.checked) {
+        statusSelected = item.value
+      }
+    })
+
     var basicData = {
       date: document.querySelector('#date-select').value, // find a way to get this value
       session_name: document.querySelector('#session-name').value,
@@ -51,7 +110,8 @@ if (save) {
       fuel: document.querySelector('#fuel').value,
       brand: document.querySelector('#brand').value,
       wood: document.querySelector('#wood').value,
-      rating: ratingSelected
+      rating: ratingSelected,
+      status: statusSelected
     }
 
     var ol = document.querySelector('ol')
@@ -104,6 +164,14 @@ if (update) {
       }
     })
 
+    var status = document.querySelectorAll('#status-box input')
+    var statusSelected
+    status.forEach(function(item) {
+      if (item.checked) {
+        statusSelected = item.value
+      }
+    })
+
     var basicData = {
       date: document.querySelector('#date-select').value, // find a way to get this value
       session_name: document.querySelector('#session-name').value,
@@ -116,7 +184,8 @@ if (update) {
       fuel: document.querySelector('#fuel').value,
       brand: document.querySelector('#brand').value,
       wood: document.querySelector('#wood').value,
-      rating: ratingSelected
+      rating: ratingSelected,
+      status: statusSelected
     }
 
     var ol = document.querySelector('ol')
@@ -173,19 +242,23 @@ if (modify) {
       }
     })
 
-      if (modOption === 'Copy Selected') {
+      if (modOption === 'Copy') {
         copyLogs(selectedLogs)
       }
 
-      else {
+      else if (modOption === 'Delete') {
         deleteLogs(selectedLogs)
+      }
+
+      else if (modOption === 'Switch Status') {
+        statusLogs(selectedLogs)
       }
 
   })
 }
 
 function copyLogs(selected) {
-  fetch('/copy-logs', {
+  fetch('/log-history', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -195,9 +268,41 @@ function copyLogs(selected) {
     cache: 'default',
     credentials: 'include'
   })
-    .then(window.location = '/log-history')
+   .then(function(res) {
+//     console.log(res.json())
+     window.location = '/log-history?message=logs%20copied'
+   })
 }
 
-function deleteLogs() {
+function deleteLogs(selected) {
+  fetch('/log-history', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(selected),
+    mode: 'cors',
+    cache: 'default',
+    credentials: 'include'
+  })
+    .then(function(res) {
+      console.log(res)
+      window.location = '/log-history?message=logs%20deleted'
+    })
+}
 
+function statusLogs(selected) {
+  fetch('/log-history', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(selected),
+    mode: 'cors',
+    cache: 'default',
+    credentials: 'include'
+  })
+   .then(function(res) {
+     window.location = '/log-history?message=log%20status%20switched'
+   })
 }

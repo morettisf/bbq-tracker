@@ -4,7 +4,8 @@ const logSchema = require('./log_schema')
 const bcrypt = require('bcryptjs')
 
 const UserSchema = new Schema({
-  email: { type: String, required: true, unique: true },
+  username: {type: String, required: true, unique: true},
+  email: { type: String, required: true },
   password: { type: String, required: true },
   logs: [logSchema]
 })

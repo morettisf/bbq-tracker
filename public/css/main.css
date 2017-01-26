@@ -63,16 +63,10 @@ main {
   height: 50px;
 }
 
-#save {
+#save, #update {
   display: block;
   clear: both;
-  margin-top: 75px;
-}
-
-#update {
-  display: block;
-  clear: both;
-  margin-top: 75px;
+  margin-top: 25px;
 }
 
 #sign-in input {
@@ -132,3 +126,6 @@ th, td {
   padding: 10px;
 }
 
+#status-box {
+  clear: both;
+}

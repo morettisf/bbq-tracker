@@ -9,10 +9,44 @@
     <h1>BBQ Tracker</h1>
   </header>
   <main>
-    <div id='menu-wrapper'>
-      <a href='/create-log'><button type='button' id='create'>Create a Log</button></a>
+    <section id='menu-wrapper'>
+      <a href='/register'><button type='button' id='create'>Register</button></a>
       <a href='/sign-in'><button type='button' id='sign-in'>Sign In</button></a>
-    </div>
+    </section>
+    <section id='public-logs'>
+      <table>
+        <tr>
+          <th>Session Name</th><th>Date</th><th>Meat</th><th>Cook Temperature</th><th>Rating</th>
+        </tr>
+        <% if (logList) { %>
+          <% logList.forEach(function(log) { %>
+            <tr id=<%= log._id %>>
+              <td><a href='/view-log/<%= log._id %>'>
+                <% if (log.session_name === '') { %>
+                  Unnamed Session
+                <% } %>
+                <%= log.session_name %></a>
+              </td>
+              <td>
+                <% if (log.date) { %>
+                  <%= moment(log.date).format('MMMM Do YYYY') %>
+                <% } %>
+              </td>
+              <td><%= log.meat %></td>
+              <td><%= log.cook_temperature %></td>
+              <td>
+                <fieldset class='rating'>
+                  <input type='radio' id='star5' name='rating' value='5' disabled='disabled' <% if (log.rating === 5) { %> checked='checked'<% } %>><label class='full' for='star5'></label>
+                  <input type='radio' id='star4' name='rating' value='4' disabled='disabled' <% if (log.rating === 4) { %> checked='checked'<% } %>><label class='full' for='star4'></label>
+                  <input type='radio' id='star3' name='rating' value='3' disabled='disabled' <% if (log.rating === 3) { %> checked='checked'<% } %>><label class='full' for='star3'></label>
+                  <input type='radio' id='star2' name='rating' value='2' disabled='disabled' <% if (log.rating === 2) { %> checked='checked'<% } %>><label class='full' for='star2'></label>
+                  <input type='radio' id='star1' name='rating' value='1' disabled='disabled' <% if (log.rating === 1) { %> checked='checked'<% } %>><label class='full' for='star1'></label>
+                </fieldset>
+              </tr>
+          <% }) %>
+        <% } %>
+      </table>
+    </section>
   </main>
   <script src='js/bundle.js'></script>
 </body>
