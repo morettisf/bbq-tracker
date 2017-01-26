@@ -8,7 +8,7 @@ describe('Creating records', () => {
     User.count().then(count => {
       request(app)
         .post('/register')
-        .send({ email: 'joe@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
+        .send({ username: 'joe', email: 'joe@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
         .end(() => {
           User.count().then(newCount => {
             assert(count + 1 === newCount)
@@ -21,11 +21,11 @@ describe('Creating records', () => {
   it('logs in a user', (done) => {
     request(app)
       .post('/register')
-      .send({ email: 'greg@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
+      .send({ username: 'greg', email: 'greg@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
       .then(() => {
         request(app)
           .post('/sign-in')
-          .send({ email: 'greg@test.com', password: 'bstpassword123' })
+          .send({ username: 'greg', password: 'bstpassword123' })
           .end((err, res) => {
             console.log(err)
               assert(res.headers['set-cookie'])

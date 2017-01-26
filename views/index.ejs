@@ -14,14 +14,16 @@
       <a href='/sign-in'><button type='button' id='sign-in'>Sign In</button></a>
     </section>
     <section id='public-logs'>
+      <h2>Public Logs</h2>
       <table>
         <tr>
-          <th>Session Name</th><th>Date</th><th>Meat</th><th>Cook Temperature</th><th>Rating</th>
+          <th>Username</th><th>Session Name</th><th>Date</th><th>Meat</th><th>Cook Temperature</th><th>Rating</th>
         </tr>
         <% if (logList) { %>
           <% logList.forEach(function(log) { %>
             <tr id=<%= log._id %>>
-              <td><a href='/view-log/<%= log._id %>'>
+              <td><%= log.username %></td>
+              <td><a href='/public-log/<%= log._id %>'>
                 <% if (log.session_name === '') { %>
                   Unnamed Session
                 <% } %>

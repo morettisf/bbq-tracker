@@ -19,6 +19,7 @@ module.exports = (app) => {
         if (err) throw err
 
       users.forEach(function(user) {
+
         userLogs.push(user.logs)
       })
 
@@ -58,6 +59,26 @@ module.exports = (app) => {
       
       res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport })
 
+    })
+
+  })
+
+  app.get('/public-log/:log', function(req, res) {
+  
+    var logId = req.params.log
+    var selectedLog
+
+    User.find({ 'logs._id': logId })
+      .exec(function (err, user) {
+        if (err) throw err
+
+      user[0].logs.forEach(function(log) {
+        if (log._id == logId) { // CONVERT TO SAME FORMAT
+          selectedLog = log
+        }
+      })
+
+      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport })
     })
 
   })
