@@ -1,56 +1,5 @@
 'use strict'
 
-// route for registration
-// var regBtn = document.querySelector('#reg-btn')
-// if (regBtn) {
-//   regBtn.addEventListener('click', function(event) {
-//     event.preventDefault()
-//     var regData = {
-//       username: document.querySelector('#username').value,
-//       email: document.querySelector('#reg-email').value,
-//       password: document.querySelector('#reg-pw').value,
-//       password2: document.querySelector('#reg-pw2').value
-//     }
-
-//     register(regData)
-
-//   })
-// }
-
-// function register(regData) {
-//   fetch('/register', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(regData),
-//     mode: 'cors',
-//     cache: 'default',
-//     credentials: 'include'
-//   })
-//     .then(function(res) {
-
-//       var info = res.json()
-//       return info
-//     })
-//     .then(function(info) {
-//       fetch('/sign-in', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(info),
-//         mode: 'cors',
-//         cache: 'default',
-//         credentials: 'include'
-//       })
-//     })
-//     .then(function(res) {
-//       window.location = '/log-history'
-//     })
-// }
-
-
 var addStepBtn = document.querySelector('#add-step')
 var list = document.querySelector('ol')
 
@@ -89,6 +38,10 @@ if (save) {
         ratingSelected = radio.value
       }
     })
+
+    if (!ratingSelected) {
+      ratingSelected = 0
+    }
 
     var status = document.querySelectorAll('#status-box input')
     var statusSelected
@@ -165,6 +118,10 @@ if (update) {
         ratingSelected = radio.value
       }
     })
+
+    if (!ratingSelected) {
+      ratingSelected = 0
+    }
 
     var status = document.querySelectorAll('#status-box input')
     var statusSelected

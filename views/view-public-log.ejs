@@ -11,19 +11,26 @@
 <body>
   <%- include header.ejs -%>
   <main>
-    <h1>Public BBQ Log Entry</h1>
-    <section>
+    <h1><%= logInfo.username %> | BBQ Log Entry</h1>
+    <div id='vote-area'>
+      <img src='../images/vote.png' alt='Lip Smackin Votes'>
+      <div id='vote-count-box'>
+        <div id='vote-count'></div>
+        <button type='button'>Vote</button>
+      </div>
+    </div>
+    <section id='log-basics'>
       <div id='date'>
         <label for='date'>Date</label>
-        <input type='text' name='date' id='date-select' value='<%= logInfo.date %>'>
+        <input type='text' name='date' id='date-select' value='<% if (logInfo.date) { %><%= moment(logInfo.date).format('MMMM Do YYYY') %><% } %>' disabled>
       </div>
       <div id='session-box'>
         <label for='session-name'>Session Name</label>
-        <input type='text' id='session-name' placeholder='Brisket in May' value='<%= logInfo.session_name %>'>
+        <input type='text' id='session-name' value='<%= logInfo.session_name %>' disabled>
       </div>
       <div id='bbq-cooker'>
         <label for='cooking-device'>Cooking Device</label>
-        <select id='cooking-device' value='<%= logInfo.cooking_device %>'>
+        <select id='cooking-device' value='<%= logInfo.cooking_device %>' disabled>
           <option value='bge'>Big Green Egg</option>
           <option value='wsm'>Weber Smokey Mountain</option>
           <option value='kettle'>Kettle Grill</option>
@@ -33,7 +40,7 @@
       </div>
       <div id='meat'>
         <label for='meat'>Meat</label>
-        <select id='meat-type' value='<%= logInfo.meat %>'>
+        <select id='meat-type' value='<%= logInfo.meat %>' disabled>
           <option value='brisket'>Beef Brisket</option>
           <option value='beef-ribs'>Beef Ribs</option>
           <option value='beef-tri-tip'>Beef Tri-tip</option>
@@ -42,32 +49,32 @@
           <option value='pork-ribs'>Pork Ribs (spares)</option>
         </select>
         <label for='meat-weight'>Weight</label>
-        <input type='text' name='meat-weight' id='weight' placeholder='5 lbs' value='<%= logInfo.weight %>'>
+        <input type='text' name='meat-weight' id='weight' value='<%= logInfo.weight %>' disabled>
         <label for='meat-notes'>Notes</label>
-        <input type='text' name='meat-notes' id='meat-notes' placeholder='Prime cut of meat' value='<%= logInfo.meat_notes %>'>
+        <input type='text' name='meat-notes' id='meat-notes' value='<%= logInfo.meat_notes %>' disabled>
       </div>
       <div id='cook-temperature'>
         <label for='cook-temperature'>Cook Temperature</label>
-        <input id='temp-slider' type='range' min='100' max='500' step='5' value='<%= logInfo.cook_temperature %>' oninput='window.outputUpdate(value)'>
+        <input id='temp-slider' type='range' min='100' max='500' step='5' value='<%= logInfo.cook_temperature %>' oninput='window.outputUpdate(value)' disabled>
         <output for='temp-slider' id='temp-slider-output'>225</output>
       </div>
       <div id='estimated-time-box'>
         <label for='estimated-time'>Estimated Time</label>
-        <input type='text' name='estimated-time' id='estimated-time' placeholder='10 hours' value='<%= logInfo.estimated_time %>'>
+        <input type='text' name='estimated-time' id='estimated-time' value='<%= logInfo.estimated_time %>' disabled>
       </div>
       <div id='fuel-box'>
         <label for='fuel'>Fuel</label>
-        <select id='fuel' value='<%= logInfo.fuel %>'>
+        <select id='fuel' value='<%= logInfo.fuel %>' disabled>
           <option value='lump'>Lump Charcoal</option>
           <option value='Briquettes'>Briquettes</option>
           <option value='Wood'>Wood</option>
         </select>
         <label for='fuel-brand'>Brand</label>
-        <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs' value='<%= logInfo.brand %>'>
+        <input type='text' name='fuel-brand' id='brand' value='<%= logInfo.brand %>' disabled>
       </div>
       <div id='wood-box'>
         <label for='wood'>Wood</label>
-        <select id='wood' value='<%= logInfo.wood %>'>
+        <select id='wood' value='<%= logInfo.wood %>' disabled>
           <option value='hickory'>Hickory</option>
           <option value='mesquite'>Mesquite</option>
           <option value='oak'>Oak</option>
@@ -86,18 +93,18 @@
             <li>
               <div class='step-box'>
                 <div class='step-notes'>
-                  <textarea class='step-text' placeholder='Write step here'><%= item.step %></textarea>
+                  <textarea class='step-text' disabled><%= item.step %></textarea>
                 </div>
                 <div class='complete-box'>
-                  <input type='checkbox' class='complete-check' name='step-complete' 
+                  <input type='checkbox' class='complete-check' name='step-complete' disabled 
                     <% if (item.completed === 'true') { %> 
                       checked='checked'
                     <% } %>
                   >
-                  <input type='time' class='time' name='time' value='<%= item.time %>'>
+                  <input type='time' class='time' name='time' value='<%= item.time %>' disabled>
                 </div>
                 <div class='complete-notes'>
-                  <textarea class='complete-notes-text' placeholder='Write notes here'><%= item.notes %></textarea>
+                  <textarea class='complete-notes-text' disabled><%= item.notes %></textarea>
                 </div>
               </div>
             </li>
@@ -105,13 +112,14 @@
         </ol>
       </div>
     </section>
-      <fieldset class='rating'>
-        <input type='radio' id='star5' name='rating' value='5' <% if (logInfo.rating === 5) { %> checked='checked'<% } %>><label class='full' for='star5'></label>
-        <input type='radio' id='star4' name='rating' value='4' <% if (logInfo.rating === 4) { %> checked='checked'<% } %>><label class='full' for='star4'></label>
-        <input type='radio' id='star3' name='rating' value='3' <% if (logInfo.rating === 3) { %> checked='checked'<% } %>><label class='full' for='star3'></label>
-        <input type='radio' id='star2' name='rating' value='2' <% if (logInfo.rating === 2) { %> checked='checked'<% } %>><label class='full' for='star2'></label>
-        <input type='radio' id='star1' name='rating' value='1' <% if (logInfo.rating === 1) { %> checked='checked'<% } %>><label class='full' for='star1'></label>
-      </fieldset>
+    <div id='public-rating'>
+      <% if (logInfo.rating === 5) { %><img src='../images/5.gif' alt='5 Stars'><% } %>
+      <% if (logInfo.rating === 4) { %><img src='../images/4.gif' alt='4 Stars'><% } %>
+      <% if (logInfo.rating === 3) { %><img src='../images/3.gif' alt='3 Stars'><% } %>
+      <% if (logInfo.rating === 2) { %><img src='../images/2.gif' alt='2 Stars'><% } %>
+      <% if (logInfo.rating === 1) { %><img src='../images/1.gif' alt='1 Stars'><% } %>
+      <% if (logInfo.rating === 0) { %><img src='../images/0.gif' alt='0 Stars'><% } %>
+    </div>
   </main>
   <script src='../js/bundle.js'></script>
 </body>

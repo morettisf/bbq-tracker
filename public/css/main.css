@@ -19,7 +19,7 @@ html, body {
   height: 100%;
 }
 
-table img {
+table img, #public-rating img {
   width: 116px;
   height: 22.5px;
 }
@@ -77,6 +77,7 @@ nav li {
 }
 
 main {
+  position: relative;
   margin: 0 20px;
 }
 
@@ -123,6 +124,39 @@ main {
 
 #register input {
   display: block;
+}
+
+#vote-area {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#vote-area img {
+  width: 150px;
+  height: 127px;
+  display: inline-block;
+}
+
+#vote-area button {
+  width: 100%;
+}
+
+#vote-count-box {
+  height: 127px;
+  width: 50px;
+  margin-left: 10px;
+  margin-top: 25px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#vote-count {
+  width: 100%;
+  height: 50px;
+  border: 1px solid black;
+  margin-bottom: 5px;
+  box-sizing: border-box;
 }
 
 /****** Style Star Rating Widget *****/

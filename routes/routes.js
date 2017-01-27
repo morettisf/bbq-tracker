@@ -239,7 +239,7 @@ module.exports = (app) => {
       
       var username = user.username
 
-      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport, username: username })
+      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport, username: username, moment: moment })
 
     })
 
@@ -261,7 +261,7 @@ module.exports = (app) => {
         }
       })
 
-      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport, username: null })
+      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport, username: null, moment: moment })
     })
   })
 

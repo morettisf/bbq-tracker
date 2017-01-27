@@ -15,7 +15,7 @@
     <section>
       <div id='date'>
         <label for='date'>Date</label>
-        <input type='text' name='date' id='date-select' value='<%= logInfo.date %>'>
+        <input type='text' name='date' id='date-select' value='<% if (logInfo.date) { %><%= moment(logInfo.date).format('MMMM Do YYYY') %><% } %>'>
       </div>
       <div id='session-box'>
         <label for='session-name'>Session Name</label>
