@@ -115,8 +115,8 @@
         <input type='radio' id='star1' name='rating' value='1' <% if (logInfo.rating === 1) { %> checked='checked'<% } %>><label class='full' for='star1'></label>
       </fieldset>
       <fieldset id='status-box'>
-        <input type='radio' name='status' value='Private' checked='checked'>Private
-        <input type='radio' name='status' value='Public'>Public
+        <input type='radio' name='status' value='Private' <% if (logInfo.status === 'Private') { %> checked='checked'<% } %>>Private
+        <input type='radio' name='status' value='Public' <% if (logInfo.status === 'Public') { %> checked='checked'<% } %>>Public
       </fieldset>
     <button type='button' id='update'>Update Log</button>
   </main>

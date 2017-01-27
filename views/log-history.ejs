@@ -30,14 +30,14 @@
             Unnamed Session
           <% } %>
             <%= log.session_name %></a></td><td><%= log.meat %></td><td><%= log.cook_temperature %></td>
-          <td>
-            <fieldset class='rating'>
-              <input type='radio' id='star5' name='rating' value='5' disabled='disabled' <% if (log.rating === 5) { %> checked='checked'<% } %>><label class='full' for='star5'></label>
-              <input type='radio' id='star4' name='rating' value='4' disabled='disabled' <% if (log.rating === 4) { %> checked='checked'<% } %>><label class='full' for='star4'></label>
-              <input type='radio' id='star3' name='rating' value='3' disabled='disabled' <% if (log.rating === 3) { %> checked='checked'<% } %>><label class='full' for='star3'></label>
-              <input type='radio' id='star2' name='rating' value='2' disabled='disabled' <% if (log.rating === 2) { %> checked='checked'<% } %>><label class='full' for='star2'></label>
-              <input type='radio' id='star1' name='rating' value='1' disabled='disabled' <% if (log.rating === 1) { %> checked='checked'<% } %>><label class='full' for='star1'></label>
-            </fieldset>
+              <td>
+                <% if (log.rating === 5) { %><img src='../images/5.gif' alt='5 Stars'><% } %>
+                <% if (log.rating === 4) { %><img src='../images/4.gif' alt='4 Stars'><% } %>
+                <% if (log.rating === 3) { %><img src='../images/3.gif' alt='3 Stars'><% } %>
+                <% if (log.rating === 2) { %><img src='../images/2.gif' alt='2 Stars'><% } %>
+                <% if (log.rating === 1) { %><img src='../images/1.gif' alt='1 Stars'><% } %>
+                <% if (log.rating === 0) { %><img src='../images/0.gif' alt='0 Stars'><% } %>
+              </td>
           <td><%= log.status %></td>
           </tr>
       <% }) %>

@@ -13,126 +13,34 @@ module.exports = (app) => {
 
   var userLogs = []
   var userLogsConcat
+  var logsSorted
 
     User.find({ 'logs.status': 'Public' })
       .exec(function (err, users) {
         if (err) throw err
 
-      users.forEach(function(user) {
-
-        userLogs.push(user.logs)
-      })
+        users.forEach(function(user) {
+          userLogs.push(user.logs)
+        })
 
       userLogsConcat = [].concat.apply([], userLogs)
 
-    res.render('index', { title: 'BBQ Tracker', message: 'HOMEPAGE content', user: req.session.passport, logList: userLogsConcat, moment: moment })
-    console.log(req.session.passport)
+      logsSorted = userLogsConcat.sort(function(a,b){
+                          return b.updated - a.updated
+                        })
+
+      res.render('index', { title: 'BBQ Tracker', message: 'HOMEPAGE content', user: req.session.passport, logList: logsSorted, moment: moment })
+      console.log(req.session.passport)
 
     })
 
   })
 
-  app.get('/sign-in', function(req, res) {
-    res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errors: null, message: req.session.message })
-  })
 
   app.get('/register', function(req, res) {
-    res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: null })
+    res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: null, username: null })
   })
 
-  app.get('/create-log', function(req, res) {
-    res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', user: req.session.passport })
-  })
-
-  app.get('/view-log/:log', function(req, res) {
-    var userId = req.session.passport.user
-    var logId = req.params.log
-
-    var logInfo
-
-    User.findOne({ _id: userId }, function(err, user) {
-      user.logs.forEach(function(log) {
-        if (log._id == logId) {  // CONVERT TO SAME FORMAT
-          logInfo = log
-        }
-      })
-      
-      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport })
-
-    })
-
-  })
-
-  app.get('/public-log/:log', function(req, res) {
-  
-    var logId = req.params.log
-    var selectedLog
-
-    User.find({ 'logs._id': logId })
-      .exec(function (err, user) {
-        if (err) throw err
-
-      user[0].logs.forEach(function(log) {
-        if (log._id == logId) { // CONVERT TO SAME FORMAT
-          selectedLog = log
-        }
-      })
-
-      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport })
-    })
-
-  })
-
-  app.put('/update-log/:log', function(req, res) {
-    var userId = req.session.passport.user
-    var logId = req.params.log
-    var info = req.body
-
-    User.findOne({ _id: userId }, function(err, user) {
-      var log = user.logs.id(logId)
-
-      log.date = info.date
-      log.rating = info.rating
-      log.wood = info.wood
-      log.brand = info.brand
-      log.fuel = info.fuel
-      log.estimated_time = info.estimated_time
-      log.cook_temperature = info.cook_temperature
-      log.meat_notes = info.meat_notes
-      log.weight = info.weight
-      log.meat = info.meat
-      log.cooking_device = info.cooking_device
-      log.session_name = info.session_name
-      log.status = info.status
-      
-      log.steps = []
-      info.steps.forEach(function(item) {
-        var stepObj = {}
-
-        stepObj.step = item.step
-        stepObj.completed = item.completed
-        stepObj.time = item.time
-        stepObj.notes = item.notes
-        log.steps.push(stepObj)
-      })
-
-      user.save()
-
-    })
-    res.send('ok')
-
-  })
-
-  app.get('/log-history', isLoggedIn, function(req, res) {
-
-    var userId = req.session.passport.user
-
-    User.findOne({ _id: userId }, function(err, user) {
-      var logs = user.logs
-
-      res.render('log-history', { title: 'Log History | BBQ Tracker', message: req.query.message || null, logList: logs, user: req.session.passport, moment: moment })
-    })
-  })
 
   app.post('/register', function(req, res, next) {
 
@@ -217,6 +125,11 @@ module.exports = (app) => {
   })
 
 
+  app.get('/sign-in', function(req, res) {
+    res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errors: null, message: req.session.message, username: null })
+  })
+
+
   app.post('/sign-in', function(req, res, next) {
     passport.authenticate('local-sign-in', function(err, user, info) {
 
@@ -239,6 +152,19 @@ module.exports = (app) => {
   })
 
 
+  app.get('/create-log', function(req, res) {
+    var userId = req.session.passport.user
+
+    User.findOne({ _id: userId }, function(err, user) {
+      var username = user.username
+
+      res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', user: req.session.passport, username: username })
+
+    })
+
+  })
+
+
   app.post('/create-log', function(req, res, next) {
 
     var info = req.body
@@ -253,6 +179,110 @@ module.exports = (app) => {
     })
 
   })
+
+
+  app.put('/update-log/:log', function(req, res) {
+    var userId = req.session.passport.user
+    var logId = req.params.log
+    var info = req.body
+
+    User.findOne({ _id: userId }, function(err, user) {
+      var log = user.logs.id(logId)
+
+      log.date = info.date
+      log.rating = info.rating
+      log.wood = info.wood
+      log.brand = info.brand
+      log.fuel = info.fuel
+      log.estimated_time = info.estimated_time
+      log.cook_temperature = info.cook_temperature
+      log.meat_notes = info.meat_notes
+      log.weight = info.weight
+      log.meat = info.meat
+      log.cooking_device = info.cooking_device
+      log.session_name = info.session_name
+      log.status = info.status
+      log.username = info.username
+      log.updated = info.updated
+      
+      log.steps = []
+      info.steps.forEach(function(item) {
+        var stepObj = {}
+
+        stepObj.step = item.step
+        stepObj.completed = item.completed
+        stepObj.time = item.time
+        stepObj.notes = item.notes
+        log.steps.push(stepObj)
+      })
+
+      user.save()
+
+    })
+    res.send('ok')
+
+  })
+
+
+  app.get('/view-log/:log', function(req, res) {
+    var userId = req.session.passport.user
+    var logId = req.params.log
+
+    var logInfo
+
+    User.findOne({ _id: userId }, function(err, user) {
+      user.logs.forEach(function(log) {
+        if (log._id == logId) {  // CONVERT TO SAME FORMAT
+          logInfo = log
+        }
+      })
+      
+      var username = user.username
+
+      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport, username: username })
+
+    })
+
+  })
+
+
+  app.get('/public-log/:log', function(req, res) {
+  
+    var logId = req.params.log
+    var selectedLog
+
+    User.find({ 'logs._id': logId })
+      .exec(function (err, user) {
+        if (err) throw err
+
+      user[0].logs.forEach(function(log) {
+        if (log._id == logId) { // CONVERT TO SAME FORMAT
+          selectedLog = log
+        }
+      })
+
+      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport, username: null })
+    })
+  })
+
+
+  app.get('/log-history', isLoggedIn, function(req, res) {
+
+    var userId = req.session.passport.user
+
+    User.findOne({ _id: userId }, function(err, user) {
+      var logs = user.logs
+
+      var logsSorted = logs.sort(function(a,b) {
+                        return b.date - a.date
+                        })
+
+      var username = user.username
+
+      res.render('log-history', { title: 'Log History | BBQ Tracker', message: req.query.message || null, logList: logsSorted, user: req.session.passport, moment: moment, username: username })
+    })
+  })
+
 
   app.post('/log-history', function(req, res, next) {
 
@@ -281,6 +311,8 @@ module.exports = (app) => {
         newLog.meat = log.meat
         newLog.cooking_device = log.cooking_device
         newLog.session_name = log.session_name
+        newLog.username = log.username
+        log.updated = info.updated
         
         newLog.steps = []
         log.steps.forEach(function(itemStep) {
@@ -304,6 +336,7 @@ module.exports = (app) => {
     })
 
   })
+
 
   app.put('/log-history', function(req, res, next) {
 
@@ -335,6 +368,7 @@ module.exports = (app) => {
 
   })
 
+
   app.delete('/log-history', function(req, res, next) {
     var reqLogs = req.body
     
@@ -360,6 +394,7 @@ module.exports = (app) => {
       res.redirect('/')
     })
   })
+
 
 }
 

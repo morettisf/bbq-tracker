@@ -99,7 +99,7 @@ if (save) {
     })
 
     var basicData = {
-      date: document.querySelector('#date-select').value, // find a way to get this value
+      date: document.querySelector('#date-select').value,
       session_name: document.querySelector('#session-name').value,
       cooking_device: document.querySelector('#cooking-device').value,
       meat: document.querySelector('#meat-type').value,
@@ -111,7 +111,9 @@ if (save) {
       brand: document.querySelector('#brand').value,
       wood: document.querySelector('#wood').value,
       rating: ratingSelected,
-      status: statusSelected
+      status: statusSelected,
+      username: document.querySelector('#username').innerHTML,
+      updated: new Date()
     }
 
     var ol = document.querySelector('ol')
@@ -146,7 +148,7 @@ function sendLog(logData) {
     credentials: 'include'
   })
     .then(function() {
-      alert('saved')
+      window.location = '/log-history?message=log%20created'
     })
 }
 
@@ -185,7 +187,9 @@ if (update) {
       brand: document.querySelector('#brand').value,
       wood: document.querySelector('#wood').value,
       rating: ratingSelected,
-      status: statusSelected
+      status: statusSelected,
+      username: document.querySelector('#username').innerHTML,
+      updated: new Date()
     }
 
     var ol = document.querySelector('ol')
@@ -202,7 +206,8 @@ if (update) {
     })
 
     var logData = Object.assign({ steps: stepInfo }, basicData)
-
+    
+    console.log(basicData)
     updateLog(logData)
   })
 }
