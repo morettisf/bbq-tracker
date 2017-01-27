@@ -250,6 +250,8 @@ module.exports = (app) => {
   
     var logId = req.params.log
     var selectedLog
+    var userId = req.session.passport.user
+    var votingStatus = true
 
     User.find({ 'logs._id': logId })
       .exec(function (err, user) {
@@ -261,7 +263,34 @@ module.exports = (app) => {
         }
       })
 
-      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport, username: null, moment: moment })
+      selectedLog.voters.forEach(function(voter) {
+        if (userId == voter.voter_id) {
+          votingStatus = false
+        }
+      })
+
+      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport, username: null, moment: moment, button: votingStatus })
+    })
+  })
+
+  app.put('/public-log', function(req, res) {
+    var author = req.body.author
+    var logId = req.body.logId
+    var voter = { voter_id: req.session.passport.user }
+    var updatedVotes
+
+    User.findOne({ username: author }, function(err, user) {
+      var logs = user.logs
+
+      logs.forEach(function(log) {
+        if (logId == log._id) {
+          log.votes++
+          log.voters.push(voter)
+          updatedVotes = log.votes
+        }
+      })
+      user.save()
+      res.json({ votes: updatedVotes })
     })
   })
 

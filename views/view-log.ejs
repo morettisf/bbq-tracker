@@ -11,7 +11,14 @@
 <body>
   <%- include header.ejs -%>
   <main>
-    <h1>Saved BBQ Log Entry</h1>
+    <h2><%= logInfo.username %></h2>
+    <h1>Saved BBQ Log</h1>
+    <div id='vote-area'>
+      <img src='../images/vote.png' alt='Lip Smackin Votes'>
+      <div id='vote-count-box'>
+        <div id='vote-count'><%= logInfo.votes %></div>
+      </div>
+    </div>
     <section>
       <div id='date'>
         <label for='date'>Date</label>

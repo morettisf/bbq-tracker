@@ -7,9 +7,7 @@
 <body id='home-body'>
   <header>
     <h1>BBQ Tracker</h1>
-  </header>
-  <main id='home-main'>
-    <section id='menu-wrapper'>
+    <div id='menu-wrapper'>
       <% if (!user) { %>
         <a href='/register'><button type='button' id='homebtn1'>Register</button></a>
         <a href='/sign-in'><button type='button' id='homebtn2'>Sign In</button></a>
@@ -17,12 +15,14 @@
         <a href='/create-log'><button type='button' id='homebtn1'>Create Log</button></a>
         <a href='/log-history'><button type='button' id='homebtn2'>Log History</button></a>
       <% } %>
-    </section>
+    </div>
+  </header>
+  <main id='home-main'>
     <section id='public-logs'>
-      <h2>Public Logs</h2>
+      <h2>Public Logs Update</h2>
       <table>
         <tr>
-          <th>Username</th><th>Session Name</th><th>Date</th><th>Meat</th><th>Cook Temperature</th><th>Rating</th>
+          <th>Username</th><th>Session Name</th><th>Date</th><th>Meat</th><th>User's Rating</th><th>Popular Votes</th>
         </tr>
         <% if (logList) { %>
           <% logList.forEach(function(log) { %>
@@ -40,7 +40,6 @@
                 <% } %>
               </td>
               <td><%= log.meat %></td>
-              <td><%= log.cook_temperature %></td>
               <td>
                 <% if (log.rating === 5) { %><img src='../images/5.gif' alt='5 Stars'><% } %>
                 <% if (log.rating === 4) { %><img src='../images/4.gif' alt='4 Stars'><% } %>
@@ -49,6 +48,7 @@
                 <% if (log.rating === 1) { %><img src='../images/1.gif' alt='1 Stars'><% } %>
                 <% if (log.rating === 0) { %><img src='../images/0.gif' alt='0 Stars'><% } %>
               </td>
+              <td><%= log.votes %></td>
             </tr>
           <% }) %>
         <% } %>

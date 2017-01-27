@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const stepSchema = require('./step_schema')
+const voterIdSchema = require('./voter_schema')
 
 const LogSchema = new Schema({
   date: { type: Date },
@@ -18,7 +19,9 @@ const LogSchema = new Schema({
   rating: { type: Number },
   status: { type: String },
   username: { type: String },
-  updated: { type: Date }
+  updated: { type: Date },
+  votes: { type: Number },
+  voters: [voterIdSchema]
 })
 
 module.exports = LogSchema

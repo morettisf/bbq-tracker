@@ -25,7 +25,7 @@ window.outputUpdate = function (temp) {
   document.querySelector('#temp-slider-output').value = temp;
 }
 
-// save log data to Mongo
+// save new log data to Mongo
 var save = document.querySelector('#save')
 
 if (save) {
@@ -66,7 +66,8 @@ if (save) {
       rating: ratingSelected,
       status: statusSelected,
       username: document.querySelector('#username').innerHTML,
-      updated: new Date()
+      updated: new Date(),
+      votes: 0
     }
 
     var ol = document.querySelector('ol')
@@ -264,7 +265,40 @@ function statusLogs(selected) {
     cache: 'default',
     credentials: 'include'
   })
-   .then(function(res) {
+    .then(function(res) {
      window.location = '/log-history?message=log%20status%20switched'
-   })
+    })
+}
+
+// add votes to public log
+var voteBtn = document.querySelector('#vote-btn')
+if (voteBtn) {
+  voteBtn.addEventListener('click', function() {
+
+  var url = window.location.pathname
+  var logId = url.split('/').pop()
+
+    var log = {
+      author: document.querySelector('h2').innerHTML,
+      logId: logId
+    }
+
+    addVote(log)
+  })
+}
+
+function addVote(log) {
+  fetch('/public-log', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(log),
+    mode: 'cors',
+    cache: 'default',
+    credentials: 'include'
+  })
+    .then(function(res) {
+     window.location.reload()
+    })
 }

@@ -19,7 +19,7 @@
   </section>
   <table>
     <tr>
-      <th>Select</th><th>Date</th><th>Session Name</th><th>Meat</th><th>Cook Temperature</th><th>Rating</th><th>Status</th>
+      <th>Select</th><th>Date</th><th>Session Name</th><th>Meat</th><th>Cook Temperature</th><th>My Rating</th><th>Votes</th><th>Status</th>
     </tr>
     <% if (logList) { %>
       <% logList.forEach(function(log) { %>
@@ -38,7 +38,7 @@
                 <% if (log.rating === 1) { %><img src='../images/1.gif' alt='1 Stars'><% } %>
                 <% if (log.rating === 0) { %><img src='../images/0.gif' alt='0 Stars'><% } %>
               </td>
-          <td><%= log.status %></td>
+          <td><%= log.votes %></td><td><%= log.status %></td>
           </tr>
       <% }) %>
     <% } %>
