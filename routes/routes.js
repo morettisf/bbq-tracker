@@ -192,6 +192,7 @@ module.exports = (app) => {
       log.date = info.date
       log.rating = info.rating
       log.wood = info.wood
+      log.wood_other = info.wood_other
       log.brand = info.brand
       log.fuel = info.fuel
       log.estimated_time = info.estimated_time
@@ -199,7 +200,9 @@ module.exports = (app) => {
       log.meat_notes = info.meat_notes
       log.weight = info.weight
       log.meat = info.meat
+      log.meat_other = info.meat_other
       log.cooking_device = info.cooking_device
+      log.device_other = info.device_other
       log.session_name = info.session_name
       log.status = info.status
       log.username = info.username
@@ -250,7 +253,15 @@ module.exports = (app) => {
   
     var logId = req.params.log
     var selectedLog
-    var userId = req.session.passport.user
+
+    // check if this is a logged in user or not
+    if (req.session.passport) {
+      var userId = req.session.passport.user
+    }
+    else {
+      var userId = null
+    }
+
     var votingStatus = true
 
     User.find({ 'logs._id': logId })
@@ -331,6 +342,7 @@ module.exports = (app) => {
         newLog.date = log.date
         newLog.rating = log.rating
         newLog.wood = log.wood
+        newLog.wood_other = log.wood_other
         newLog.brand = log.brand
         newLog.fuel = log.fuel
         newLog.estimated_time = log.estimated_time
@@ -338,7 +350,9 @@ module.exports = (app) => {
         newLog.meat_notes = log.meat_notes
         newLog.weight = log.weight
         newLog.meat = log.meat
+        newLog.meat_other = log.meat_other
         newLog.cooking_device = log.cooking_device
+        newLog.device_other = log.device_other
         newLog.session_name = log.session_name
         newLog.username = log.username
         log.updated = info.updated

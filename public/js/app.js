@@ -1,5 +1,59 @@
 'use strict'
 
+// displaying other device textbox
+var deviceList = document.querySelector('#cooking-device')
+var otherDevice = document.querySelector('#device-other-text')
+
+if (deviceList) {
+  deviceList.addEventListener('change', function() {
+  
+    if (deviceList.value === 'Other') {
+      otherDevice.classList.toggle('hidden')
+    }
+
+    else if (deviceList.value !== 'Other') {
+      otherDevice.classList.toggle('hidden')
+    }
+
+  })
+}
+
+// displaying other meat textbox
+var meatList = document.querySelector('#meat-type')
+var otherMeat = document.querySelector('#meat-other-text')
+
+if (meatList) {
+  meatList.addEventListener('change', function() {
+  
+    if (meatList.value === 'Other') {
+      otherMeat.classList.toggle('hidden')
+    }
+
+    else if (meatList.value !== 'Other') {
+      otherMeat.classList.toggle('hidden')
+    }
+
+  })
+}
+
+// displaying other wood textbox
+var woodList = document.querySelector('#wood')
+var otherWood = document.querySelector('#wood-other-text')
+
+if (woodList) {
+  woodList.addEventListener('change', function() {
+  
+    if (woodList.value === 'Other') {
+      otherWood.classList.toggle('hidden')
+    }
+
+    else if (woodList.value !== 'Other') {
+      otherWood.classList.toggle('hidden')
+    }
+
+  })
+}
+
 var addStepBtn = document.querySelector('#add-step')
 var list = document.querySelector('ol')
 
@@ -55,7 +109,9 @@ if (save) {
       date: document.querySelector('#date-select').value,
       session_name: document.querySelector('#session-name').value,
       cooking_device: document.querySelector('#cooking-device').value,
+      device_other: document.querySelector('#device-other-text').value,
       meat: document.querySelector('#meat-type').value,
+      meat_other: document.querySelector('#meat-other-text').value,
       weight: document.querySelector('#weight').value,
       meat_notes: document.querySelector('#meat-notes').value,
       cook_temperature: document.querySelector('#temp-slider').value,
@@ -63,6 +119,7 @@ if (save) {
       fuel: document.querySelector('#fuel').value,
       brand: document.querySelector('#brand').value,
       wood: document.querySelector('#wood').value,
+      wood_other: document.querySelector('#wood-other-text').value,
       rating: ratingSelected,
       status: statusSelected,
       username: document.querySelector('#username').innerHTML,
@@ -132,11 +189,25 @@ if (update) {
       }
     })
 
+    var meat = document.querySelector('#meat-type').value
+
+    if (otherMeat.value !== '') {
+      meat = otherMeat.value
+    }
+
+    var cookingDevice = document.querySelector('#cooking-device').value
+
+    if (otherDevice.value !== '') {
+      cookingDevice = otherDevice.value
+    }
+
     var basicData = {
       date: document.querySelector('#date-select').value, // find a way to get this value
       session_name: document.querySelector('#session-name').value,
       cooking_device: document.querySelector('#cooking-device').value,
+      device_other: document.querySelector('#device-other-text').value,
       meat: document.querySelector('#meat-type').value,
+      meat_other: document.querySelector('#meat-other-text').value,
       weight: document.querySelector('#weight').value,
       meat_notes: document.querySelector('#meat-notes').value,
       cook_temperature: document.querySelector('#temp-slider').value,
@@ -144,6 +215,7 @@ if (update) {
       fuel: document.querySelector('#fuel').value,
       brand: document.querySelector('#brand').value,
       wood: document.querySelector('#wood').value,
+      wood_other: document.querySelector('#wood-other-text').value,
       rating: ratingSelected,
       status: statusSelected,
       username: document.querySelector('#username').innerHTML,

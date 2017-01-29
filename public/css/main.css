@@ -68,6 +68,11 @@ table img, #public-rating img {
 
 /* Sitewide */
 
+#log-body {
+  color: white;
+  background-color: #000000;
+}
+
 nav {
   height: 125px;
   background-color: #FFD7A6;
@@ -179,6 +184,10 @@ main {
   box-sizing: border-box;
 }
 
+.hidden {
+  display: none;
+}
+
 /****** Style Star Rating Widget *****/
 
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
@@ -216,7 +225,7 @@ main {
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
 
-/* Log tables */
+/***** Log tables *****/
 
 table  {
   width: 100%;
