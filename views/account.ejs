@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href='../css/main.css'>
+  <title><%= title %></title>
+</head>
+<body>
+  <%- include header.ejs -%>
+  <% if (message) { %>
+  <%= message %>
+  <% } %>
+  <h1>My Account</h1>
+  <main>
+    <ul>
+      <li>Change username</li>
+      <li>Change password</li>
+      <li>Change gravatar</li>
+      <li>Delete account</li>
+      <li>Change username</li>
+    </ul>
+  <script src='js/bundle.js'></script>
+</body>
+</html>

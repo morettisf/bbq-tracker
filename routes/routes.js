@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const moment = require('moment')
+const gravatar = require('gravatar')
 
 module.exports = (app) => {
 
@@ -44,7 +45,8 @@ module.exports = (app) => {
 
   app.post('/register', function(req, res, next) {
 
-    var userInfo = { username: req.body.username, email: req.body.email, password: req.body.password }
+    var gImg = gravatar.url(emailReq, { s: '150', r: 'pg', d: 'wavatar' }, false)
+    var userInfo = { username: req.body.username, email: req.body.email, password: req.body.password, gravatar: gImg }
     var resInfo = { username: req.body.username, email: req.body.email, password: req.body.password }
     var userNameReq = req.body.username
     var emailReq = req.body.email
@@ -151,6 +153,24 @@ module.exports = (app) => {
     })(req, res, next)
   })
 
+  app.get('/account', function(req, res) {
+    var userId = req.session.passport.user
+    var username
+
+    // grab their username for the nav if logged in
+    User.findOne({ _id: userId }, function(err, user) {
+      if (user) {
+        username = user.username
+      }
+      else {
+        username = null
+      }
+
+      res.render('account', { title: 'My Account | BBQ Tracker', user: req.session.passport, message: null, username: username })
+
+    })
+
+  })
 
   app.get('/create-log', function(req, res) {
     var userId = req.session.passport.user
@@ -241,8 +261,9 @@ module.exports = (app) => {
       })
       
       var username = user.username
+      var gravatar = user.gravatar
 
-      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport, username: username, moment: moment })
+      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport, username: username, gravatar: gravatar, moment: moment })
 
     })
 
@@ -253,6 +274,7 @@ module.exports = (app) => {
   
     var logId = req.params.log
     var selectedLog
+    var username
 
     // check if this is a logged in user or not
     if (req.session.passport) {
@@ -262,8 +284,20 @@ module.exports = (app) => {
       var userId = null
     }
 
+    // grab their username for the nav if logged in
+    User.findOne({ _id: userId }, function(err, user) {
+      if (user) {
+        username = user.username
+      }
+      else {
+        username = null
+      }
+    })
+
+    // set default voting status to available
     var votingStatus = true
 
+    // find the visited public log in database
     User.find({ 'logs._id': logId })
       .exec(function (err, user) {
         if (err) throw err
@@ -274,13 +308,14 @@ module.exports = (app) => {
         }
       })
 
+      // see if user has voted for visited log or not. If so, disable voting.
       selectedLog.voters.forEach(function(voter) {
         if (userId == voter.voter_id) {
           votingStatus = false
         }
       })
 
-      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport, username: null, moment: moment, button: votingStatus })
+      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport, username: username, moment: moment, button: votingStatus })
     })
   })
 

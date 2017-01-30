@@ -23,7 +23,7 @@ video {
 }
 
 #home-body {
-  color: white;
+  color: #d9d9d9;
   background-color: #000000;
 }
 
@@ -69,7 +69,7 @@ table img, #public-rating img {
 /* Sitewide */
 
 #log-body {
-  color: white;
+  color: #d9d9d9;
   background-color: #000000;
 }
 
@@ -89,6 +89,7 @@ nav img {
 nav ul {  
   list-style: none;
   margin-top: 55px;
+  float: left;
 }
 
 nav li {
@@ -96,9 +97,29 @@ nav li {
   margin-left: 25px;
 }
 
+#right-nav-area {
+  float: right;
+  margin-top: 18px;
+  margin-right: 10px;
+  text-align: right;
+  color: black;
+}
+
+#right-nav-area a {
+  text-decoration: none;
+}
+
 #username {
   font-weight: bold;
-  margin-right: 20px;
+}
+
+#profile-box {
+  margin-top: 20px;
+}
+
+#profile-box img {
+  width: 75px;
+  height: 75px;
 }
 
 main {
@@ -153,7 +174,7 @@ main {
 
 #vote-area {
   position: absolute;
-  top: 0;
+  top: -20px;
   right: 0;
 }
 
