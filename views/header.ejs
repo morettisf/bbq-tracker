@@ -11,9 +11,11 @@
   </ul>
   <% if (username) { %>
     <div id='right-nav-area'>
-    <div id='username'><%= username %></div>
-    <a href='/account'><div>Account Settings</div></a>
-    <a href='/logout'><div id='logout'>Logout</div></a> 
+    <div id='username-menu'><%= username %></div>
+    <div id='drop-down-options' class='hidden'>
+      <a href='/account'><div>Account Settings</div></a>
+      <a href='/logout'><div id='logout'>Logout</div></a>
+    </div>
   <% } %>   
   </div>
 </nav>

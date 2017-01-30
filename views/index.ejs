@@ -21,14 +21,14 @@
     </div>
   </header>
   <main id='home-main'>
-    <section id='public-logs'>
-      <h2>Public Logs Update</h2>
+    <h2>Latest Updates</h2>
+    <section id='public-logs-updated'>
       <table>
         <tr>
-          <th>Username</th><th>Session Name</th><th>Date</th><th>Meat</th><th>User's Rating</th><th>Popular Votes</th>
+          <th>Username</th><th>Session Name</th><th>Updated</th><th>Meat</th><th>User's Rating</th>
         </tr>
-        <% if (logList) { %>
-          <% logList.forEach(function(log) { %>
+        <% if (updatedLogs) { %>
+          <% updatedLogs.forEach(function(log) { %>
             <tr id=<%= log._id %>>
               <td><%= log.username %></td>
               <td><a href='/public-log/<%= log._id %>'>
@@ -38,8 +38,8 @@
                 <%= log.session_name %></a>
               </td>
               <td>
-                <% if (log.date) { %>
-                  <%= moment(log.date).format('MMMM Do YYYY') %>
+                <% if (log.updated) { %>
+                  <%= moment(log.updated).format('MMMM Do YYYY') %>
                 <% } %>
               </td>
               <td><%= log.meat %></td>
@@ -51,6 +51,28 @@
                 <% if (log.rating === 1) { %><img src='../images/1.gif' alt='1 Stars'><% } %>
                 <% if (log.rating === 0) { %><img src='../images/0.gif' alt='0 Stars'><% } %>
               </td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </table>
+    </section>
+    <h2>Top Pit Hits</h2>
+    <section id='top-voted-logs'>
+      <table>
+        <tr>
+          <th>Username</th><th>Session Name</th><th>Meat</th><th>Pit Hits</th>
+        </tr>
+        <% if (topVotedLogs) { %>
+          <% topVotedLogs.forEach(function(log) { %>
+            <tr id=<%= log._id %>>
+              <td><%= log.username %></td>
+              <td><a href='/public-log/<%= log._id %>'>
+                <% if (log.session_name === '') { %>
+                  Unnamed Session
+                <% } %>
+                <%= log.session_name %></a>
+              </td>
+              <td><%= log.meat %></td>
               <td><%= log.votes %></td>
             </tr>
           <% }) %>

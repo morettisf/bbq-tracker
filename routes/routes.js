@@ -10,14 +10,14 @@ module.exports = (app) => {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  app.get('/', function(req, res) {
+  app.get('/', function(req, res, next) {
 
   var userLogs = []
   var userLogsConcat
-  var logsSorted
 
     User.find({ 'logs.status': 'Public' })
       .exec(function (err, users) {
+
         if (err) throw err
 
         users.forEach(function(user) {
@@ -26,11 +26,15 @@ module.exports = (app) => {
 
       userLogsConcat = [].concat.apply([], userLogs)
 
-      logsSorted = userLogsConcat.sort(function(a,b){
+      var updatedLogs = userLogsConcat.sort(function(a,b) {
                           return b.updated - a.updated
                         })
 
-      res.render('index', { title: 'BBQ Tracker', message: 'HOMEPAGE content', user: req.session.passport, logList: logsSorted, moment: moment })
+      var topVotedLogs = userLogsConcat.sort(function(a,b) {
+                          return b.votes - a.votes
+                        })
+
+      res.render('index', { title: 'BBQ Tracker', message: 'HOMEPAGE content', user: req.session.passport, updatedLogs: updatedLogs, topVotedLogs: topVotedLogs, moment: moment })
       console.log(req.session.passport)
 
     })
@@ -38,7 +42,7 @@ module.exports = (app) => {
   })
 
 
-  app.get('/register', function(req, res) {
+  app.get('/register', function(req, res, next) {
     res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: null, username: null })
   })
 
@@ -46,9 +50,9 @@ module.exports = (app) => {
   app.post('/register', function(req, res, next) {
 
     var gImg = gravatar.url(emailReq, { s: '150', r: 'pg', d: 'wavatar' }, false)
-    var userInfo = { username: req.body.username, email: req.body.email, password: req.body.password, gravatar: gImg }
-    var resInfo = { username: req.body.username, email: req.body.email, password: req.body.password }
-    var userNameReq = req.body.username
+    var userInfo = { username: req.body.username.toLowerCase(), email: req.body.email, password: req.body.password, gravatar: gImg }
+    var resInfo = { username: req.body.username.toLowerCase(), email: req.body.email, password: req.body.password }
+    var userNameReq = req.body.username.toLowerCase()
     var emailReq = req.body.email
     var passwordReq = req.body.password
     var password2Req = req.body.password2
@@ -79,6 +83,14 @@ module.exports = (app) => {
       errors.push('Supply a password')
     }
 
+    if (passwordReq.length < 5) {
+      errors.push('Password must be a minimum of 5 characters')
+    }
+
+    // if (passwordReq !== /\d/) {
+    //   errors.push('Password must contain at least one number')
+    // }
+
     if (password2Req === '') {
       errors.push('Confirm your password')
     }
@@ -88,21 +100,18 @@ module.exports = (app) => {
     }
 
     if (errors.length > 0) {
-      res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors })
+      res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors, username: null })
 //        res.json(errors)
     }
 
     else {
 
       User.findOne({ username: userNameReq }, function(err, user) {
-
-        if (err) {
-          return done(err)
-        }
+        
+        if (err) throw err
 
         if (user) {
-          res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: ['Username already taken, please try another'] })
-//          res.json({ error: 'Username already taken, please try another' })
+          res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: ['Username already taken, please try another'], username: null })
         }
 
         else {
@@ -127,7 +136,7 @@ module.exports = (app) => {
   })
 
 
-  app.get('/sign-in', function(req, res) {
+  app.get('/sign-in', function(req, res, next) {
     res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errors: null, message: req.session.message, username: null })
   })
 
@@ -135,11 +144,13 @@ module.exports = (app) => {
   app.post('/sign-in', function(req, res, next) {
     passport.authenticate('local-sign-in', function(err, user, info) {
 
-      var userNameReq = req.body.username
+      if (err) throw err
+
+      var userNameReq = req.body.username.toLowerCase()
       var passwordReq = req.body.password
 
       if (info) {
-        res.render('sign-in', { title: 'Sign-In | BBQ Tracker', user: req.session.passport, errors: info.message, message: null })
+        res.render('sign-in', { title: 'Sign-In | BBQ Tracker', user: req.session.passport, errors: info.message, message: null, username: null })
       }
 
       else {
@@ -153,15 +164,19 @@ module.exports = (app) => {
     })(req, res, next)
   })
 
-  app.get('/account', function(req, res) {
+  app.get('/account', isLoggedIn, function(req, res, next) {
     var userId = req.session.passport.user
     var username
 
     // grab their username for the nav if logged in
     User.findOne({ _id: userId }, function(err, user) {
+
+      if (err) throw err
+
       if (user) {
         username = user.username
       }
+
       else {
         username = null
       }
@@ -172,10 +187,13 @@ module.exports = (app) => {
 
   })
 
-  app.get('/create-log', function(req, res) {
+  app.get('/create-log', isLoggedIn, function(req, res, next) {
     var userId = req.session.passport.user
 
     User.findOne({ _id: userId }, function(err, user) {
+
+      if (err) throw err
+
       var username = user.username
 
       res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', user: req.session.passport, username: username })
@@ -192,6 +210,8 @@ module.exports = (app) => {
 
     User.findOne({ _id: userId }, function(err, user) {
 
+      if (err) throw err
+
       user.logs.push(info)
       user.save()
 
@@ -201,12 +221,15 @@ module.exports = (app) => {
   })
 
 
-  app.put('/update-log/:log', function(req, res) {
+  app.put('/update-log/:log', function(req, res, next) {
     var userId = req.session.passport.user
     var logId = req.params.log
     var info = req.body
 
     User.findOne({ _id: userId }, function(err, user) {
+
+      if (err) throw err
+
       var log = user.logs.id(logId)
 
       log.date = info.date
@@ -247,13 +270,16 @@ module.exports = (app) => {
   })
 
 
-  app.get('/view-log/:log', function(req, res) {
+  app.get('/view-log/:log', isLoggedIn, function(req, res, next) {
     var userId = req.session.passport.user
     var logId = req.params.log
 
     var logInfo
 
     User.findOne({ _id: userId }, function(err, user) {
+      
+      if (err) throw err
+
       user.logs.forEach(function(log) {
         if (log._id == logId) {  // CONVERT TO SAME FORMAT
           logInfo = log
@@ -270,7 +296,7 @@ module.exports = (app) => {
   })
 
 
-  app.get('/public-log/:log', function(req, res) {
+  app.get('/public-log/:log', function(req, res, next) {
   
     var logId = req.params.log
     var selectedLog
@@ -286,6 +312,9 @@ module.exports = (app) => {
 
     // grab their username for the nav if logged in
     User.findOne({ _id: userId }, function(err, user) {
+
+      if (err) throw err
+
       if (user) {
         username = user.username
       }
@@ -300,6 +329,7 @@ module.exports = (app) => {
     // find the visited public log in database
     User.find({ 'logs._id': logId })
       .exec(function (err, user) {
+
         if (err) throw err
 
       user[0].logs.forEach(function(log) {
@@ -319,7 +349,7 @@ module.exports = (app) => {
     })
   })
 
-  app.put('/public-log', function(req, res) {
+  app.put('/public-log', function(req, res, next) {
     var author = req.body.author
     var logId = req.body.logId
     var voter = { voter_id: req.session.passport.user }
@@ -341,11 +371,14 @@ module.exports = (app) => {
   })
 
 
-  app.get('/log-history', isLoggedIn, function(req, res) {
+  app.get('/log-history', isLoggedIn, function(req, res, next) {
 
     var userId = req.session.passport.user
 
     User.findOne({ _id: userId }, function(err, user) {
+
+      if (err) throw err
+
       var logs = user.logs
 
       var logsSorted = logs.sort(function(a,b) {
@@ -367,6 +400,8 @@ module.exports = (app) => {
     var logs
 
     User.findOne({ _id: userId }, function(err, user) {
+
+      if (err) throw err
 
       logs = user.logs
 
@@ -423,6 +458,8 @@ module.exports = (app) => {
 
     User.findOne({ _id: userId }, function(err, user) {
 
+      if (err) throw err
+
       logs = user.logs
 
       reqLogs.forEach(function(item) {
@@ -453,6 +490,8 @@ module.exports = (app) => {
     var userId = req.session.passport.user
 
     User.findOne({ _id: userId }, function(err, user) {
+
+      if (err) throw err
 
       reqLogs.forEach(function(item) {
         var log = user.logs.id(item)
@@ -485,9 +524,8 @@ passport.use('local-sign-in', new LocalStrategy({
   function(req, userName, password, done) {
 
     User.findOne({ 'username':  userName }, function(err, user) {
-      if (err) {
-        return done(err)
-      }
+
+      if (err) throw err
 
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' })
@@ -517,6 +555,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
   User.findById(id, function(err, user) {
+    if (err) throw err
     done(err, user);
   })
 })

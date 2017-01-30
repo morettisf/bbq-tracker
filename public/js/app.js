@@ -1,5 +1,14 @@
 'use strict'
 
+// logged in account menu drop down
+var dropMenu = document.querySelector('#username-menu')
+if (dropMenu) {
+  dropMenu.addEventListener('click', function() {
+    var options = document.querySelector('#drop-down-options')
+    options.classList.toggle('hidden')
+  })
+}
+
 // displaying other device textbox
 var deviceList = document.querySelector('#cooking-device')
 var otherDevice = document.querySelector('#device-other-text')
@@ -8,11 +17,11 @@ if (deviceList) {
   deviceList.addEventListener('change', function() {
   
     if (deviceList.value === 'Other') {
-      otherDevice.classList.toggle('hidden')
+      otherDevice.classList.remove('hidden')
     }
 
     else if (deviceList.value !== 'Other') {
-      otherDevice.classList.toggle('hidden')
+      otherDevice.classList.add('hidden')
     }
 
   })
@@ -26,11 +35,11 @@ if (meatList) {
   meatList.addEventListener('change', function() {
   
     if (meatList.value === 'Other') {
-      otherMeat.classList.toggle('hidden')
+      otherMeat.classList.remove('hidden')
     }
 
     else if (meatList.value !== 'Other') {
-      otherMeat.classList.toggle('hidden')
+      otherMeat.classList.add('hidden')
     }
 
   })
@@ -44,11 +53,11 @@ if (woodList) {
   woodList.addEventListener('change', function() {
   
     if (woodList.value === 'Other') {
-      otherWood.classList.toggle('hidden')
+      otherWood.classList.remove('hidden')
     }
 
     else if (woodList.value !== 'Other') {
-      otherWood.classList.toggle('hidden')
+      otherWood.classList.add('hidden')
     }
 
   })
@@ -373,4 +382,38 @@ function addVote(log) {
     .then(function(res) {
      window.location.reload()
     })
+}
+
+// accounts page displaying option fields on click
+var newUserName = document.querySelector('#new-username-btn')
+var newEmail = document.querySelector('#new-email-btn')
+var newPW = document.querySelector('#new-pw-btn')
+var newGravatar = document.querySelector('#new-gravatar-btn')
+
+if (newUserName) {
+  newUserName.addEventListener('click', function(event) {
+    var field = document.querySelector('#new-username-field')
+    field.classList.toggle('hidden')
+  })
+}
+
+if (newEmail) {
+  newEmail.addEventListener('click', function(event) {
+    var field = document.querySelector('#new-email-field')
+    field.classList.toggle('hidden')
+  })
+}
+
+if (newPW) {
+  newPW.addEventListener('click', function(event) {
+    var field = document.querySelector('#new-pw-field')
+    field.classList.toggle('hidden')
+  })
+}
+
+if (newGravatar) {
+  newGravatar.addEventListener('click', function(event) {
+    var field = document.querySelector('#new-gravatar-field')
+    field.classList.toggle('hidden')
+  })
 }

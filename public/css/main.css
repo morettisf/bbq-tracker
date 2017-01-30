@@ -48,6 +48,16 @@ table img, #public-rating img {
   height: 22.5px;
 }
 
+#public-logs-updated {
+  height: 300px;
+  overflow: scroll;
+}
+
+#top-voted-logs {
+  height: 300px;
+  overflow: scroll;
+}
+
 #menu-wrapper {
   position: absolute;
   top: 300px;
@@ -109,8 +119,12 @@ nav li {
   text-decoration: none;
 }
 
-#username {
+#username-menu {
   font-weight: bold;
+}
+
+#username-menu:hover {
+  cursor: pointer;
 }
 
 #profile-box {
@@ -263,4 +277,13 @@ th, td {
 
 #status-box {
   clear: both;
+}
+
+/***** Accounts Page *****/
+#account-options {
+  list-style: none;
+}
+
+#account-options h3 {
+  cursor: pointer;
 }

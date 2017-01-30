@@ -11,13 +11,39 @@
   <% } %>
   <h1>My Account</h1>
   <main>
-    <ul>
-      <li>Change username</li>
-      <li>Change password</li>
-      <li>Change gravatar</li>
-      <li>Delete account</li>
-      <li>Change username</li>
+    <ul id='account-options'>
+      <li>
+        <h3 id='new-username-btn'>Change Username</h3>
+        <div id='new-username-field' class='hidden'>
+          <label for='username'>New Username</label>
+          <input id='new-username' type='text' for='username' name='username' placeholder='BBQ123'>
+        </div>
+      </li>
+      <li>
+        <h3 id='new-email-btn'>Change Email</h3>
+        <div id='new-email-field' class='hidden'>
+          <label for='email'>New Email</label>
+          <input id='new-reg-email' type='text' for='email' name='email' placeholder='you@email.com'>
+        </div>
+      </li>
+      <li>
+        <h3 id='new-pw-btn'>Change Password</h3>
+        <div id='new-pw-field' class='hidden'>
+          <label for='password'>New Password</label>
+          <input id='new-reg-pw' type='password' for='password' name='password'>
+          <label for='confirm password'>Confirm Password</label>
+          <input id='new-reg-pw2' type='password' for='confirmpassword' name='password2'>
+        </div>
+      </li>
+      <li>
+        <h3 id='new-gravatar-btn'>Change Gravatar</h3>
+        <div id='new-gravatar-field'class='hidden'>LINK TO GRAVATAR WEBSITE</div>
+      </li>
+      <li>
+        <h3>Delete account</h3>
+      </li>
     </ul>
+    <input id='update-profile-btn' type='submit' for='submit' value='Submit'>
   <script src='js/bundle.js'></script>
 </body>
 </html>
