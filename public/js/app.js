@@ -385,13 +385,13 @@ function addVote(log) {
 }
 
 // accounts page displaying option fields on click
-var newUserName = document.querySelector('#new-username-btn')
+var newUsername = document.querySelector('#new-username-btn')
 var newEmail = document.querySelector('#new-email-btn')
 var newPW = document.querySelector('#new-pw-btn')
 var newGravatar = document.querySelector('#new-gravatar-btn')
 
-if (newUserName) {
-  newUserName.addEventListener('click', function(event) {
+if (newUsername) {
+  newUsername.addEventListener('click', function(event) {
     var field = document.querySelector('#new-username-field')
     field.classList.toggle('hidden')
   })
@@ -416,4 +416,67 @@ if (newGravatar) {
     var field = document.querySelector('#new-gravatar-field')
     field.classList.toggle('hidden')
   })
+}
+
+// accounts page new username
+var newUsernameSubmit = document.querySelector('#new-username-submit')
+if (newUsernameSubmit) {
+  newUsernameSubmit.addEventListener('click', function() {
+
+  var newUsernameValue = { username: document.querySelector('#new-username').value }
+  changeUsername(newUsernameValue)
+
+  })
+}
+
+function changeUsername(newUsernameValue) {
+  fetch('/account/username', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newUsernameValue),
+    mode: 'cors',
+    cache: 'default',
+    credentials: 'include'
+  })
+    .then(function(res) {
+      console.log(res.json())
+      if (res.json() === { message: "Username changed" }) {
+        window.location = '/account?message=Username%20Changed'
+      }
+      else if (res.json() === { message: "Supply a new username" }) {
+        window.location = '/account?message=Supply%20A%20New%20Username'
+      }
+      else if (res.json() === { message: "No spaces allowed in username" }) {
+        window.location = '/account?message=No%20Spaces%20Allowed%20In%20Username'
+      }
+    })
+}
+
+// accounts page new email
+var newEmailSubmit = document.querySelector('#new-email-submit')
+if (newEmailSubmit) {
+  newEmailSubmit.addEventListener('click', function() {
+
+  var newEmailValue = { email: document.querySelector('#new-reg-email').value }
+  changeEmail(newEmailValue)
+
+  })
+}
+
+function changeEmail(newEmailValue) {
+  fetch('/account/email', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newEmailValue),
+    mode: 'cors',
+    cache: 'default',
+    credentials: 'include'
+  })
+    .then(function(res) {
+     window.location.reload()
+    })
 }

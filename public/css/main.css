@@ -96,35 +96,44 @@ nav img {
   height: 100px;
 }
 
-nav ul {  
+#left-nav {  
   list-style: none;
   margin-top: 55px;
   float: left;
 }
 
-nav li {
+#left-nav li {
   float: left;
   margin-left: 25px;
 }
 
-#right-nav-area {
-  float: right;
-  margin-top: 18px;
-  margin-right: 10px;
-  text-align: right;
-  color: black;
-}
-
-#right-nav-area a {
-  text-decoration: none;
+#right-nav-area ul {
+  list-style: none;
 }
 
 #username-menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: black;
   font-weight: bold;
+  text-decoration: none;
+  text-align: center;
 }
 
 #username-menu:hover {
   cursor: pointer;
+}
+
+#username-menu img {
+  margin-top: 10px;
+  height: 50px;
+}
+
+#drop-down-options {
+  margin-top: 78px;
+  text-align: right; 
+  text-decoration: none;
 }
 
 #profile-box {
@@ -286,4 +295,8 @@ th, td {
 
 #account-options h3 {
   cursor: pointer;
+}
+
+#avatar-options img {
+  width: 75px;
 }

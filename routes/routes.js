@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const moment = require('moment')
-const gravatar = require('gravatar')
 
 module.exports = (app) => {
 
@@ -43,14 +42,13 @@ module.exports = (app) => {
 
 
   app.get('/register', function(req, res, next) {
-    res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: null, username: null })
+    res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: null, username: null, avatar: null })
   })
 
 
   app.post('/register', function(req, res, next) {
 
-    var gImg = gravatar.url(emailReq, { s: '150', r: 'pg', d: 'wavatar' }, false)
-    var userInfo = { username: req.body.username.toLowerCase(), email: req.body.email, password: req.body.password, gravatar: gImg }
+    var userInfo = { username: req.body.username.toLowerCase(), email: req.body.email, password: req.body.password, avatar: '../images/cow.svg' }
     var resInfo = { username: req.body.username.toLowerCase(), email: req.body.email, password: req.body.password }
     var userNameReq = req.body.username.toLowerCase()
     var emailReq = req.body.email
@@ -100,7 +98,7 @@ module.exports = (app) => {
     }
 
     if (errors.length > 0) {
-      res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors, username: null })
+      res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors, username: null, avatar: null })
 //        res.json(errors)
     }
 
@@ -111,7 +109,7 @@ module.exports = (app) => {
         if (err) throw err
 
         if (user) {
-          res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: ['Username already taken, please try another'], username: null })
+          res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: ['Username already taken, please try another'], username: null, avatar: null })
         }
 
         else {
@@ -137,20 +135,28 @@ module.exports = (app) => {
 
 
   app.get('/sign-in', function(req, res, next) {
-    res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errors: null, message: req.session.message, username: null })
+    res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errors: null, message: req.session.message, username: null, avatar: null })
   })
 
 
   app.post('/sign-in', function(req, res, next) {
     passport.authenticate('local-sign-in', function(err, user, info) {
 
-      if (err) throw err
+      var error
+
+      // if (info) {
+      //   error = 'Incorrect username, try again'
+      // }
+
+      // if (err) {
+      //   error = 'Incorrect password, try again'
+      // }
 
       var userNameReq = req.body.username.toLowerCase()
       var passwordReq = req.body.password
 
       if (info) {
-        res.render('sign-in', { title: 'Sign-In | BBQ Tracker', user: req.session.passport, errors: info.message, message: null, username: null })
+        res.render('sign-in', { title: 'Sign-In | BBQ Tracker', user: req.session.passport, errors: error, message: info.message, username: null, avatar: null })
       }
 
       else {
@@ -167,6 +173,7 @@ module.exports = (app) => {
   app.get('/account', isLoggedIn, function(req, res, next) {
     var userId = req.session.passport.user
     var username
+    var avatar
 
     // grab their username for the nav if logged in
     User.findOne({ _id: userId }, function(err, user) {
@@ -175,17 +182,91 @@ module.exports = (app) => {
 
       if (user) {
         username = user.username
+        avatar = user.avatar
       }
 
       else {
         username = null
       }
 
-      res.render('account', { title: 'My Account | BBQ Tracker', user: req.session.passport, message: null, username: username })
+      res.render('account', { title: 'My Account | BBQ Tracker', user: req.session.passport, message: null, errors: null, username: username, avatar: avatar })
 
     })
 
   })
+
+  app.put('/account/username', function(req, res, next) {
+    var userId = req.session.passport.user
+    var userNameReq = req.body.username
+    var username
+
+    if (userNameReq === '') {
+      res.json({ message: 'Supply a new username' })
+    }
+
+    if (userNameReq.indexOf(' ') !== -1) {
+      res.json({ message: 'No spaces allowed in username' })
+    }
+
+    // if valid username, proceed
+    User.findOne({ _id: userId }, function(err, user) {
+
+      if (err) throw err
+
+      user.username = userNameReq
+
+      user.logs.forEach(function(log) {
+        log.username = user.username
+      })
+
+      user.save()
+
+      res.json({ message: 'Username changed' })
+
+    })
+
+  })
+
+  // app.put('/account/email', function(req, res, next) {
+  //   var userId = req.session.passport.user
+  //   var emailReq = req.body.email
+  //   var email
+  //   var errors = []
+
+  //   // grab their username for the nav
+  //   User.findOne({ _id: userId }, function(err, user) {
+
+  //     if (err) throw err
+
+  //     // run checks on valid username
+  //     if (emailReq === '') {
+  //       errors.push('Supply an email address')
+  //     }
+
+  //     if (emailReq.indexOf(' ') !== -1) {
+  //       errors.push('No spaces allowed in email address')
+  //     }
+
+  //     if (emailReq.indexOf('@') < 0) {
+  //       errors.push('Email does not contain @')
+  //     }
+
+  //     if (errors.length > 0) {
+  //       res.render('account', { title: 'My Account | BBQ Tracker', user: req.session.passport, errors, message: null, username: username })
+  //     }
+
+  //     else {
+  //       user.email = emailReq
+
+  //       user.save()
+
+  //       username = user.username
+  //       res.render('account', { title: 'My Account | BBQ Tracker', user: req.session.passport, errors: null, message: 'Email changed', username: username })
+  //     }
+
+  //   })
+
+  // })
 
   app.get('/create-log', isLoggedIn, function(req, res, next) {
     var userId = req.session.passport.user
@@ -195,8 +276,9 @@ module.exports = (app) => {
       if (err) throw err
 
       var username = user.username
+      var avatar = user.avatar
 
-      res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', user: req.session.passport, username: username })
+      res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', user: req.session.passport, username: username, avatar: null })
 
     })
 
@@ -289,7 +371,7 @@ module.exports = (app) => {
       var username = user.username
       var gravatar = user.gravatar
 
-      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport, username: username, gravatar: gravatar, moment: moment })
+      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport, username: username, avatar: avatar, moment: moment })
 
     })
 
@@ -301,6 +383,7 @@ module.exports = (app) => {
     var logId = req.params.log
     var selectedLog
     var username
+    var avatar
 
     // check if this is a logged in user or not
     if (req.session.passport) {
@@ -317,6 +400,7 @@ module.exports = (app) => {
 
       if (user) {
         username = user.username
+        avatar = user.avatar
       }
       else {
         username = null
@@ -345,7 +429,7 @@ module.exports = (app) => {
         }
       })
 
-      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport, username: username, moment: moment, button: votingStatus })
+      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport, username: username, avatar: avatar, moment: moment, button: votingStatus })
     })
   })
 
@@ -386,8 +470,9 @@ module.exports = (app) => {
                         })
 
       var username = user.username
+      var avatar = user.avatar
 
-      res.render('log-history', { title: 'Log History | BBQ Tracker', message: req.query.message || null, logList: logsSorted, user: req.session.passport, moment: moment, username: username })
+      res.render('log-history', { title: 'Log History | BBQ Tracker', message: req.query.message || null, logList: logsSorted, user: req.session.passport, moment: moment, username: username, avatar: avatar })
     })
   })
 
@@ -528,18 +613,20 @@ passport.use('local-sign-in', new LocalStrategy({
       if (err) throw err
 
       if (!user) {
-        return done(null, false, { message: 'Incorrect username.' })
+        return done(null, false, { message: 'Incorrect username, try again' })
       }
     
       else {
 
         User.comparePassword(password, user.password, function(err, isMatch) {
           if (err) throw err
+
           if (isMatch) {
             return done(null, user)
           }
           else {
-            return done(err)
+            return done (null, false, { message: 'Incorrect password, try again'})
+//            return done(err)
           }
         })
 

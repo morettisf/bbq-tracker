@@ -1,6 +1,6 @@
 <nav>
   <a href='/'><img src='../images/smoker.svg' alt='smoker icon'></a>
-  <ul>
+  <ul id='left-nav'>
     <% if (!user) { %>
       <a href='/register'><li>Register</li></a>
       <a href='/sign-in'><li>Sign In</li></a>
@@ -11,10 +11,16 @@
   </ul>
   <% if (username) { %>
     <div id='right-nav-area'>
-    <div id='username-menu'><%= username %></div>
-    <div id='drop-down-options' class='hidden'>
-      <a href='/account'><div>Account Settings</div></a>
-      <a href='/logout'><div id='logout'>Logout</div></a>
+      <div id='username-menu'>
+        <img src='<%= avatar %>'>
+        <div><%= username %></div>
+      </div>
+      <div id='drop-down-options' class='hidden'>
+        <ul>
+          <li><a href='/account'>Account Settings</a></li>
+          <li><a href='/logout' id='logout'>Logout</a></li>
+        </ul>
+      </div>
     </div>
   <% } %>   
   </div>
