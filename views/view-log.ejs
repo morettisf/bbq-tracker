@@ -93,6 +93,10 @@
         </select>
         <input type='text' placeholder='Other wood type' id='wood-other-text' <% if (!logInfo.wood_other) { %>class='hidden'<% } %> value='<%= logInfo.wood_other %>'>
       </div>
+      <div id='other-ingredients-box'>
+        <label for='other-ingredients'>Other Ingredients<label>
+        <textarea id='other-ingredients' placeholder='List them out here'><%= logInfo.other_ingredients %></textarea>
+      </div>
     </section>
     <section id='recipe-area'>
       <h2>Recipe Steps</h2>

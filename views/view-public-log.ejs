@@ -13,8 +13,8 @@
   <%- include header.ejs -%>
   <main>
     <div id='profile-box'>
-      <img src='<%= avatar %>' alt='avatar'>
-      <div><%= logInfo.username %></div>
+      <img src='<%= logAvatar %>' alt='avatar'>
+      <div id='author'><%= logInfo.username %></div>
     </div>
     <h1>Public BBQ Log</h1>
     <div id='vote-area'>
@@ -97,6 +97,10 @@
           <option id='wood-other' value='Other' <% if (logInfo.wood === 'Other') { %>selected='selected'<% } %>>Other</option>
         </select>
         <input type='text' placeholder='Other wood type' id='wood-other-text' <% if (!logInfo.wood_other) { %>class='hidden'<% } %> value='<%= logInfo.wood_other %>' disabled>
+      </div>
+      <div id='other-ingredients-box'>
+        <label for='other-ingredients'>Other Ingredients<label>
+        <textarea id='other-ingredients' placeholder='List them out here' disabled><%= logInfo.other_ingredients %></textarea>
       </div>
     </section>
     <section id='recipe-area'>

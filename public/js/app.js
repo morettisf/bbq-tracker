@@ -133,7 +133,8 @@ if (save) {
       status: statusSelected,
       username: document.querySelector('#username').innerHTML,
       updated: new Date(),
-      votes: 0
+      votes: 0,
+      other_ingredients: document.querySelector('#other-ingredients').value
     }
 
     var ol = document.querySelector('ol')
@@ -228,7 +229,8 @@ if (update) {
       rating: ratingSelected,
       status: statusSelected,
       username: document.querySelector('#username').innerHTML,
-      updated: new Date()
+      updated: new Date(),
+      other_ingredients: document.querySelector('#other-ingredients').value
     }
 
     var ol = document.querySelector('ol')
@@ -312,9 +314,16 @@ function copyLogs(selected) {
     cache: 'default',
     credentials: 'include'
   })
-   .then(function(res) {
-//     console.log(res.json())
-     window.location = '/log-history?message=logs%20copied'
+    .then(function(res) {
+      return res.json()
+    })
+    .then(function(res) {
+      if (res.message === "Logs copied") {
+        window.location = '/log-history?message=Logs%20copied'
+      }
+      else if (res.error === "No logs selected") {
+        window.location = '/log-history?error=No%20logs%20selected'
+      }
    })
 }
 
@@ -360,7 +369,7 @@ if (voteBtn) {
   var logId = url.split('/').pop()
 
     var log = {
-      author: document.querySelector('h2').innerHTML,
+      author: document.querySelector('#author').innerHTML,
       logId: logId
     }
 

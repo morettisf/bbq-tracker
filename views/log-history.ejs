@@ -10,6 +10,9 @@
   <% if (message) { %>
   <p><%= message %></p>
   <% } %>
+  <% if (error) { %>
+  <p><%= error %></p>
+  <% } %>
   <section id='log-action'>
     <select id='log-action-options'>
       <option>Copy</option>
