@@ -9,9 +9,9 @@ before(done => {
     })
 })
 
-beforeEach(done => {
+after(done => {
   const { users } = mongoose.connection.collections
   users.drop()
     .then(() => done())
-    .catch(() => done()) // runs 1st time tests start to catch error since there's no users yet
+    .catch(() => done())
 })
