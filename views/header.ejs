@@ -12,8 +12,9 @@
   <% if (username) { %>
     <div id='right-nav-area'>
       <div id='username-menu'>
+        <i class="fa fa-caret-down fa-lg" aria-hidden="true"></i>
         <img src='<%= avatar %>'>
-        <div><%= username %></div>
+        <div id='username'><%= username %></div>
       </div>
       <div id='drop-down-options' class='hidden'>
         <ul>

@@ -24,7 +24,7 @@ video {
 
 #home-body {
   color: #d9d9d9;
-  background-color: #000000;
+  background-color: mediumseagreen;
 }
 
 #home-body h1 {
@@ -80,7 +80,7 @@ table img, #public-rating img {
 
 #log-body {
   color: #d9d9d9;
-  background-color: #000000;
+  background-color: mediumseagreen;
 }
 
 nav {
@@ -115,19 +115,28 @@ nav img {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+#username-menu i {
+  display: block;
+  margin-top: 4px;
+}
+
+#username-menu img {
+  display: inline-block;
+  margin-top: -20px;
+  height: 60px;
+}
+
+#username {
   color: black;
   font-weight: bold;
-  text-decoration: none;
   text-align: center;
+  margin-left: 8px;
 }
 
 #username-menu:hover {
   cursor: pointer;
-}
-
-#username-menu img {
-  margin-top: 10px;
-  height: 50px;
 }
 
 #drop-down-options {
@@ -233,8 +242,6 @@ main {
 }
 
 /****** Style Star Rating Widget *****/
-
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 .rating fieldset { margin: 0; padding: 0; }
 .rating label { margin: 0; padding: 0; }

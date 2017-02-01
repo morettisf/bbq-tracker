@@ -441,15 +441,17 @@ function changeUsername(newUsernameValue) {
     credentials: 'include'
   })
     .then(function(res) {
-      console.log(res.json())
-      if (res.json() === { message: "Username changed" }) {
-        window.location = '/account?message=Username%20Changed'
+      return res.json()
+    })
+    .then(function(res) {
+      if (res.message === "Username changed") {
+        window.location = '/account?message=Username%20changed'
       }
-      else if (res.json() === { message: "Supply a new username" }) {
-        window.location = '/account?message=Supply%20A%20New%20Username'
+      else if (res.error === "Supply a new username") {
+        window.location = '/account?message=Supply%20a%20new%20username'
       }
-      else if (res.json() === { message: "No spaces allowed in username" }) {
-        window.location = '/account?message=No%20Spaces%20Allowed%20In%20Username'
+      else if (res.error === "No spaces allowed in username") {
+        window.location = '/account?message=No%20spaces%20allowed%20in%20username'
       }
     })
 }

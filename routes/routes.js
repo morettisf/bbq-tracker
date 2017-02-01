@@ -11,25 +11,25 @@ module.exports = (app) => {
 
   app.get('/', function(req, res, next) {
 
-  var userLogs = []
-  var userLogsConcat
-
     User.find({ 'logs.status': 'Public' })
       .exec(function (err, users) {
 
-        if (err) throw err
+      if (err) throw err
 
-        users.forEach(function(user) {
-          userLogs.push(user.logs)
-        })
+      var logs = users.reduce(function (acc, row) {
+       if (row.logs) acc = [].concat(acc, row.logs)
+       return acc
+      }, [])
 
-      userLogsConcat = [].concat.apply([], userLogs)
+      var publicLogs = logs.filter(function (log) {
+       return log.status === 'Public'
+      })
 
-      var updatedLogs = userLogsConcat.sort(function(a,b) {
+      var updatedLogs = publicLogs.sort(function(a,b) {
                           return b.updated - a.updated
                         })
 
-      var topVotedLogs = userLogsConcat.sort(function(a,b) {
+      var topVotedLogs = publicLogs.sort(function(a,b) {
                           return b.votes - a.votes
                         })
 
@@ -189,7 +189,7 @@ module.exports = (app) => {
         username = null
       }
 
-      res.render('account', { title: 'My Account | BBQ Tracker', user: req.session.passport, message: null, errors: null, username: username, avatar: avatar })
+      res.render('account', { title: 'My Account | BBQ Tracker', user: req.session.passport, message: req.query.message || null, error: req.query.error || null, username: username, avatar: avatar })
 
     })
 
@@ -201,29 +201,31 @@ module.exports = (app) => {
     var username
 
     if (userNameReq === '') {
-      res.json({ message: 'Supply a new username' })
+      res.json({ error: 'Supply a new username' })
     }
 
-    if (userNameReq.indexOf(' ') !== -1) {
-      res.json({ message: 'No spaces allowed in username' })
+    else if (userNameReq.indexOf(' ') !== -1) {
+      res.json({ error: 'No spaces allowed in username' })
     }
 
-    // if valid username, proceed
-    User.findOne({ _id: userId }, function(err, user) {
+    else {
+      // if valid username, proceed
+      User.findOne({ _id: userId }, function(err, user) {
 
-      if (err) throw err
+        if (err) throw err
 
-      user.username = userNameReq
+        user.username = userNameReq
 
-      user.logs.forEach(function(log) {
-        log.username = user.username
+        user.logs.forEach(function(log) {
+          log.username = user.username
+        })
+
+        user.save()
+
+        res.json({ message: 'Username changed' })
+
       })
-
-      user.save()
-
-      res.json({ message: 'Username changed' })
-
-    })
+    }
 
   })
 
@@ -278,7 +280,7 @@ module.exports = (app) => {
       var username = user.username
       var avatar = user.avatar
 
-      res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', user: req.session.passport, username: username, avatar: null })
+      res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', user: req.session.passport, username: username, avatar: avatar })
 
     })
 
@@ -369,7 +371,7 @@ module.exports = (app) => {
       })
       
       var username = user.username
-      var gravatar = user.gravatar
+      var avatar = user.avatar
 
       res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport, username: username, avatar: avatar, moment: moment })
 

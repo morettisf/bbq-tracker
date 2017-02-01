@@ -6,12 +6,16 @@
   <meta name='description' content='BBQ Tracker helps you manage cook sessions, recipes, and outcomes.'>
   <link rel='stylesheet' type='text/css' href='/css/main.css'>
   <link rel='stylesheet' type='text/css' href='/css/datepickr.css'>
+  <link rel="stylesheet" href="/css/font-awesome.css">
   <title><%= title %></title>
 </head>
 <body id='log-body'>
   <%- include header.ejs -%>
   <main>
-    <h2><%= logInfo.username %></h2>
+    <div id='profile-box'>
+      <img src='<%= avatar %>' alt='avatar'>
+      <div><%= logInfo.username %></div>
+    </div>
     <h1>Public BBQ Log</h1>
     <div id='vote-area'>
       <img src='../images/vote.png' alt='Lip Smackin Votes'>
