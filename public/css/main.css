@@ -314,3 +314,31 @@ th, td {
   border: 1px solid yellow;
   cursor: default !important;
 }
+
+.pop {
+  width: 400px;
+  height: 300px;
+  position: absolute;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -200px;
+  background-color: grey;
+}
+
+.pop p {
+  text-align: center;
+  font-size: 2em;
+}
+
+.pop-options {
+  width: 200px;
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+}
+
+#del-yes {
+
+}

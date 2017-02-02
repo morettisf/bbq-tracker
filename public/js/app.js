@@ -603,9 +603,40 @@ function changePW(newPW) {
 }
 
 // delete account
+var popDeleteUser = document.querySelector('#pop-del-user')
+
 var deleteAccountSubmit = document.querySelector('#delete-account-submit')
 if (deleteAccountSubmit) {
   deleteAccountSubmit.addEventListener('click', function() {
-    confirm('Deleting account will remove your records from BBQ Tracker. Are you sure?')
+    popDeleteUser.classList.toggle('hidden')
   })
+}
+
+var delNo = document.querySelector('#del-no')
+if (delNo) {
+  delNo.addEventListener('click', function() {
+    popDeleteUser.classList.toggle('hidden')
+  })
+}
+
+var delYes = document.querySelector('#del-yes')
+if (delYes) {
+  delYes.addEventListener('click', function() {
+    deleteUser()
+  })
+}
+
+function deleteUser() {
+  fetch('/account', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    cache: 'default',
+    credentials: 'include'
+  })
+    .then(function(res) {
+      window.location = '/'
+    })
 }

@@ -334,6 +334,17 @@ module.exports = (app) => {
 
   })
 
+  app.delete('/account', function(req, res, next) {
+    var userId = req.session.passport.user
+
+    User.findOne({ _id: userId }, function(err, user) {
+      user.remove()
+      req.session.destroy()
+    })
+
+    res.json({ message: 'User deleted' })
+  })
+
   app.get('/create-log', isLoggedIn, function(req, res, next) {
     var userId = req.session.passport.user
 
@@ -704,6 +715,16 @@ console.log(reqLogs)
     res.render('about', { title: 'About | BBQ Tracker', message: null, user: userId, username: username, avatar: avatar })
 
     })
+  })
+
+  app.get('/goodbye', function(req, res) {
+
+    var userId
+    var username
+    var avatar
+
+    res.render('goodbye', { title: 'Goodbye | BBQ Tracker' })
+
   })
 
   app.get('/logout', function(req, res) {
