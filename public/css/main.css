@@ -307,4 +307,10 @@ th, td {
 
 #avatar-options img {
   width: 75px;
+  cursor: pointer;
+}
+
+.avatar-highlight {
+  border: 1px solid yellow;
+  cursor: default !important;
 }

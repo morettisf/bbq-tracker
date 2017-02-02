@@ -174,6 +174,7 @@ module.exports = (app) => {
     var userId = req.session.passport.user
     var username
     var avatar
+    var email
 
     // grab their username for the nav if logged in
     User.findOne({ _id: userId }, function(err, user) {
@@ -183,13 +184,14 @@ module.exports = (app) => {
       if (user) {
         username = user.username
         avatar = user.avatar
+        email = user.email
       }
 
       else {
         username = null
       }
 
-      res.render('account', { title: 'My Account | BBQ Tracker', user: req.session.passport, message: req.query.message || null, error: req.query.error || null, username: username, avatar: avatar })
+      res.render('account', { title: 'My Account | BBQ Tracker', user: req.session.passport, message: req.query.message || null, error: req.query.error || null, username: username, email: email, avatar: avatar })
 
     })
 
@@ -229,46 +231,108 @@ module.exports = (app) => {
 
   })
 
-  // app.put('/account/email', function(req, res, next) {
-  //   var userId = req.session.passport.user
-  //   var emailReq = req.body.email
-  //   var email
-  //   var errors = []
+  app.put('/account/avatar', function(req, res, next) {
+    var userId = req.session.passport.user
+    var avatarReq = req.body.avatar
 
-  //   // grab their username for the nav
-  //   User.findOne({ _id: userId }, function(err, user) {
+    User.findOne({ _id: userId }, function(err, user) {
 
-  //     if (err) throw err
+      if (err) throw err
 
-  //     // run checks on valid username
-  //     if (emailReq === '') {
-  //       errors.push('Supply an email address')
-  //     }
+      user.avatar = avatarReq
 
-  //     if (emailReq.indexOf(' ') !== -1) {
-  //       errors.push('No spaces allowed in email address')
-  //     }
+      user.save()
 
-  //     if (emailReq.indexOf('@') < 0) {
-  //       errors.push('Email does not contain @')
-  //     }
+      res.json({ message: 'Avatar changed' })
 
-  //     if (errors.length > 0) {
-  //       res.render('account', { title: 'My Account | BBQ Tracker', user: req.session.passport, errors, message: null, username: username })
-  //     }
+    })
 
-  //     else {
-  //       user.email = emailReq
+  })
 
-  //       user.save()
+  app.put('/account/email', function(req, res, next) {
+    var userId = req.session.passport.user
+    var emailReq = req.body.email
+    var email
 
-  //       username = user.username
-  //       res.render('account', { title: 'My Account | BBQ Tracker', user: req.session.passport, errors: null, message: 'Email changed', username: username })
-  //     }
+    // grab their username for the nav
+    User.findOne({ _id: userId }, function(err, user) {
 
-  //   })
+      if (err) throw err
 
-  // })
+      // run checks on valid username
+      if (emailReq === '') {
+        res.json({ error: 'Supply an email address' })
+      }
+
+      else if (emailReq.indexOf(' ') !== -1) {
+        res.json({ error: 'No spaces allowed in email address' })
+      }
+
+      else if (emailReq.indexOf('@') < 0) {
+        res.json({ error: 'Email does not contain @' })
+      }
+
+      else {
+        user.email = emailReq
+
+        user.save()
+
+        res.json({ message: 'Email changed' })
+      }
+
+    })
+
+  })
+
+  app.put('/account/password', function(req, res, next) {
+    var userId = req.session.passport.user
+    var passwordReq = req.body.password
+    var password2Req = req.body.password2
+
+    if (passwordReq === '') {
+      res.json({ error: 'Supply a password' })
+    }
+
+    else if (passwordReq.length < 5) {
+      res.json({ error: 'Password must be a minimum of 5 characters' })
+    }
+
+    // if (passwordReq !== /\d/) {
+    //   errors.push('Password must contain at least one number')
+    // }
+
+    else if (password2Req === '') {
+      res.json({ error: 'Confirm your password' })
+    }
+
+    else if (passwordReq !== password2Req) {
+      res.json({ error: 'Passwords do not match' })
+    }
+
+    else {
+
+      User.findOne({ _id: userId }, function(err, user) {
+        
+        if (err) throw err
+
+        else {
+          bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(passwordReq, salt, function(err, hash) {
+              passwordReq = hash
+              user.password = passwordReq
+              user.save()
+              
+              res.json({ message: 'Password changed'})
+
+            })
+          })
+        }
+
+      })
+
+    }
+
+  })
 
   app.get('/create-log', isLoggedIn, function(req, res, next) {
     var userId = req.session.passport.user
