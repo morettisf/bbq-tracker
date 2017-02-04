@@ -14,7 +14,7 @@
   <div class='error'><%= error %></div>
   <% } %>
   <h1>My Account</h1>
-  <main>
+  <main id='account-main'>
     <ul id='account-options'>
       <li>
         <h3 id='new-username-btn'>Change Username</h3>
@@ -54,13 +54,6 @@
         <h3 id='delete-account-btn'>Delete account</h3>
         <div id='delete-account-field' class='hidden'>
           <button id='delete-account-submit' type='button'>Confirm Delete</button>
-        </div>
-        <div id='pop-del-user' class='pop hidden'>
-          <p>Confirming will delete your profile. Are you sure?</p>
-          <div class='pop-options'>
-            <button id='del-yes'>Yes</button>
-            <button id='del-no'>No</button>
-          </div>
         </div>
       </li>
     </ul>

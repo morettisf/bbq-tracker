@@ -5,7 +5,7 @@ chai.use(chaiHttp);
 const app = require('../server')
 
 describe('The express app', () => {
-  it('handles a GET request to homepage', (done) => {
+  it('handles a GET request to Homepage', (done) => {
     chai.request(app)
       .get('/')
       .end((err, res) => {

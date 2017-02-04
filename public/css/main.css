@@ -296,6 +296,10 @@ th, td {
   clear: both;
 }
 
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+  content: " \25B4\25BE" 
+}
+
 /***** Accounts Page *****/
 #account-options {
   list-style: none;
@@ -315,7 +319,19 @@ th, td {
   cursor: default !important;
 }
 
-.pop {
+.pop-update {
+  width: 300px;
+  height: 150px;
+  position: absolute;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -150px;
+  background-color: grey;
+}
+
+.pop-del {
   width: 400px;
   height: 300px;
   position: absolute;
@@ -327,18 +343,14 @@ th, td {
   background-color: grey;
 }
 
-.pop p {
+.pop-del p {
   text-align: center;
   font-size: 2em;
 }
 
-.pop-options {
+.pop-del-options {
   width: 200px;
   position: absolute;
   left: 50%;
   margin-left: -100px;
-}
-
-#del-yes {
-
 }

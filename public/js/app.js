@@ -134,6 +134,7 @@ if (save) {
       username: document.querySelector('#username').innerHTML,
       updated: new Date(),
       votes: 0,
+      voters: [],
       other_ingredients: document.querySelector('#other-ingredients').value
     }
 
@@ -257,7 +258,7 @@ var url = window.location.pathname
 var logId = url.split('/').pop()
 
 function updateLog(logData) {
-  fetch('/update-log/' + logId, {
+  fetch('/view-log/' + logId, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -268,7 +269,18 @@ function updateLog(logData) {
     credentials: 'include'
   })
     .then(function() {
-      alert('updated')
+      var logBody = document.querySelector('#log-body')
+      var div = document.createElement('div')
+      var popHTML = "<p>Log updated</p>"
+
+      div.classList.add('pop-update')
+      div.innerHTML = popHTML
+
+      logBody.appendChild(div)
+
+      setTimeout(function(){
+        div.parentNode.removeChild(div)
+      }, 1500)
     })
 }
 
@@ -379,7 +391,7 @@ if (voteBtn) {
 
 function addVote(log) {
   fetch('/public-log', {
-    method: 'PUT',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -389,7 +401,20 @@ function addVote(log) {
     credentials: 'include'
   })
     .then(function(res) {
-     window.location.reload()
+      return res.json()
+    })
+    .then(function(res) {
+      var updatedVotes = res.votes
+      var voteCount = document.querySelector('#vote-count')
+      var voteCountBox = document.querySelector('#vote-count-box')
+      var voteBtn = document.querySelector('#vote-btn')
+
+      voteCount.innerHTML = updatedVotes
+      voteBtn.parentNode.removeChild(voteBtn)
+
+      var div = document.createElement('div')
+      voteCountBox.appendChild(div)
+      div.innerHTML = 'Voted'
     })
 }
 
@@ -604,18 +629,27 @@ function changePW(newPW) {
 
 // delete account
 var popDeleteUser = document.querySelector('#pop-del-user')
+var accountMain = document.querySelector('#account-main')
 
 var deleteAccountSubmit = document.querySelector('#delete-account-submit')
 if (deleteAccountSubmit) {
   deleteAccountSubmit.addEventListener('click', function() {
-    popDeleteUser.classList.toggle('hidden')
+    var div = document.createElement('div')
+    var popHTML = "<p>Confirming will delete your profile. Are you sure?</p><button id='del-yes'>Yes</button><button class='del-no'>No</button></div>"
+
+    div.classList.add('pop-del')
+    div.innerHTML = popHTML
+
+    accountMain.appendChild(div)
   })
 }
 
-var delNo = document.querySelector('#del-no')
-if (delNo) {
-  delNo.addEventListener('click', function() {
-    popDeleteUser.classList.toggle('hidden')
+if (accountMain) {
+  accountMain.addEventListener('click', function(event) {
+    if (event.target.classList.contains('del-no')) { // CAN THIS BE AN ID?
+      var div = event.target.closest('div')
+      div.parentNode.removeChild(div)
+    }
   })
 }
 

@@ -116,6 +116,18 @@ describe('Registration', () => {
     })
   })
 
+  it('rejects if password is missing a number', (done) => {
+    User.count().then(count => {
+      chai.request(app)
+        .post('/register')
+        .send({ username: 'joe', email: 'email@test.com', password: 'bestpassword', password2: 'bestpassword' })
+        .end((err, res) => {
+          res.text.should.have.string('Password must contain at least one number')
+          done()
+        })
+    })
+  })
+
   it('rejects if passwords do not match', (done) => {
     User.count().then(count => {
       chai.request(app)
@@ -126,21 +138,6 @@ describe('Registration', () => {
           done()
         })
     })
-  })
-
-  it('logs in a user', (done) => {
-    chai.request(app)
-      .post('/register')
-      .send({ username: 'greg', email: 'greg@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
-      .then(() => {
-        chai.request(app)
-          .post('/sign-in')
-          .send({ username: 'greg', password: 'bestpassword123' })
-          .end((err, res) => {
-            res.should.have.status(200)
-            done()
-          })
-      })
   })
 
 })

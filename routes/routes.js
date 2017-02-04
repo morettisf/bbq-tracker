@@ -6,6 +6,13 @@ const moment = require('moment')
 
 module.exports = (app) => {
 
+var logOptions = {
+  device: ['Big Green Egg', 'Kettle Grill', 'Oven', 'Weber Smokey Mountain'],
+  meat: ['Beef Brisket', 'Beef Ribs', 'Beef Tri-tip', 'Pork Ribs (baby backs)', 'Pork Ribs (spares)', 'Pork Shoulder'],
+  fuel: ['Briquettes', 'Lump Charcoal', 'Wood'],
+  wood: ['Apple', 'Cherry', 'Hickory', 'Mesquite', 'Oak', 'Pecan', 'None']
+}
+
   app.use(passport.initialize())
   app.use(passport.session())
 
@@ -16,25 +23,27 @@ module.exports = (app) => {
 
       if (err) throw err
 
-      var logs = users.reduce(function (acc, row) {
+      var logs = users.reduce(function(acc, row) {
        if (row.logs) acc = [].concat(acc, row.logs)
        return acc
       }, [])
 
-      var publicLogs = logs.filter(function (log) {
+      var publicLogs = logs.filter(function(log) {
        return log.status === 'Public'
       })
 
-      var updatedLogs = publicLogs.sort(function(a,b) {
+      var updatedLogs = [].concat(publicLogs).sort(function(a,b) {
                           return b.updated - a.updated
                         })
 
-      var topVotedLogs = publicLogs.sort(function(a,b) {
+      var topVotedLogs = [].concat(publicLogs).sort(function(a,b) {
                           return b.votes - a.votes
                         })
 
-      res.render('index', { title: 'BBQ Tracker', message: 'HOMEPAGE content', user: req.session.passport, updatedLogs: updatedLogs, topVotedLogs: topVotedLogs, moment: moment })
-      console.log(req.session.passport)
+      var updated20 = updatedLogs.slice(0, 21)
+      var topVoted20 = topVotedLogs.slice(0, 21)
+
+      res.render('index', { title: 'BBQ Tracker', message: 'HOMEPAGE content', user: req.session.passport, updated20: updated20, topVoted20: topVoted20, moment: moment })
 
     })
 
@@ -85,9 +94,9 @@ module.exports = (app) => {
       errors.push('Password must be a minimum of 5 characters')
     }
 
-    // if (passwordReq !== /\d/) {
-    //   errors.push('Password must contain at least one number')
-    // }
+    if (!/[0-9]/.test(passwordReq)) {
+      errors.push('Password must contain at least one number')
+    }
 
     if (password2Req === '') {
       errors.push('Confirm your password')
@@ -99,32 +108,39 @@ module.exports = (app) => {
 
     if (errors.length > 0) {
       res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors, username: null, avatar: null })
-//        res.json(errors)
     }
 
     else {
 
       User.findOne({ username: userNameReq }, function(err, user) {
-        
         if (err) throw err
-
         if (user) {
           res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: ['Username already taken, please try another'], username: null, avatar: null })
         }
 
         else {
-          bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(userInfo.password, salt, function(err, hash) {
-              userInfo.password = hash
-              User.create(userInfo)
-                .then(function(){
-                  req.session.message = 'Registration successful, now sign in'
-                  res.redirect('/sign-in')
-//                    res.json(resInfo)
+          User.findOne({ email: emailReq }, function(err, user) { 
+            if (err) throw err
+            if (user) {
+              res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: ['Email already in use, please try another'], username: null, avatar: null })
+            }
+
+            else {
+              bcrypt.genSalt(10, function(err, salt) {
+                bcrypt.hash(userInfo.password, salt, function(err, hash) {
+                  userInfo.password = hash
+                  User.create(userInfo)
+                    .then(function(){
+                      req.session.message = 'Registration successful, now sign in'
+                      res.redirect('/sign-in')
+                    })
+                    .catch(next)
                 })
-                .catch(next)
-            })
+              })
+            }
+
           })
+
         }
 
       })
@@ -142,29 +158,19 @@ module.exports = (app) => {
   app.post('/sign-in', function(req, res, next) {
     passport.authenticate('local-sign-in', function(err, user, info) {
 
-      var error
-
-      // if (info) {
-      //   error = 'Incorrect username, try again'
-      // }
-
-      // if (err) {
-      //   error = 'Incorrect password, try again'
-      // }
+      if (err) throw err
 
       var userNameReq = req.body.username.toLowerCase()
       var passwordReq = req.body.password
 
       if (info) {
-        res.render('sign-in', { title: 'Sign-In | BBQ Tracker', user: req.session.passport, errors: error, message: info.message, username: null, avatar: null })
+        res.render('sign-in', { title: 'Sign-In | BBQ Tracker', user: req.session.passport, errors: info.message, message: null, username: null, avatar: null })
       }
 
       else {
         req.logIn(user, function(err) {
           if (err) { return next(err) }
           return res.redirect('log-history')
-
- //         return res.json('ok')
         })
       }
     })(req, res, next)
@@ -297,9 +303,9 @@ module.exports = (app) => {
       res.json({ error: 'Password must be a minimum of 5 characters' })
     }
 
-    // if (passwordReq !== /\d/) {
-    //   errors.push('Password must contain at least one number')
-    // }
+    else if (!/[0-9]/.test(passwordReq)) {
+      res.json({ error: 'Password must contain at least one number' })
+    }
 
     else if (password2Req === '') {
       res.json({ error: 'Confirm your password' })
@@ -345,6 +351,7 @@ module.exports = (app) => {
     res.json({ message: 'User deleted' })
   })
 
+
   app.get('/create-log', isLoggedIn, function(req, res, next) {
     var userId = req.session.passport.user
 
@@ -355,7 +362,7 @@ module.exports = (app) => {
       var username = user.username
       var avatar = user.avatar
 
-      res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', user: req.session.passport, username: username, avatar: avatar })
+      res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', h1: 'New BBQ Log Entry', logOptions: logOptions, user: req.session.passport, username: username, avatar: avatar})
 
     })
 
@@ -380,7 +387,7 @@ module.exports = (app) => {
   })
 
 
-  app.put('/update-log/:log', function(req, res, next) {
+  app.put('/view-log/:log', function(req, res, next) {
     var userId = req.session.passport.user
     var logId = req.params.log
     var info = req.body
@@ -449,7 +456,7 @@ module.exports = (app) => {
       var username = user.username
       var avatar = user.avatar
 
-      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', logInfo: logInfo, user: req.session.passport, username: username, avatar: avatar, moment: moment })
+      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', h1: 'Saved BBQ Log', logInfo: logInfo, user: req.session.passport, username: username, avatar: avatar, moment: moment })
 
     })
 
@@ -459,17 +466,20 @@ module.exports = (app) => {
   app.get('/public-log/:log', function(req, res, next) {
   
     var logId = req.params.log
+    var userId
     var selectedLog
     var username
     var avatar
     var logAvatar
+    var authorId
+    var sameUserAuthor
 
     // check if this is a logged in user or not
     if (req.session.passport) {
-      var userId = req.session.passport.user
+      userId = req.session.passport.user
     }
     else {
-      var userId = null
+      userId = null
     }
 
     // grab their username for the nav if logged in
@@ -496,45 +506,69 @@ module.exports = (app) => {
         if (err) throw err
 
         logAvatar = user[0].avatar
+        authorId = user[0]._id
 
-      user[0].logs.forEach(function(log) {
-        if (log._id == logId) { // CONVERT TO SAME FORMAT
-          selectedLog = log
+        user[0].logs.forEach(function(log) {
+          if (log._id == logId) { // CONVERT TO SAME FORMAT
+            selectedLog = log
+          }
+        })
+
+        // see if user has voted for visited log or not. If so, disable voting.
+        selectedLog.voters.forEach(function(voter) {
+          if (userId == voter.voter_id) { // CONVERT TO SAME FORMAT
+            votingStatus = false
+          }
+        })
+
+        // remove voting ability if logged in user same as public log author
+        if (userId == authorId) { // CONVERT TO SAME FORMAT
+            sameUserAuthor = true
         }
-      })
 
-      // see if user has voted for visited log or not. If so, disable voting.
-      selectedLog.voters.forEach(function(voter) {
-        if (userId == voter.voter_id) {
-          votingStatus = false
+        else {
+          sameUserAuthor = false
         }
-      })
 
-      console.log(user[0].avatar)
-
-      res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', logInfo: selectedLog, user: req.session.passport, username: username, avatar: avatar, logAvatar: logAvatar, moment: moment, button: votingStatus })
+        res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', h1: 'Public BBQ Log', logInfo: selectedLog, user: req.session.passport, username: username, avatar: avatar, logAvatar: logAvatar, moment: moment, button: votingStatus, sameUserAuthor: sameUserAuthor })
     })
   })
 
-  app.put('/public-log', function(req, res, next) {
+
+// ***** VOTING - ADDING VOTES *****
+  app.post('/public-log', function(req, res, next) {
     var author = req.body.author
     var logId = req.body.logId
     var voter = { voter_id: req.session.passport.user }
     var updatedVotes
+    var pastVoters
+    var logObject
 
     User.findOne({ username: author }, function(err, user) {
       var logs = user.logs
 
       logs.forEach(function(log) {
         if (logId == log._id) {
-          log.votes++
-          log.voters.push(voter)
-          updatedVotes = log.votes
+          pastVoters = log.voters
+          logObject = log
         }
       })
+
+      pastVoters.forEach(function(pastVoter) {
+        if (voter.voter_id == pastVoter.voter_id) {
+          res.status(500)
+        }
+      })
+              
+      logObject.votes++
+      logObject.voters.push(voter)
+      updatedVotes = logObject.votes
+
       user.save()
       res.json({ votes: updatedVotes })
+
     })
+
   })
 
 
@@ -566,7 +600,6 @@ module.exports = (app) => {
     var userId = req.session.passport.user
     var logs
 
-console.log(reqLogs)
     if (reqLogs.length < 1) {
       res.json({ error: 'No logs selected' })
     }
@@ -715,16 +748,6 @@ console.log(reqLogs)
     res.render('about', { title: 'About | BBQ Tracker', message: null, user: userId, username: username, avatar: avatar })
 
     })
-  })
-
-  app.get('/goodbye', function(req, res) {
-
-    var userId
-    var username
-    var avatar
-
-    res.render('goodbye', { title: 'Goodbye | BBQ Tracker' })
-
   })
 
   app.get('/logout', function(req, res) {

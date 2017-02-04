@@ -7,6 +7,7 @@
 </head>
 <body>
   <%- include header.ejs -%>
+  <h1>Log History</h1>
   <% if (message) { %>
   <p><%= message %></p>
   <% } %>
@@ -21,7 +22,7 @@
     </select>
     <button type='button' id='log-action-btn'>Modify Selected</button>
   </section>
-  <table>
+  <table class='sortable'>
     <tr>
       <th>Select</th><th>Date</th><th>Session Name</th><th>Meat</th><th>Cook Temperature</th><th>My Rating</th><th>Votes</th><th>Status</th>
     </tr>
@@ -34,13 +35,20 @@
             Unnamed Session
           <% } %>
             <%= log.session_name %></a></td><td><%= log.meat %></td><td><%= log.cook_temperature %></td>
-              <td>
-                <% if (log.rating === 5) { %><img src='../images/5.gif' alt='5 Stars'><% } %>
-                <% if (log.rating === 4) { %><img src='../images/4.gif' alt='4 Stars'><% } %>
-                <% if (log.rating === 3) { %><img src='../images/3.gif' alt='3 Stars'><% } %>
-                <% if (log.rating === 2) { %><img src='../images/2.gif' alt='2 Stars'><% } %>
-                <% if (log.rating === 1) { %><img src='../images/1.gif' alt='1 Stars'><% } %>
-                <% if (log.rating === 0) { %><img src='../images/0.gif' alt='0 Stars'><% } %>
+              <td 
+                <% if (log.rating === 5) { %> sorttable_customkey='5'<% } %>
+                <% if (log.rating === 4) { %> sorttable_customkey='4'<% } %>
+                <% if (log.rating === 3) { %> sorttable_customkey='3'<% } %>
+                <% if (log.rating === 2) { %> sorttable_customkey='2'<% } %>
+                <% if (log.rating === 1) { %> sorttable_customkey='1'<% } %>
+                <% if (log.rating === 0) { %> sorttable_customkey='0'<% } %>
+                >
+                  <% if (log.rating === 5) { %><img src='../images/5.gif' alt='5 Stars'><% } %>
+                  <% if (log.rating === 4) { %><img src='../images/4.gif' alt='4 Stars'><% } %>
+                  <% if (log.rating === 3) { %><img src='../images/3.gif' alt='3 Stars'><% } %>
+                  <% if (log.rating === 2) { %><img src='../images/2.gif' alt='2 Stars'><% } %>
+                  <% if (log.rating === 1) { %><img src='../images/1.gif' alt='1 Stars'><% } %>
+                  <% if (log.rating === 0) { %><img src='../images/0.gif' alt='0 Stars'><% } %>
               </td>
           <td><%= log.votes %></td><td><%= log.status %></td>
           </tr>

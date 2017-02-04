@@ -12,7 +12,7 @@
 <body id='log-body'>
   <%- include header.ejs -%>
   <main>
-    <h1>New BBQ Log Entry</h1>
+    <h1><%= h1 %></h1>
     <section>
       <div id='date'>
         <label for='date'>Date</label>
@@ -25,10 +25,9 @@
       <div id='bbq-cooker'>
         <label for='cooking-device'>Cooking Device</label>
         <select id='cooking-device'>
-          <option value='Big Green Egg'>Big Green Egg</option>
-          <option value='Kettle Grill'>Kettle Grill</option>
-          <option value='Oven'>Oven</option>
-          <option value='Weber Smokey Mountain'>Weber Smokey Mountain</option>
+          <% logOptions.device.forEach(function(device) { %>
+            <option value='<%= device %>'><%= device %></option>
+          <% }) %>
           <option id='device-other' value='Other'>Other</option>
         </select>
         <input type='text' placeholder='My custom cooker' id='device-other-text' class='hidden'>
@@ -36,12 +35,9 @@
       <div id='meat'>
         <label for='meat'>Meat</label>
         <select id='meat-type'>
-          <option value='Beef Brisket'>Beef Brisket</option>
-          <option value='Beef Ribs'>Beef Ribs</option>
-          <option value='Beef Tri-Tip'>Beef Tri-tip</option>
-          <option value='Pork Ribs (baby backs)'>Pork Ribs (baby backs)</option>
-          <option value='Pork Ribs (spares)'>Pork Ribs (spares)</option>
-          <option value='Pork Shoulder'>Pork Shoulder</option>
+          <% logOptions.meat.forEach(function(meatType) { %>
+            <option value='<%= meatType %>'><%= meatType %></option>
+          <% }) %>
           <option id='meat-other' value='Other'>Other</option>
         </select>
         <input type='text' placeholder='Other meat type' id='meat-other-text' class='hidden'>
@@ -62,9 +58,9 @@
       <div id='fuel-box'>
         <label for='fuel'>Fuel</label>
         <select id='fuel'>
-          <option value='Briquettes'>Briquettes</option>
-          <option value='lump'>Lump Charcoal</option>
-          <option value='Wood'>Wood</option>
+          <% logOptions.fuel.forEach(function(fuelType) { %>
+            <option value='<%= fuelType %>'><%= fuelType %></option>
+          <% }) %>
         </select>
         <label for='fuel-brand'>Brand</label>
         <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs'>
@@ -72,13 +68,9 @@
       <div id='wood-box'>
         <label for='wood'>Wood</label>
         <select id='wood'>
-          <option value='Apple'>Apple</option>
-          <option value='Cherry'>Cherry</option>
-          <option value='Hickory'>Hickory</option>
-          <option value='Mesquite'>Mesquite</option>
-          <option value='Oak'>Oak</option>
-          <option value='Pecan'>Pecan</option>
-          <option value='None'>None</option>  
+          <% logOptions.wood.forEach(function(woodType) { %>
+            <option value='<%= woodType %>'><%= woodType %></option>
+          <% }) %>
           <option id='wood-other' value='Other'>Other</option>
         </select>
         <input type='text' placeholder='Other wood type' id='wood-other-text' class='hidden'>

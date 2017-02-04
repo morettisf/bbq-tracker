@@ -16,12 +16,12 @@
       <img src='<%= logAvatar %>' alt='avatar'>
       <div id='author'><%= logInfo.username %></div>
     </div>
-    <h1>Public BBQ Log</h1>
+    <h1><%= h1 %></h1>
     <div id='vote-area'>
       <img src='../images/vote.png' alt='Lip Smackin Votes'>
       <div id='vote-count-box'>
         <div id='vote-count'><%= logInfo.votes %></div>
-        <% if (user) { %>
+        <% if (user && sameUserAuthor === false) { %>
           <% if (button === true) { %>
             <button type='button' id='vote-btn'>Vote</button>
           <% } else { %>Voted<% } %>
