@@ -63,7 +63,7 @@
       <div id='cook-temperature'>
         <label for='cook-temperature'>Cook Temperature</label>
         <input id='temp-slider' type='range' min='100' max='500' step='5' value='<%= logInfo.cook_temperature %>' oninput='window.outputUpdate(value)'>
-        <output for='temp-slider' id='temp-slider-output'>225</output>
+        <output for='temp-slider' id='temp-slider-output'><%= logInfo.cook_temperature %></output>
       </div>
       <div id='estimated-time-box'>
         <label for='estimated-time'>Estimated Time</label>

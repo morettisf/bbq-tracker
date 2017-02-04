@@ -86,6 +86,10 @@ var logOptions = {
       errors.push('Email does not contain @')
     }
 
+    if (emailReq.indexOf('.') < 0) {
+      errors.push('Email does not contain .')
+    }
+
     if (passwordReq === '') {
       errors.push('Supply a password')
     }
@@ -278,6 +282,10 @@ var logOptions = {
         res.json({ error: 'Email does not contain @' })
       }
 
+      else if (emailReq.indexOf('.') < 0) {
+        res.json({ error: 'Email does not contain .' })
+      }
+
       else {
         user.email = emailReq
 
@@ -296,7 +304,7 @@ var logOptions = {
     var password2Req = req.body.password2
 
     if (passwordReq === '') {
-      res.json({ error: 'Supply a password' })
+      res.json({ error: 'Supply a new password' })
     }
 
     else if (passwordReq.length < 5) {
@@ -452,7 +460,7 @@ var logOptions = {
           logInfo = log
         }
       })
-      
+
       var username = user.username
       var avatar = user.avatar
 
