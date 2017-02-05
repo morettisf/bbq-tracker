@@ -67,9 +67,10 @@ var logOptions = {
         else {
           username = null
         }
-      })
 
-      res.render('index', { title: 'BBQ Tracker', user: req.session.passport, username: username, avatar: avatar, updated20: updated20, topVoted20: topVoted20, moment: moment })
+        res.render('index', { title: 'BBQ Tracker', user: req.session.passport, username: username, avatar: avatar, updated20: updated20, topVoted20: topVoted20, moment: moment })
+
+      })
 
     })
 
@@ -396,7 +397,7 @@ var logOptions = {
       var username = user.username
       var avatar = user.avatar
 
-      res.render('create-log', { title: 'Create New BBQ Log | BBQ Tracker', h1: 'New BBQ Log Entry', logOptions: logOptions, user: req.session.passport, username: username, avatar: avatar})
+      res.render('create-log', { title: 'Create New Log | BBQ Tracker', h1: 'New BBQ Log', logOptions: logOptions, user: req.session.passport, username: username, avatar: avatar})
 
     })
 

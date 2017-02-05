@@ -5,6 +5,7 @@
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel="stylesheet" type="text/css" href='../css/main.css'>
   <link rel="stylesheet" href="/css/font-awesome.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <title><%= title %></title>
 </head>
 <body id='home-body'>
@@ -15,17 +16,9 @@
     </video>
   </div>
     <%- include header.ejs -%>
-<!--     <div id='menu-wrapper'>
-      <% if (!user) { %>
-        <a href='/register'><button type='button' id='homebtn1'>Register</button></a>
-        <a href='/sign-in'><button type='button' id='homebtn2'>Sign In</button></a>
-      <% } else { %>
-        <a href='/create-log'><button type='button' id='homebtn1'>Create Log</button></a>
-        <a href='/log-history'><button type='button' id='homebtn2'>Log History</button></a>
-      <% } %>
-    </div>
- -->  </header>
+  </header>
   <main id='home-main'>
+    <h1>Public Logs</h1>
     <h2>Latest Updates</h2>
     <section id='public-logs-updated'>
       <table>
