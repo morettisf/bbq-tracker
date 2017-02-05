@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel="stylesheet" type="text/css" href='../css/main.css'>
   <link rel="stylesheet" href="/css/font-awesome.css">
   <title><%= title %></title>
 </head>
 <body id='home-body'>
   <header>
-    <h1>BBQ Tracker</h1>
+  <div id='video-container'>
     <video loop muted autoplay>
       <source src='../video/coals.mp4' type='video/mp4'>
     </video>
-    <div id='menu-wrapper'>
+  </div>
+    <%- include header.ejs -%>
+<!--     <div id='menu-wrapper'>
       <% if (!user) { %>
         <a href='/register'><button type='button' id='homebtn1'>Register</button></a>
         <a href='/sign-in'><button type='button' id='homebtn2'>Sign In</button></a>
@@ -20,13 +24,13 @@
         <a href='/log-history'><button type='button' id='homebtn2'>Log History</button></a>
       <% } %>
     </div>
-  </header>
+ -->  </header>
   <main id='home-main'>
     <h2>Latest Updates</h2>
     <section id='public-logs-updated'>
       <table>
         <tr>
-          <th>Username</th><th>Session Name</th><th>Updated</th><th>Meat</th><th>User's Rating</th>
+          <th>Username</th><th>Session Name</th><th id='updated-th'>Updated</th><th>Meat</th><th id='rating-th'>User's Rating</th>
         </tr>
         <% if (updated20) { %>
           <% updated20.forEach(function(log) { %>
@@ -38,13 +42,13 @@
                 <% } %>
                 <%= log.session_name %></a>
               </td>
-              <td>
+              <td id='updated-td'>
                 <% if (log.updated) { %>
                   <%= moment(log.updated).format('MMMM Do YYYY') %>
                 <% } %>
               </td>
               <td><%= log.meat %></td>
-              <td>
+              <td id='rating-td'>
                 <% if (log.rating === 5) { %><img src='../images/5.gif' alt='5 Stars'><% } %>
                 <% if (log.rating === 4) { %><img src='../images/4.gif' alt='4 Stars'><% } %>
                 <% if (log.rating === 3) { %><img src='../images/3.gif' alt='3 Stars'><% } %>
@@ -61,7 +65,7 @@
     <section id='top-voted-logs'>
       <table>
         <tr>
-          <th>Username</th><th>Session Name</th><th>Meat</th><th>Pit Hits</th>
+          <th>Username</th><th>Session Name</th><th id='vote-meat-th'>Meat</th><th>Pit Hits</th>
         </tr>
         <% if (topVoted20) { %>
           <% topVoted20.forEach(function(log) { %>
@@ -73,7 +77,7 @@
                 <% } %>
                 <%= log.session_name %></a>
               </td>
-              <td><%= log.meat %></td>
+              <td id='vote-meat-td'><%= log.meat %></td>
               <td><%= log.votes %></td>
             </tr>
           <% }) %>

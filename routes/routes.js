@@ -18,6 +18,10 @@ var logOptions = {
 
   app.get('/', function(req, res, next) {
 
+    var userId
+    var username
+    var avatar
+
     User.find({ 'logs.status': 'Public' })
       .exec(function (err, users) {
 
@@ -43,7 +47,29 @@ var logOptions = {
       var updated20 = updatedLogs.slice(0, 21)
       var topVoted20 = topVotedLogs.slice(0, 21)
 
-      res.render('index', { title: 'BBQ Tracker', message: 'HOMEPAGE content', user: req.session.passport, updated20: updated20, topVoted20: topVoted20, moment: moment })
+      // check if this is a logged in user or not
+      if (req.session.passport) {
+        userId = req.session.passport.user
+      }
+      else {
+        userId = null
+      }
+
+      // grab their username for the nav if logged in
+      User.findOne({ _id: userId }, function(err, user) {
+
+        if (err) throw err
+
+        if (user) {
+          username = user.username
+          avatar = user.avatar
+        }
+        else {
+          username = null
+        }
+      })
+
+      res.render('index', { title: 'BBQ Tracker', user: req.session.passport, username: username, avatar: avatar, updated20: updated20, topVoted20: topVoted20, moment: moment })
 
     })
 
@@ -456,7 +482,7 @@ var logOptions = {
       if (err) throw err
 
       user.logs.forEach(function(log) {
-        if (log._id == logId) {  // CONVERT TO SAME FORMAT
+        if (log._id.toString() === logId) {
           logInfo = log
         }
       })
@@ -517,20 +543,20 @@ var logOptions = {
         authorId = user[0]._id
 
         user[0].logs.forEach(function(log) {
-          if (log._id == logId) { // CONVERT TO SAME FORMAT
+          if (log._id.toString() === logId) {
             selectedLog = log
           }
         })
 
         // see if user has voted for visited log or not. If so, disable voting.
         selectedLog.voters.forEach(function(voter) {
-          if (userId == voter.voter_id) { // CONVERT TO SAME FORMAT
+          if (userId === voter.voter_id) {
             votingStatus = false
           }
         })
 
         // remove voting ability if logged in user same as public log author
-        if (userId == authorId) { // CONVERT TO SAME FORMAT
+        if (userId === authorId) {
             sameUserAuthor = true
         }
 
@@ -556,14 +582,14 @@ var logOptions = {
       var logs = user.logs
 
       logs.forEach(function(log) {
-        if (logId == log._id) {
+        if (logId === log._id) {
           pastVoters = log.voters
           logObject = log
         }
       })
 
       pastVoters.forEach(function(pastVoter) {
-        if (voter.voter_id == pastVoter.voter_id) {
+        if (voter.voter_id === pastVoter.voter_id) {
           res.status(500)
         }
       })

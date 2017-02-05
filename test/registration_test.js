@@ -45,7 +45,6 @@ describe('Registration', () => {
       .post('/register')
       .send({ username: 'joe', email: '', password: 'bestpassword123', password2: 'bestpassword123' })
       .end((err, res) => {
-        console.log(err)
         res.text.should.have.string('Supply an email address')
         done()
       })
