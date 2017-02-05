@@ -575,14 +575,14 @@ var logOptions = {
     var logId = req.body.logId
     var voter = { voter_id: req.session.passport.user }
     var updatedVotes
-    var pastVoters
+    var pastVoters = []
     var logObject
 
     User.findOne({ username: author }, function(err, user) {
       var logs = user.logs
 
       logs.forEach(function(log) {
-        if (logId === log._id) {
+        if (logId === log._id.toString()) {
           pastVoters = log.voters
           logObject = log
         }
