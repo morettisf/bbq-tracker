@@ -413,6 +413,7 @@ function addVote(log) {
       voteBtn.parentNode.removeChild(voteBtn)
 
       var div = document.createElement('div')
+      div.style.float = 'right'
       voteCountBox.appendChild(div)
       div.innerHTML = 'Voted'
     })

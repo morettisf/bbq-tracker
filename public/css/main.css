@@ -17,13 +17,6 @@ h1, h2, h3 {
 
 /* Homepage */
 
-#video-container {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  overflow: hidden;
-}
-
 video {
   position: fixed;
   z-index: -100;
@@ -475,34 +468,39 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 #vote-area img {
-  width: 40%;
-  height: 40%;
+  width: 105px;
+  height: 89px;
   float: right;
 }
 
 #vote-area button {
+  font-family: 'Roboto Slab', serif;
   width: 100%;
+  height: 22px;
+  padding: 0;
+  font-size: 0.75em;
 }
 
 #vote-count-box {
   height: 127px;
-  width: 44px;
-  margin-left: 10px;
-  margin-top: 25px;
+  width: 50px;
+  margin-left: 5px;
+  margin-top: 16px;
   vertical-align: top;
   float: right;
 }
 
 #vote-count {
-  width: 100%;
-  height: 44px;
+  width: 35px;
+  height: 35px;
   border: 1px solid black;
   margin-bottom: 5px;
   box-sizing: border-box;
   text-align: center;
-  font-size: 1.75em;
+  font-size: 1.5em;
   background-color: #ffec80;
   color: black;
+  float: right;
 }
 
 .hidden {
