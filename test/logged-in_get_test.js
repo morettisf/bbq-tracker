@@ -50,7 +50,7 @@ describe('Logged in', () => {
           .then(() => {
             agent.get('/create-log')
             .then((res) => {
-              res.text.should.have.string('New BBQ Log Entry')
+              res.text.should.have.string('New BBQ Log')
               done()
             })
           })

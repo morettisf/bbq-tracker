@@ -3,8 +3,16 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Architects Daughter', cursive;
   font-size: 1em;
+}
+
+body {
+  background-color: #B5C1C6;
+}
+
+h1, h2, h3 {
+  font-family: 'Roboto Slab', serif;
 }
 
 /* Homepage */
@@ -21,7 +29,7 @@ video {
   z-index: -100;
   left: 0;
   height: 100%;
-  background-color: #000000;
+  background-color: black;
 }
 
 #updated-th, #updated-td, #rating-th, #rating-td {
@@ -34,7 +42,7 @@ video {
 
 #home-body {
   color: #d9d9d9;
-  background-color: mediumseagreen;
+  background-color: black;
 }
 
 #home-body h1 {
@@ -45,6 +53,7 @@ video {
   width: 100%;
   height: 100%;
   margin-top: 60px;
+  margin-bottom: 30px;
   overflow: hidden;
 }
 
@@ -87,7 +96,7 @@ table img, #public-rating img {
 }
 
 #mobile-out {
-  position: absolute;
+  position: fixed;
   top: 0;
   z-index: 100;
   height: 100%;
@@ -121,12 +130,13 @@ table img, #public-rating img {
 
 #left-nav {  
   list-style: none;
-  margin-top: 40px;
-  padding-left: 30px;
+  margin-top: 20px;
+  padding-left: 20px;
 }
 
 #left-nav li {
-  margin-bottom: 20px;
+  color: #d9d9d9;
+  margin-bottom: 10px;
   font-size: 2em;
 }
 
@@ -143,11 +153,12 @@ table img, #public-rating img {
 
 #right-nav-area ul {
   list-style: none;
-  padding-right: 30px;
+  padding-right: 20px;
   margin-top: 5px;
 }
 
 #right-nav-area li {
+  color: #d9d9d9;
   text-align: right;
   font-size: 1.5em;
   margin-bottom: 5px;
@@ -171,7 +182,7 @@ table img, #public-rating img {
 
 #username-menu img {
   height: 100px;
-  margin-left: 170px;
+  margin-left: 180px;
 
 }
 
@@ -201,62 +212,246 @@ table img, #public-rating img {
 
 /* Sitewide */
 
-#log-body {
-  color: black;
-  background-color: #B5C1C6;
-}
-
-#profile-box {
-  margin-top: 20px;
-}
-
 #profile-box img {
   width: 75px;
   height: 75px;
 }
 
-main {
+#log-main, #about-main, #account-main {
   position: relative;
-}
-
-#log-main {
   overflow: hidden;
+  color: black;
   margin: 60px 10px 10px 10px;
 }
 
-#log-main h1 {
+#account-main ul {
+  padding: 0;
+}
+
+#log-main h1, #account-main h1 {
   margin: 10px 0;
+}
+
+/*#log-main input {
+  float: right;
+}*/
+
+label {
+  display: inline-block;
+  white-space: nowrap;
+  margin-top: 3px;
+}
+
+input[type='select'] {
+  -webkit-appearance: none;
+  width: 150px;
+}
+
+input[type='text'] {
+  -webkit-appearance: none;
+  width: 150px;
+}
+
+input[type='checkbox'] {
+  zoom: 2;
+  vertical-align: middle;
+}
+
+input[type='radio'] {
+  zoom: 2;
+  vertical-align: middle;
+}
+
+textarea {
+  -webkit-appearance: none;
+  resize: none;
+}
+
+select {
+  -webkit-appearance: none;
+  padding: 3px 6px;
+}
+
+button {
+  font-family: 'Architects Daughter', cursive;
+  font-size: 1.2em;
+  border: solid black 1px;
+  padding: 5px 10px;
+  border-radius: 0;
+  -webkit-appearance: none;
+    -webkit-border-radius: 0;
+  background-color: #63737A;
+  color: white;
+}
+
+ol {
+  margin-left: 22px;
+  padding: 0;
+}
+
+
+
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 50%;
+  margin: 9.7px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5.6px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #63737a;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 10px;
+  border-radius: 0px;
+  background: #ff7b7b;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -8.4px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #6e8088;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 5.6px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #63737a;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 25px;
+  width: 12px;
+  border-radius: 0px;
+  background: #ff7b7b;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 5.6px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #58666c;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #63737a;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 25px;
+  width: 12px;
+  border-radius: 0px;
+  background: #ff7b7b;
+  cursor: pointer;
+  height: 5.6px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #63737a;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #6e8088;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#date-select {
+  width: 200px;
+}
+
+#cooking-device, #meat-type {
+  width: 100px;
+}
+
+#weight, #estimated-time {
+  width: 70px;
+}
+
+#other-ingredients-label {
+  display: block;
+}
+
+#other-ingredients {
+  width: 270px;
+  height: 60px;
+}
+
+#meat-notes-label {
+
 }
 
 .step-box {
   border: 1px solid black;
-  padding: 25px;
-  overflow: hidden;
+  padding: 15px;
+  margin-top: 10px;
 }
 
 .step-notes {
-  float: left;
   width: 100%;
 }
 
 .step-notes textarea {
   width: 100%;
   height: 50px;
+  box-sizing: border-box;
 }
 
 .complete-box {
-  float: left;
-  width: 25%;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.time {
+  display: inline-block;
+  margin-left: 15px;
 }
 
 .complete-notes {
-  float: left;
-  width: 75%;
+  width: 100%;
 }
 
 .complete-notes textarea {
   width: 100%;
   height: 50px;
+  box-sizing: border-box;
+}
+
+.remove-step {
+  margin-top: 10px;
 }
 
 #save, #update {
@@ -275,14 +470,14 @@ main {
 
 #vote-area {
   position: absolute;
-  top: -20px;
+  top: 0;
   right: 0;
 }
 
 #vote-area img {
-  width: 150px;
-  height: 127px;
-  display: inline-block;
+  width: 40%;
+  height: 40%;
+  float: right;
 }
 
 #vote-area button {
@@ -291,19 +486,23 @@ main {
 
 #vote-count-box {
   height: 127px;
-  width: 50px;
+  width: 44px;
   margin-left: 10px;
   margin-top: 25px;
-  display: inline-block;
   vertical-align: top;
+  float: right;
 }
 
 #vote-count {
   width: 100%;
-  height: 50px;
+  height: 44px;
   border: 1px solid black;
   margin-bottom: 5px;
   box-sizing: border-box;
+  text-align: center;
+  font-size: 1.75em;
+  background-color: #ffec80;
+  color: black;
 }
 
 .hidden {
@@ -323,7 +522,7 @@ main {
 .rating > input { display: none; } 
 .rating > label:before { 
   margin: 5px;
-  font-size: 1.25em;
+  font-size: 1.5em;
   font-family: FontAwesome;
   display: inline-block;
   content: "\f005";
@@ -345,6 +544,27 @@ main {
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
 
+/***** Log History *****/
+
+#log-history-main {
+  height: 100%;
+  margin: 60px 10px 10px 10px;
+  background-color: #B5C1C6;
+}
+
+#date-td-log-history, #date-th-log-history, #meat-td-log-history, #meat-th-log-history, #status-td-log-history, #status-th-log-history, #temp-td-log-history, #temp-th-log-history, #votes-td-log-history, #votes-th-log-history, #public-td-log-history, #public-th-log-history {
+  display: none;
+}
+
+#select-th-log-history, #select-td-log-history {
+  width: 20%;
+}
+
+td img {
+  height: 18px;
+  width: 93px;
+}
+
 /***** Log tables *****/
 
 table  {
@@ -362,6 +582,7 @@ th, td {
 }
 
 #status-box {
+  padding: 4px;
   clear: both;
 }
 
@@ -374,7 +595,12 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   list-style: none;
 }
 
+#account-options button {
+  margin-top: 10px;
+}
+
 #account-options h3 {
+  margin: 10px 0;
   cursor: pointer;
 }
 
@@ -384,7 +610,8 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 }
 
 .avatar-highlight {
-  border: 1px solid yellow;
+  background-color: #ffec80;
+  padding: 2px;
   cursor: default !important;
 }
 

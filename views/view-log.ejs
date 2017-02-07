@@ -6,96 +6,112 @@
   <meta name='description' content='BBQ Tracker helps you manage cook sessions, recipes, and outcomes.'>
   <link rel='stylesheet' type='text/css' href='/css/main.css'>
   <link rel='stylesheet' type='text/css' href='/css/datepickr.css'>
-  <link rel="stylesheet" href="/css/font-awesome.css">
+  <link rel='stylesheet' href='/css/font-awesome.css'>
+  <link href='https://fonts.googleapis.com/css?family=Architects+Daughter|Roboto+Slab' rel='stylesheet'>
   <title><%= title %></title>
 </head>
 <body id='log-body'>
   <%- include header.ejs -%>
-  <main>
+  <main id='log-main'>
     <div id='profile-box'>
       <img src='<%= avatar %>' alt='avatar'>
       <div><%= logInfo.username %></div>
     </div>
     <h1><%= h1 %></h1>
     <div id='vote-area'>
-      <img src='../images/vote.png' alt='Lip Smackin Votes'>
       <div id='vote-count-box'>
         <div id='vote-count'><%= logInfo.votes %></div>
       </div>
+      <img src='../images/vote.png' alt='Lip Smackin Votes'>
     </div>
     <section>
       <div id='date'>
-        <label for='date'>Date</label>
-        <input type='text' name='date' id='date-select' value='<% if (logInfo.date) { %><%= logInfo.date %><% } %>'>
+        <label for='date'>Date
+          <input type='text' name='date' id='date-select' value='<% if (logInfo.date) { %><%= logInfo.date %><% } %>'>
+        </label>
       </div>
       <div id='session-box'>
-        <label for='session-name'>Session Name</label>
-        <input type='text' id='session-name' placeholder='Brisket in May' value='<%= logInfo.session_name %>'>
+        <label for='session-name'>Session Name
+          <input type='text' id='session-name' placeholder='Brisket in May' value='<%= logInfo.session_name %>'>
+        </label>
       </div>
       <div id='bbq-cooker'>
-        <label for='cooking-device'>Cooking Device</label>
-        <select id='cooking-device'>
-          <option value='Big Green Egg' <% if (logInfo.cooking_device === 'Big Green Egg') { %>selected='selected'<% } %>>Big Green Egg</option>
-          <option value='Kettle Grill' <% if (logInfo.cooking_device === 'Kettle Grill') { %>selected='selected'<% } %>>Kettle Grill</option>
-          <option value='Oven' <% if (logInfo.cooking_device === 'Oven') { %>selected='selected'<% } %>>Oven</option>
-          <option value='Weber Smokey Mountain' <% if (logInfo.cooking_device === 'Weber Smokey Mountain') { %>selected='selected'<% } %>>Weber Smokey Mountain</option>
-          <option value='Other' <% if (logInfo.cooking_device === 'Other') { %>selected='selected'<% } %>>Other</option>
-        </select>
-        <input type='text' placeholder='My custom cooker' id='device-other-text' <% if (!logInfo.device_other) { %>class='hidden'<% } %> value='<%= logInfo.device_other %>'>
+        <label for='cooking-device'>Cooking Device
+          <select id='cooking-device'>
+            <option value='Big Green Egg' <% if (logInfo.cooking_device === 'Big Green Egg') { %>selected='selected'<% } %>>Big Green Egg</option>
+            <option value='Kettle Grill' <% if (logInfo.cooking_device === 'Kettle Grill') { %>selected='selected'<% } %>>Kettle Grill</option>
+            <option value='Oven' <% if (logInfo.cooking_device === 'Oven') { %>selected='selected'<% } %>>Oven</option>
+            <option value='Weber Smokey Mountain' <% if (logInfo.cooking_device === 'Weber Smokey Mountain') { %>selected='selected'<% } %>>Weber Smokey Mountain</option>
+            <option value='Other' <% if (logInfo.cooking_device === 'Other') { %>selected='selected'<% } %>>Other</option>
+          </select>
+          <div id='device-other-box' <% if (!logInfo.device_other) { %>class='hidden'<% } %> >
+              <label for='custom-cooking-device'> Device Name
+            <input type='text' placeholder='Custom' id='device-other-text' value='<%= logInfo.device_other %>'>
+            </label>
+          </div>
+        </label>
       </div>
       <div id='meat'>
-        <label for='meat'>Meat</label>
-        <select id='meat-type'>
-          <option value='Beef Brisket' <% if (logInfo.meat === 'Beef Brisket') { %>selected='selected'<% } %>>Beef Brisket</option>
-          <option value='Beef Ribs' <% if (logInfo.meat === 'Beef Ribs') { %>selected='selected'<% } %>>Beef Ribs</option>
-          <option value='Beef Tri-tip' <% if (logInfo.meat === 'Beef Tri-tip') { %>selected='selected'<% } %>>Beef Tri-tip</option>
-          <option value='Pork Ribs (baby backs)' <% if (logInfo.meat === 'Pork Ribs (baby backs)') { %>selected='selected'<% } %>>Pork Ribs (baby backs)</option>
-          <option value='Pork Ribs (spares)' <% if (logInfo.meat === 'Pork Ribs (spares)') { %>selected='selected'<% } %>>Pork Ribs (spares)</option>
-          <option value='Pork Shoulder' <% if (logInfo.meat === 'Pork Shoulder') { %>selected='selected'<% } %>>Pork Shoulder</option>
-          <option id='meat-other' value='Other' <% if (logInfo.meat === 'Other') { %>selected='selected'<% } %>>Other</option>
-        </select>
-        <input type='text' placeholder='Other meat' id='meat-other-text' <% if (!logInfo.meat_other) { %>class='hidden'<% } %> value='<%= logInfo.meat_other %>'>
-        <label for='meat-weight'>Weight</label>
-        <input type='text' name='meat-weight' id='weight' placeholder='5 lbs' value='<%= logInfo.weight %>'>
-        <label for='meat-notes'>Notes</label>
-        <input type='text' name='meat-notes' id='meat-notes' placeholder='Prime cut of meat' value='<%= logInfo.meat_notes %>'>
+        <label for='meat'>Meat
+          <select id='meat-type'>
+            <option value='Beef Brisket' <% if (logInfo.meat === 'Beef Brisket') { %>selected='selected'<% } %>>Beef Brisket</option>
+            <option value='Beef Ribs' <% if (logInfo.meat === 'Beef Ribs') { %>selected='selected'<% } %>>Beef Ribs</option>
+            <option value='Beef Tri-tip' <% if (logInfo.meat === 'Beef Tri-tip') { %>selected='selected'<% } %>>Beef Tri-tip</option>
+            <option value='Pork Ribs (baby backs)' <% if (logInfo.meat === 'Pork Ribs (baby backs)') { %>selected='selected'<% } %>>Pork Ribs (baby backs)</option>
+            <option value='Pork Ribs (spares)' <% if (logInfo.meat === 'Pork Ribs (spares)') { %>selected='selected'<% } %>>Pork Ribs (spares)</option>
+            <option value='Pork Shoulder' <% if (logInfo.meat === 'Pork Shoulder') { %>selected='selected'<% } %>>Pork Shoulder</option>
+            <option id='meat-other' value='Other' <% if (logInfo.meat === 'Other') { %>selected='selected'<% } %>>Other</option>
+          </select>
+          <input type='text' placeholder='Other meat' id='meat-other-text' <% if (!logInfo.meat_other) { %>class='hidden'<% } %> value='<%= logInfo.meat_other %>'>
+        </label>
+        <label for='meat-weight'>Weight
+          <input type='text' name='meat-weight' id='weight' placeholder='5 lbs' value='<%= logInfo.weight %>'>
+        </label>
+        <label for='meat-notes'>Meat Notes
+          <input type='text' name='meat-notes' id='meat-notes' placeholder='Prime cut of meat' value='<%= logInfo.meat_notes %>'>
+        </label>
       </div>
       <div id='cook-temperature'>
-        <label for='cook-temperature'>Cook Temperature</label>
-        <input id='temp-slider' type='range' min='100' max='500' step='5' value='<%= logInfo.cook_temperature %>' oninput='window.outputUpdate(value)'>
-        <output for='temp-slider' id='temp-slider-output'><%= logInfo.cook_temperature %></output>
+        <label for='cook-temperature'>Cooking Temp
+          <input id='temp-slider' type='range' min='100' max='500' step='5' value='<%= logInfo.cook_temperature %>' oninput='window.outputUpdate(value)'>
+          <output for='temp-slider' id='temp-slider-output'><%= logInfo.cook_temperature %></output>
+        </label>
       </div>
       <div id='estimated-time-box'>
-        <label for='estimated-time'>Estimated Time</label>
-        <input type='text' name='estimated-time' id='estimated-time' placeholder='10 hours' value='<%= logInfo.estimated_time %>'>
+        <label for='estimated-time'>Estimated Time
+          <input type='text' name='estimated-time' id='estimated-time' placeholder='10 hours' value='<%= logInfo.estimated_time %>'>
+        </label>
       </div>
       <div id='fuel-box'>
-        <label for='fuel'>Fuel</label>
-        <select id='fuel' value='<%= logInfo.fuel %>'>
-          <option value='Briquettes'>Briquettes</option>
-          <option value='lump'>Lump Charcoal</option>
-          <option value='Wood'>Wood</option>
-        </select>
-        <label for='fuel-brand'>Brand</label>
-        <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs' value='<%= logInfo.brand %>'>
+        <label for='fuel'>Fuel
+          <select id='fuel' value='<%= logInfo.fuel %>'>
+            <option value='Briquettes'>Briquettes</option>
+            <option value='lump'>Lump Charcoal</option>
+            <option value='Wood'>Wood</option>
+          </select>
+        </label>
+        <label for='fuel-brand'>Brand
+          <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs' value='<%= logInfo.brand %>'>
+        </label>
       </div>
       <div id='wood-box'>
-        <label for='wood'>Wood</label>
-        <select id='wood'>
-          <option value='Apple' <% if (logInfo.wood === 'Apple') { %>selected='selected'<% } %>>Apple</option>
-          <option value='Cherry' <% if (logInfo.wood === 'Cherry') { %>selected='selected'<% } %>>Cherry</option>
-          <option value='Hickory' <% if (logInfo.wood === 'Hickory') { %>selected='selected'<% } %>>Hickory</option>
-          <option value='Mesquite' <% if (logInfo.wood === 'Mesquite') { %>selected='selected'<% } %>>Mesquite</option>
-          <option value='Oak' <% if (logInfo.wood === 'Oak') { %>selected='selected'<% } %>>Oak</option>
-          <option value='Pecan' <% if (logInfo.wood === 'Pecan') { %>selected='selected'<% } %>>Pecan</option>
-          <option value='None' <% if (logInfo.wood === 'None') { %>selected='selected'<% } %>>None</option>  
-          <option id='wood-other' value='Other' <% if (logInfo.wood === 'Other') { %>selected='selected'<% } %>>Other</option>
-        </select>
-        <input type='text' placeholder='Other wood type' id='wood-other-text' <% if (!logInfo.wood_other) { %>class='hidden'<% } %> value='<%= logInfo.wood_other %>'>
+        <label for='wood'>Wood
+          <select id='wood'>
+            <option value='Apple' <% if (logInfo.wood === 'Apple') { %>selected='selected'<% } %>>Apple</option>
+            <option value='Cherry' <% if (logInfo.wood === 'Cherry') { %>selected='selected'<% } %>>Cherry</option>
+            <option value='Hickory' <% if (logInfo.wood === 'Hickory') { %>selected='selected'<% } %>>Hickory</option>
+            <option value='Mesquite' <% if (logInfo.wood === 'Mesquite') { %>selected='selected'<% } %>>Mesquite</option>
+            <option value='Oak' <% if (logInfo.wood === 'Oak') { %>selected='selected'<% } %>>Oak</option>
+            <option value='Pecan' <% if (logInfo.wood === 'Pecan') { %>selected='selected'<% } %>>Pecan</option>
+            <option value='None' <% if (logInfo.wood === 'None') { %>selected='selected'<% } %>>None</option>  
+            <option id='wood-other' value='Other' <% if (logInfo.wood === 'Other') { %>selected='selected'<% } %>>Other</option>
+          </select>
+          <input type='text' placeholder='Other wood type' id='wood-other-text' <% if (!logInfo.wood_other) { %>class='hidden'<% } %> value='<%= logInfo.wood_other %>'>
+        </label>
       </div>
       <div id='other-ingredients-box'>
-        <label for='other-ingredients'>Other Ingredients<label>
-        <textarea id='other-ingredients' placeholder='List them out here'><%= logInfo.other_ingredients %></textarea>
+        <label for='other-ingredients'>Other Ingredients</label>
+          <textarea id='other-ingredients' placeholder='List them out here'><%= logInfo.other_ingredients %></textarea>
       </div>
     </section>
     <section id='recipe-area'>

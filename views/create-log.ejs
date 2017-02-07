@@ -6,8 +6,8 @@
   <meta name='description' content='BBQ Tracker helps you manage cook sessions, recipes, and outcomes.'>
   <link rel='stylesheet' type='text/css' href='/css/main.css'>
   <link rel='stylesheet' type='text/css' href='/css/datepickr.css'>
-  <link rel="stylesheet" href="/css/font-awesome.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel='stylesheet' href='/css/font-awesome.css'>
+  <link href='https://fonts.googleapis.com/css?family=Architects+Daughter|Roboto+Slab' rel='stylesheet'>
   <title><%= title %></title>
 </head>
 <body id='log-body'>
@@ -16,69 +16,84 @@
     <h1><%= h1 %></h1>
     <section>
       <div id='date'>
-        <label for='date'>Date</label>
-        <input type='text' name='date' id='date-select'>
+        <label for='date'>Date
+          <input type='text' name='date' id='date-select'>
+        </label>
       </div>
       <div id='session-box'>
-        <label for='session-name'>Session Name</label>
-        <input type='text' id='session-name' placeholder='Brisket in May'>
+        <label for='session-name'>Session Name
+          <input type='text' id='session-name' placeholder='Brisket in May'>
+        </label>
       </div>
       <div id='bbq-cooker'>
-        <label for='cooking-device'>Cooking Device</label>
-        <select id='cooking-device'>
-          <% logOptions.device.forEach(function(device) { %>
-            <option value='<%= device %>'><%= device %></option>
-          <% }) %>
-          <option id='device-other' value='Other'>Other</option>
-        </select>
-        <input type='text' placeholder='My custom cooker' id='device-other-text' class='hidden'>
+        <label for='cooking-device'>Cooking Device
+          <select id='cooking-device'>
+            <% logOptions.device.forEach(function(device) { %>
+              <option value='<%= device %>'><%= device %></option>
+            <% }) %>
+            <option id='device-other' value='Other'>Other</option>
+          </select>
+        <div id='device-other-box' class='hidden'>
+          <label for='custom-cooking-device'> Device Name
+            <input type='text' placeholder='Custom' id='device-other-text'>
+          </label>
+          </div>
+        </label>
       </div>
       <div id='meat'>
-        <label for='meat'>Meat</label>
-        <select id='meat-type'>
-          <% logOptions.meat.forEach(function(meatType) { %>
-            <option value='<%= meatType %>'><%= meatType %></option>
-          <% }) %>
-          <option id='meat-other' value='Other'>Other</option>
-        </select>
-        <input type='text' placeholder='Other meat type' id='meat-other-text' class='hidden'>
-        <label for='meat-weight'>Weight</label>
-        <input type='text' name='meat-weight' id='weight' placeholder='5 lbs'>
-        <label for='meat-notes'>Notes</label>
-        <input type='text' name='meat-notes' id='meat-notes' placeholder='Prime cut of meat'>
+        <label for='meat'>Meat
+          <select id='meat-type'>
+            <% logOptions.meat.forEach(function(meatType) { %>
+              <option value='<%= meatType %>'><%= meatType %></option>
+            <% }) %>
+            <option id='meat-other' value='Other'>Other</option>
+          </select>
+          <input type='text' placeholder='Other meat type' id='meat-other-text' class='hidden'>
+        </label>
+        <label for='meat-weight'>Weight
+          <input type='text' name='meat-weight' id='weight' placeholder='5 lbs'>
+        </label>
+        <label for='meat-notes' id='meat-notes-label'>Meat Notes
+          <input type='text' name='meat-notes' id='meat-notes' placeholder='Prime cut of meat'>
+        </label>
       </div>
       <div id='cook-temperature'>
-        <label for='cook-temperature'>Cook Temperature</label>
-        <input id='temp-slider' type='range' min='100' max='500' step='5' value='225' oninput='window.outputUpdate(value)'>
-        <output for='temp-slider' id='temp-slider-output'>225</output>
+        <label for='cook-temperature'>Cooking Temp
+          <input id='temp-slider' type='range' min='100' max='500' step='5' value='225' oninput='window.outputUpdate(value)'>
+          <output for='temp-slider' id='temp-slider-output'>225</output>
+        </label>
       </div>
       <div id='estimated-time-box'>
-        <label for='estimated-time'>Estimated Time</label>
-        <input type='text' name='estimated-time' id='estimated-time' placeholder='10 hours'>
+        <label for='estimated-time'>Estimated Time
+          <input type='text' name='estimated-time' id='estimated-time' placeholder='10 hours'>
+        </label>
       </div>
       <div id='fuel-box'>
-        <label for='fuel'>Fuel</label>
-        <select id='fuel'>
-          <% logOptions.fuel.forEach(function(fuelType) { %>
-            <option value='<%= fuelType %>'><%= fuelType %></option>
-          <% }) %>
-        </select>
-        <label for='fuel-brand'>Brand</label>
-        <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs'>
+        <label for='fuel'>Fuel
+          <select id='fuel'>
+            <% logOptions.fuel.forEach(function(fuelType) { %>
+              <option value='<%= fuelType %>'><%= fuelType %></option>
+            <% }) %>
+          </select>
+        </label>
+        <label for='fuel-brand'>Brand
+          <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs'>
+        </label>
       </div>
       <div id='wood-box'>
-        <label for='wood'>Wood</label>
-        <select id='wood'>
-          <% logOptions.wood.forEach(function(woodType) { %>
-            <option value='<%= woodType %>'><%= woodType %></option>
-          <% }) %>
-          <option id='wood-other' value='Other'>Other</option>
-        </select>
-        <input type='text' placeholder='Other wood type' id='wood-other-text' class='hidden'>
-        <div id='other-ingredients-box'>
-          <label for='other-ingredients'>Other Ingredients<label>
-          <textarea id='other-ingredients' placeholder='List them out here'></textarea>
-        </div>
+        <label for='wood'>Wood
+          <select id='wood'>
+            <% logOptions.wood.forEach(function(woodType) { %>
+              <option value='<%= woodType %>'><%= woodType %></option>
+            <% }) %>
+            <option id='wood-other' value='Other'>Other</option>
+          </select>
+          <input type='text' placeholder='Other wood type' id='wood-other-text' class='hidden'>
+        </label>
+      </div>
+      <div id='other-ingredients-box'>
+        <label for='other-ingredients' id='other-ingredients-label'>Other Ingredients</label>
+        <textarea id='other-ingredients' placeholder='List them out here'></textarea>
       </div>
     </section>
     <section id='recipe-area'>

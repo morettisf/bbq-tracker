@@ -9,7 +9,7 @@ module.exports = (app) => {
 var logOptions = {
   device: ['Big Green Egg', 'Kettle Grill', 'Oven', 'Weber Smokey Mountain'],
   meat: ['Beef Brisket', 'Beef Ribs', 'Beef Tri-tip', 'Pork Ribs (baby backs)', 'Pork Ribs (spares)', 'Pork Shoulder'],
-  fuel: ['Briquettes', 'Lump Charcoal', 'Wood'],
+  fuel: ['Briquettes', 'Lump Charcoal', 'Pellets', 'Wood'],
   wood: ['Apple', 'Cherry', 'Hickory', 'Mesquite', 'Oak', 'Pecan', 'None']
 }
 
