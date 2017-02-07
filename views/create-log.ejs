@@ -31,7 +31,6 @@
             <% logOptions.device.forEach(function(device) { %>
               <option value='<%= device %>'><%= device %></option>
             <% }) %>
-            <option id='device-other' value='Other'>Other</option>
           </select>
         <div id='device-other-box' class='hidden'>
           <label for='custom-cooking-device'> Device Name
@@ -46,7 +45,6 @@
             <% logOptions.meat.forEach(function(meatType) { %>
               <option value='<%= meatType %>'><%= meatType %></option>
             <% }) %>
-            <option id='meat-other' value='Other'>Other</option>
           </select>
           <input type='text' placeholder='Other meat type' id='meat-other-text' class='hidden'>
         </label>

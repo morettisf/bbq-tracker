@@ -38,30 +38,46 @@
       <div id='bbq-cooker'>
         <label for='cooking-device'>Cooking Device
           <select id='cooking-device'>
-            <option value='Big Green Egg' <% if (logInfo.cooking_device === 'Big Green Egg') { %>selected='selected'<% } %>>Big Green Egg</option>
-            <option value='Kettle Grill' <% if (logInfo.cooking_device === 'Kettle Grill') { %>selected='selected'<% } %>>Kettle Grill</option>
-            <option value='Oven' <% if (logInfo.cooking_device === 'Oven') { %>selected='selected'<% } %>>Oven</option>
-            <option value='Weber Smokey Mountain' <% if (logInfo.cooking_device === 'Weber Smokey Mountain') { %>selected='selected'<% } %>>Weber Smokey Mountain</option>
-            <option value='Other' <% if (logInfo.cooking_device === 'Other') { %>selected='selected'<% } %>>Other</option>
+            <% logOptions.device.forEach(function(device) { %>
+              <option value='<%= device %>' 
+                  <% if (logInfo.cooking_device === device) { %> 
+                     selected='selected'
+                  <% } %>
+                    ><%= device %>
+              </option>
+            <% }) %>
           </select>
-          <div id='device-other-box' <% if (!logInfo.device_other) { %>class='hidden'<% } %> >
-              <label for='custom-cooking-device'> Device Name
-            <input type='text' placeholder='Custom' id='device-other-text' value='<%= logInfo.device_other %>'>
-            </label>
-          </div>
+        </label>
+      </div>
+      <div id='device-other-box' <% if (!logInfo.device_other) { %> class='hidden'<% } %> >
+        <label for='custom-cooking-device'> Device Name
+          <input type='text' placeholder='Custom' id='device-other-text' value='<%= logInfo.device_other %>'>
         </label>
       </div>
       <div id='meat'>
         <label for='meat'>Meat
           <select id='meat-type'>
-            <option value='Beef Brisket' <% if (logInfo.meat === 'Beef Brisket') { %>selected='selected'<% } %>>Beef Brisket</option>
+
+            <% logOptions.meat.forEach(function(meatType) { %>
+              <option value='<%= meatType %>' 
+                  <% if (logInfo.meat === meatType) { %> 
+                     selected='selected'
+                  <% } %>
+                    ><%= meatType %>
+              </option>
+            <% }) %>
+
+
+
+<!--             <option value='Beef Brisket' <% if (logInfo.meat === 'Beef Brisket') { %>selected='selected'<% } %>>Beef Brisket</option>
             <option value='Beef Ribs' <% if (logInfo.meat === 'Beef Ribs') { %>selected='selected'<% } %>>Beef Ribs</option>
             <option value='Beef Tri-tip' <% if (logInfo.meat === 'Beef Tri-tip') { %>selected='selected'<% } %>>Beef Tri-tip</option>
             <option value='Pork Ribs (baby backs)' <% if (logInfo.meat === 'Pork Ribs (baby backs)') { %>selected='selected'<% } %>>Pork Ribs (baby backs)</option>
             <option value='Pork Ribs (spares)' <% if (logInfo.meat === 'Pork Ribs (spares)') { %>selected='selected'<% } %>>Pork Ribs (spares)</option>
             <option value='Pork Shoulder' <% if (logInfo.meat === 'Pork Shoulder') { %>selected='selected'<% } %>>Pork Shoulder</option>
             <option id='meat-other' value='Other' <% if (logInfo.meat === 'Other') { %>selected='selected'<% } %>>Other</option>
-          </select>
+ -->          </select>
+ 
           <input type='text' placeholder='Other meat' id='meat-other-text' <% if (!logInfo.meat_other) { %>class='hidden'<% } %> value='<%= logInfo.meat_other %>'>
         </label>
         <label for='meat-weight'>Weight

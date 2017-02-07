@@ -7,10 +7,10 @@ const moment = require('moment')
 module.exports = (app) => {
 
 var logOptions = {
-  device: ['Big Green Egg', 'Kettle Grill', 'Oven', 'Weber Smokey Mountain'],
-  meat: ['Beef Brisket', 'Beef Ribs', 'Beef Tri-tip', 'Pork Ribs (baby backs)', 'Pork Ribs (spares)', 'Pork Shoulder'],
-  fuel: ['Briquettes', 'Lump Charcoal', 'Pellets', 'Wood'],
-  wood: ['Apple', 'Cherry', 'Hickory', 'Mesquite', 'Oak', 'Pecan', 'None']
+  device: ['Select device ---', 'Big Green Egg', 'Kettle Grill', 'Oven', 'Weber Smokey Mountain', 'Other'],
+  meat: ['Select meat ---', 'Beef Brisket', 'Beef Ribs', 'Beef Tri-tip', 'Pork Ribs (baby backs)', 'Pork Ribs (spares)', 'Pork Shoulder', 'Other'],
+  fuel: ['Select fuel ---', 'Briquettes', 'Lump Charcoal', 'Pellets', 'Wood'],
+  wood: ['Select wood ---', 'Apple', 'Cherry', 'Hickory', 'Mesquite', 'Oak', 'Pecan', 'None', 'Other']
 }
 
   app.use(passport.initialize())
@@ -491,7 +491,7 @@ var logOptions = {
       var username = user.username
       var avatar = user.avatar
 
-      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', h1: 'Saved BBQ Log', logInfo: logInfo, user: req.session.passport, username: username, avatar: avatar, moment: moment })
+      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', h1: 'Saved BBQ Log', logOptions: logOptions, logInfo: logInfo, user: req.session.passport, username: username, avatar: avatar, moment: moment })
 
     })
 
@@ -565,7 +565,7 @@ var logOptions = {
           sameUserAuthor = false
         }
 
-        res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', h1: 'Public BBQ Log', logInfo: selectedLog, user: req.session.passport, username: username, avatar: avatar, logAvatar: logAvatar, moment: moment, button: votingStatus, sameUserAuthor: sameUserAuthor })
+        res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', h1: 'Public BBQ Log', logOptions: logOptions, logInfo: selectedLog, user: req.session.passport, username: username, avatar: avatar, logAvatar: logAvatar, moment: moment, button: votingStatus, sameUserAuthor: sameUserAuthor })
     })
   })
 

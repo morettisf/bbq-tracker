@@ -48,6 +48,15 @@ video {
   margin-top: 60px;
   margin-bottom: 30px;
   overflow: hidden;
+  color: white;
+}
+
+#home-main th {
+  font-weight: bolder;
+}
+
+#home-main a {
+  color: inherit;
 }
 
 #home-main h2 {
@@ -158,7 +167,7 @@ table img, #public-rating img {
 }
 
 #username-menu {
-
+/*  margin-top: -50px; */
 }
 
 /*#username-menu {
@@ -257,7 +266,6 @@ input[type='radio'] {
 
 textarea {
   -webkit-appearance: none;
-  resize: none;
 }
 
 select {
@@ -614,37 +622,55 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 }
 
 .pop-update {
-  width: 300px;
-  height: 150px;
-  position: absolute;
+  width: 200px;
+  height: 75px;
+  position: fixed;
   z-index: 100;
-  top: 50%;
+  top: 40%;
   left: 50%;
-  margin-top: -150px;
-  margin-left: -150px;
-  background-color: grey;
+  margin-left: -100px;
+  background-color: #ffec80;
+  text-align: center;
+  line-height: 10px;
+  font-size: 2em;
+  color: black;
+  border: 1px solid black;
 }
 
 .pop-del {
-  width: 400px;
-  height: 300px;
-  position: absolute;
+  width: 250px;
+  height: 175px;
+  position: fixed;
   z-index: 100;
-  top: 50%;
+  top: 30%;
   left: 50%;
-  margin-top: -150px;
-  margin-left: -200px;
+  margin-left: -125px;
   background-color: grey;
+  background-color: #ffec80;
+  border: 1px solid black;
 }
 
 .pop-del p {
   text-align: center;
-  font-size: 2em;
+  font-size: 1em;
+  color: black;
 }
 
-.pop-del-options {
-  width: 200px;
+#pop-del-options {
+  width: 250px;
   position: absolute;
   left: 50%;
-  margin-left: -100px;
+  margin-left: -125px;
+}
+
+#pop-del-options button {
+  width: 60px;
+}
+
+#del-yes {
+  margin-left: 50px;
+}
+
+#del-no {
+  margin-left: 30px;
 }

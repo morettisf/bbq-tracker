@@ -1,13 +1,13 @@
 'use strict'
 
 // logged in account menu drop down
-var dropMenu = document.querySelector('#username-menu')
-if (dropMenu) {
-  dropMenu.addEventListener('click', function() {
-    var options = document.querySelector('#drop-down-options')
-    options.classList.toggle('hidden')
-  })
-}
+// var dropMenu = document.querySelector('#username-menu')
+// if (dropMenu) {
+//   dropMenu.addEventListener('click', function() {
+//     var options = document.querySelector('#drop-down-options')
+//     options.classList.toggle('hidden')
+//   })
+// }
 
 // displaying other device textbox
 var deviceList = document.querySelector('#cooking-device')
@@ -636,7 +636,7 @@ var deleteAccountSubmit = document.querySelector('#delete-account-submit')
 if (deleteAccountSubmit) {
   deleteAccountSubmit.addEventListener('click', function() {
     var div = document.createElement('div')
-    var popHTML = "<p>Confirming will delete your profile. Are you sure?</p><button id='del-yes'>Yes</button><button class='del-no'>No</button></div>"
+    var popHTML = "<p>Confirming will delete your profile. Are you sure?</p><div id='pop-del-options'><button id='del-yes'>Yes</button><button id='del-no'>No</button></div>"
 
     div.classList.add('pop-del')
     div.innerHTML = popHTML
