@@ -16,7 +16,7 @@ var logOptions = {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  app.get('/', function(req, res, next) {
+  app.get('/', function(req, res) {
 
     var userId
     var username
@@ -77,12 +77,14 @@ var logOptions = {
   })
 
 
-  app.get('/register', function(req, res, next) {
+  app.get('/register', function(req, res) {
     res.render('register', { title: 'Register | BBQ Tracker', user: req.session.passport, errors: null, username: null, avatar: null })
   })
 
 
-  app.post('/register', function(req, res, next) {
+  app.post('/register', function(req, res) {
+    // app.post('/foo', require('./routes/foo'))
+    // module.exports = function(req, res) {} INCLUDE DEPENDENCIES
 
     var userInfo = { username: req.body.username.toLowerCase(), email: req.body.email, password: req.body.password, avatar: '../images/cow.svg' }
     var resInfo = { username: req.body.username.toLowerCase(), email: req.body.email, password: req.body.password }
@@ -181,12 +183,12 @@ var logOptions = {
   })
 
 
-  app.get('/sign-in', function(req, res, next) {
+  app.get('/sign-in', function(req, res) {
     res.render('sign-in', { title: 'Sign In | BBQ Tracker', user: req.session.passport, errors: null, message: req.session.message, username: null, avatar: null })
   })
 
 
-  app.post('/sign-in', function(req, res, next) {
+  app.post('/sign-in', function(req, res) {
     passport.authenticate('local-sign-in', function(err, user, info) {
 
       if (err) throw err
@@ -204,10 +206,10 @@ var logOptions = {
           return res.redirect('log-history')
         })
       }
-    })(req, res, next)
+    })(req, res)
   })
 
-  app.get('/account', isLoggedIn, function(req, res, next) {
+  app.get('/account', isLoggedIn, function(req, res) {
     var userId = req.session.passport.user
     var username
     var avatar
@@ -234,7 +236,7 @@ var logOptions = {
 
   })
 
-  app.put('/account/username', function(req, res, next) {
+  app.put('/account/username', function(req, res) {
     var userId = req.session.passport.user
     var userNameReq = req.body.username
     var username
@@ -268,7 +270,7 @@ var logOptions = {
 
   })
 
-  app.put('/account/avatar', function(req, res, next) {
+  app.put('/account/avatar', function(req, res) {
     var userId = req.session.passport.user
     var avatarReq = req.body.avatar
 
@@ -286,7 +288,7 @@ var logOptions = {
 
   })
 
-  app.put('/account/email', function(req, res, next) {
+  app.put('/account/email', function(req, res) {
     var userId = req.session.passport.user
     var emailReq = req.body.email
     var email
@@ -325,7 +327,7 @@ var logOptions = {
 
   })
 
-  app.put('/account/password', function(req, res, next) {
+  app.put('/account/password', function(req, res) {
     var userId = req.session.passport.user
     var passwordReq = req.body.password
     var password2Req = req.body.password2
@@ -375,7 +377,7 @@ var logOptions = {
 
   })
 
-  app.delete('/account', function(req, res, next) {
+  app.delete('/account', function(req, res) {
     var userId = req.session.passport.user
 
     User.findOne({ _id: userId }, function(err, user) {
@@ -387,7 +389,7 @@ var logOptions = {
   })
 
 
-  app.get('/create-log', isLoggedIn, function(req, res, next) {
+  app.get('/create-log', isLoggedIn, function(req, res) {
     var userId = req.session.passport.user
 
     User.findOne({ _id: userId }, function(err, user) {
@@ -404,7 +406,7 @@ var logOptions = {
   })
 
 
-  app.post('/create-log', function(req, res, next) {
+  app.post('/create-log', function(req, res) {
 
     var info = req.body
     var userId = req.session.passport.user
@@ -422,7 +424,7 @@ var logOptions = {
   })
 
 
-  app.put('/view-log/:log', function(req, res, next) {
+  app.put('/view-log/:log', function(req, res) {
     var userId = req.session.passport.user
     var logId = req.params.log
     var info = req.body
@@ -472,7 +474,7 @@ var logOptions = {
   })
 
 
-  app.get('/view-log/:log', isLoggedIn, function(req, res, next) {
+  app.get('/view-log/:log', isLoggedIn, function(req, res) {
     var userId = req.session.passport.user
     var logId = req.params.log
 
@@ -482,23 +484,27 @@ var logOptions = {
       
       if (err) throw err
 
-      user.logs.forEach(function(log) {
+      var ownLog = user.logs.some(function(log) {
         if (log._id.toString() === logId) {
           logInfo = log
+          return true
         }
       })
+      
+      if (ownLog) {
+          var username = user.username
+          var avatar = user.avatar
+          return res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', h1: 'Saved BBQ Log', logOptions: logOptions, logInfo: logInfo, user: req.session.passport, username: username, avatar: avatar, moment: moment })
+        }
 
-      var username = user.username
-      var avatar = user.avatar
-
-      res.render('view-log', { title: logInfo.session_name + ' | BBQ Tracker', h1: 'Saved BBQ Log', logOptions: logOptions, logInfo: logInfo, user: req.session.passport, username: username, avatar: avatar, moment: moment })
+      res.status(403).redirect('/')
 
     })
 
   })
 
 
-  app.get('/public-log/:log', function(req, res, next) {
+  app.get('/public-log/:log', function(req, res) {
   
     var logId = req.params.log
     var userId
@@ -538,7 +544,11 @@ var logOptions = {
     User.find({ 'logs._id': logId })
       .exec(function (err, user) {
 
-        if (err) throw err
+        if (err) {
+          res.render('not-found', { title: 'Page Not Found | BBQ Tracker', user: req.session.passport, username: username, avatar: avatar })
+        }
+
+        else {
 
         logAvatar = user[0].avatar
         authorId = user[0]._id
@@ -566,12 +576,15 @@ var logOptions = {
         }
 
         res.render('view-public-log', { title: selectedLog.session_name + ' | BBQ Tracker', h1: 'Public BBQ Log', logOptions: logOptions, logInfo: selectedLog, user: req.session.passport, username: username, avatar: avatar, logAvatar: logAvatar, moment: moment, button: votingStatus, sameUserAuthor: sameUserAuthor })
+      }
+    
     })
+
   })
 
 
 // ***** VOTING - ADDING VOTES *****
-  app.post('/public-log', function(req, res, next) {
+  app.post('/public-log', function(req, res) {
     var author = req.body.author
     var logId = req.body.logId
     var voter = { voter_id: req.session.passport.user }
@@ -607,7 +620,7 @@ var logOptions = {
   })
 
 
-  app.get('/log-history', isLoggedIn, function(req, res, next) {
+  app.get('/log-history', isLoggedIn, function(req, res) {
 
     var userId = req.session.passport.user
 
@@ -629,7 +642,7 @@ var logOptions = {
   })
 
 
-  app.post('/log-history', function(req, res, next) {
+  app.post('/log-history', function(req, res) {
 
     var reqLogs = req.body
     var userId = req.session.passport.user
@@ -697,7 +710,7 @@ var logOptions = {
   })
 
 
-  app.put('/log-history', function(req, res, next) {
+  app.put('/log-history', function(req, res) {
 
     var reqLogs = req.body
     var userId = req.session.passport.user
@@ -730,7 +743,7 @@ var logOptions = {
   })
 
 
-  app.delete('/log-history', function(req, res, next) {
+  app.delete('/log-history', function(req, res) {
     var reqLogs = req.body
     
     var userId = req.session.passport.user
@@ -791,6 +804,38 @@ var logOptions = {
     })
   })
 
+  app.use('*', function(req, res) {
+
+    var userId
+    var username
+    var avatar
+
+    // check if this is a logged in user or not
+    if (req.session.passport) {
+      var userId = req.session.passport.user
+    }
+    else {
+      var userId = null
+    }
+
+    // grab their username for the nav if logged in
+    User.findOne({ _id: userId }, function(err, user) {
+
+      if (err) throw err
+
+      if (user) {
+        username = user.username
+        avatar = user.avatar
+      }
+
+      else {
+        username = null
+      }
+
+    res.render('not-found', { title: 'Page Not Found | BBQ Tracker', user: req.session.passport, username: username, avatar: avatar })
+    
+    })
+  })
 
 }
 
@@ -820,7 +865,6 @@ passport.use('local-sign-in', new LocalStrategy({
           }
           else {
             return done (null, false, { message: 'Incorrect password, try again'})
-//            return done(err)
           }
         })
 
@@ -841,7 +885,7 @@ passport.deserializeUser(function(id, done) {
   })
 })
 
-function isLoggedIn(req, res, next) {
+function isLoggedIn(req, res) {
   if (req.isAuthenticated())
     return next()
   else {

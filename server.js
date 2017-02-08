@@ -29,10 +29,6 @@ app.use(session({
   cookie: { secure: false }
 }))
 
-app.use((err, req, res, next) => { // middleware to handle errors. "Next" is a function to pass to next middleware in chain
-  res.status(422).send({ error: err.message })
-})
-
 routes(app)
 
 app.listen(process.env.PORT || 8080)

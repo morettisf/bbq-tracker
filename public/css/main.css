@@ -23,6 +23,7 @@ video {
   left: 0;
   height: 100%;
   background-color: black;
+  margin-top: -10px;
 }
 
 #updated-th, #updated-td, #rating-th, #rating-td {
@@ -40,14 +41,19 @@ video {
 
 #home-body h1 {
   text-align: center;
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+  margin-bottom: 14px;
 }
 
 #home-main {
   width: 100%;
   height: 100%;
-  margin-top: 60px;
+  margin-top: 70px;
   margin-bottom: 30px;
-  overflow: hidden;
   color: white;
 }
 
@@ -56,35 +62,81 @@ video {
 }
 
 #home-main a {
-  color: inherit;
+  color: #ffec80;
+  text-decoration: none;
 }
 
 #home-main h2 {
   text-align: center;
   margin-top: 15px;
   margin-bottom: 5px;
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
 }
 
-#home-main table {
+/*#home-main table {
   background-color: rgba(99, 115, 122, 0.7);
-}
+}*/
 
 table img, #public-rating img {
   width: 116px;
   height: 22.5px;
 }
 
-#public-logs-updated {
+#public-logs-updated, #top-voted-logs {
   height: 200px;
-  margin: 0 20px;
+  margin: 0 20px 20px;
   overflow: scroll;
+  border: 1px solid black;
+  background-color: rgba(99, 115, 122, 0.7);
+  overflow-x: hidden;
 }
 
-#top-voted-logs {
-  height: 200px;
-  margin: 0 20px;
-  overflow: scroll;
+#public-logs-updated::-webkit-scrollbar {
+    width: 8px;
 }
+
+/* Track */
+#public-logs-updated::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+#public-logs-updated::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: white; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+#top-voted-logs::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+#top-voted-logs::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+#top-voted-logs::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: white; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+/*
+#public-logs-updated::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255,0,0,0.4); 
+}*/
 
 /* Navigation Menu */
 
@@ -212,14 +264,14 @@ table img, #public-rating img {
   text-decoration: none;
 }*/
 
-/* Sitewide */
+/***** Logs *****/
 
 #profile-box img {
   width: 75px;
   height: 75px;
 }
 
-#log-main, #about-main, #account-main {
+#log-main, #about-main, #account-main, #reg-main, #sign-in-main {
   position: relative;
   overflow: hidden;
   color: black;
@@ -290,8 +342,7 @@ ol {
   padding: 0;
 }
 
-
-
+/***** Temperature Range Slider *****/
 
 input[type=range] {
   -webkit-appearance: none;
@@ -379,15 +430,7 @@ input[type=range]:focus::-ms-fill-upper {
   background: #6e8088;
 }
 
-
-
-
-
-
-
-
-
-
+/***** End Temperature Range Slider *****/
 
 
 #date-select {
@@ -409,10 +452,6 @@ input[type=range]:focus::-ms-fill-upper {
 #other-ingredients {
   width: 270px;
   height: 60px;
-}
-
-#meat-notes-label {
-
 }
 
 .step-box {
@@ -491,8 +530,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 #vote-count-box {
   height: 127px;
-  width: 50px;
-  margin-left: 5px;
+  width: 40px;
   margin-top: 16px;
   vertical-align: top;
   float: right;
@@ -571,6 +609,10 @@ td img {
   width: 93px;
 }
 
+#log-action-btn {
+  margin-left: 10px;
+}
+
 /***** Log tables *****/
 
 table  {
@@ -637,7 +679,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   border: 1px solid black;
 }
 
-.pop-del {
+#pop-del {
   width: 250px;
   height: 175px;
   position: fixed;
@@ -650,7 +692,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   border: 1px solid black;
 }
 
-.pop-del p {
+#pop-del p {
   text-align: center;
   font-size: 1em;
   color: black;
@@ -674,3 +716,71 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 #del-no {
   margin-left: 30px;
 }
+
+/***** Register Page *****/
+
+#reg-main h1, #sign-in-main h1 {
+  text-align: center;
+}
+
+#register form, #sign-in form {
+  margin: 0 auto; 
+  width: 75%;
+  text-align: center;
+}
+
+#register input, #sign-in input {
+  width: 100%;
+  -webkit-appearance: none;
+}
+
+#reg-btn, #sign-in-btn {
+  font-family: 'Architects Daughter', cursive;
+  font-size: 1.2em;
+  border: solid black 1px;
+  padding: 5px 10px;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  background-color: #63737A;
+  color: white;
+  width: 100px !important;
+  margin: 20px auto;
+}
+
+/***** Page Not Found *****/
+
+#not-found-main {
+  background-image: url('../images/bbq-tracker-cow.png');
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+  height: 100%;
+}
+
+#not-found-main h1 {
+  margin-top: 80px;
+  text-align: center;
+}
+
+/***** Messages / Errors *****/
+
+.message {
+  margin: 6px;
+  background-color: #99ff99;
+  border-radius: 6px;
+  padding: 6px;
+  text-align: center;
+  border: solid black 1px;
+}
+
+.error {
+  margin: 6px;
+  background-color: #ff4d4d;
+  border-radius: 6px;
+  padding: 6px;
+  text-align: center;
+  border: solid black 1px;
+}
+

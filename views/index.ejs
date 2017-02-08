@@ -17,63 +17,67 @@
   </header>
   <main id='home-main'>
     <h1>Public Logs</h1>
-    <h2>Latest Updates</h2>
     <section id='public-logs-updated'>
-      <table>
-        <tr>
-          <th>Username</th><th>Session Name</th><th id='updated-th'>Updated</th><th>Meat</th><th id='rating-th'>User's Rating</th>
-        </tr>
-        <% if (updated20) { %>
-          <% updated20.forEach(function(log) { %>
-            <tr id=<%= log._id %>>
-              <td><%= log.username %></td>
-              <td><a href='/public-log/<%= log._id %>'>
-                <% if (log.session_name === '') { %>
-                  Unnamed Session
-                <% } %>
-                <%= log.session_name %></a>
-              </td>
-              <td id='updated-td'>
-                <% if (log.updated) { %>
-                  <%= moment(log.updated).format('MMMM Do YYYY') %>
-                <% } %>
-              </td>
-              <td><%= log.meat %></td>
-              <td id='rating-td'>
-                <% if (log.rating === 5) { %><img src='../images/5.gif' alt='5 Stars'><% } %>
-                <% if (log.rating === 4) { %><img src='../images/4.gif' alt='4 Stars'><% } %>
-                <% if (log.rating === 3) { %><img src='../images/3.gif' alt='3 Stars'><% } %>
-                <% if (log.rating === 2) { %><img src='../images/2.gif' alt='2 Stars'><% } %>
-                <% if (log.rating === 1) { %><img src='../images/1.gif' alt='1 Stars'><% } %>
-                <% if (log.rating === 0) { %><img src='../images/0.gif' alt='0 Stars'><% } %>
-              </td>
-            </tr>
-          <% }) %>
-        <% } %>
-      </table>
+      <div id='updates-table'>
+        <h2>Latest Updates</h2>
+        <table>
+          <tr>
+            <th>Username</th><th>Session Name</th><th id='updated-th'>Updated</th><th>Meat</th><th id='rating-th'>User's Rating</th>
+          </tr>
+          <% if (updated20) { %>
+            <% updated20.forEach(function(log) { %>
+              <tr id=<%= log._id %>>
+                <td><%= log.username %></td>
+                <td><a href='/public-log/<%= log._id %>'>
+                  <% if (log.session_name === '') { %>
+                    Unnamed Session
+                  <% } %>
+                  <%= log.session_name %></a>
+                </td>
+                <td id='updated-td'>
+                  <% if (log.updated) { %>
+                    <%= moment(log.updated).format('MMMM Do YYYY') %>
+                  <% } %>
+                </td>
+                <td><%= log.meat %></td>
+                <td id='rating-td'>
+                  <% if (log.rating === 5) { %><img src='../images/5.gif' alt='5 Stars'><% } %>
+                  <% if (log.rating === 4) { %><img src='../images/4.gif' alt='4 Stars'><% } %>
+                  <% if (log.rating === 3) { %><img src='../images/3.gif' alt='3 Stars'><% } %>
+                  <% if (log.rating === 2) { %><img src='../images/2.gif' alt='2 Stars'><% } %>
+                  <% if (log.rating === 1) { %><img src='../images/1.gif' alt='1 Stars'><% } %>
+                  <% if (log.rating === 0) { %><img src='../images/0.gif' alt='0 Stars'><% } %>
+                </td>
+              </tr>
+            <% }) %>
+          <% } %>
+        </table>
+        </div>
     </section>
-    <h2>Top Pit Hits</h2>
     <section id='top-voted-logs'>
-      <table>
-        <tr>
-          <th>Username</th><th>Session Name</th><th id='vote-meat-th'>Meat</th><th>Pit Hits</th>
-        </tr>
-        <% if (topVoted20) { %>
-          <% topVoted20.forEach(function(log) { %>
-            <tr id=<%= log._id %>>
-              <td><%= log.username %></td>
-              <td><a href='/public-log/<%= log._id %>'>
-                <% if (log.session_name === '') { %>
-                  Unnamed Session
-                <% } %>
-                <%= log.session_name %></a>
-              </td>
-              <td id='vote-meat-td'><%= log.meat %></td>
-              <td><%= log.votes %></td>
-            </tr>
-          <% }) %>
-        <% } %>
-      </table>
+      <div id='votes-table'>
+        <h2>Top Pit Hits</h2>
+        <table>
+          <tr>
+            <th>Username</th><th>Session Name</th><th id='vote-meat-th'>Meat</th><th>Pit Hits</th>
+          </tr>
+          <% if (topVoted20) { %>
+            <% topVoted20.forEach(function(log) { %>
+              <tr id=<%= log._id %>>
+                <td><%= log.username %></td>
+                <td><a href='/public-log/<%= log._id %>'>
+                  <% if (log.session_name === '') { %>
+                    Unnamed Session
+                  <% } %>
+                  <%= log.session_name %></a>
+                </td>
+                <td id='vote-meat-td'><%= log.meat %></td>
+                <td><%= log.votes %></td>
+              </tr>
+            <% }) %>
+          <% } %>
+        </table>
+      </div>
     </section>
   </main>
   <script src='js/bundle.js'></script>

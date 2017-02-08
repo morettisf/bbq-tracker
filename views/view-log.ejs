@@ -57,7 +57,6 @@
       <div id='meat'>
         <label for='meat'>Meat
           <select id='meat-type'>
-
             <% logOptions.meat.forEach(function(meatType) { %>
               <option value='<%= meatType %>' 
                   <% if (logInfo.meat === meatType) { %> 
@@ -66,19 +65,8 @@
                     ><%= meatType %>
               </option>
             <% }) %>
-
-
-
-<!--             <option value='Beef Brisket' <% if (logInfo.meat === 'Beef Brisket') { %>selected='selected'<% } %>>Beef Brisket</option>
-            <option value='Beef Ribs' <% if (logInfo.meat === 'Beef Ribs') { %>selected='selected'<% } %>>Beef Ribs</option>
-            <option value='Beef Tri-tip' <% if (logInfo.meat === 'Beef Tri-tip') { %>selected='selected'<% } %>>Beef Tri-tip</option>
-            <option value='Pork Ribs (baby backs)' <% if (logInfo.meat === 'Pork Ribs (baby backs)') { %>selected='selected'<% } %>>Pork Ribs (baby backs)</option>
-            <option value='Pork Ribs (spares)' <% if (logInfo.meat === 'Pork Ribs (spares)') { %>selected='selected'<% } %>>Pork Ribs (spares)</option>
-            <option value='Pork Shoulder' <% if (logInfo.meat === 'Pork Shoulder') { %>selected='selected'<% } %>>Pork Shoulder</option>
-            <option id='meat-other' value='Other' <% if (logInfo.meat === 'Other') { %>selected='selected'<% } %>>Other</option>
- -->          </select>
- 
-          <input type='text' placeholder='Other meat' id='meat-other-text' <% if (!logInfo.meat_other) { %>class='hidden'<% } %> value='<%= logInfo.meat_other %>'>
+         </select>
+        <input type='text' placeholder='Other meat' id='meat-other-text' <% if (!logInfo.meat_other) { %> class='hidden'<% } %> value='<%= logInfo.meat_other %>'>
         </label>
         <label for='meat-weight'>Weight
           <input type='text' name='meat-weight' id='weight' placeholder='5 lbs' value='<%= logInfo.weight %>'>
@@ -113,14 +101,14 @@
       <div id='wood-box'>
         <label for='wood'>Wood
           <select id='wood'>
-            <option value='Apple' <% if (logInfo.wood === 'Apple') { %>selected='selected'<% } %>>Apple</option>
-            <option value='Cherry' <% if (logInfo.wood === 'Cherry') { %>selected='selected'<% } %>>Cherry</option>
-            <option value='Hickory' <% if (logInfo.wood === 'Hickory') { %>selected='selected'<% } %>>Hickory</option>
-            <option value='Mesquite' <% if (logInfo.wood === 'Mesquite') { %>selected='selected'<% } %>>Mesquite</option>
-            <option value='Oak' <% if (logInfo.wood === 'Oak') { %>selected='selected'<% } %>>Oak</option>
-            <option value='Pecan' <% if (logInfo.wood === 'Pecan') { %>selected='selected'<% } %>>Pecan</option>
-            <option value='None' <% if (logInfo.wood === 'None') { %>selected='selected'<% } %>>None</option>  
-            <option id='wood-other' value='Other' <% if (logInfo.wood === 'Other') { %>selected='selected'<% } %>>Other</option>
+            <% logOptions.wood.forEach(function(woodType) { %>
+              <option value='<%= woodType %>' 
+                  <% if (logInfo.wood === woodType) { %> 
+                     selected='selected'
+                  <% } %>
+                    ><%= woodType %>
+              </option>
+            <% }) %>
           </select>
           <input type='text' placeholder='Other wood type' id='wood-other-text' <% if (!logInfo.wood_other) { %>class='hidden'<% } %> value='<%= logInfo.wood_other %>'>
         </label>

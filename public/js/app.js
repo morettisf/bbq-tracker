@@ -638,28 +638,30 @@ if (deleteAccountSubmit) {
     var div = document.createElement('div')
     var popHTML = "<p>Confirming will delete your profile. Are you sure?</p><div id='pop-del-options'><button id='del-yes'>Yes</button><button id='del-no'>No</button></div>"
 
-    div.classList.add('pop-del')
+    div.setAttribute('id', 'pop-del')
     div.innerHTML = popHTML
-
     accountMain.appendChild(div)
-  })
-}
 
-if (accountMain) {
-  accountMain.addEventListener('click', function(event) {
-    if (event.target.classList.contains('del-no')) { // CAN THIS BE AN ID?
-      var div = event.target.closest('div')
-      div.parentNode.removeChild(div)
+    var delNo = document.querySelector('#del-no')
+    if (delNo) {
+      delNo.addEventListener('click', function() {
+        var popDel = document.querySelector('#pop-del')
+        popDel.parentNode.removeChild(popDel)
+        console.log('no')
+      })
     }
+
+    var delYes = document.querySelector('#del-yes')
+    if (delYes) {
+      delYes.addEventListener('click', function() {
+        deleteUser()
+      })
+    }
+
   })
 }
 
-var delYes = document.querySelector('#del-yes')
-if (delYes) {
-  delYes.addEventListener('click', function() {
-    deleteUser()
-  })
-}
+
 
 function deleteUser() {
   fetch('/account', {

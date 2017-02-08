@@ -10,14 +10,14 @@
 </head>
 <body>
   <%- include header.ejs -%>
-  <% if (message) { %>
-  <%= message %>
-  <% } %>
-  <% if (errors) { %>
-    <div class='error'><%= errors %></div>
-  <% } %>
-  <h1>Sign In</h1>
-  <main>
+  <main id='sign-in-main'>
+    <% if (message) { %>
+    <div class='message'><%= message %></div>
+    <% } %>
+    <% if (errors) { %>
+      <div class='error'><%= errors %></div>
+    <% } %>
+    <h1>Sign In</h1>
     <section id='sign-in'>
       <form id='sign-in-form' action='/sign-in' method='post'>
         <label for='username'>Username</label>
