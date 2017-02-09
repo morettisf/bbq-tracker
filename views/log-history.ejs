@@ -4,7 +4,6 @@
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel="stylesheet" type="text/css" href='../css/main.css'>
-  <link rel="stylesheet" href="/css/font-awesome.css">
   <link href='https://fonts.googleapis.com/css?family=Architects+Daughter|Roboto+Slab' rel='stylesheet'>
   <title><%= title %></title>
 </head>
@@ -13,10 +12,10 @@
   <main id='log-history-main'>
     <h1>Log History</h1>
     <% if (message) { %>
-    <p><%= message %></p>
+    <div class='message'><%= message %></div>
     <% } %>
     <% if (error) { %>
-    <p><%= error %></p>
+    <div class='error'><%= error %></div>
     <% } %>
     <section id='log-action'>
       <select id='log-action-options'>

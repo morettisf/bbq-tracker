@@ -1,3 +1,5 @@
+/***** General *****/
+
 html, body {
   width: 100%;
   height: 100%;
@@ -9,13 +11,58 @@ html, body {
 
 body {
   background-color: #B5C1C6;
+  min-width: 320px;
 }
 
 h1, h2, h3 {
   font-family: 'Roboto Slab', serif;
 }
 
-/* Homepage */
+#log-main, #about-main, #account-main, #reg-main, #sign-in-main, #log-history-main {
+  position: relative;
+  overflow: hidden;
+  color: black;
+  margin: 60px 10px 10px 10px;
+}
+
+#account-main ul {
+  padding: 0;
+}
+
+#log-main h1, #account-main h1 {
+  margin: 10px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.message {
+  margin: 6px;
+  background-color: #99ff99;
+  border-radius: 6px;
+  padding: 6px;
+  text-align: center;
+  border: solid black 1px;
+}
+
+.error {
+  margin: 6px;
+  background-color: #ff4d4d;
+  border-radius: 6px;
+  padding: 6px;
+  text-align: center;
+  border: solid black 1px;
+}
+
+#non-mobile-top {
+  display: none;
+}
+
+
+
+
+/***** Homepage *****/
 
 video {
   position: fixed;
@@ -24,14 +71,6 @@ video {
   height: 100%;
   background-color: black;
   margin-top: -10px;
-}
-
-#updated-th, #updated-td, #rating-th, #rating-td {
-  display: none;
-}
-
-#vote-meat-th, #vote-meat-td {
-  display: none;
 }
 
 #home-body {
@@ -53,7 +92,6 @@ video {
   width: 100%;
   height: 100%;
   margin-top: 70px;
-  margin-bottom: 30px;
   color: white;
 }
 
@@ -77,14 +115,7 @@ video {
      1px 1px 0 #000;
 }
 
-/*#home-main table {
-  background-color: rgba(99, 115, 122, 0.7);
-}*/
-
-table img, #public-rating img {
-  width: 116px;
-  height: 22.5px;
-}
+/* Public Logs */
 
 #public-logs-updated, #top-voted-logs {
   height: 200px;
@@ -95,18 +126,23 @@ table img, #public-rating img {
   overflow-x: hidden;
 }
 
+table img, #public-rating img {
+  width: 116px;
+  height: 22.5px;
+}
+
+/* Public Logs (Updated) - Scrolling */
+
 #public-logs-updated::-webkit-scrollbar {
     width: 8px;
 }
 
-/* Track */
 #public-logs-updated::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
  
-/* Handle */
 #public-logs-updated::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
@@ -114,18 +150,18 @@ table img, #public-rating img {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
+/* Public Logs (Votes) - Scrolling */
+
 #top-voted-logs::-webkit-scrollbar {
     width: 8px;
 }
 
-/* Track */
 #top-voted-logs::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
  
-/* Handle */
 #top-voted-logs::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
@@ -133,12 +169,20 @@ table img, #public-rating img {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
-/*
-#public-logs-updated::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(255,0,0,0.4); 
-}*/
+/* Public Logs - Hiding Columns */
 
-/* Navigation Menu */
+#updated-th, #updated-td, #rating-th, #rating-td {
+  display: none;
+}
+
+#vote-meat-th, #vote-meat-td {
+  display: none;
+}
+
+
+
+
+/***** Navigation Menu *****/
 
 #mobile-top {
   position: fixed;
@@ -218,33 +262,11 @@ table img, #public-rating img {
   margin-bottom: 5px;
 }
 
-#username-menu {
-/*  margin-top: -50px; */
-}
-
-/*#username-menu {
-  position: absolute;
-  top: 0;
-  right: 0;
-}*/
-
-#username-menu i {
-  display: none;
-  margin-top: 4px;
-  color: black;
-}
-
 #username-menu img {
   height: 100px;
   margin-left: 180px;
 
 }
-
-/*#username-menu img {
-  display: inline-block;
-  margin-top: -20px;
-  height: 60px;
-}*/
 
 #username {
   color: black;
@@ -258,11 +280,8 @@ table img, #public-rating img {
   cursor: pointer;
 }
 
-/*#drop-down-options {
-  margin-top: 78px;
-  text-align: right; 
-  text-decoration: none;
-}*/
+
+
 
 /***** Logs *****/
 
@@ -270,25 +289,6 @@ table img, #public-rating img {
   width: 75px;
   height: 75px;
 }
-
-#log-main, #about-main, #account-main, #reg-main, #sign-in-main {
-  position: relative;
-  overflow: hidden;
-  color: black;
-  margin: 60px 10px 10px 10px;
-}
-
-#account-main ul {
-  padding: 0;
-}
-
-#log-main h1, #account-main h1 {
-  margin: 10px 0;
-}
-
-/*#log-main input {
-  float: right;
-}*/
 
 label {
   display: inline-block;
@@ -303,7 +303,7 @@ input[type='select'] {
 
 input[type='text'] {
   -webkit-appearance: none;
-  width: 150px;
+  width: 170px;
 }
 
 input[type='checkbox'] {
@@ -314,10 +314,6 @@ input[type='checkbox'] {
 input[type='radio'] {
   zoom: 2;
   vertical-align: middle;
-}
-
-textarea {
-  -webkit-appearance: none;
 }
 
 select {
@@ -342,7 +338,27 @@ ol {
   padding: 0;
 }
 
-/***** Temperature Range Slider *****/
+.pop-update {
+  width: 200px;
+  height: 75px;
+  position: fixed;
+  z-index: 100;
+  top: 40%;
+  left: 50%;
+  margin-left: -100px;
+  background-color: #ffec80;
+  text-align: center;
+  line-height: 10px;
+  font-size: 2em;
+  color: black;
+  border: 1px solid black;
+}
+
+.pop-update-fade {
+  transition: opacity 3s ease-in-out;
+}
+
+/* Temperature Range Slider */
 
 input[type=range] {
   -webkit-appearance: none;
@@ -430,7 +446,8 @@ input[type=range]:focus::-ms-fill-upper {
   background: #6e8088;
 }
 
-/***** End Temperature Range Slider *****/
+
+/* End Temperature Range Slider */
 
 
 #date-select {
@@ -438,6 +455,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 #cooking-device, #meat-type {
+  -webkit-appearance: none;
   width: 100px;
 }
 
@@ -450,8 +468,11 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 #other-ingredients {
-  width: 270px;
-  height: 60px;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  resize: vertical;
+  width: 100%;
+  height: 90px;
 }
 
 .step-box {
@@ -468,6 +489,7 @@ input[type=range]:focus::-ms-fill-upper {
   width: 100%;
   height: 50px;
   box-sizing: border-box;
+  resize: vertical;
 }
 
 .complete-box {
@@ -478,6 +500,7 @@ input[type=range]:focus::-ms-fill-upper {
 .time {
   display: inline-block;
   margin-left: 15px;
+  vertical-align: middle;
 }
 
 .complete-notes {
@@ -488,6 +511,7 @@ input[type=range]:focus::-ms-fill-upper {
   width: 100%;
   height: 50px;
   box-sizing: border-box;
+  resize: vertical;
 }
 
 .remove-step {
@@ -498,14 +522,6 @@ input[type=range]:focus::-ms-fill-upper {
   display: block;
   clear: both;
   margin-top: 25px;
-}
-
-#sign-in input {
-  display: block;
-}
-
-#register input {
-  display: block;
 }
 
 #vote-area {
@@ -530,7 +546,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 #vote-count-box {
   height: 127px;
-  width: 40px;
+  width: 50px;
   margin-top: 16px;
   vertical-align: top;
   float: right;
@@ -549,11 +565,8 @@ input[type=range]:focus::-ms-fill-upper {
   float: right;
 }
 
-.hidden {
-  display: none;
-}
 
-/****** Style Star Rating Widget *****/
+/* Style Star Rating Widget */
 
 .rating fieldset { margin: 0; padding: 0; }
 .rating label { margin: 0; padding: 0; }
@@ -577,7 +590,8 @@ input[type=range]:focus::-ms-fill-upper {
   float: right; 
 }
 
-/***** CSS Magic to Highlight Stars on Hover *****/
+
+/* Highlight Stars on Hover */
 
 .rating > input:checked ~ label, /* show gold star when clicked */
 .rating:not(:checked) > label:hover, /* hover current star */
@@ -588,20 +602,19 @@ input[type=range]:focus::-ms-fill-upper {
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
 
+
+
+
 /***** Log History *****/
 
-#log-history-main {
-  height: 100%;
-  margin: 60px 10px 10px 10px;
-  background-color: #B5C1C6;
+table  {
+  width: 100%;
+  table-layout: fixed;
 }
 
-#date-td-log-history, #date-th-log-history, #meat-td-log-history, #meat-th-log-history, #status-td-log-history, #status-th-log-history, #temp-td-log-history, #temp-th-log-history, #votes-td-log-history, #votes-th-log-history, #public-td-log-history, #public-th-log-history {
-  display: none;
-}
-
-#select-th-log-history, #select-td-log-history {
-  width: 20%;
+th, td {
+  padding: 10px;
+  text-align: center;
 }
 
 td img {
@@ -609,24 +622,20 @@ td img {
   width: 93px;
 }
 
+#log-history-main th {
+  cursor: pointer;
+}
+
+#date-td-log-history, #date-th-log-history, #meat-td-log-history, #meat-th-log-history, #status-td-log-history, #status-th-log-history, #temp-td-log-history, #temp-th-log-history, #votes-td-log-history, #votes-th-log-history {
+  display: none;
+}
+
+#select-th-log-history, #select-td-log-history {
+  width: 20%;
+}
+
 #log-action-btn {
   margin-left: 10px;
-}
-
-/***** Log tables *****/
-
-table  {
-  width: 100%;
-  table-layout: fixed;
-}
-
-th {
-  text-align: left;
-}
-
-th, td {
-  padding: 10px;
-  text-align: center;
 }
 
 #status-box {
@@ -638,7 +647,11 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   content: " \25B4\25BE" 
 }
 
+
+
+
 /***** Accounts Page *****/
+
 #account-options {
   list-style: none;
 }
@@ -661,22 +674,6 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   background-color: #ffec80;
   padding: 2px;
   cursor: default !important;
-}
-
-.pop-update {
-  width: 200px;
-  height: 75px;
-  position: fixed;
-  z-index: 100;
-  top: 40%;
-  left: 50%;
-  margin-left: -100px;
-  background-color: #ffec80;
-  text-align: center;
-  line-height: 10px;
-  font-size: 2em;
-  color: black;
-  border: 1px solid black;
 }
 
 #pop-del {
@@ -717,6 +714,9 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   margin-left: 30px;
 }
 
+
+
+
 /***** Register Page *****/
 
 #reg-main h1, #sign-in-main h1 {
@@ -725,7 +725,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 #register form, #sign-in form {
   margin: 0 auto; 
-  width: 75%;
+  width: 50%;
   text-align: center;
 }
 
@@ -748,39 +748,425 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   margin: 20px auto;
 }
 
+
+
+
 /***** Page Not Found *****/
 
 #not-found-main {
-  background-image: url('../images/bbq-tracker-cow.png');
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
-  overflow: hidden;
   height: 100%;
 }
 
 #not-found-main h1 {
-  margin-top: 80px;
+  margin-top: 20%;
   text-align: center;
 }
 
-/***** Messages / Errors *****/
-
-.message {
-  margin: 6px;
-  background-color: #99ff99;
-  border-radius: 6px;
-  padding: 6px;
-  text-align: center;
-  border: solid black 1px;
+#not-found-main img {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  margin-left: -25%;
+  width: 50%;
 }
 
-.error {
-  margin: 6px;
-  background-color: #ff4d4d;
-  border-radius: 6px;
-  padding: 6px;
+
+
+
+/***** About *****/
+
+#about-main img {
+  position: absolute;
+  left: 50%;
+  top: 5%;
+  margin-left: -20%;
+  width: 40%;
+}
+
+#about-area {
+  margin-top: 35%;
   text-align: center;
-  border: solid black 1px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
+@media (min-width: 375px) {
+
+  #public-logs-updated, #top-voted-logs {
+    height: 250px;
+  }
+
+  #cooking-device, #meat-type {
+    width: 150px;
+  }
+
+  input[type='text'] {
+    width: 190px;
+  }
+
+  input[type=range] {
+    width: 60%;
+  }
+
+}
+
+@media (min-width: 414px) {
+
+  #public-logs-updated, #top-voted-logs {
+    height: 275px;
+  }
+
+  #updated-th, #updated-td {
+    display: table-cell;
+  }
+
+  #vote-meat-th, #vote-meat-td {
+    display: table-cell;
+  }
+
+  input[type=range] {
+    width: 70%;
+  }
+
+  #meat-td-log-history, #meat-th-log-history {
+    display: table-cell;
+  }
+
+  #vote-area img {
+    width: 120px;
+    height: 102px;
+  }
+
+}
+
+
+
+
+@media (min-width: 768px) {
+
+  #mobile-top {
+    height: 100px;
+  }
+
+  #logo {
+    float: left;
+    height: 80px;
+    margin: 9px 5px 5px 12px;
+  }
+
+  #hamburger {
+    float: right;
+    height: 40px;
+    margin: 15px;
+  }
+
+  .nav-open {
+    margin-top: 100px !important;
+  }
+
+  #left-nav li {
+    font-size: 3em;
+    margin-top: 50px;
+  }
+
+  #right-nav-area {
+    width: 400px;
+  }
+
+  #right-nav-area li {
+    font-size: 2em;
+    margin-top: 20px;
+  }
+
+  #username-menu img {
+    height: 200px;
+    margin-left: 180px;
+  }
+
+  #username {
+    color: black;
+    font-weight: bold;
+    font-size: 1.75em;
+    text-align: right;
+    margin-right: 30px;
+  }
+
+  #log-main, #about-main, #account-main, #reg-main, #sign-in-main {
+    margin: 100px 20px 20px 20px;
+    font-size: 1.5em;
+  }
+
+  #home-main {
+    margin-top: 100px;
+  }
+
+  #home-main h1 {
+    font-size: 3em;
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+
+  #home-main h2 {
+    font-size: 1.75em;
+  }
+
+  #public-logs-updated, #top-voted-logs {
+    height: 380px;
+  }
+
+  #rating-th, #rating-td {
+    display: table-cell;
+  }
+
+  input[type='select'], #log-action-options {
+    height: 25px;
+  }
+
+  input[type='text'] {
+    height: 20px;
+    vertical-align: middle;
+  }
+
+  #other-ingredients {
+    height: 120px;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 30px;
+    width: 12px;
+    border-radius: 0px;
+    background: #ff7b7b;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -12.4px;
+  }
+
+  #log-history-main {
+    margin: 100px 20px 20px 20px;
+  }
+
+  #log-action-options {
+    height: 25px;
+    width: 150px;
+  }
+
+  #log-action-btn {
+      margin-left: 20px;
+  }
+
+  #date-td-log-history, #date-th-log-history, #status-td-log-history, #status-th-log-history, #temp-td-log-history, #temp-th-log-history, #votes-td-log-history, #votes-th-log-history {
+    display: table-cell;
+  }
+
+  #select-th-log-history, #select-td-log-history {
+    width: 10%;
+  }
+
+  #account-options li {
+    margin-top: 30px;
+  }
+
+  #vote-area img {
+    width: 210px;
+    height: 178px;
+  }
+
+  #vote-area button {
+    height: 30px;
+  }
+
+  #vote-count-box {
+    height: 127px;
+    width: 80px;
+    margin-top: 40px;
+  }
+
+  #vote-count {
+    width: 50px;
+    height: 50px;
+  }
+
+  #profile-box img {
+    width: 125px;
+    height: 125px;
+  }
+
+  #register input, #sign-in input {
+    height: 30px;
+  }
+
+  #register input[type='submit'], #sign-in input[type='submit'] {
+    height: 48px;
+    font-size: 1em;
+  }
+
+}
+
+
+
+
+@media (min-width: 1150px) {
+
+  #mobile-top {
+    position: absolute;
+    height: 80px;
+  }
+
+  #logo {
+    float: left;
+    height: 60px;
+    margin: 9px 5px 5px 12px;
+  }
+
+  #hamburger {
+    display: none;
+  }
+
+  #log-main, #about-main, #account-main, #reg-main, #sign-in-main {
+    margin: 80px 20px 20px 20px;
+    font-size: 1em;
+  }
+
+  #home-main {
+    margin-top: 80px;
+  }
+
+  video {
+    margin-top: -80px;
+  }
+
+  #home-main h1 {
+    font-size: 2.5em;
+    padding-top: 40px;
+    padding-bottom: 30px;
+  }
+
+  #home-main h2 {
+    font-size: 1.5em;
+  }
+
+  #public-logs-updated, #top-voted-logs {
+    height: 400px;
+    margin: 0 10% 20px;
+  }
+
+  #top-voted-logs {
+    margin-top: 60px;
+  }
+
+  input[type='text'] {
+    height: 15px;
+  }
+
+  #vote-area img {
+    width: 180px;
+    height: 152px;
+  }
+
+  #vote-area button {
+    height: 25px;
+  }
+
+  #vote-count-box {
+    height: 127px;
+    width: 65px;
+    margin-top: 40px;
+  }
+
+  #vote-count {
+    font-size: 2em;
+    width: 50px;
+    height: 50px;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 28px;
+    width: 12px;
+    border-radius: 0px;
+    background: #ff7b7b;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -11.4px;
+  }
+
+  #non-mobile-top {
+    display: block;
+  }
+
+  #non-mobile-top ul {
+    list-style: none;
+    text-decoration: none;
+    height: 100px;
+    margin-top: 0;
+    margin-bottom: 0;
+    float: left;
+  }
+
+  #non-mobile-top-left li {
+    float: left;
+    margin-right: 50px;
+    font-size: 1.25em;
+    color: white;
+    margin-top: 29px;
+  }
+
+  #non-mobile-right ul {
+    float: right;
+    margin-top: 12px;
+    margin-right: 20px;
+    padding-left: 30px;
+  }
+
+  #non-mobile-right li {
+    text-align: right;
+    font-size: 1.25em;
+  }
+
+  #non-mobile-right a {
+    text-decoration: none;
+    color: white;
+  }
+
+  #avatar-name {
+    float: right;
+  }
+
+  #username-non-mobile {
+    text-align: right;
+    margin-right: 0;
+    color: black;
+    font-size: 1.5em;
+    margin-top: -12px;
+  }
+
+  #non-mobile-right img {
+    width: 50px;
+  }
+
+  .message, .error {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #register form, #sign-in form {
+    margin: 0 auto; 
+    width: 33%;
+    text-align: center;
+  }
+
+  #register input[type='submit'], #sign-in input[type='submit'] {
+    height: 48px;
+    font-size: 1.2em;
+  }
+
 }
 

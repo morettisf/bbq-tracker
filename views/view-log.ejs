@@ -6,7 +6,6 @@
   <meta name='description' content='BBQ Tracker helps you manage cook sessions, recipes, and outcomes.'>
   <link rel='stylesheet' type='text/css' href='/css/main.css'>
   <link rel='stylesheet' type='text/css' href='/css/datepickr.css'>
-  <link rel='stylesheet' href='/css/font-awesome.css'>
   <link href='https://fonts.googleapis.com/css?family=Architects+Daughter|Roboto+Slab' rel='stylesheet'>
   <title><%= title %></title>
 </head>
@@ -22,7 +21,7 @@
       <div id='vote-count-box'>
         <div id='vote-count'><%= logInfo.votes %></div>
       </div>
-      <img src='../images/vote.png' alt='Pit Hit Votes'>
+      <img src='../images/vote.svg' alt='Pit Hit Votes'>
     </div>
     <section>
       <div id='date'>
@@ -131,10 +130,10 @@
                 </div>
                 <div class='complete-box'>
                   <input type='checkbox' class='complete-check' name='step-complete' 
-                    <% if (item.completed === 'true') { %> 
+                    <% if (item.completed === true) { %> 
                       checked='checked'
                     <% } %>
-                  >
+                  >Complete
                   <input type='time' class='time' name='time' value='<%= item.time %>'>
                 </div>
                 <div class='complete-notes'>

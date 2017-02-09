@@ -1,7 +1,31 @@
 <nav>
   <div id='mobile-top'>
-    <a href='/'><img src='../images/bbq_tracker_logo_h.png' alt='BBQ Tracker Logo' id='logo'></a>
+    <a href='/'><img src='../images/bbq_tracker_logo_h.svg' alt='BBQ Tracker Logo' id='logo'></a>
     <img src='../images/hamburger.svg' id='hamburger' alt='expanding menu button' id='hamburger'>
+    <div id='non-mobile-top'>
+      <ul id='non-mobile-top-left'>
+      <% if (!user) { %>
+        <a href='/sign-in'><li>Sign In</li></a>
+        <a href='/register'><li>Register</li></a>
+      <% } else { %>
+        <a href='/create-log'><li>Create BBQ Log</li></a>
+        <a href='/log-history'><li>Log History</li></a>
+      <% } %>
+      <a href='/about'><li>About</li></a>
+    </ul>
+      <% if (username) { %>
+        <div id='non-mobile-right'>
+          <ul>
+            <li><a href='/account'>Account Settings</a></li>
+            <li><a href='/logout' id='logout'>Logout</a></li>
+          </ul>
+          <div id='avatar-name'>
+            <img src='<%= avatar %>'>
+            <div id='username-non-mobile'><%= username %></div>
+          </div>
+        </div>
+      <% } %>   
+    </div>
   </div>
   <div id='mobile-out'>
     <ul id='left-nav'>
@@ -17,7 +41,6 @@
     <% if (username) { %>
       <div id='right-nav-area'>
         <div id='username-menu'>
-          <i class='fa fa-caret-down fa-lg' aria-hidden='true'></i>
           <img src='<%= avatar %>'>
           <div id='username'><%= username %></div>
         </div>

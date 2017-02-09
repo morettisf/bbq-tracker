@@ -170,7 +170,7 @@ function sendLog(logData) {
     credentials: 'include'
   })
     .then(function() {
-      window.location = '/log-history?message=log%20created'
+      window.location = '/log-history?message=Log%20created'
     })
 }
 
@@ -275,8 +275,9 @@ function updateLog(logData) {
 
       div.classList.add('pop-update')
       div.innerHTML = popHTML
-
       logBody.appendChild(div)
+
+      div.classList.add('pop-update-fade')
 
       setTimeout(function(){
         div.parentNode.removeChild(div)
@@ -352,7 +353,7 @@ function deleteLogs(selected) {
   })
     .then(function(res) {
       console.log(res)
-      window.location = '/log-history?message=logs%20deleted'
+      window.location = '/log-history?message=Logs%20deleted'
     })
 }
 
@@ -368,7 +369,7 @@ function statusLogs(selected) {
     credentials: 'include'
   })
     .then(function(res) {
-     window.location = '/log-history?message=log%20status%20switched'
+     window.location = '/log-history?message=Log%20status%20switched'
     })
 }
 
