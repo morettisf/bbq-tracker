@@ -33,7 +33,7 @@
     <section id='log-basics'>
       <div id='date'>
         <label for='date'>Date
-          <input type='text' name='date' id='date-select' value='<% if (logInfo.date) { %><%= moment(logInfo.date).format('MMMM Do YYYY') %><% } %>' disabled>
+          <input type='text' name='date' id='date-select' value='<% if (logInfo.date) { %><%= moment(logInfo.date).format('MMMM Do YYYY') %><% } %>' readonly='true' disabled>
         </label>
       </div>
       <div id='session-box'>
