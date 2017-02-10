@@ -46,6 +46,10 @@ module.exports = {
       errors.push('No spaces allowed in username')
     }
 
+    if (userNameReq.length > 15) {
+      errors.push('Username is limited to 15 characters')
+    }
+
     if (emailReq === '') {
       errors.push('Supply an email address')
     }

@@ -25,7 +25,8 @@ const LogSchema = new Schema({
   updated: { type: Date },
   votes: { type: Number },
   other_ingredients: { type: String },
-  voters: [voterIdSchema]
+  voters: [voterIdSchema],
+  final: { type: String }
 })
 
 module.exports = LogSchema

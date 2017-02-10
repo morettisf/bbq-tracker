@@ -49,6 +49,10 @@ module.exports = {
       res.json({ error: 'Supply a new username' })
     }
 
+    if (userNameReq.length > 15) {
+      res.json({ error: 'Username is limited to 15 characters' })
+    }
+
     else if (userNameReq.indexOf(' ') !== -1) {
       res.json({ error: 'No spaces allowed in username' })
     }

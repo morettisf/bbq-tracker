@@ -130,7 +130,8 @@ if (save) {
       updated: new Date(),
       votes: 0,
       voters: [],
-      other_ingredients: document.querySelector('#other-ingredients').value
+      other_ingredients: document.querySelector('#other-ingredients').value,
+      final: document.querySelector('#final-comments').value
     }
 
     var ol = document.querySelector('ol')
@@ -226,7 +227,8 @@ if (update) {
       status: statusSelected,
       username: document.querySelector('#username').innerHTML,
       updated: new Date(),
-      other_ingredients: document.querySelector('#other-ingredients').value
+      other_ingredients: document.querySelector('#other-ingredients').value,
+      final: document.querySelector('#final-comments').value
     }
 
     var ol = document.querySelector('ol')
@@ -498,6 +500,10 @@ function changeUsername(newUsernameValue) {
       else if (res.error === "No spaces allowed in username") {
         window.location = '/account?error=No%20spaces%20allowed%20in%20username'
       }
+      else if (res.error === "Username is limited to 15 characters") {
+        window.location = '/account?error=Username%20is%20limited%20to%2015%20characters'
+      }
+
     })
 }
 

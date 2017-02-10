@@ -265,7 +265,6 @@ table img, #public-rating img {
 #username-menu img {
   height: 100px;
   margin-left: 180px;
-
 }
 
 #username {
@@ -478,6 +477,21 @@ input[type=range]:focus::-ms-fill-upper {
   height: 90px;
 }
 
+#final-comments-box {
+  clear: both;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+#final-comments {
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  resize: vertical;
+  width: 100%;
+  height: 50px;
+}
+
 .step-box {
   border: 1px solid black;
   padding: 15px;
@@ -489,6 +503,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .step-notes textarea {
+  -webkit-appearance: none;
   width: 100%;
   height: 50px;
   box-sizing: border-box;
@@ -512,6 +527,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .complete-notes textarea {
+  -webkit-appearance: none;
   width: 100%;
   height: 50px;
   box-sizing: border-box;
@@ -1128,7 +1144,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
     float: right;
     margin-top: 12px;
     margin-right: 20px;
-    padding-left: 30px;
+    padding-left: 20px;
   }
 
   #non-mobile-right li {
@@ -1141,20 +1157,26 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
     color: white;
   }
 
+  #about-li {
+    margin-right: 0 !important;
+  }
+
   #avatar-name {
     float: right;
+    margin-top: 1px;
   }
 
   #username-non-mobile {
     text-align: right;
     margin-right: 0;
     color: black;
-    font-size: 1.5em;
+    font-size: 1em;
     margin-top: -12px;
   }
 
   #non-mobile-right img {
     width: 50px;
+    float: right;
   }
 
   .message, .error {

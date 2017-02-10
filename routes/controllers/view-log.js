@@ -72,7 +72,8 @@ module.exports = {
       log.status = info.status
       log.username = info.username
       log.updated = info.updated
-      log.other_ingredients = info.other_ingredients
+      log.other_ingredients = info.other_ingredients,
+      log.final = info.final
       
       log.steps = []
       info.steps.forEach(function(item) {

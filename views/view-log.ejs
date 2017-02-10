@@ -160,6 +160,10 @@
         <input type='radio' id='star2' name='rating' value='2' <% if (logInfo.rating === 2) { %> checked='checked'<% } %>><label class='full' for='star2'></label>
         <input type='radio' id='star1' name='rating' value='1' <% if (logInfo.rating === 1) { %> checked='checked'<% } %>><label class='full' for='star1'></label>
       </fieldset>
+      <div id='final-comments-box'>
+        <label for='final-comments' id='final-comments-label'>Final Comments</label>
+        <textarea id='final-comments' placeholder='List final comments here'><%= logInfo.final %></textarea>
+      </div>
       <fieldset id='status-box'>
         <input type='radio' name='status' value='Private' <% if (logInfo.status === 'Private') { %> checked='checked'<% } %>>Private
         <input type='radio' name='status' value='Public' <% if (logInfo.status === 'Public') { %> checked='checked'<% } %>>Public

@@ -10,7 +10,7 @@
 */
 
 document.addEventListener('DOMContentLoaded', function() {
-  datepickr('#date-select', { dateFormat: 'F-m-Y' })
+  datepickr('#date-select')
 })
 
 var datepickr = function (selector, config) {

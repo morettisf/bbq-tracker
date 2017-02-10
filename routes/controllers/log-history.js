@@ -76,7 +76,8 @@ module.exports = {
           newLog.updated = null
           newLog.status = 'Private'
           newLog.votes = 0
-          newLog.other_ingredients = log.other_ingredients
+          newLog.other_ingredients = log.other_ingredients,
+          newLog.final = log.final
           
           newLog.steps = []
           log.steps.forEach(function(itemStep) {
