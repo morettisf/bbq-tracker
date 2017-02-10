@@ -588,6 +588,7 @@ input[type=range]:focus::-ms-fill-upper {
   float: right;
 }
 
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 /* Style Star Rating Widget */
 
