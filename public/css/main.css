@@ -296,7 +296,6 @@ label {
 }
 
 input[type='select'] {
-  -webkit-appearance: none;
   width: 150px;
 }
 

@@ -24,6 +24,11 @@ module.exports = {
 
       if (err) throw err
 
+      var userReq = {
+        username: req.body.username.toLowerCase(),
+        password: req.body.password
+      }
+
       var userNameReq = req.body.username.toLowerCase()
       var passwordReq = req.body.password
 
@@ -43,7 +48,7 @@ module.exports = {
 
       else {
 
-        req.logIn(user, function(err) {
+        req.logIn(userReq, function(err) {
 
           if (err) { 
             return next(err) 
