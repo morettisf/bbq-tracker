@@ -7,6 +7,8 @@
   <link rel='stylesheet' type='text/css' href='/css/main.css'>
   <link rel='stylesheet' type='text/css' href='/css/datepickr.css'>
   <link href='https://fonts.googleapis.com/css?family=Architects+Daughter|Roboto+Slab' rel='stylesheet'>
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <title><%= title %></title>
 </head>
 <body id='log-body'>
@@ -26,7 +28,7 @@
           <% } else { %>Voted<% } %>
         <% } %>
       </div>
-      <img src='../images/vote.svg' alt='Pit Hit Votes'>
+      <img src='/images/vote.svg' alt='Pit Hit Votes'>
     </div>
     <section id='log-basics'>
       <div id='date'>
@@ -151,15 +153,15 @@
       </div>
     </section>
     <div id='public-rating'>
-      <% if (logInfo.rating === 5) { %><img src='../images/5.gif' alt='5 Stars'><% } %>
-      <% if (logInfo.rating === 4) { %><img src='../images/4.gif' alt='4 Stars'><% } %>
-      <% if (logInfo.rating === 3) { %><img src='../images/3.gif' alt='3 Stars'><% } %>
-      <% if (logInfo.rating === 2) { %><img src='../images/2.gif' alt='2 Stars'><% } %>
-      <% if (logInfo.rating === 1) { %><img src='../images/1.gif' alt='1 Stars'><% } %>
-      <% if (logInfo.rating === 0) { %><img src='../images/0.gif' alt='0 Stars'><% } %>
+      <% if (logInfo.rating === 5) { %><img src='/images/5.gif' alt='5 Stars'><% } %>
+      <% if (logInfo.rating === 4) { %><img src='/images/4.gif' alt='4 Stars'><% } %>
+      <% if (logInfo.rating === 3) { %><img src='/images/3.gif' alt='3 Stars'><% } %>
+      <% if (logInfo.rating === 2) { %><img src='/images/2.gif' alt='2 Stars'><% } %>
+      <% if (logInfo.rating === 1) { %><img src='/images/1.gif' alt='1 Stars'><% } %>
+      <% if (logInfo.rating === 0) { %><img src='/images/0.gif' alt='0 Stars'><% } %>
     </div>
   </main>
-  <script src='../js/bundle.js'></script>
+  <script src='/js/bundle.js'></script>
 </body>
 </html>
 

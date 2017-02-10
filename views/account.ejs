@@ -3,8 +3,10 @@
   <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" type="text/css" href='../css/main.css'>
+    <link rel="stylesheet" type="text/css" href='/css/main.css'>
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter|Roboto+Slab' rel='stylesheet'>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title><%= title %></title>
   </head>
   <body>
@@ -28,9 +30,9 @@
         <li>
           <h3 id='new-avatar-btn'>Change Avatar</h3>
           <div id='avatar-options'>
-            <img src='../images/cow.svg' alt='cow' id='cow-avatar' <% if (avatar === '../images/cow.svg') { %>class='avatar-highlight'<% } %> >
-            <img src='../images/chicken.svg' alt='chicken' id='chicken-avatar' <% if (avatar === '../images/chicken.svg') { %>class='avatar-highlight'<% } %> >
-            <img src='../images/pig.svg' alt='pig' id='pig-avatar' <% if (avatar === '../images/pig.svg') { %>class='avatar-highlight'<% } %> >
+            <img src='/images/cow.svg' alt='cow' id='cow-avatar' <% if (avatar === '../images/cow.svg') { %>class='avatar-highlight'<% } %> >
+            <img src='/images/chicken.svg' alt='chicken' id='chicken-avatar' <% if (avatar === '../images/chicken.svg') { %>class='avatar-highlight'<% } %> >
+            <img src='/images/pig.svg' alt='pig' id='pig-avatar' <% if (avatar === '../images/pig.svg') { %>class='avatar-highlight'<% } %> >
           </div>
         </li>
         </li>
@@ -60,6 +62,6 @@
         </li>
       </ul>
     </main>
-    <script src='js/bundle.js'></script>
+    <script src='/js/bundle.js'></script>
   </body>
 </html>

@@ -3,8 +3,10 @@
 <head>
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link rel="stylesheet" type="text/css" href='../css/main.css'>
+  <link rel="stylesheet" type="text/css" href='/css/main.css'>
   <link href='https://fonts.googleapis.com/css?family=Architects+Daughter|Roboto+Slab' rel='stylesheet'>
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <title><%= title %></title>
 </head>
 <body>
@@ -48,12 +50,12 @@
                   <% if (log.rating === 1) { %> sorttable_customkey='1'<% } %>
                   <% if (log.rating === 0) { %> sorttable_customkey='0'<% } %>
                   >
-                    <% if (log.rating === 5) { %><img src='../images/5.gif' alt='5 Stars'><% } %>
-                    <% if (log.rating === 4) { %><img src='../images/4.gif' alt='4 Stars'><% } %>
-                    <% if (log.rating === 3) { %><img src='../images/3.gif' alt='3 Stars'><% } %>
-                    <% if (log.rating === 2) { %><img src='../images/2.gif' alt='2 Stars'><% } %>
-                    <% if (log.rating === 1) { %><img src='../images/1.gif' alt='1 Stars'><% } %>
-                    <% if (log.rating === 0) { %><img src='../images/0.gif' alt='0 Stars'><% } %>
+                    <% if (log.rating === 5) { %><img src='/images/5.gif' alt='5 Stars'><% } %>
+                    <% if (log.rating === 4) { %><img src='/images/4.gif' alt='4 Stars'><% } %>
+                    <% if (log.rating === 3) { %><img src='/images/3.gif' alt='3 Stars'><% } %>
+                    <% if (log.rating === 2) { %><img src='/images/2.gif' alt='2 Stars'><% } %>
+                    <% if (log.rating === 1) { %><img src='/images/1.gif' alt='1 Stars'><% } %>
+                    <% if (log.rating === 0) { %><img src='/images/0.gif' alt='0 Stars'><% } %>
                 </td>
             <td id='votes-td-log-history'><%= log.votes %></td>
             <td id='status-td-log-history'>
@@ -68,7 +70,7 @@
       <% } %>
     </table>
   </main>
-  <script src='js/bundle.js'></script>
+  <script src='/js/bundle.js'></script>
 </body>
 </html>
 

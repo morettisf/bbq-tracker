@@ -68,7 +68,7 @@ video {
   position: fixed;
   z-index: -100;
   left: 0;
-  height: 100%;
+  min-height: 100%;
   background-color: black;
   margin-top: -10px;
 }
@@ -118,7 +118,7 @@ video {
 /* Public Logs */
 
 #public-logs-updated, #top-voted-logs {
-  height: 200px;
+  height: 35%;
   margin: 0 20px 20px;
   overflow: scroll;
   border: 1px solid black;
@@ -352,10 +352,13 @@ ol {
   font-size: 2em;
   color: black;
   border: 1px solid black;
+  opacity: 0;
 }
 
 .pop-update-fade {
-  transition: opacity 3s ease-in-out;
+  transition: opacity 1s ease-in-out;
+  transition-delay: initial;
+  opacity: 1;
 }
 
 /* Temperature Range Slider */
@@ -758,14 +761,14 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 }
 
 #not-found-main h1 {
-  margin-top: 20%;
+  margin-top: 150px;
   text-align: center;
 }
 
 #not-found-main img {
   position: absolute;
   left: 50%;
-  top: 40%;
+  top: 280px;
   margin-left: -25%;
   width: 50%;
 }
@@ -797,7 +800,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 @media (min-width: 375px) {
 
   #public-logs-updated, #top-voted-logs {
-    height: 250px;
+    height: 37%;
   }
 
   #cooking-device, #meat-type {
@@ -817,7 +820,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 @media (min-width: 414px) {
 
   #public-logs-updated, #top-voted-logs {
-    height: 275px;
+    height: 38%;
   }
 
   #updated-th, #updated-td {
@@ -915,7 +918,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   }
 
   #public-logs-updated, #top-voted-logs {
-    height: 380px;
+    height: 35%;
   }
 
   #rating-th, #rating-td {
@@ -1052,7 +1055,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   }
 
   #public-logs-updated, #top-voted-logs {
-    height: 400px;
+    height: 33%;
     margin: 0 10% 20px;
   }
 
@@ -1157,6 +1160,10 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
     margin-right: auto;
   }
 
+  #sign-in-main, #reg-main {
+    margin-top: 200px;
+  }
+
   #register form, #sign-in form {
     margin: 0 auto; 
     width: 33%;
@@ -1166,6 +1173,10 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   #register input[type='submit'], #sign-in input[type='submit'] {
     height: 48px;
     font-size: 1.2em;
+  }
+
+  video {
+    min-width: 100%;
   }
 
 }

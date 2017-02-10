@@ -1,13 +1,6 @@
 'use strict'
 
-// logged in account menu drop down
-// var dropMenu = document.querySelector('#username-menu')
-// if (dropMenu) {
-//   dropMenu.addEventListener('click', function() {
-//     var options = document.querySelector('#drop-down-options')
-//     options.classList.toggle('hidden')
-//   })
-// }
+/***** LOGS *****/
 
 // displaying other device textbox
 var deviceList = document.querySelector('#cooking-device')
@@ -63,6 +56,7 @@ if (woodList) {
   })
 }
 
+// adding step to recipe
 var addStepBtn = document.querySelector('#add-step')
 var list = document.querySelector('ol')
 
@@ -84,6 +78,7 @@ if (addStepBtn) {
   })
 }
 
+// temperature slider output
 window.outputUpdate = function (temp) {
   document.querySelector('#temp-slider-output').value = temp;
 }
@@ -249,11 +244,11 @@ if (update) {
 
     var logData = Object.assign({ steps: stepInfo }, basicData)
     
-    console.log(basicData)
     updateLog(logData)
   })
 }
 
+// updating log
 var url = window.location.pathname
 var logId = url.split('/').pop()
 
@@ -277,11 +272,20 @@ function updateLog(logData) {
       div.innerHTML = popHTML
       logBody.appendChild(div)
 
-      div.classList.add('pop-update-fade')
 
       setTimeout(function(){
-        div.parentNode.removeChild(div)
-      }, 1500)
+        div.classList.add('pop-update-fade')
+      }, 0)
+
+      setTimeout(function(){
+        div.classList.remove('pop-update-fade')
+
+        setTimeout(function() {
+        div.parentNode.removeChild(div)        
+        }, 1000)
+
+      }, 2000)
+
     })
 }
 
@@ -423,7 +427,7 @@ function addVote(log) {
 
 
 
-// ***** ACCOUNTS PAGE *****
+/***** ACCOUNTS PAGE *****/
 
 // displaying option fields on click
 var newUsername = document.querySelector('#new-username-btn')
@@ -648,7 +652,6 @@ if (deleteAccountSubmit) {
       delNo.addEventListener('click', function() {
         var popDel = document.querySelector('#pop-del')
         popDel.parentNode.removeChild(popDel)
-        console.log('no')
       })
     }
 
@@ -661,8 +664,6 @@ if (deleteAccountSubmit) {
 
   })
 }
-
-
 
 function deleteUser() {
   fetch('/account', {
