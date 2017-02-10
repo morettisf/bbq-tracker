@@ -201,7 +201,7 @@ table img, #public-rating img {
   position: fixed;
   top: 0;
   z-index: 100;
-  -webkit-transform: translate3d(0,0,0);
+  -webkit-overflow-scrolling: touch;
   height: 100%;
   width: 100%;
   margin-top: -200%;
@@ -338,7 +338,7 @@ button {
 }
 
 ol {
-  margin-left: 22px;
+  margin-left: 28px;
   padding: 0;
 }
 
