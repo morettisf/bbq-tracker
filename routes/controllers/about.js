@@ -28,7 +28,14 @@ module.exports = function(req, res, next) {
         username = null
       }
 
-    res.render('about', { title: 'About | BBQ Tracker', message: null, user: userId, username: username, avatar: avatar })
+      var ejs = { 
+        title: 'About | BBQ Tracker', 
+        message: null, 
+        user: userId, 
+        username: username, 
+        avatar: avatar 
+      }
 
+    res.render('about', ejs)
     })
 }

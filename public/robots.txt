@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /view-log/
+Disallow: /create-log
+Disallow: /log-history
+Disallow: /account
+Disallow: /log-out

@@ -10,7 +10,8 @@ const cookieParser = require('cookie-parser')
 
 mongoose.Promise = global.Promise
 if (process.env.NODE_ENV !== 'test') { // package.json specifies a test database connection when running mocha
-  mongoose.connect('mongodb://localhost/bbq-tracker') // mongoose connects into mongo
+//  mongoose.connect('mongodb://localhost/bbq-tracker') // mongoose connects into mongo
+  mongoose.connect(process.env.MLAB_KEY)
 }
 
 app.use(express.static('public'))

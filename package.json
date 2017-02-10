@@ -6,7 +6,7 @@
   "scripts": {
     "test-watch": "NODE_ENV=test nodemon --exec 'mocha'",
     "test": "NODE_ENV=test mocha",
-    "build": "browserify client.js -o public/js/bundle.js",
+    "build": "browserify client.js | uglifyjs -o public/js/bundle.js",
     "watch": "watchify client.js -o public/js/bundle.js --debug --verbose",
     "watch-server": "nodemon --watch routes ./server.js"
   },
@@ -31,6 +31,7 @@
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "supertest": "^2.0.1",
+    "uglify-js": "^2.7.5",
     "watchify": "^3.8.0"
   }
 }

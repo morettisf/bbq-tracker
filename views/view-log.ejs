@@ -89,10 +89,15 @@
       </div>
       <div id='fuel-box'>
         <label for='fuel'>Fuel
-          <select id='fuel' value='<%= logInfo.fuel %>'>
-            <option value='Briquettes'>Briquettes</option>
-            <option value='lump'>Lump Charcoal</option>
-            <option value='Wood'>Wood</option>
+          <select id='fuel'>
+            <% logOptions.fuel.forEach(function(fuelType) { %>
+              <option value='<%= fuelType %>' 
+                  <% if (logInfo.fuel === fuelType) { %> 
+                     selected='selected'
+                  <% } %>
+                    ><%= fuelType %>
+              </option>
+            <% }) %>
           </select>
         </label>
         <label for='fuel-brand'>Brand
