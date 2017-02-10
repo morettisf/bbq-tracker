@@ -1181,3 +1181,18 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 }
 
+@media print {
+
+   video {
+    display: none
+  }
+
+  #mobile-top, #mobile-out {
+    display: none
+  }
+
+  body {
+    color: black;
+  }
+  
+}

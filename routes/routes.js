@@ -1,7 +1,5 @@
 const User = require('../models/users')
-const bcrypt = require('bcryptjs')
 const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
 
 const Index = require('./controllers/index')
 const Register = require('./controllers/register')
@@ -149,7 +147,7 @@ function isLoggedIn(req, res, next) {
       username: username, 
       avatar: avatar 
     }
-    
+
     res.render('not-found', ejs)
   }
 }

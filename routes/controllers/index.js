@@ -55,8 +55,17 @@ module.exports = {
           username = null
         }
 
-        res.render('index', { title: 'BBQ Tracker', user: req.session.passport, username: username, avatar: avatar, updated20: updated20, topVoted20: topVoted20, moment: moment })
+        var ejs = { 
+          title: 'BBQ Tracker | Online BBQ Journal Community', 
+          user: req.session.passport, 
+          username: username, 
+          avatar: avatar, 
+          updated20: updated20, 
+          topVoted20: topVoted20, 
+          moment: moment 
+        }
 
+        res.render('index', ejs)
       })
 
     })
