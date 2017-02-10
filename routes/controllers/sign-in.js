@@ -24,11 +24,6 @@ module.exports = {
 
       if (err) throw err
 
-      var userReq = {
-        username: req.body.username.toLowerCase(),
-        password: req.body.password
-      }
-
       var userNameReq = req.body.username.toLowerCase()
       var passwordReq = req.body.password
 
@@ -48,7 +43,7 @@ module.exports = {
 
       else {
 
-        req.logIn(userReq, function(err) {
+        req.logIn(user, function(err) {
 
           if (err) { 
             return next(err) 
@@ -68,9 +63,12 @@ passport.use('local-sign-in', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true,
   },
+
   function(req, userName, password, done) {
 
-    User.findOne({ 'username':  userName }, function(err, user) {
+    var userNameLower = userName.toLowerCase()
+
+    User.findOne({ 'username':  userNameLower }, function(err, user) {
 
       if (err) throw err
 

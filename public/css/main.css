@@ -59,8 +59,9 @@ h1, h2, h3 {
   display: none;
 }
 
-
-
+input, select, textarea {
+  font-size: 16px;
+}
 
 /***** Homepage *****/
 
@@ -210,7 +211,8 @@ table img, #public-rating img {
 }
 
 #hamburger {
-  float: right;
+  position: absolute;
+  right: 0;
   height: 25px;
   margin: 10px;
 }
@@ -292,7 +294,7 @@ table img, #public-rating img {
 label {
   display: inline-block;
   white-space: nowrap;
-  margin-top: 3px;
+  margin-top: 10px;
 }
 
 input[type='select'] {
@@ -312,11 +314,6 @@ input[type='checkbox'] {
 input[type='radio'] {
   zoom: 2;
   vertical-align: middle;
-}
-
-select {
-  -webkit-appearance: none;
-  padding: 3px 6px;
 }
 
 button {
@@ -456,7 +453,6 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 #cooking-device, #meat-type {
-  -webkit-appearance: none;
   width: 100px;
 }
 
@@ -1033,6 +1029,10 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 
 @media (min-width: 1150px) {
+
+  input, select, textarea {
+    font-size: 12px;
+  }
 
   #mobile-top {
     position: absolute;
