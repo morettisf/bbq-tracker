@@ -63,14 +63,8 @@ input, select, textarea {
   font-size: 16px;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
-  select:focus,
-  textarea:focus,
-  input:focus {
-    font-size: 16px;
-    background: #eee;
-  }
-}
+
+
 
 /***** Homepage *****/
 
@@ -211,6 +205,7 @@ table img, #public-rating img {
   width: 100%;
   margin-top: -200%;
   background-color: #63737A;
+  display: none;
 }
 
 #logo {
@@ -224,6 +219,10 @@ table img, #public-rating img {
   right: 0;
   height: 25px;
   margin: 10px;
+}
+
+.visible {
+  display: block !important;
 }
 
 .nav-open {
