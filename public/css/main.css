@@ -546,6 +546,7 @@ input[type=range]:focus::-ms-fill-upper {
   display: block;
   clear: both;
   margin-top: 25px;
+  margin-bottom: 50px;
 }
 
 #vote-area {
@@ -1029,6 +1030,11 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   #register input[type='submit'], #sign-in input[type='submit'] {
     height: 48px;
     font-size: 1em;
+  }
+
+  #reg-main h1, #sign-in-main h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
 }
