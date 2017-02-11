@@ -23,6 +23,7 @@ h1, h2, h3 {
   overflow: hidden;
   color: black;
   margin: 60px 10px 10px 10px;
+  -webkit-overflow-scrolling: touch;
 }
 
 #account-main ul {
@@ -201,7 +202,6 @@ table img, #public-rating img {
   position: fixed;
   top: 0;
   z-index: 100;
-  -webkit-overflow-scrolling: touch;
   height: 100%;
   width: 100%;
   margin-top: -200%;
