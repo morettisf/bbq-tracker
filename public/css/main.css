@@ -122,7 +122,7 @@ video {
 /* Public Logs */
 
 #public-logs-updated, #top-voted-logs {
-  height: 35%;
+  height: 33%;
   margin: 0 20px 20px;
   overflow: scroll;
   border: 1px solid black;
@@ -746,6 +746,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 #reg-main h1, #sign-in-main h1 {
   text-align: center;
+  margin-top: 2px;
   margin-bottom: 2px;
 }
 
@@ -824,10 +825,6 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 @media (min-width: 375px) {
 
-  #public-logs-updated, #top-voted-logs {
-    height: 37%;
-  }
-
   #cooking-device, #meat-type {
     width: 150px;
   }
@@ -845,7 +842,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 @media (min-width: 414px) {
 
   #public-logs-updated, #top-voted-logs {
-    height: 38%;
+    height: 35%;
   }
 
   #updated-th, #updated-td {
