@@ -660,8 +660,13 @@ td img {
   width: 20%;
 }
 
+#log-action-options {
+  width: 125px;
+}
+
 #log-action-btn {
   margin-left: 10px;
+  font-size: 1em;
 }
 
 #status-box {
@@ -1215,6 +1220,10 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
   video {
     min-width: 100%;
+  }
+
+  #not-found-main h1 {
+    margin-top: 250px;
   }
 
 }
