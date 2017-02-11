@@ -1,7 +1,5 @@
 'use strict'
 
-import 'whatwg-fetch'
-
 /***** LOGS *****/
 
 // displaying other device textbox
