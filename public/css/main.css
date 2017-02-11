@@ -23,9 +23,6 @@ h1, h2, h3 {
   overflow: hidden;
   color: black;
   margin: 60px 10px 10px 10px;
-  -webkit-transform: translateZ(0px);
-  -webkit-transform: translate3d(0,0,0);
-  -webkit-perspective: 1000;
 }
 
 #account-main ul {
@@ -209,6 +206,8 @@ table img, #public-rating img {
   margin-top: -200%;
   background-color: #63737A;
   display: none;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 #logo {
@@ -747,6 +746,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 #reg-main h1, #sign-in-main h1 {
   text-align: center;
+  margin-bottom: 2px;
 }
 
 #register form, #sign-in form {
@@ -786,7 +786,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 }
 
 #not-found-main h1 {
-  margin-top: 150px;
+  margin-top: 100px;
   text-align: center;
 }
 
