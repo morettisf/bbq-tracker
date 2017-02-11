@@ -255,6 +255,7 @@ var url = window.location.pathname
 var logId = url.split('/').pop()
 
 function updateLog(logData) {
+  import 'whatwg-fetch'
   fetch('/view-log/' + logId, {
     method: 'PUT',
     headers: {
