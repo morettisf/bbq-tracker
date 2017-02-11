@@ -221,6 +221,7 @@ table img, #public-rating img {
   right: 0;
   height: 25px;
   margin: 10px;
+  cursor: pointer;
 }
 
 .visible {
@@ -336,6 +337,7 @@ button {
     -webkit-border-radius: 0;
   background-color: #63737A;
   color: white;
+  cursor: pointer;
 }
 
 ol {
@@ -661,7 +663,7 @@ td img {
 }
 
 #log-action-options {
-  width: 125px;
+  width: 130px;
 }
 
 #log-action-btn {
