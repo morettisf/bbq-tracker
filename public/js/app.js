@@ -70,10 +70,36 @@ if (addStepBtn) {
 
   })
 
+  var logMain = document.querySelector('#log-main')
+
   document.querySelector('#recipe-list ol').addEventListener('click', function(event) {
     if (event.target.classList.contains('remove-step')) {
       var li = event.target.closest('li')
-      li.parentNode.removeChild(li)
+
+      var div = document.createElement('div')
+      var popHTML = "<p style='margin-top: 40px;'>Confirm delete step?</p><div id='pop-del-options'><button id='del-yes'>Yes</button><button id='del-no'>No</button></div>"
+
+      div.setAttribute('id', 'pop-del')
+      div.innerHTML = popHTML
+      logMain.appendChild(div)
+
+      var delNo = document.querySelector('#del-no')
+      if (delNo) {
+        delNo.addEventListener('click', function() {
+          var popDel = document.querySelector('#pop-del')
+          popDel.parentNode.removeChild(popDel)
+        })
+      }
+
+      var delYes = document.querySelector('#del-yes')
+      if (delYes) {
+        delYes.addEventListener('click', function() {
+          li.parentNode.removeChild(li)
+          var popDel = document.querySelector('#pop-del')
+          popDel.parentNode.removeChild(popDel)
+        })
+      }
+
     }
   })
 }
