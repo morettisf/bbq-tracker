@@ -1,1 +1,1 @@
-console.error("\n/Users/morettisf/Desktop/Projects/bbq-tracker/public/js/app.js:258\n  import 'whatwg-fetch'\n  ^\nParseError: 'import' and 'export' may only appear at the top level");
+console.error("\n/Users/morettisf/Desktop/Projects/bbq-tracker/public/js/app.js:3\nimport 'whatwg-fetch'\n^\nParseError: 'import' and 'export' may appear only with 'sourceType: module'");

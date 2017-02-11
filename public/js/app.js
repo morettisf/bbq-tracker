@@ -1,5 +1,7 @@
 'use strict'
 
+import 'whatwg-fetch'
+
 /***** LOGS *****/
 
 // displaying other device textbox
@@ -255,7 +257,6 @@ var url = window.location.pathname
 var logId = url.split('/').pop()
 
 function updateLog(logData) {
-  import 'whatwg-fetch'
   fetch('/view-log/' + logId, {
     method: 'PUT',
     headers: {
