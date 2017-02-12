@@ -7,6 +7,7 @@
     "test-watch": "NODE_ENV=test nodemon --exec 'mocha'",
     "test": "NODE_ENV=test mocha",
     "build": "browserify client.js | uglifyjs -o public/js/bundle.js",
+    "start": "node --harmony-async-await server",
     "watch": "watchify client.js -o public/js/bundle.js --debug --verbose",
     "watch-server": "nodemon --watch routes ./server.js"
   },
@@ -19,6 +20,7 @@
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
+    "micro": "latest",
     "moment": "^2.17.1",
     "mongoose": "^4.7.6",
     "passport": "^0.3.2",

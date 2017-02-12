@@ -1,5 +1,6 @@
 console.log('server is running')
 
+const micro = require('micro')
 const express = require('express')
 const session = require('express-session')
 const bodyParser = require('body-parser')

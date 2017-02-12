@@ -64,7 +64,7 @@ input, select, textarea {
 }
 
 #log-main input[type='text']:focus, #log-main textarea:focus {
-  background-color: #ffec80;
+  background-color: #FAFFBD;
 }
 
 
