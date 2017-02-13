@@ -663,7 +663,8 @@ td img {
 }
 
 td {
-  word-wrap: break-word; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #log-history-main th {
