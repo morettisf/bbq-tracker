@@ -73,15 +73,19 @@
               </option>
             <% }) %>
           </select>
-          <input type='text' placeholder='Other meat' id='meat-other-text' <% if (!logInfo.meat_other) { %>class='hidden'<% } %> value='<%= logInfo.meat_other %>' disabled>
-        </label>
-        <label for='meat-weight'>Weight
-          <input type='text' name='meat-weight' id='weight' value='<%= logInfo.weight %>' disabled>
-        </label>
+          <label for='meat-weight'>Weight
+            <input type='text' name='meat-weight' id='weight' value='<%= logInfo.weight %>' disabled>
+          </label>
+          </label>
+        <div id='meat-other-box' <% if (!logInfo.meat_other) { %> class='hidden'<% } %> >
+          <label for='other-meat'> Meat Type
+          <input type='text' placeholder='Other meat' id='meat-other-text' value='<%= logInfo.meat_other %>' disabled>
+          </label>
+        </div>
+      </div>
         <label for='meat-notes'>Meat Notes
           <input type='text' name='meat-notes' id='meat-notes' value='<%= logInfo.meat_notes %>' disabled>
         </label>
-      </div>
       <div id='cook-temperature'>
         <label for='cook-temperature'>Cooking Temp
           <input id='temp-slider' type='range' min='100' max='500' step='5' value='<%= logInfo.cook_temperature %>' oninput='window.outputUpdate(value)' disabled>

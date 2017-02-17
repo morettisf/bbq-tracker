@@ -22,7 +22,7 @@ if (deviceList) {
 
 // displaying other meat textbox
 var meatList = document.querySelector('#meat-type')
-var otherMeat = document.querySelector('#meat-other-text')
+var otherMeat = document.querySelector('#meat-other-box')
 
 if (meatList) {
   meatList.addEventListener('change', function() {

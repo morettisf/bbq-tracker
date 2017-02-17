@@ -48,15 +48,19 @@
               <option value='<%= meatType %>'><%= meatType %></option>
             <% }) %>
           </select>
-          <input type='text' placeholder='Other meat type' id='meat-other-text' class='hidden'>
-        </label>
         <label for='meat-weight'>Weight
           <input type='text' name='meat-weight' id='weight' placeholder='5 lbs'>
         </label>
+        </label>
+        <div id='meat-other-box' class='hidden'>
+          <label for='other-meat'> Meat Type
+            <input type='text' placeholder='Custom' id='meat-other-text'>
+          </label>
+        </div>
+      </div>
         <label for='meat-notes' id='meat-notes-label'>Meat Notes
           <input type='text' name='meat-notes' id='meat-notes' placeholder='Prime cut of meat'>
         </label>
-      </div>
       <div id='cook-temperature'>
         <label for='cook-temperature'>Cooking Temp
           <input id='temp-slider' type='range' min='100' max='500' step='5' value='225' oninput='window.outputUpdate(value)'>

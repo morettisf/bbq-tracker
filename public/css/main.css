@@ -102,7 +102,13 @@ video {
 }
 
 #home-main th {
-  font-weight: bolder;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 100;
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
 }
 
 #home-main a {
@@ -128,13 +134,17 @@ video {
   margin: 0 20px 20px;
   overflow: scroll;
   border: 1px solid black;
-  background-color: rgba(99, 115, 122, 0.7);
+  background-color: rgba(99, 115, 122, 0.8);
   overflow-x: hidden;
 }
 
 table img, #public-rating img {
   width: 116px;
   height: 22.5px;
+}
+
+#public-rating {
+  margin-top: 20px;
 }
 
 /* Public Logs (Updated) - Scrolling */
@@ -208,8 +218,6 @@ table img, #public-rating img {
   margin-top: -200%;
   background-color: #63737A;
   display: none;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
 }
 
 #logo {
@@ -298,6 +306,9 @@ table img, #public-rating img {
 
 
 /***** Logs *****/
+
+#profile-box {
+}
 
 #profile-box img {
   width: 75px;
@@ -469,8 +480,16 @@ input[type=range]:focus::-ms-fill-upper {
   width: 200px;
 }
 
-#cooking-device, #meat-type {
+#meat-type {
   width: 100px;
+}
+
+label[for='meat-weight'] {
+  margin-top: 0;
+}
+
+#cooking-device {
+  width: 180px;
 }
 
 #weight, #estimated-time {
@@ -502,7 +521,7 @@ input[type=range]:focus::-ms-fill-upper {
 #final-comments-box {
   clear: both;
   width: 100%;
-  padding: 15px;
+  margin-bottom: 20px;
   box-sizing: border-box;
 }
 
@@ -617,6 +636,7 @@ input[type=range]:focus::-ms-fill-upper {
 .rating { 
   border: none;
   float: left;
+  margin-left: -12px;
 }
 
 .rating > input { display: none; } 
@@ -852,10 +872,6 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 
 @media (min-width: 375px) {
-
-  #cooking-device, #meat-type {
-    width: 150px;
-  }
 
   input[type='text'] {
     width: 190px;
