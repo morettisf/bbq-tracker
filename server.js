@@ -8,6 +8,7 @@ const routes = require('./routes/routes')
 const app = express()
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
+const MongoStore = require('connect-mongo')(session)
 
 mongoose.Promise = global.Promise
 if (process.env.NODE_ENV !== 'test') { // package.json specifies a test database connection when running mocha
@@ -28,7 +29,9 @@ app.use(session({
   secret: 'secret',
   saveUninitialized: true,
   resave: true,
-  cookie: { secure: false }
+  cookie: { secure: false },
+//  store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') })
+  store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
 }))
 
 app.use((err, req, res, next) => { // middleware to handle errors. "Next" is a function to pass to next middleware in chain

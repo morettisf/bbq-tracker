@@ -690,7 +690,12 @@ td {
   text-overflow: ellipsis;
 }
 
+#select-td-log-history {
+  text-overflow: clip;
+}
+
 #log-history-main th {
+  font-family: 'Roboto Slab', serif;
   cursor: pointer;
 }
 
