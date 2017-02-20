@@ -15,6 +15,9 @@ module.exports = {
     var authorId
     var sameUserAuthor
 
+    // set default voting status to available
+    var votingStatus = true
+
     // check if this is a logged in user or not
     if (req.session.passport) {
       userId = req.session.passport.user
@@ -23,41 +26,53 @@ module.exports = {
       userId = null
     }
 
-    // grab their username for the nav if logged in
-    User.findOne({ _id: userId }, function(err, user) {
+    // grab their username for the nav if logged in, pass to callback function
+    function getNavUser(userId, callback) {
 
-      if (err) throw err
+      User.findOne({ _id: userId }, function(err, user) {
 
-      if (user) {
-        username = user.username
-        avatar = user.avatar
-      }
-      else {
-        username = null
-      }
+        if (err) throw err
 
-    })
+        if (user) {
 
-    // set default voting status to available
-    var votingStatus = true
+          username = user.username
+          avatar = user.avatar
+          callback(null, username, avatar)
 
-    // find the visited public log in database
-    User.find({ 'logs._id': logId })
-      .exec(function (err, user) {
+        }
+        else {
+          username = null
 
-        if (err) {
-
-          var ejs = { 
-            title: 'Page Not Found | BBQ Tracker', 
-            h1: 'Page not found!', 
-            user: req.session.passport, 
-            username: username, 
-            avatar: avatar 
-          }
-
-          res.render('not-found', ejs)
+          callback(null, username, null)
         }
 
+      })
+
+    }
+
+    // ***** receives logged in/out info from callback function, populates page or not *****
+    getNavUser(userId, function(err, username, avatar) {
+
+      // ***** find the visited public log in database, associate it to a user *****
+      User.find({ 'logs._id': logId })
+        .exec(function (err, user) {
+
+        // *** if there's no such log in database ***
+        if (err) {
+
+            var ejs = { 
+              title: 'Page Not Found | BBQ Tracker', 
+              h1: 'Sorry, page not found!', 
+              user: req.session.passport, 
+              username: username, 
+              avatar: avatar 
+            }
+
+            res.status(404)
+            res.render('not-found', ejs)
+        }
+
+        // ***** if log was found and user was found, find log info to populate ***** 
         else {
 
           logAvatar = user[0].avatar
@@ -69,38 +84,63 @@ module.exports = {
             }
           })
 
-          // see if user has voted for visited log or not. If so, disable voting.
-          selectedLog.voters.forEach(function(voter) {
-            if (userId === voter.voter_id) {
-              votingStatus = false
+          // *** check if log is Public or not before displaying ***
+          if (selectedLog.status === 'Public') {
+
+            // see if user has voted for visited log or not. If so, disable voting.
+            selectedLog.voters.forEach(function(voter) {
+              if (userId === voter.voter_id) {
+                votingStatus = false
+              }
+            })
+
+            // remove voting ability if logged in user same as public log author
+            if (userId === authorId) {
+              sameUserAuthor = true
             }
-          })
 
-          // remove voting ability if logged in user same as public log author
-          if (userId === authorId) {
-            sameUserAuthor = true
+            else {
+              sameUserAuthor = false
+            }
+
+
+            var ejs = { 
+              title: selectedLog.session_name + ' | BBQ Tracker', 
+              h1: 'Public BBQ Log', 
+              logOptions: LogOptions, 
+              logInfo: selectedLog, 
+              user: req.session.passport, 
+              username: username, 
+              avatar: avatar, 
+              logAvatar: logAvatar, 
+              moment: moment, 
+              button: votingStatus, 
+              sameUserAuthor: sameUserAuthor 
+            }
+
+            res.render('view-public-log', ejs)
+        
           }
 
+          // *** if log is not public, show page not found ***
           else {
-            sameUserAuthor = false
+
+            var ejs = { 
+              title: 'Not a Public Log | BBQ Tracker', 
+              h1: 'Sorry, not a public log!', 
+              user: req.session.passport, 
+              username: username, 
+              avatar: avatar 
+            }
+
+            res.status(404)
+            res.render('not-found', ejs)
+
           }
 
-          var ejs = { 
-            title: selectedLog.session_name + ' | BBQ Tracker', 
-            h1: 'Public BBQ Log', 
-            logOptions: LogOptions, 
-            logInfo: selectedLog, 
-            user: req.session.passport, 
-            username: username, 
-            avatar: avatar, 
-            logAvatar: logAvatar, 
-            moment: moment, 
-            button: votingStatus, 
-            sameUserAuthor: sameUserAuthor 
-          }
-
-          res.render('view-public-log', ejs)
         }
+
+      })
 
     })
 

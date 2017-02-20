@@ -57,4 +57,23 @@ describe('Logged in', () => {
       })
   })
 
+  // it('handles an error accessing unknown URL', (done) => {
+  //   chai.request(app)
+  //     .post('/register')
+  //     .send({ username: 'phil', email: 'phil@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
+  //     .then(() => {
+  //       var agent = chai.request.agent(app)
+  //         agent.post('/sign-in')
+  //         .send({ username: 'phil', password: 'bestpassword123' })
+  //         .then(() => {
+  //           agent.get('/create-logbubu')
+  //           .then((res) => {
+  //             res.should.have.status(404)
+  //             res.text.should.have.string('Sorry, page not found!')
+  //             done()
+  //           })
+  //         })
+  //     })
+  // })
+
 })

@@ -19,6 +19,7 @@ module.exports = {
           logInfo = log
           return true
         }
+
       })
       
       if (ownLog) {
@@ -30,6 +31,7 @@ module.exports = {
             h1: 'Saved BBQ Log', 
             logOptions: LogOptions, 
             logInfo: logInfo, 
+            logId: logId,
             user: req.session.passport, 
             username: username, 
             avatar: avatar, 
@@ -38,6 +40,23 @@ module.exports = {
 
           return res.render('view-log', ejs)
         }
+
+      else if (!ownLog) {
+
+          var username = user.username
+          var avatar = user.avatar
+
+          var ejs = { 
+            title: 'Page Not Found | BBQ Tracker', 
+            h1: 'Sorry, page not found!', 
+            user: req.session.passport, 
+            username: username, 
+            avatar: avatar 
+          }
+
+          res.status(404)
+          res.render('not-found', ejs)
+      }
 
     })
 

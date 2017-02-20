@@ -152,7 +152,7 @@ if (save) {
       wood_other: document.querySelector('#wood-other-text').value,
       rating: ratingSelected,
       status: statusSelected,
-      username: document.querySelector('#username').innerHTML,
+      username: document.querySelector('#username').textContent,
       updated: new Date(),
       votes: 0,
       voters: [],
@@ -251,7 +251,7 @@ if (update) {
       wood_other: document.querySelector('#wood-other-text').value,
       rating: ratingSelected,
       status: statusSelected,
-      username: document.querySelector('#username').innerHTML,
+      username: document.querySelector('#username').textContent,
       updated: new Date(),
       other_ingredients: document.querySelector('#other-ingredients').value,
       final: document.querySelector('#final-comments').value
@@ -313,6 +313,31 @@ function updateLog(logData) {
         }, 1000)
 
       }, 2000)
+
+      // add/remove public link on update without page refresh
+      var h3 = document.querySelector('h3')
+      var pubLink = document.querySelector('#pub-link')
+      var status = document.querySelectorAll('#status-box input')
+      var statusSelected
+
+      status.forEach(function(item) {
+        if (item.checked) {
+          statusSelected = item.value
+        }
+      })
+
+      if ((statusSelected === 'Private') && h3) {
+        pubLink.removeChild(h3)
+      }
+
+      if ((statusSelected === 'Public') && !h3) {
+        var h3 = document.createElement('h3')
+        var url = window.location.pathname
+        var logId = url.split('/').pop()
+        var h3Content = "<a href='/public-log/" + logId + "'>Public link here</a>"
+        h3.innerHTML = h3Content
+        pubLink.appendChild(h3)
+      }
 
     })
 }
@@ -414,7 +439,7 @@ if (voteBtn) {
   var logId = url.split('/').pop()
 
     var log = {
-      author: document.querySelector('#author').innerHTML,
+      author: document.querySelector('#author').textContent,
       logId: logId
     }
 

@@ -66,7 +66,9 @@ module.exports = (app) => {
     })
   })
 
-  app.use('*', function(req, res, next) {
+
+  // Handle 404 errors
+  app.use(function(req, res) {
 
     var userId
     var username
@@ -96,12 +98,54 @@ module.exports = (app) => {
 
       var ejs = { 
         title: 'Page Not Found | BBQ Tracker', 
-        h1: 'Page not found!', 
+        h1: 'Sorry, page not found!', 
         user: req.session.passport, 
         username: username, 
         avatar: avatar 
       }
-      
+
+      res.status(404)
+      res.render('not-found', ejs)
+    })
+  })
+
+  // Handle 500 errors
+  app.use(function(error, req, res, next) {
+    var userId
+    var username
+    var avatar
+
+    // check if this is a logged in user or not
+    if (req.session.passport) {
+      var userId = req.session.passport.user
+    }
+    else {
+      var userId = null
+    }
+
+    // grab their username for the nav if logged in
+    User.findOne({ _id: userId }, function(err, user) {
+
+      if (err) throw err
+
+      if (user) {
+        username = user.username
+        avatar = user.avatar
+      }
+
+      else {
+        username = null
+      }
+
+      var ejs = { 
+        title: 'Server Error | BBQ Tracker', 
+        h1: 'Sorry, server error!', 
+        user: req.session.passport, 
+        username: username, 
+        avatar: avatar 
+      }
+
+      res.status(500)
       res.render('not-found', ejs)
     })
   })
@@ -148,6 +192,7 @@ function isLoggedIn(req, res, next) {
       avatar: avatar 
     }
 
+    res.status(404)
     res.render('not-found', ejs)
   }
 }

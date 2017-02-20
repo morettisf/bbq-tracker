@@ -102,8 +102,6 @@ video {
 }
 
 #home-main th {
-  font-family: 'Roboto Slab', serif;
-  font-weight: 100;
   text-shadow:
    -1px -1px 0 #000,  
     1px -1px 0 #000,
@@ -306,9 +304,6 @@ table img, #public-rating img {
 
 
 /***** Logs *****/
-
-#profile-box {
-}
 
 #profile-box img {
   width: 75px;

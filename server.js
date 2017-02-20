@@ -8,7 +8,7 @@ const routes = require('./routes/routes')
 const app = express()
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
-const MongoStore = require('connect-mongo')(session)
+const MongoStore = require('connect-mongo')(session) // stores session in mongo
 
 mongoose.Promise = global.Promise
 if (process.env.NODE_ENV !== 'test') { // package.json specifies a test database connection when running mocha
@@ -28,9 +28,10 @@ app.use(cookieParser())
 app.use(session({ 
   secret: 'secret',
   saveUninitialized: true,
-  resave: true,
-  cookie: { secure: false },
-//  store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') })
+  resave: false,
+  rolling: true,
+  cookie: { secure: false, maxAge: 1440000 }, // 24 hours
+//  store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') }) // stores session in mongo
   store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
 }))
 

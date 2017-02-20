@@ -20,6 +20,11 @@
       <div><%= logInfo.username %></div>
     </div>
     <h1><%= h1 %></h1>
+    <div id='pub-link'>
+      <% if (logInfo.status === 'Public') { %>
+        <h3><a href='/public-log/<%= logId %>'>Public link here</a></h3>
+      <% } %>
+    </div>
     <div id='vote-area'>
       <div id='vote-count-box'>
         <div id='vote-count'><%= logInfo.votes %></div>

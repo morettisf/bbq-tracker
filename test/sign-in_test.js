@@ -12,11 +12,11 @@ describe('Sign-In', () => {
       .post('/register')
       .send({ username: 'greg', email: 'greg@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
       .then(() => {
-        chai.request(app)
-          .post('/sign-in')
+        var agent = chai.request.agent(app)
+          agent.post('/sign-in')
           .send({ username: 'greg', password: 'bestpassword123' })
           .end((err, res) => {
-            res.should.have.status(200)
+            res.text.should.have.string('Log History')
             done()
           })
       })
