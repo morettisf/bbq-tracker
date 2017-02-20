@@ -25,15 +25,31 @@ app.use(bodyParser.json())
 
 app.use(cookieParser())
 
-app.use(session({ 
-  secret: 'secret',
-  saveUninitialized: true,
-  resave: false,
-  rolling: true,
-  cookie: { secure: false, maxAge: 1440000 }, // 24 hours
-//  store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') }) // stores session in mongo
-//  store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
-}))
+if (process.env.NODE_ENV !== 'test') {
+
+  app.use(session({ 
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: false,
+    rolling: true,
+    cookie: { secure: false, maxAge: 1440000 }, // 24 hours
+    store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') }) // stores session in mongo
+  //  store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
+  }))
+
+}
+
+else if (process.env.NODE_ENV === 'test') {
+
+  app.use(session({ 
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: false,
+    rolling: true,
+    cookie: { secure: false, maxAge: 1440000 }, // 24 hours
+  }))
+
+}
 
 app.use((err, req, res, next) => { // middleware to handle errors. "Next" is a function to pass to next middleware in chain
   res.status(422).send({ error: err.message })
