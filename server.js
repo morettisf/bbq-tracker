@@ -32,7 +32,7 @@ app.use(session({
   rolling: true,
   cookie: { secure: false, maxAge: 1440000 }, // 24 hours
 //  store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') }) // stores session in mongo
-  store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
+//  store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
 }))
 
 app.use((err, req, res, next) => { // middleware to handle errors. "Next" is a function to pass to next middleware in chain
