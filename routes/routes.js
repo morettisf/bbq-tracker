@@ -11,6 +11,19 @@ const PublicLog = require('./controllers/public-log')
 const LogHistory = require('./controllers/log-history')
 const About = require('./controllers/about')
 
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '/Users/morettisf/desktop/uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+
+const upload = multer({ storage })
+
 module.exports = (app) => {
 
   app.use(passport.initialize())
@@ -40,7 +53,7 @@ module.exports = (app) => {
 
   app.get('/create-log', isLoggedIn, CreateLog.get)
 
-  app.post('/create-log', CreateLog.post)
+  app.post('/create-log', upload.single('pic1'), CreateLog.post)
 
   app.get('/view-log/:log', isLoggedIn, ViewLog.get)
 

@@ -69,6 +69,10 @@ var logInfoUpdate = {
   votes: 0,
   other_ingredients: '- rub\n- sauce' }
 
+var logInfoUpdateBad = { 
+  blah: 'blah'
+}
+
 describe('Logged in', () => {
   it('handles a creating a new log', (done) => {
     chai.request(app)
@@ -251,6 +255,64 @@ describe('Logged in', () => {
                 })
               })
             })
+          })
+      })
+  })
+
+  it('handles a post request error', (done) => {
+    chai.request(app)
+      .post('/register')
+      .send({ username: 'steve', email: 'steve@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
+      .then(() => {
+        var agent = chai.request.agent(app)
+          agent.post('/sign-in')
+          .send({ username: 'steve', password: 'bestpassword123' })
+          .then(() => {
+            agent.get('/create-log')
+            .then(() => {
+              agent.post('/create-log')
+              .send(logInfo)
+              .then(() => {
+                User.findOne({ username: 'steve' }, function(err, user) {
+                  var logId = user.logs[0]._id
+                  agent.get('/view-log/' + logId)
+                  .then(() => {
+                    agent.post('/view-log-bad/' + logId)
+                    .send('')
+                    .then(() => {
+                    })
+                    .catch((err) => {
+                      err.should.have.status(404)
+                      err.response.error.text.should.have.string('Sorry, page not found!')
+                      done()
+                    })
+                  })
+                })
+              })
+            })
+          })
+      })
+  })
+
+  it('handles a put request error', (done) => {
+    chai.request(app)
+      .post('/register')
+      .send({ username: 'steve', email: 'steve@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
+      .then(() => {
+        var agent = chai.request.agent(app)
+          agent.post('/sign-in')
+          .send({ username: 'steve', password: 'bestpassword123' })
+            .then(() => {
+              agent.put('/vi')
+              .send('somethingbogus')
+              .then((res) => {
+              })
+              .catch((err) => {
+                console.log(err)
+                err.should.have.status(404)
+                err.response.error.text.should.have.string('Sorry, page not found!')
+                done()
+              })
           })
       })
   })

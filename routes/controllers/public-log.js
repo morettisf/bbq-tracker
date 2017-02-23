@@ -154,8 +154,9 @@ module.exports = {
     var updatedVotes
     var pastVoters = []
     var logObject
-
+    
     User.findOne({ username: author }, function(err, user) {
+
       var logs = user.logs
 
       logs.forEach(function(log) {

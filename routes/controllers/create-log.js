@@ -32,6 +32,8 @@ module.exports = {
     var info = req.body
     var userId = req.session.passport.user
 
+//    console.log(req.file, req.body)
+
     User.findOne({ _id: userId }, function(err, user) {
 
       if (err) throw err

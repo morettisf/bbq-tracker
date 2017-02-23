@@ -305,6 +305,14 @@ table img, #public-rating img {
 
 /***** Logs *****/
 
+.pic-upload {
+  clear: both;
+}
+
+.pic-upload label {
+  display: block;
+}
+
 #profile-box img {
   width: 75px;
   height: 75px;
@@ -570,10 +578,11 @@ label[for='meat-weight'] {
 }
 
 .remove-step {
+  display: block;
   margin-top: 10px;
 }
 
-#save, #update {
+#save, #update, #upload-pic {
   display: block;
   clear: both;
   margin-top: 25px;

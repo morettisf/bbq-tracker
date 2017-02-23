@@ -24,11 +24,11 @@ describe('Logged in', () => {
   it('handles a GET request to Account page', (done) => {
     chai.request(app)
       .post('/register')
-      .send({ username: 'phil', email: 'phil@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
+      .send({ username: 'phil2', email: 'phil2@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
       .then(() => {
         var agent = chai.request.agent(app)
           agent.post('/sign-in')
-          .send({ username: 'phil', password: 'bestpassword123' })
+          .send({ username: 'phil2', password: 'bestpassword123' })
           .then(() => {
             agent.get('/account')
             .then((res) => {
@@ -42,11 +42,11 @@ describe('Logged in', () => {
   it('handles a GET request to Create Log', (done) => {
     chai.request(app)
       .post('/register')
-      .send({ username: 'phil', email: 'phil@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
+      .send({ username: 'phil3', email: 'phil3@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
       .then(() => {
         var agent = chai.request.agent(app)
           agent.post('/sign-in')
-          .send({ username: 'phil', password: 'bestpassword123' })
+          .send({ username: 'phil3', password: 'bestpassword123' })
           .then(() => {
             agent.get('/create-log')
             .then((res) => {
@@ -57,23 +57,25 @@ describe('Logged in', () => {
       })
   })
 
-  // it('handles an error accessing unknown URL', (done) => {
-  //   chai.request(app)
-  //     .post('/register')
-  //     .send({ username: 'phil', email: 'phil@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
-  //     .then(() => {
-  //       var agent = chai.request.agent(app)
-  //         agent.post('/sign-in')
-  //         .send({ username: 'phil', password: 'bestpassword123' })
-  //         .then(() => {
-  //           agent.get('/create-logbubu')
-  //           .then((res) => {
-  //             res.should.have.status(404)
-  //             res.text.should.have.string('Sorry, page not found!')
-  //             done()
-  //           })
-  //         })
-  //     })
-  // })
+  it('handles an error accessing unknown URL', (done) => {
+    chai.request(app)
+      .post('/register')
+      .send({ username: 'phil4', email: 'phil4@test.com', password: 'bestpassword123', password2: 'bestpassword123' })
+      .then(() => {
+        var agent = chai.request.agent(app)
+          agent.post('/sign-in')
+          .send({ username: 'phil4', password: 'bestpassword123' })
+          .then(() => {
+            agent.get('/create-logbubu')
+            .then(() => {
+            })
+            .catch((err) => {
+              err.should.have.status(404)
+              err.response.error.text.should.have.string('Sorry, page not found!')
+              done()
+            })
+          })
+      })
+  })
 
 })

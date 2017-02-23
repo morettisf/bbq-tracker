@@ -135,6 +135,7 @@ if (save) {
       }
     })
 
+    var formData = new FormData()
     var basicData = {
       date: document.querySelector('#date-select').value,
       session_name: document.querySelector('#session-name').value,
@@ -157,6 +158,7 @@ if (save) {
       votes: 0,
       voters: [],
       other_ingredients: document.querySelector('#other-ingredients').value,
+//      pic: formData.append('pic1', document.querySelector('.file').files[0]),
       final: document.querySelector('#final-comments').value
     }
 
@@ -176,7 +178,15 @@ if (save) {
     var logData = Object.assign({ steps: stepInfo }, basicData)
 
     sendLog(logData)
-  })
+    // var f = new FormData()
+    // f.append('session_name', document.querySelector('#session-name').value)
+    // f.append('pic1', document.querySelector('.file').files[0])
+
+    // var xhr = new XMLHttpRequest()
+    // xhr.open('POST', '/create-log')
+    // xhr.send(f)
+
+    })
 }
 
 

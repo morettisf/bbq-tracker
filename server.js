@@ -20,8 +20,7 @@ app.use(express.static('public'))
 
 app.set('view engine', 'ejs') // enabling view engine templates
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use([bodyParser.urlencoded({ extended: true }), bodyParser.json()])
 
 app.use(cookieParser())
 
@@ -32,9 +31,9 @@ if (process.env.NODE_ENV !== 'test') {
     saveUninitialized: true,
     resave: false,
     rolling: true,
-    cookie: { secure: false, maxAge: 1440000 }, // 24 hours
-    store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') }) // stores session in mongo
-  //  store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
+    cookie: { secure: false, maxAge: 1000 * 60 * 24 }, // 24 hours
+  //  store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') }) // stores session in mongo
+    store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
   }))
 
 }
@@ -46,7 +45,7 @@ else if (process.env.NODE_ENV === 'test') {
     saveUninitialized: true,
     resave: false,
     rolling: true,
-    cookie: { secure: false, maxAge: 1440000 }, // 24 hours
+    cookie: { secure: false, maxAge: 1000 * 60 * 24 }, // 24 hours
   }))
 
 }
