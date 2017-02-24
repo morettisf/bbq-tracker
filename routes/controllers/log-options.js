@@ -75,7 +75,6 @@ module.exports = {
       'Old Smokey - Electric',
       'Outsunny Backyard - Charcoal Horizontal',
       'Oven',
-      'Oil Drum',
       'Pit Barrel Cooker',
       'Pit Boss - Charcoal Vertical',
       'Pit Boss - Pellet Horizontal',
@@ -119,6 +118,7 @@ module.exports = {
       'Traeger - Texas Elite 34"',
       'Traeger - XL',
       'Triprel Patio Smoker Grill - Charcoal',
+      'Ugly Drum Smoker',
       'Weber Kettle Grill',
       'Weber Smokey Mountain - Charcoal Vertical',
       'Other'

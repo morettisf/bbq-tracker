@@ -29,10 +29,10 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(session({ 
     secret: 'secret',
     saveUninitialized: true,
-    resave: true,
+    resave: false,
     rolling: true,
-    cookie: { secure: false, maxAge: 1000 * 60 * 24 }, // 24 hours
-  //  store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') }) // stores session in mongo
+    cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
+//    store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') }) // stores session in mongo
     store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
   }))
 
@@ -45,7 +45,7 @@ else if (process.env.NODE_ENV === 'test') {
     saveUninitialized: true,
     resave: false,
     rolling: true,
-    cookie: { secure: false, maxAge: 1000 * 60 * 24 }, // 24 hours
+    cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
   }))
 
 }

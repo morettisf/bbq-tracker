@@ -77,6 +77,7 @@ module.exports = {
           newLog.status = 'Private'
           newLog.votes = 0
           newLog.other_ingredients = log.other_ingredients,
+          newLog.recipe_guideline = log.recipe_guideline,
           newLog.final = log.final
           
           newLog.steps = []

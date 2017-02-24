@@ -12,6 +12,7 @@
 <body>
   <%- include header.ejs -%>
   <main id='log-history-main'>
+    <a href='/create-log'><button type='button' id='new-log-btn'>Create BBQ Log</button></a>
     <h1>Log History</h1>
     <% if (message) { %>
     <div class='message'><%= message %></div>

@@ -25,6 +25,7 @@ const LogSchema = new Schema({
   updated: { type: Date },
   votes: { type: Number },
   other_ingredients: { type: String },
+  recipe_guideline: { type: String },
   voters: [voterIdSchema],
   final: { type: String }
 })

@@ -134,9 +134,13 @@
         <label for='other-ingredients'>Other Ingredients</label>
           <textarea id='other-ingredients' placeholder='List them out here' disabled><%= logInfo.other_ingredients %></textarea>
       </div>
+      <div id='recipe-guideline-box'>
+        <label for='recipe-guideline'>Recipe Guideline</label>
+          <textarea id='recipe-guideline' placeholder='List planned recipe steps here' disabled><%= logInfo.recipe_guideline %></textarea>
+      </div>
     </section>
     <section id='recipe-area'>
-      <h2>Recipe Steps</h2>
+      <h2>Cooking Steps</h2>
       <div id='recipe-list'>
         <ol>
           <% logInfo.steps.forEach(function(item) { %>

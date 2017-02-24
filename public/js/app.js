@@ -158,6 +158,7 @@ if (save) {
       votes: 0,
       voters: [],
       other_ingredients: document.querySelector('#other-ingredients').value,
+      recipe_guideline: document.querySelector('#recipe-guideline').value,
 //      pic: formData.append('pic1', document.querySelector('.file').files[0]),
       final: document.querySelector('#final-comments').value
     }
@@ -264,6 +265,7 @@ if (update) {
       username: document.querySelector('#username').textContent,
       updated: new Date(),
       other_ingredients: document.querySelector('#other-ingredients').value,
+      recipe_guideline: document.querySelector('#recipe-guideline').value,
       final: document.querySelector('#final-comments').value
     }
 

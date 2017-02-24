@@ -92,6 +92,7 @@ module.exports = {
       log.username = info.username
       log.updated = info.updated
       log.other_ingredients = info.other_ingredients,
+      log.recipe_guideline = info.recipe_guideline,
       log.final = info.final
       
       log.steps = []
