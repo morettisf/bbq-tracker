@@ -29,7 +29,7 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(session({ 
     secret: 'secret',
     saveUninitialized: true,
-    resave: false,
+    resave: true,
     rolling: true,
     cookie: { secure: false, maxAge: 1000 * 60 * 24 }, // 24 hours
   //  store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') }) // stores session in mongo

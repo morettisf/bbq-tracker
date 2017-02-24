@@ -136,7 +136,6 @@
     </section>
     <section id='recipe-area'>
       <h2>Recipe Steps</h2>
-      <button type='button' id='add-step'>Add Step</button>
       <div id='recipe-list'>
         <ol>
           <% logInfo.steps.forEach(function(item) { %>
@@ -162,6 +161,7 @@
           <% }) %>
         </ol>
       </div>
+      <button type='button' id='add-step'>Add Step</button>
     </section>
       <fieldset class='rating'>
         <input type='radio' id='star5' name='rating' value='5' <% if (logInfo.rating === 5) { %> checked='checked'<% } %>><label class='full' for='star5'></label>
