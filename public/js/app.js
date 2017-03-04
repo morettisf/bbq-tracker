@@ -159,7 +159,7 @@ if (save) {
       voters: [],
       other_ingredients: document.querySelector('#other-ingredients').value,
       recipe_guideline: document.querySelector('#recipe-guideline').value,
-//      pic: formData.append('pic1', document.querySelector('.file').files[0]),
+      // pic: formData.append('pic1', document.querySelector('.file').files[0]),
       final: document.querySelector('#final-comments').value
     }
 

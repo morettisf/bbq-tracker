@@ -10,19 +10,33 @@ const ViewLog = require('./controllers/view-log')
 const PublicLog = require('./controllers/public-log')
 const LogHistory = require('./controllers/log-history')
 const About = require('./controllers/about')
+// const GoogleDrive = require('./controllers/google-drive')
 
-const multer = require('multer')
+// const multer = require('multer')
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '/Users/morettisf/desktop/uploads/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname)
-  }
-})
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, '/Users/morettisf/desktop/uploads/')
+//     console.log(file)
+//   },
+//   // check extension type, size
+//   filename: function (req, file, cb) {
 
-const upload = multer({ storage })
+//     let fileSplit = file.originalname.split('.')
+
+//     let filename = fileSplit.slice(0, fileSplit.length - 1)
+//     filename.push(Date.now())
+//     filename = filename.join('_') + '.' + fileSplit[fileSplit.length - 1]
+
+//     cb(null, filename)
+//   }
+// })
+
+// var storage = multer.memoryStorage()
+
+// console.log(storage)
+
+// const upload = multer({ storage })
 
 module.exports = (app) => {
 
@@ -53,7 +67,8 @@ module.exports = (app) => {
 
   app.get('/create-log', isLoggedIn, CreateLog.get)
 
-  app.post('/create-log', upload.single('pic1'), CreateLog.post)
+  app.post('/create-log', CreateLog.post)
+  // app.post('/create-log', upload.single('pic1'), CreateLog.post)
 
   app.get('/view-log/:log', isLoggedIn, ViewLog.get)
 

@@ -32,7 +32,9 @@ module.exports = {
     var info = req.body
     var userId = req.session.passport.user
 
-//    console.log(req.file, req.body)
+    // var picName = req.file.filename
+    
+    // info.pic1 = picName
 
     User.findOne({ _id: userId }, function(err, user) {
 

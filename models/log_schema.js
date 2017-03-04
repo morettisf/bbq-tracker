@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const stepSchema = require('./step_schema')
 const voterIdSchema = require('./voter_schema')
+const picSchema = require('./pic_schema')
 
 const LogSchema = new Schema({
   date: { type: Date },
@@ -27,7 +28,8 @@ const LogSchema = new Schema({
   other_ingredients: { type: String },
   recipe_guideline: { type: String },
   voters: [voterIdSchema],
-  final: { type: String }
+  final: { type: String },
+  pics: [picSchema]
 })
 
 module.exports = LogSchema
