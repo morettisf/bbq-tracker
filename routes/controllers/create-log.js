@@ -29,22 +29,24 @@ module.exports = {
 
   post: function(req, res, next) {
 
-    var info = JSON.parse(req.body.logData)
+    console.log(req.files)
 
-    var userId = req.session.passport.user
+    // var info = JSON.parse(req.body.logData)
 
-    var pics = req.files
+    // var userId = req.session.passport.user
 
-    for (i=0; i < pics.length; i++) {
-      info.pics.push({ filename: pics[i].key })
-    }
+    // var pics = req.files
 
-    User.findOne({ _id: userId }, function(err, user) {
+    // for (i=0; i < pics.length; i++) {
+    //   info.pics.push({ filename: pics[i].key })
+    // }
 
-      if (err) throw err
+    // User.findOne({ _id: userId }, function(err, user) {
 
-      user.logs.push(info)
-      user.save()
+    //   if (err) throw err
+
+    //   user.logs.push(info)
+    //   user.save()
 
       res.send('ok')
       
