@@ -239,6 +239,8 @@ if (save) {
     f.append('pics', document.querySelector('#file4').files[0])
     f.append('pics', document.querySelector('#file5').files[0])
 
+    console.log(f.get('pics'))
+
     xhrPromise(f)
       .then((res) => {
         window.location = '/log-history?message=Log%20created'
@@ -481,7 +483,6 @@ if (update) {
         })
 
         for (var i = 1; i < 6; i++) {
-          console.log('in loop')
           var uploadDiv = document.createElement('div')
           uploadDiv.classList.add('pic-upload')
 
@@ -650,7 +651,6 @@ function deleteLogs(selected) {
     credentials: 'include'
   })
     .then(function(res) {
-      console.log(res)
       window.location = '/log-history?message=Logs%20deleted'
     })
 }
