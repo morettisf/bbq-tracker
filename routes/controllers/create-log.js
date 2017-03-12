@@ -50,7 +50,7 @@ module.exports = {
 
       res.send('ok')
       
-    })
+    // })
 
   }
 
