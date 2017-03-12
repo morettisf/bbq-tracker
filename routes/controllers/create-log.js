@@ -29,7 +29,7 @@ module.exports = {
 
   post: function(req, res, next) {
 
-    console.log(req.files)
+    console.log(req)
 
     // var info = JSON.parse(req.body.logData)
 
