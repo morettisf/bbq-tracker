@@ -229,22 +229,35 @@ if (save) {
 
     var logData = Object.assign({ steps: stepInfo }, basicData)
 
-    var f = new FormData()
+    if ( navigator.userAgent.match(/Android/i)
+     || navigator.userAgent.match(/webOS/i)
+     || navigator.userAgent.match(/iPhone/i)
+     || navigator.userAgent.match(/iPad/i)
+     || navigator.userAgent.match(/iPod/i)
+     || navigator.userAgent.match(/BlackBerry/i)
+     || navigator.userAgent.match(/Windows Phone/i)
+     ) {
+      sendLog(logData)
+    }
 
-    f.append('logData', JSON.stringify(logData))
+    else {
 
-    f.append('pics', document.querySelector('#file1').files[0])
-    f.append('pics', document.querySelector('#file2').files[0])
-    f.append('pics', document.querySelector('#file3').files[0])
-    f.append('pics', document.querySelector('#file4').files[0])
-    f.append('pics', document.querySelector('#file5').files[0])
+      var f = new FormData()
 
-    xhrPromise(f)
-      .then((res) => {
-        window.location = '/log-history?message=Log%20created'
-      })
+      f.append('logData', JSON.stringify(logData))
 
-    // sendLog(f)
+      f.append('pics', document.querySelector('#file1').files[0])
+      f.append('pics', document.querySelector('#file2').files[0])
+      f.append('pics', document.querySelector('#file3').files[0])
+      f.append('pics', document.querySelector('#file4').files[0])
+      f.append('pics', document.querySelector('#file5').files[0])
+
+      xhrPromise(f)
+        .then((res) => {
+          window.location = '/log-history?message=Log%20created'
+        })
+
+    }
 
     })
 }
@@ -266,21 +279,21 @@ function xhrPromise(f) {
   })
 }
 
-// function sendLog(f) {
-//   fetch('/create-log', {
-//     method: 'POST',
-    // headers: {
-    //   'Content-Type': 'multipart/form-data'
-    // },
-    // body: f,
-    // mode: 'cors',
-    // cache: 'default',
-    // credentials: 'include'
-//   })
-//     .then(function() {
-//       window.location = '/log-history?message=Log%20created'
-//     })
-// }
+function sendLog(logData) {
+  fetch('/create-log', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: logData,
+    mode: 'cors',
+    cache: 'default',
+    credentials: 'include'
+  })
+    .then(function() {
+      window.location = '/log-history?message=Log%20created'
+    })
+}
 
 // update log data to Mongo
 var update = document.querySelector('#update')
