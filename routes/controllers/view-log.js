@@ -67,15 +67,21 @@ module.exports = {
     var logId = req.params.log
     // var info = req.body
 
-    var info = JSON.parse(req.body.logData)
+    if (req.files) {
 
-    var newPics = req.files
+      var info = JSON.parse(req.body.logData)
 
-    for (i=0; i < newPics.length; i++) {
-      info.pics.push({ filename: newPics[i].key })
+      var newPics = req.files
+
+      for (i=0; i < newPics.length; i++) {
+        info.pics.push({ filename: newPics[i].key })
+      }
+
     }
 
-
+    else {
+      var info = req.body
+    }
 
     User.findOne({ _id: userId }, function(err, user) {
 
