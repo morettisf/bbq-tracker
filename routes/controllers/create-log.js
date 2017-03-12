@@ -30,6 +30,7 @@ module.exports = {
   post: function(req, res, next) {
 
     // console.log(req)
+    console.log('hit post')
 
     var info = JSON.parse(req.body.logData)
 
