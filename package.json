@@ -7,6 +7,7 @@
     "test-watch": "NODE_ENV=test nodemon --exec 'mocha'",
     "test": "NODE_ENV=test mocha",
     "build": "browserify client.js | uglifyjs -o public/js/bundle.js",
+    "start": "npm run server.js",
     "watch": "watchify client.js -o public/js/bundle.js --debug --verbose",
     "watch-server": "nodemon --watch routes ./server.js"
   },
