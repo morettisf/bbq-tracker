@@ -87,8 +87,8 @@ module.exports = (app) => {
 
   app.get('/create-log', isLoggedIn, CreateLog.get)
 
-  // app.post('/create-log', upload.array('pics'), CreateLog.post)
-  app.post('/create-log', CreateLog.post)
+  app.post('/create-log', upload.array('pics'), CreateLog.post)
+//  app.post('/create-log', CreateLog.post)
 
   app.get('/view-log/:log', isLoggedIn, ViewLog.get)
 
