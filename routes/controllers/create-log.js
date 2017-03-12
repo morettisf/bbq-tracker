@@ -31,19 +31,24 @@ module.exports = {
 
     // console.log(req)
     console.log('hit post')
-
-    var info = JSON.parse(req.body.logData)
+    console.log(req.body)
 
     var userId = req.session.passport.user
 
     if (req.files) {
+
+      var info = JSON.parse(req.body.logData)
 
       var pics = req.files
 
       for (i=0; i < pics.length; i++) {
         info.pics.push({ filename: pics[i].key })
       }
-      
+
+    }
+
+    else {
+      var info = req.body
     }
 
     User.findOne({ _id: userId }, function(err, user) {
