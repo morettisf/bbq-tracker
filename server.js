@@ -12,8 +12,8 @@ const MongoStore = require('connect-mongo')(session) // stores session in mongo
 
 mongoose.Promise = global.Promise
 if (process.env.NODE_ENV !== 'test') { // package.json specifies a test database connection when running mocha
-//  mongoose.connect('mongodb://localhost/bbq-tracker') // mongoose connects into mongo
-  mongoose.connect(process.env.MLAB_KEY)
+  mongoose.connect('mongodb://localhost/bbq-tracker') // mongoose connects into mongo
+//  mongoose.connect(process.env.MLAB_KEY)
 }
 
 app.use(express.static('public'))
@@ -32,8 +32,8 @@ if (process.env.NODE_ENV !== 'test') {
     resave: false,
     rolling: true,
     cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
-//    store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') }) // stores session in mongo
-    store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
+    store: new MongoStore({ mongooseConnection: mongoose.createConnection('mongodb://localhost/bbq-tracker') }) // stores session in mongo
+//    store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
   }))
 
 }

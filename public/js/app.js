@@ -231,9 +231,10 @@ if (save) {
     f.append('pics', document.querySelector('#file4').files[0])
     f.append('pics', document.querySelector('#file5').files[0])
 
+    console.log(JSON.parse(f))
+
     xhrPromise(f)
       .then((res) => {
-        console.log(res)
         window.location = '/log-history?message=Log%20created'
       })
 
