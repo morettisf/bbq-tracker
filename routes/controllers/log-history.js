@@ -76,8 +76,8 @@ module.exports = {
           newLog.updated = null
           newLog.status = 'Private'
           newLog.votes = 0
-          newLog.other_ingredients = log.other_ingredients,
-          newLog.recipe_guideline = log.recipe_guideline,
+          newLog.other_ingredients = log.other_ingredients
+          newLog.recipe_guideline = log.recipe_guideline
           newLog.final = log.final
           
           newLog.steps = []
@@ -89,6 +89,14 @@ module.exports = {
             stepObj.time = itemStep.time
             stepObj.notes = itemStep.notes
             newLog.steps.push(stepObj)
+          })
+
+          newLog.pics = []
+          log.pics.forEach(function(pic) {
+            var picObj = {}
+
+            picObj.filename = pic.filename
+            newLog.pics.push(picObj)
           })
 
           user.logs.push(newLog)

@@ -30,3 +30,5 @@ BBQ Tracker is an online journal that keeps track of BBQ cook sessions, learning
 * Travis CI
 * Heroku
 * mLab
+* Multer
+* AWS S3

@@ -29,12 +29,15 @@ module.exports = {
 
   post: function(req, res, next) {
 
-    var info = req.body
+    var info = JSON.parse(req.body.logData)
+
     var userId = req.session.passport.user
 
-    // var picName = req.file.filename
-    
-    // info.pic1 = picName
+    var pics = req.files
+
+    for (i=0; i < pics.length; i++) {
+      info.pics.push({ filename: pics[i].key })
+    }
 
     User.findOne({ _id: userId }, function(err, user) {
 
@@ -44,6 +47,7 @@ module.exports = {
       user.save()
 
       res.send('ok')
+      
     })
 
   }

@@ -10,33 +10,53 @@ const ViewLog = require('./controllers/view-log')
 const PublicLog = require('./controllers/public-log')
 const LogHistory = require('./controllers/log-history')
 const About = require('./controllers/about')
-// const GoogleDrive = require('./controllers/google-drive')
 
-// const multer = require('multer')
+const multer = require('multer')
+const multerS3 = require('multer-s3')
+const aws = require('aws-sdk');
 
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, '/Users/morettisf/desktop/uploads/')
-//     console.log(file)
-//   },
-//   // check extension type, size
-//   filename: function (req, file, cb) {
+var awsAccessKey = 'AKIAIA2HNBAXTQ4XJSUQ'
+var awsSecretKey = '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'
 
-//     let fileSplit = file.originalname.split('.')
+aws.config.update({
+    secretAccessKey: awsSecretKey,
+    accessKeyId: awsAccessKey
+})
 
-//     let filename = fileSplit.slice(0, fileSplit.length - 1)
-//     filename.push(Date.now())
-//     filename = filename.join('_') + '.' + fileSplit[fileSplit.length - 1]
+var s3 = new aws.S3()
 
-//     cb(null, filename)
-//   }
-// })
 
-// var storage = multer.memoryStorage()
+var upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'bbqtracker',
+    contentType: multerS3.AUTO_CONTENT_TYPE,
 
-// console.log(storage)
+    metadata: function (req, file, cb) {
 
-// const upload = multer({ storage })
+      cb(null, {fieldName: file.fieldname});
+    },
+
+    key: function (req, file, cb) {
+
+    let fileSplit = file.originalname.split('.')
+
+    let filename = fileSplit.slice(0, fileSplit.length - 1)
+    filename.push(Date.now())
+    filename = filename.join('_') + '.' + fileSplit[fileSplit.length - 1]
+
+      cb(null, filename)
+    }
+  }),
+  limits: { fileSize: 5000000 },
+  fileFilter: function (req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+        return cb(new Error('Only image files are allowed!'));
+    }
+    cb(null, true)
+  }
+})
+
 
 module.exports = (app) => {
 
@@ -67,12 +87,11 @@ module.exports = (app) => {
 
   app.get('/create-log', isLoggedIn, CreateLog.get)
 
-  app.post('/create-log', CreateLog.post)
-  // app.post('/create-log', upload.single('pic1'), CreateLog.post)
+  app.post('/create-log', upload.array('pics'), CreateLog.post)
 
   app.get('/view-log/:log', isLoggedIn, ViewLog.get)
 
-  app.put('/view-log/:log', ViewLog.put)
+  app.put('/view-log/:log', upload.array('pics'), ViewLog.put)
 
   app.get('/public-log/:log', PublicLog.get)
 

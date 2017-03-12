@@ -104,6 +104,49 @@ if (addStepBtn) {
   })
 }
 
+
+// removing pic from log
+var removePicBtn = document.querySelector('.remove-pic')
+var picsBox = document.querySelector('.pics-box')
+
+if (removePicBtn) {
+
+  var logMain = document.querySelector('#log-main')
+
+  picsBox.addEventListener('click', function(event) {
+    if (event.target.classList.contains('remove-pic')) {
+      var picDiv = event.target.closest('div')
+
+      var div = document.createElement('div')
+      var popHTML = "<p style='margin-top: 40px;'>Confirm delete pic?</p><div id='pop-del-options'><button id='del-yes'>Yes</button><button id='del-no'>No</button></div>"
+
+      div.setAttribute('id', 'pop-del')
+      div.innerHTML = popHTML
+      logMain.appendChild(div)
+
+      var delNo = document.querySelector('#del-no')
+      if (delNo) {
+        delNo.addEventListener('click', function() {
+          var popDel = document.querySelector('#pop-del')
+          popDel.parentNode.removeChild(popDel)
+        })
+      }
+
+      var delYes = document.querySelector('#del-yes')
+      if (delYes) {
+        delYes.addEventListener('click', function() {
+          picDiv.parentNode.removeChild(picDiv)
+          var popDel = document.querySelector('#pop-del')
+          popDel.parentNode.removeChild(popDel)
+        })
+      }
+
+    }
+  })
+}
+
+
+
 // temperature slider output
 window.outputUpdate = function (temp) {
   document.querySelector('#temp-slider-output').value = temp;
@@ -159,7 +202,7 @@ if (save) {
       voters: [],
       other_ingredients: document.querySelector('#other-ingredients').value,
       recipe_guideline: document.querySelector('#recipe-guideline').value,
-      // pic: formData.append('pic1', document.querySelector('.file').files[0]),
+      pics: [],
       final: document.querySelector('#final-comments').value
     }
 
@@ -178,34 +221,58 @@ if (save) {
 
     var logData = Object.assign({ steps: stepInfo }, basicData)
 
-    sendLog(logData)
-    // var f = new FormData()
-    // f.append('session_name', document.querySelector('#session-name').value)
-    // f.append('pic1', document.querySelector('.file').files[0])
+    var f = new FormData()
 
-    // var xhr = new XMLHttpRequest()
-    // xhr.open('POST', '/create-log')
-    // xhr.send(f)
+    f.append('logData', JSON.stringify(logData))
+
+    f.append('pics', document.querySelector('#file1').files[0])
+    f.append('pics', document.querySelector('#file2').files[0])
+    f.append('pics', document.querySelector('#file3').files[0])
+    f.append('pics', document.querySelector('#file4').files[0])
+    f.append('pics', document.querySelector('#file5').files[0])
+
+    xhrPromise(f)
+      .then((res) => {
+        console.log(res)
+        window.location = '/log-history?message=Log%20created'
+      })
+
+    // sendLog(f)
 
     })
 }
 
+function xhrPromise(f) {
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest()
+    xhr.open('post', '/create-log')
+    xhr.addEventListener('load', function(){
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        resolve(xhr.responseText)
+      }
+    })
+    xhr.addEventListener('error', reject)
 
-function sendLog(logData) {
-  fetch('/create-log', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(logData),
-    mode: 'cors',
-    cache: 'default',
-    credentials: 'include'
+    xhr.send(f)
+
   })
-    .then(function() {
-      window.location = '/log-history?message=Log%20created'
-    })
 }
+
+// function sendLog(f) {
+//   fetch('/create-log', {
+//     method: 'POST',
+    // headers: {
+    //   'Content-Type': 'multipart/form-data'
+    // },
+    // body: f,
+    // mode: 'cors',
+    // cache: 'default',
+    // credentials: 'include'
+//   })
+//     .then(function() {
+//       window.location = '/log-history?message=Log%20created'
+//     })
+// }
 
 // update log data to Mongo
 var update = document.querySelector('#update')
@@ -282,9 +349,132 @@ if (update) {
       stepInfo.push(stepObject)
     })
 
-    var logData = Object.assign({ steps: stepInfo }, basicData)
+    var displayedPics = document.querySelectorAll('.pic img')
+    var displayedPicsArray = []
     
-    updateLog(logData)
+    Array.from(displayedPics).forEach(function(displayedPic) {
+      var picsObject = {}
+      var attr = displayedPic.getAttribute('src')
+      var filename = attr.split('/').pop()
+      picsObject.filename = filename
+      displayedPicsArray.push(picsObject)
+    })
+
+    var logData = Object.assign({ steps: stepInfo }, { pics: displayedPicsArray }, basicData)
+    
+    // updateLog(logData)
+
+    var f = new FormData()
+    f.append('logData', JSON.stringify(logData))
+
+    f.append('pics', document.querySelector('#file1').files[0])
+    f.append('pics', document.querySelector('#file2').files[0])
+    f.append('pics', document.querySelector('#file3').files[0])
+    f.append('pics', document.querySelector('#file4').files[0])
+    f.append('pics', document.querySelector('#file5').files[0])
+
+    var url = window.location.pathname
+    var logId = url.split('/').pop()
+
+    // var xhr = new XMLHttpRequest()
+    // xhr.open('PUT', '/view-log/' + logId)
+    // xhr.send(f)
+    // xhr.onload = function() {
+    //   location.reload()
+    // }
+
+    xhrPromiseUpdate(f)
+      .then((res) => {
+
+        var logBody = document.querySelector('#log-body')
+        var div = document.createElement('div')
+        var popHTML = "<p>Log updated</p>"
+
+        div.classList.add('pop-update')
+        div.innerHTML = popHTML
+        logBody.appendChild(div)
+
+
+        setTimeout(function(){
+          div.classList.add('pop-update-fade')
+        }, 0)
+
+        setTimeout(function(){
+          div.classList.remove('pop-update-fade')
+
+          setTimeout(function() {
+          div.parentNode.removeChild(div)        
+          }, 1000)
+
+        }, 2000)
+
+        // add/remove public link on update without page refresh
+        var h3 = document.querySelector('h3')
+        var pubLink = document.querySelector('#pub-link')
+        var status = document.querySelectorAll('#status-box input')
+        var statusSelected
+
+        status.forEach(function(item) {
+          if (item.checked) {
+            statusSelected = item.value
+          }
+        })
+
+        if ((statusSelected === 'Private') && h3) {
+          pubLink.removeChild(h3)
+        }
+
+        if ((statusSelected === 'Public') && !h3) {
+          var h3 = document.createElement('h3')
+          var url = window.location.pathname
+          var logId = url.split('/').pop()
+          var h3Content = "<a href='/public-log/" + logId + "'>Public link here</a>"
+          h3.innerHTML = h3Content
+          pubLink.appendChild(h3)
+        }
+
+        // add/remove pictures on update without page refresh
+        var picsBox = document.querySelector('.pics-box')
+        var logPics = document.querySelectorAll('.pic')
+
+        logPics.forEach(function(pic) {
+          pic.parentNode.removeChild(pic)
+        })
+
+        var response = JSON.parse(res)
+        var newPics = response.pics
+
+        if (newPics) {
+          newPics.forEach(function(pic) {
+            var picDiv = document.createElement('div')
+            picDiv.classList.add('pic')
+
+            picsBox.appendChild(picDiv)
+            picDiv.innerHTML = "<img src='https://s3-us-west-1.amazonaws.com/bbqtracker/" + pic.filename + "'><button type='button' class='remove-pic'>Remove Picture</button>"
+          })
+        }
+
+        // add/remove file upload fields on update without page refresh
+        var uploadBox = document.querySelector('.pics-upload-box')
+        var uploadBtns = document.querySelectorAll('.pic-upload')
+
+        uploadBtns.forEach(function(btn) {
+          btn.parentNode.removeChild(btn)
+        })
+
+        for (var i = 1; i < 6; i++) {
+          console.log('in loop')
+          var uploadDiv = document.createElement('div')
+          uploadDiv.classList.add('pic-upload')
+
+          uploadBox.appendChild(uploadDiv)
+          uploadDiv.innerHTML = "<label>Upload Picture " + [i] + "</label><input id='file" + [i] + "' type='file' name='file" + [i] + "'>"
+        }
+
+      })
+
+    // sendLog(f)
+
   })
 }
 
@@ -292,67 +482,88 @@ if (update) {
 var url = window.location.pathname
 var logId = url.split('/').pop()
 
-function updateLog(logData) {
-  fetch('/view-log/' + logId, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(logData),
-    mode: 'cors',
-    cache: 'default',
-    credentials: 'include'
-  })
-    .then(function() {
-      var logBody = document.querySelector('#log-body')
-      var div = document.createElement('div')
-      var popHTML = "<p>Log updated</p>"
-
-      div.classList.add('pop-update')
-      div.innerHTML = popHTML
-      logBody.appendChild(div)
-
-
-      setTimeout(function(){
-        div.classList.add('pop-update-fade')
-      }, 0)
-
-      setTimeout(function(){
-        div.classList.remove('pop-update-fade')
-
-        setTimeout(function() {
-        div.parentNode.removeChild(div)        
-        }, 1000)
-
-      }, 2000)
-
-      // add/remove public link on update without page refresh
-      var h3 = document.querySelector('h3')
-      var pubLink = document.querySelector('#pub-link')
-      var status = document.querySelectorAll('#status-box input')
-      var statusSelected
-
-      status.forEach(function(item) {
-        if (item.checked) {
-          statusSelected = item.value
-        }
-      })
-
-      if ((statusSelected === 'Private') && h3) {
-        pubLink.removeChild(h3)
+function xhrPromiseUpdate(f) {
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest()
+    xhr.open('put', '/view-log/' + logId)
+    xhr.addEventListener('load', function(){
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        resolve(xhr.responseText)
       }
-
-      if ((statusSelected === 'Public') && !h3) {
-        var h3 = document.createElement('h3')
-        var url = window.location.pathname
-        var logId = url.split('/').pop()
-        var h3Content = "<a href='/public-log/" + logId + "'>Public link here</a>"
-        h3.innerHTML = h3Content
-        pubLink.appendChild(h3)
-      }
-
     })
+    xhr.addEventListener('error', reject)
+
+    xhr.send(f)
+
+  })
 }
+
+
+// updating log
+// var url = window.location.pathname
+// var logId = url.split('/').pop()
+
+// function updateLog(logData) {
+//   fetch('/view-log/' + logId, {
+//     method: 'PUT',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(logData),
+//     mode: 'cors',
+//     cache: 'default',
+//     credentials: 'include'
+//   })
+//     .then(function() {
+//       var logBody = document.querySelector('#log-body')
+//       var div = document.createElement('div')
+//       var popHTML = "<p>Log updated</p>"
+
+//       div.classList.add('pop-update')
+//       div.innerHTML = popHTML
+//       logBody.appendChild(div)
+
+
+//       setTimeout(function(){
+//         div.classList.add('pop-update-fade')
+//       }, 0)
+
+//       setTimeout(function(){
+//         div.classList.remove('pop-update-fade')
+
+//         setTimeout(function() {
+//         div.parentNode.removeChild(div)        
+//         }, 1000)
+
+//       }, 2000)
+
+//       // add/remove public link on update without page refresh
+//       var h3 = document.querySelector('h3')
+//       var pubLink = document.querySelector('#pub-link')
+//       var status = document.querySelectorAll('#status-box input')
+//       var statusSelected
+
+//       status.forEach(function(item) {
+//         if (item.checked) {
+//           statusSelected = item.value
+//         }
+//       })
+
+//       if ((statusSelected === 'Private') && h3) {
+//         pubLink.removeChild(h3)
+//       }
+
+//       if ((statusSelected === 'Public') && !h3) {
+//         var h3 = document.createElement('h3')
+//         var url = window.location.pathname
+//         var logId = url.split('/').pop()
+//         var h3Content = "<a href='/public-log/" + logId + "'>Public link here</a>"
+//         h3.innerHTML = h3Content
+//         pubLink.appendChild(h3)
+//       }
+
+//     })
+// }
 
 
 // log history controls

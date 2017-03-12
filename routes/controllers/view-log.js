@@ -65,7 +65,17 @@ module.exports = {
   put: function(req, res, next) {
     var userId = req.session.passport.user
     var logId = req.params.log
-    var info = req.body
+    // var info = req.body
+
+    var info = JSON.parse(req.body.logData)
+
+    var newPics = req.files
+
+    for (i=0; i < newPics.length; i++) {
+      info.pics.push({ filename: newPics[i].key })
+    }
+
+
 
     User.findOne({ _id: userId }, function(err, user) {
 
@@ -91,9 +101,10 @@ module.exports = {
       log.status = info.status
       log.username = info.username
       log.updated = info.updated
-      log.other_ingredients = info.other_ingredients,
-      log.recipe_guideline = info.recipe_guideline,
+      log.other_ingredients = info.other_ingredients
+      log.recipe_guideline = info.recipe_guideline
       log.final = info.final
+      log.pics = info.pics
       
       log.steps = []
       info.steps.forEach(function(item) {
@@ -108,8 +119,10 @@ module.exports = {
 
       user.save()
 
+    var pics = log.pics
+    res.json({ pics })
+
     })
-    res.send('ok')
 
   }
 

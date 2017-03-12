@@ -305,8 +305,31 @@ table img, #public-rating img {
 
 /***** Logs *****/
 
+.pics-box {
+  clear: both;
+}
 .pic-upload {
   clear: both;
+}
+
+.pic {
+  border: 1px solid black;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+
+.pic img {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+.remove-pic {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .pic-upload label {
@@ -582,11 +605,16 @@ label[for='meat-weight'] {
   margin-top: 10px;
 }
 
-#save, #update, #upload-pic {
+#save, #update {
   display: block;
   clear: both;
   margin-top: 25px;
   margin-bottom: 50px;
+}
+
+#save:active, #update:active {
+  background-color: #ffec80;
+  color: black;
 }
 
 #vote-area {
