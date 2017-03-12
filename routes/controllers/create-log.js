@@ -36,10 +36,14 @@ module.exports = {
 
     var userId = req.session.passport.user
 
-    var pics = req.files
+    if (req.files) {
 
-    for (i=0; i < pics.length; i++) {
-      info.pics.push({ filename: pics[i].key })
+      var pics = req.files
+
+      for (i=0; i < pics.length; i++) {
+        info.pics.push({ filename: pics[i].key })
+      }
+      
     }
 
     User.findOne({ _id: userId }, function(err, user) {
