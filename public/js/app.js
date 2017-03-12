@@ -282,10 +282,10 @@ function sendLog(logData) {
   console.log('sending fetch')
   fetch('/create-log', {
     method: 'POST',
-    // headers: {
-    //   'Content-Type': 'application/json'
-    // },
-    body: logData,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(logData),
     mode: 'cors',
     cache: 'default',
     credentials: 'include'
