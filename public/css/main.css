@@ -412,12 +412,12 @@ ol {
   z-index: 100;
   top: 40%;
   left: 50%;
-  margin-left: -75px;
+  margin-left: -37.5px;
 }
 
 .pop img {
-  width: 150px;
-  height: 150px;
+  width: 75px;
+  height: 75px;
 }
 /* Temperature Range Slider */
 
