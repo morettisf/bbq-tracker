@@ -239,8 +239,6 @@ if (save) {
     f.append('pics', document.querySelector('#file4').files[0])
     f.append('pics', document.querySelector('#file5').files[0])
 
-    console.log(f.get('pics'))
-
     xhrPromise(f)
       .then((res) => {
         window.location = '/log-history?message=Log%20created'
@@ -252,6 +250,9 @@ if (save) {
 }
 
 function xhrPromise(f) {
+  
+  console.log(f.get('pics'))
+
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest()
     xhr.open('post', '/create-log')
