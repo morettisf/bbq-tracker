@@ -263,7 +263,6 @@ if (save) {
 }
 
 function xhrPromise(f) {
-
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest()
     xhr.open('post', '/create-log')
@@ -280,11 +279,12 @@ function xhrPromise(f) {
 }
 
 function sendLog(logData) {
+  console.log('sending fetch')
   fetch('/create-log', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    // headers: {
+    //   'Content-Type': 'application/json'
+    // },
     body: logData,
     mode: 'cors',
     cache: 'default',
