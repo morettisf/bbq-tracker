@@ -250,8 +250,6 @@ if (save) {
 }
 
 function xhrPromise(f) {
-  
-  console.log(f.get('pics'))
 
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest()

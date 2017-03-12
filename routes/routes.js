@@ -48,7 +48,7 @@ var upload = multer({
       cb(null, filename)
     }
   }),
-  limits: { fileSize: 10000000 },
+  limits: { fileSize: 5000000 },
   fileFilter: function (req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
         return cb(new Error('Only image files are allowed!'));
