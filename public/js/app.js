@@ -158,6 +158,14 @@ var save = document.querySelector('#save')
 if (save) {
   save.addEventListener('click', function() {
 
+    var logBody = document.querySelector('#log-body')
+    var div = document.createElement('div')
+    var popHTML = "<img src='../images/uploading.gif'>"
+
+    div.classList.add('pop')
+    div.innerHTML = popHTML
+    logBody.appendChild(div)
+
     var radios = document.querySelectorAll('.rating input')
     var ratingSelected
     radios.forEach(function(radio) {
@@ -231,8 +239,6 @@ if (save) {
     f.append('pics', document.querySelector('#file4').files[0])
     f.append('pics', document.querySelector('#file5').files[0])
 
-    console.log(JSON.parse(f))
-
     xhrPromise(f)
       .then((res) => {
         window.location = '/log-history?message=Log%20created'
@@ -280,6 +286,14 @@ var update = document.querySelector('#update')
 
 if (update) {
   update.addEventListener('click', function() {
+
+    var logBody = document.querySelector('#log-body')
+    var div = document.createElement('div')
+    var popHTML = "<img src='../images/uploading.gif'>"
+
+    div.classList.add('pop')
+    div.innerHTML = popHTML
+    logBody.appendChild(div)
 
     var radios = document.querySelectorAll('.rating input')
     var ratingSelected
@@ -386,6 +400,9 @@ if (update) {
 
     xhrPromiseUpdate(f)
       .then((res) => {
+
+        var loader = document.querySelector('.pop')
+        loader.parentNode.removeChild(loader)
 
         var logBody = document.querySelector('#log-body')
         var div = document.createElement('div')

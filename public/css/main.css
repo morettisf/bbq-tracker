@@ -407,6 +407,18 @@ ol {
   opacity: 1;
 }
 
+.pop {
+  position: fixed;
+  z-index: 100;
+  top: 40%;
+  left: 50%;
+  margin-left: -100px;
+}
+
+.pop img {
+  width: 150px;
+  height: 150px;
+}
 /* Temperature Range Slider */
 
 input[type=range] {
