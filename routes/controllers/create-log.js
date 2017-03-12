@@ -30,8 +30,6 @@ module.exports = {
   post: function(req, res, next) {
 
     // console.log(req)
-    console.log('hit post')
-    console.log(req.body)
 
     var userId = req.session.passport.user
 

@@ -391,120 +391,124 @@ if (update) {
 
     var logData = Object.assign({ steps: stepInfo }, { pics: displayedPicsArray }, basicData)
     
-    // updateLog(logData)
+    if ( navigator.userAgent.match(/Android/i)
+     || navigator.userAgent.match(/webOS/i)
+     || navigator.userAgent.match(/iPhone/i)
+     || navigator.userAgent.match(/iPad/i)
+     || navigator.userAgent.match(/iPod/i)
+     || navigator.userAgent.match(/BlackBerry/i)
+     || navigator.userAgent.match(/Windows Phone/i)
+     ) {
+      updateLog(logData)
+    }
 
-    var f = new FormData()
-    f.append('logData', JSON.stringify(logData))
+    else {
 
-    f.append('pics', document.querySelector('#file1').files[0])
-    f.append('pics', document.querySelector('#file2').files[0])
-    f.append('pics', document.querySelector('#file3').files[0])
-    f.append('pics', document.querySelector('#file4').files[0])
-    f.append('pics', document.querySelector('#file5').files[0])
+      var f = new FormData()
+      f.append('logData', JSON.stringify(logData))
 
-    var url = window.location.pathname
-    var logId = url.split('/').pop()
+      f.append('pics', document.querySelector('#file1').files[0])
+      f.append('pics', document.querySelector('#file2').files[0])
+      f.append('pics', document.querySelector('#file3').files[0])
+      f.append('pics', document.querySelector('#file4').files[0])
+      f.append('pics', document.querySelector('#file5').files[0])
 
-    // var xhr = new XMLHttpRequest()
-    // xhr.open('PUT', '/view-log/' + logId)
-    // xhr.send(f)
-    // xhr.onload = function() {
-    //   location.reload()
-    // }
-
-    xhrPromiseUpdate(f)
-      .then((res) => {
-
-        var loader = document.querySelector('.pop')
-        loader.parentNode.removeChild(loader)
-
-        var logBody = document.querySelector('#log-body')
-        var div = document.createElement('div')
-        var popHTML = "<p>Log updated</p>"
-
-        div.classList.add('pop-update')
-        div.innerHTML = popHTML
-        logBody.appendChild(div)
+      var url = window.location.pathname
+      var logId = url.split('/').pop()
 
 
-        setTimeout(function(){
-          div.classList.add('pop-update-fade')
-        }, 0)
+      xhrPromiseUpdate(f)
+        .then((res) => {
 
-        setTimeout(function(){
-          div.classList.remove('pop-update-fade')
+          var loader = document.querySelector('.pop')
+          loader.parentNode.removeChild(loader)
 
-          setTimeout(function() {
-          div.parentNode.removeChild(div)        
-          }, 1000)
+          var logBody = document.querySelector('#log-body')
+          var div = document.createElement('div')
+          var popHTML = "<p>Log updated</p>"
 
-        }, 2000)
+          div.classList.add('pop-update')
+          div.innerHTML = popHTML
+          logBody.appendChild(div)
 
-        // add/remove public link on update without page refresh
-        var h3 = document.querySelector('h3')
-        var pubLink = document.querySelector('#pub-link')
-        var status = document.querySelectorAll('#status-box input')
-        var statusSelected
 
-        status.forEach(function(item) {
-          if (item.checked) {
-            statusSelected = item.value
-          }
-        })
+          setTimeout(function(){
+            div.classList.add('pop-update-fade')
+          }, 0)
 
-        if ((statusSelected === 'Private') && h3) {
-          pubLink.removeChild(h3)
-        }
+          setTimeout(function(){
+            div.classList.remove('pop-update-fade')
 
-        if ((statusSelected === 'Public') && !h3) {
-          var h3 = document.createElement('h3')
-          var url = window.location.pathname
-          var logId = url.split('/').pop()
-          var h3Content = "<a href='/public-log/" + logId + "'>Public link here</a>"
-          h3.innerHTML = h3Content
-          pubLink.appendChild(h3)
-        }
+            setTimeout(function() {
+            div.parentNode.removeChild(div)        
+            }, 1000)
 
-        // add/remove pictures on update without page refresh
-        var picsBox = document.querySelector('.pics-box')
-        var logPics = document.querySelectorAll('.pic')
+          }, 2000)
 
-        logPics.forEach(function(pic) {
-          pic.parentNode.removeChild(pic)
-        })
+          // add/remove public link on update without page refresh
+          var h3 = document.querySelector('h3')
+          var pubLink = document.querySelector('#pub-link')
+          var status = document.querySelectorAll('#status-box input')
+          var statusSelected
 
-        var response = JSON.parse(res)
-        var newPics = response.pics
-
-        if (newPics) {
-          newPics.forEach(function(pic) {
-            var picDiv = document.createElement('div')
-            picDiv.classList.add('pic')
-
-            picsBox.appendChild(picDiv)
-            picDiv.innerHTML = "<img src='https://s3-us-west-1.amazonaws.com/bbqtracker/" + pic.filename + "'><button type='button' class='remove-pic'>Remove Picture</button>"
+          status.forEach(function(item) {
+            if (item.checked) {
+              statusSelected = item.value
+            }
           })
-        }
 
-        // add/remove file upload fields on update without page refresh
-        var uploadBox = document.querySelector('.pics-upload-box')
-        var uploadBtns = document.querySelectorAll('.pic-upload')
+          if ((statusSelected === 'Private') && h3) {
+            pubLink.removeChild(h3)
+          }
 
-        uploadBtns.forEach(function(btn) {
-          btn.parentNode.removeChild(btn)
+          if ((statusSelected === 'Public') && !h3) {
+            var h3 = document.createElement('h3')
+            var url = window.location.pathname
+            var logId = url.split('/').pop()
+            var h3Content = "<a href='/public-log/" + logId + "'>Public link here</a>"
+            h3.innerHTML = h3Content
+            pubLink.appendChild(h3)
+          }
+
+          // add/remove pictures on update without page refresh
+          var picsBox = document.querySelector('.pics-box')
+          var logPics = document.querySelectorAll('.pic')
+
+          logPics.forEach(function(pic) {
+            pic.parentNode.removeChild(pic)
+          })
+
+          var response = JSON.parse(res)
+          var newPics = response.pics
+
+          if (newPics) {
+            newPics.forEach(function(pic) {
+              var picDiv = document.createElement('div')
+              picDiv.classList.add('pic')
+
+              picsBox.appendChild(picDiv)
+              picDiv.innerHTML = "<img src='https://s3-us-west-1.amazonaws.com/bbqtracker/" + pic.filename + "'><button type='button' class='remove-pic'>Remove Picture</button>"
+            })
+          }
+
+          // add/remove file upload fields on update without page refresh
+          var uploadBox = document.querySelector('.pics-upload-box')
+          var uploadBtns = document.querySelectorAll('.pic-upload')
+
+          uploadBtns.forEach(function(btn) {
+            btn.parentNode.removeChild(btn)
+          })
+
+          for (var i = 1; i < 6; i++) {
+            var uploadDiv = document.createElement('div')
+            uploadDiv.classList.add('pic-upload')
+
+            uploadBox.appendChild(uploadDiv)
+            uploadDiv.innerHTML = "<label>Upload Picture " + [i] + "</label><input id='file" + [i] + "' type='file' name='file" + [i] + "'>"
+          }
+
         })
-
-        for (var i = 1; i < 6; i++) {
-          var uploadDiv = document.createElement('div')
-          uploadDiv.classList.add('pic-upload')
-
-          uploadBox.appendChild(uploadDiv)
-          uploadDiv.innerHTML = "<label>Upload Picture " + [i] + "</label><input id='file" + [i] + "' type='file' name='file" + [i] + "'>"
-        }
-
-      })
-
-    // sendLog(f)
+      }
 
   })
 }
@@ -530,71 +534,72 @@ function xhrPromiseUpdate(f) {
 }
 
 
-// updating log
-// var url = window.location.pathname
-// var logId = url.split('/').pop()
+// updating log - mobile
+function updateLog(logData) {
+  fetch('/view-log/' + logId, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(logData),
+    mode: 'cors',
+    cache: 'default',
+    credentials: 'include'
+  })
+    .then(function() {
 
-// function updateLog(logData) {
-//   fetch('/view-log/' + logId, {
-//     method: 'PUT',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(logData),
-//     mode: 'cors',
-//     cache: 'default',
-//     credentials: 'include'
-//   })
-//     .then(function() {
-//       var logBody = document.querySelector('#log-body')
-//       var div = document.createElement('div')
-//       var popHTML = "<p>Log updated</p>"
+      var loader = document.querySelector('.pop')
+      loader.parentNode.removeChild(loader)
+          
+      var logBody = document.querySelector('#log-body')
+      var div = document.createElement('div')
+      var popHTML = "<p>Log updated</p>"
 
-//       div.classList.add('pop-update')
-//       div.innerHTML = popHTML
-//       logBody.appendChild(div)
+      div.classList.add('pop-update')
+      div.innerHTML = popHTML
+      logBody.appendChild(div)
 
 
-//       setTimeout(function(){
-//         div.classList.add('pop-update-fade')
-//       }, 0)
+      setTimeout(function(){
+        div.classList.add('pop-update-fade')
+      }, 0)
 
-//       setTimeout(function(){
-//         div.classList.remove('pop-update-fade')
+      setTimeout(function(){
+        div.classList.remove('pop-update-fade')
 
-//         setTimeout(function() {
-//         div.parentNode.removeChild(div)        
-//         }, 1000)
+        setTimeout(function() {
+        div.parentNode.removeChild(div)        
+        }, 1000)
 
-//       }, 2000)
+      }, 2000)
 
-//       // add/remove public link on update without page refresh
-//       var h3 = document.querySelector('h3')
-//       var pubLink = document.querySelector('#pub-link')
-//       var status = document.querySelectorAll('#status-box input')
-//       var statusSelected
+      // add/remove public link on update without page refresh
+      var h3 = document.querySelector('h3')
+      var pubLink = document.querySelector('#pub-link')
+      var status = document.querySelectorAll('#status-box input')
+      var statusSelected
 
-//       status.forEach(function(item) {
-//         if (item.checked) {
-//           statusSelected = item.value
-//         }
-//       })
+      status.forEach(function(item) {
+        if (item.checked) {
+          statusSelected = item.value
+        }
+      })
 
-//       if ((statusSelected === 'Private') && h3) {
-//         pubLink.removeChild(h3)
-//       }
+      if ((statusSelected === 'Private') && h3) {
+        pubLink.removeChild(h3)
+      }
 
-//       if ((statusSelected === 'Public') && !h3) {
-//         var h3 = document.createElement('h3')
-//         var url = window.location.pathname
-//         var logId = url.split('/').pop()
-//         var h3Content = "<a href='/public-log/" + logId + "'>Public link here</a>"
-//         h3.innerHTML = h3Content
-//         pubLink.appendChild(h3)
-//       }
+      if ((statusSelected === 'Public') && !h3) {
+        var h3 = document.createElement('h3')
+        var url = window.location.pathname
+        var logId = url.split('/').pop()
+        var h3Content = "<a href='/public-log/" + logId + "'>Public link here</a>"
+        h3.innerHTML = h3Content
+        pubLink.appendChild(h3)
+      }
 
-//     })
-// }
+    })
+}
 
 
 // log history controls
