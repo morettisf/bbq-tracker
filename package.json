@@ -6,9 +6,9 @@
   "scripts": {
     "test-watch": "NODE_ENV=test nodemon --exec 'mocha'",
     "test": "NODE_ENV=test mocha",
-    "build": "browserify client.js | uglifyjs -o public/js/bundle.js",
+    "build": "browserify client.js -t babelify | uglifyjs -o public/js/bundle.js",
     "start": "node server.js",
-    "watch": "watchify client.js -o public/js/bundle.js --debug --verbose",
+    "watch": "watchify client.js -t babelify -o public/js/bundle.js --debug --verbose",
     "watch-server": "nodemon --watch routes ./server.js"
   },
   "author": "",
@@ -21,6 +21,7 @@
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
+    "formdata-polyfill": "^1.0.6",
     "micro": "^7.0.6",
     "moment": "^2.17.1",
     "mongoose": "^4.7.6",
@@ -31,6 +32,7 @@
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
+    "babelify": "^7.3.0",
     "browserify": "^13.3.0",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
