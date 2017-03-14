@@ -242,7 +242,7 @@ if (save) {
 
     else {
 
-      var f = new FormDataPolyfill()
+      var f = new FormData()
 
       f.append('logData', JSON.stringify(logData))
 
