@@ -242,12 +242,9 @@ if (save) {
 
     // else {
 
-      var f = new FormData(form)
+      var f = new FormData()
 
-      let blob = new Blob('logData', JSON.stringify(logData))
-      f.append(blob)
-
-      // f.append('logData', JSON.stringify(logData))
+      f.append('logData', JSON.stringify(logData))
 
       f.append('pics', document.querySelector('#file1').files[0])
       f.append('pics', document.querySelector('#file2').files[0])
@@ -276,7 +273,7 @@ function xhrPromise(f) {
     })
     xhr.addEventListener('error', reject)
 
-    xhr.send(f._blob())
+    xhr.send(f)
 
   })
 }
