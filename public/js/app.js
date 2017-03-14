@@ -229,20 +229,20 @@ if (save) {
 
     var logData = Object.assign({ steps: stepInfo }, basicData)
 
-    if ( navigator.userAgent.match(/Android/i)
-     || navigator.userAgent.match(/webOS/i)
-     || navigator.userAgent.match(/iPhone/i)
-     || navigator.userAgent.match(/iPad/i)
-     || navigator.userAgent.match(/iPod/i)
-     || navigator.userAgent.match(/BlackBerry/i)
-     || navigator.userAgent.match(/Windows Phone/i)
-     ) {
-      sendLog(logData)
-    }
+    // if ( navigator.userAgent.match(/Android/i)
+    //  || navigator.userAgent.match(/webOS/i)
+    //  || navigator.userAgent.match(/iPhone/i)
+    //  || navigator.userAgent.match(/iPad/i)
+    //  || navigator.userAgent.match(/iPod/i)
+    //  || navigator.userAgent.match(/BlackBerry/i)
+    //  || navigator.userAgent.match(/Windows Phone/i)
+    //  ) {
+    //   sendLog(logData)
+    // }
 
-    else {
+    // else {
 
-      var f = new FormData()
+      var f = new FormDataPolyfill()
 
       f.append('logData', JSON.stringify(logData))
 
@@ -257,7 +257,7 @@ if (save) {
           window.location = '/log-history?message=Log%20created'
         })
 
-    }
+    // }
 
     })
 }
