@@ -1,5 +1,7 @@
 'use strict'
 
+var FormData = require('formdata-polyfill')
+
 /***** LOGS *****/
 
 // displaying other device textbox
@@ -244,8 +246,8 @@ if (save) {
 
       var f = new FormData()
 
-      let blob = new Blob('logData', JSON.stringify(logData))
-      f.append(blob)
+      // let blob = new Blob('logData', JSON.stringify(logData))
+      // f.append(blob)
 
       f.append('logData', JSON.stringify(logData))
 
@@ -276,7 +278,7 @@ function xhrPromise(f) {
     })
     xhr.addEventListener('error', reject)
 
-    xhr.send(f._blob())
+    xhr.send(f)
 
   })
 }
