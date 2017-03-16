@@ -305,6 +305,10 @@ table img, #public-rating img {
 
 /***** Logs *****/
 
+.pics-upload-box {
+  display: none;
+}
+
 .pics-box {
   clear: both;
 }
@@ -1289,6 +1293,10 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
   #log-history-main h1 {
     margin-top: 38px;
+  }
+
+  .pics-upload-box {
+    display: block;
   }
 
 }
