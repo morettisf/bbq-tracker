@@ -249,7 +249,9 @@ if (save) {
       // let blob = new Blob('logData', JSON.stringify(logData))
       // f.append(blob)
 
-      f.append('logData', JSON.stringify(logData))
+      f.append('test', document.querySelector('.complete-notes-text').value)
+
+      // f.append('logData', JSON.stringify(logData))
 
       f.append('pics', document.querySelector('#file1').files[0])
       f.append('pics', document.querySelector('#file2').files[0])
