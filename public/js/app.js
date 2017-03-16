@@ -1,6 +1,6 @@
 'use strict'
 
-var FormData = require('formdata-polyfill')
+// var FormData = require('formdata-polyfill')
 
 /***** LOGS *****/
 
@@ -231,27 +231,25 @@ if (save) {
 
     var logData = Object.assign({ steps: stepInfo }, basicData)
 
-    // if ( navigator.userAgent.match(/Android/i)
-    //  || navigator.userAgent.match(/webOS/i)
-    //  || navigator.userAgent.match(/iPhone/i)
-    //  || navigator.userAgent.match(/iPad/i)
-    //  || navigator.userAgent.match(/iPod/i)
-    //  || navigator.userAgent.match(/BlackBerry/i)
-    //  || navigator.userAgent.match(/Windows Phone/i)
-    //  ) {
-    //   sendLog(logData)
-    // }
+    if ( navigator.userAgent.match(/Android/i)
+     || navigator.userAgent.match(/webOS/i)
+     || navigator.userAgent.match(/iPhone/i)
+     || navigator.userAgent.match(/iPad/i)
+     || navigator.userAgent.match(/iPod/i)
+     || navigator.userAgent.match(/BlackBerry/i)
+     || navigator.userAgent.match(/Windows Phone/i)
+     ) {
+      sendLog(logData)
+    }
 
-    // else {
+    else {
 
       var f = new FormData()
 
       // let blob = new Blob('logData', JSON.stringify(logData))
       // f.append(blob)
 
-      f.append('test', document.querySelector('#final-comments').value)
-
-      // f.append('logData', JSON.stringify(logData))
+      f.append('logData', JSON.stringify(logData))
 
       f.append('pics', document.querySelector('#file1').files[0])
       f.append('pics', document.querySelector('#file2').files[0])
@@ -264,7 +262,7 @@ if (save) {
           window.location = '/log-history?message=Log%20created'
         })
 
-    // }
+    }
 
     })
 }
