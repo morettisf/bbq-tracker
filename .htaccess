@@ -1,0 +1,1 @@
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
