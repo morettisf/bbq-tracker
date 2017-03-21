@@ -2,7 +2,7 @@
 Full stack capstone project at Thinkful (http://thinkful.com/)
 
 ## Live Site
-https://www.bbqtracker.com
+http://www.bbqtracker.com
 
 ## Background
 BBQ Tracker is an online journal that keeps track of BBQ cook sessions, learning best practices of others, and sharing your own successes. This application was designed as full stack utilizing Node.js and MongoDB.
