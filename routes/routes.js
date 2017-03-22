@@ -65,6 +65,10 @@ module.exports = (app) => {
 
   app.get('/', Index.get)
 
+  app.get('/.well-known/acme-challenge/4ASfXd4mi_gQDVzP81rot0hiWe8qaOVd4Bx0SYZlJmk', function(req, res) {
+    res.send('4ASfXd4mi_gQDVzP81rot0hiWe8qaOVd4Bx0SYZlJmk.mk8nQdNxpsrfEvBiyEvVVlMa-tZuUxTeyiNXGBpUn64')
+  })
+
   app.get('/register', Register.get)
 
   app.post('/register', Register.post)
