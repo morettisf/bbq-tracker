@@ -1,7 +1,5 @@
 'use strict'
 
-// var FormData = require('formdata-polyfill')
-
 /***** LOGS *****/
 
 // displaying other device textbox
@@ -245,9 +243,6 @@ if (save) {
     else {
 
       var f = new FormData()
-
-      // let blob = new Blob('logData', JSON.stringify(logData))
-      // f.append(blob)
 
       f.append('logData', JSON.stringify(logData))
 
