@@ -8,6 +8,7 @@ module.exports = {
     var username
     var avatar
     var email
+    var disable = null
 
     // grab their username for the nav if logged in
     User.findOne({ _id: userId }, function(err, user) {
@@ -18,6 +19,10 @@ module.exports = {
         username = user.username
         avatar = user.avatar
         email = user.email
+      }
+
+      if (username === 'demo') {
+        disable = true
       }
 
       else {
@@ -31,7 +36,8 @@ module.exports = {
         error: req.query.error || null, 
         username: username, 
         email: email, 
-        avatar: avatar 
+        avatar: avatar,
+        disable: disable 
       }
 
       res.render('account', ejs)

@@ -801,6 +801,10 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   cursor: pointer;
 }
 
+#avatar-options {
+  margin-top: 30px;
+}
+
 #avatar-options img {
   width: 75px;
   cursor: pointer;
@@ -853,7 +857,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 
 
-/***** Register Page *****/
+/***** Register Page / Sign-In *****/
 
 #reg-main h1, #sign-in-main h1 {
   text-align: center;
@@ -888,6 +892,32 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 #sign-in-main p {
   text-align: center;
+}
+
+#demo {
+  font-family: 'Roboto Slab', serif;
+  text-align: center;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#demo h3 {
+  margin-bottom: 6px;
+  margin-top: 30px;
+}
+
+#demo-box {
+  border: 1px solid black;
+  padding: 4px;
+}
+
+br {
+   margin: 2px 0;
+}
+
+p {
+  line-height: 16px;
 }
 
 

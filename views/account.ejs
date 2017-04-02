@@ -20,13 +20,20 @@
     <% } %>
     <h1>My Account</h1>
     <ul id='account-options'>
-      <li>
-        <h3 id='new-username-btn'>Change Username</h3>
-        <div id='new-username-field' class='hidden'>
-          <label for='username'>New Username</label>
-          <input id='new-username' type='text' for='username' name='username' placeholder='BBQ123'>
-          <button id='new-username-submit' type='button'>Submit</button>
-        </div>
+      <% if (!disable) { %>
+        <li>
+          <h3 id='new-username-btn'>Change Username</h3>
+          <div id='new-username-field' class='hidden'>
+            <label for='username'>New Username</label>
+            <input id='new-username' type='text' for='username' name='username' placeholder='BBQ123'>
+            <button id='new-username-submit' type='button'>Submit</button>
+          </div>
+        </li>
+      <% } else { %>
+        <li>
+          <h3 id='new-username-btn-d' style="text-decoration: line-through;">Change Username</h3>
+        </li>
+      <% } %>
       <li>
         <h3 id='new-avatar-btn'>Change Avatar</h3>
         <div id='avatar-options'>
@@ -34,7 +41,6 @@
           <img src='/images/chicken.svg' alt='chicken' id='chicken-avatar' <% if (avatar === '../images/chicken.svg') { %>class='avatar-highlight'<% } %> >
           <img src='/images/pig.svg' alt='pig' id='pig-avatar' <% if (avatar === '../images/pig.svg') { %>class='avatar-highlight'<% } %> >
         </div>
-      </li>
       </li>
       <li>
         <h3 id='new-email-btn'>Change Email</h3>
@@ -44,6 +50,7 @@
           <button id='new-email-submit' type='button'>Submit</button>
         </div>
       </li>
+      <% if (!disable) { %>
       <li>
         <h3 id='new-pw-btn'>Change Password</h3>
         <div id='new-pw-field' class='hidden'>
@@ -60,6 +67,14 @@
           <button id='delete-account-submit' type='button'>Confirm Delete</button>
         </div>
       </li>
+      <% } else { %>
+        <li>
+          <h3 id='new-pw-btn-d' style="text-decoration: line-through;">Change Password</h3>
+        </li>
+        <li>
+          <h3 id='delete-account-btn-d' style="text-decoration: line-through;">Delete account</h3>
+        </li>
+      <% } %>
     </ul>
   </main>
   <%- include footer.ejs -%>
