@@ -7,17 +7,17 @@ module.exports = {
 
   get: function(req, res, next) {
 
-      var ejs = {
-        title: 'Sign In | BBQ Tracker', 
-        user: req.session.passport, 
-        errors: null, 
-        message: req.session.message, 
-        username: null, 
-        avatar: null
-      }
+    var ejs = {
+      title: 'Sign In | BBQ Tracker', 
+      user: req.session.passport, 
+      errors: null, 
+      message: req.session.message, 
+      username: null, 
+      avatar: null
+    }
 
-      res.render('sign-in', ejs)
-    },
+    res.render('sign-in', ejs)
+  },
   
   post: function(req, res, next) {
     passport.authenticate('local-sign-in', function(err, user, info) {

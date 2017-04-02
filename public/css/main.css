@@ -123,6 +123,7 @@ video {
     1px -1px 0 #000,
     -1px 1px 0 #000,
      1px 1px 0 #000;
+  font-size: 1.5em;
 }
 
 /* Public Logs */
@@ -1007,13 +1008,9 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   }
 
   #home-main h1 {
-    font-size: 3em;
-    padding-top: 20px;
+    font-size: 2.5em;
+    padding-top: 10px;
     padding-bottom: 10px;
-  }
-
-  #home-main h2 {
-    font-size: 1.75em;
   }
 
   #public-logs-updated, #top-voted-logs {
@@ -1138,13 +1135,8 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   }
 
   #home-main h1 {
-    font-size: 2.5em;
     padding-top: 40px;
     padding-bottom: 30px;
-  }
-
-  #home-main h2 {
-    font-size: 1.5em;
   }
 
   #public-logs-updated, #top-voted-logs {
