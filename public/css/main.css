@@ -789,6 +789,15 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   list-style: none;
 }
 
+#account-options label {
+  display: block;
+}
+
+#account-options input {
+  float: none;
+  display: block;
+}
+
 #account-options button {
   margin-top: 10px;
 }
@@ -870,7 +879,12 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 #register input, #sign-in input {
   width: 100%;
+  box-sizing: border-box;
   -webkit-appearance: none;
+}
+
+#sign-in-form label, #register-form label {
+  width: 100%;
 }
 
 #reg-btn, #sign-in-btn {
