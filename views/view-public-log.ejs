@@ -62,7 +62,7 @@
         </label>
       </div>
       <div id='meat'>
-        <label for='meat'>Meat
+        <label for='meat'>Meat Type
           <select id='meat-type' disabled>
             <% logOptions.meat.forEach(function(meatType) { %>
               <option value='<%= meatType %>' 
@@ -73,10 +73,12 @@
               </option>
             <% }) %>
           </select>
-          <label for='meat-weight'>Weight
-            <input type='text' name='meat-weight' id='weight' value='<%= logInfo.weight %>' disabled>
           </label>
-          </label>
+          <div>
+            <label for='meat-weight'>Meat Weight
+              <input type='text' name='meat-weight' id='weight' value='<%= logInfo.weight %>' disabled>
+            </label>
+          </div>
         <div id='meat-other-box' <% if (!logInfo.meat_other) { %> class='hidden'<% } %> >
           <label for='other-meat'> Meat Type
           <input type='text' placeholder='Other meat' id='meat-other-text' value='<%= logInfo.meat_other %>' disabled>
@@ -88,9 +90,11 @@
         </label>
       <div id='cook-temperature'>
         <label for='cook-temperature'>Cooking Temp
-          <input id='temp-slider' type='range' min='100' max='500' step='5' value='<%= logInfo.cook_temperature %>' oninput='window.outputUpdate(value)' disabled>
+          <div id='slider-group'>
+            <input id='temp-slider' type='range' min='100' max='500' step='5' value='<%= logInfo.cook_temperature %>' oninput='window.outputUpdate(value)' disabled>
 
-          <output for='temp-slider' id='temp-slider-output'><%= logInfo.cook_temperature %></output>
+            <output for='temp-slider' id='temp-slider-output'><%= logInfo.cook_temperature %></output>
+          </div>
         </label>
       </div>
       <div id='estimated-time-box'>
@@ -99,7 +103,7 @@
         </label>
       </div>
       <div id='fuel-box'>
-        <label for='fuel'>Fuel
+        <label for='fuel'>Fuel Type
           <select id='fuel' disabled>
             <% logOptions.fuel.forEach(function(fuelType) { %>
               <option value='<%= fuelType %>' 
@@ -111,9 +115,11 @@
             <% }) %>
           </select>
         </label>
-        <label for='fuel-brand'>Brand
-          <input type='text' name='fuel-brand' id='brand' value='<%= logInfo.brand %>' disabled>
-        </label>
+        <div>
+          <label for='fuel-brand'>Fuel Brand
+            <input type='text' name='fuel-brand' id='brand' value='<%= logInfo.brand %>' disabled>
+          </label>
+        </div>
       </div>
       <div id='wood-box'>
         <label for='wood'>Wood
@@ -166,6 +172,7 @@
         </ol>
       </div>
     </section>
+    <label for='User rating' id='rating-label'>User Rating</label>
     <div id='public-rating'>
       <% if (logInfo.rating === 5) { %><img src='/images/5.gif' alt='5 Stars'><% } %>
       <% if (logInfo.rating === 4) { %><img src='/images/4.gif' alt='4 Stars'><% } %>
