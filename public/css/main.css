@@ -24,7 +24,11 @@ h1, h2, h3 {
   position: relative;
   overflow: hidden;
   color: black;
-  margin: 80px 10px 10px 10px;
+  margin: 60px 10px 10px 10px;
+}
+
+#reg-main, #sign-in-main {
+  margin-top: 80px;
 }
 
 #account-main ul {
