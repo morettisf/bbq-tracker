@@ -76,6 +76,10 @@ select {
 
 /***** Homepage *****/
 
+.maxh2 {
+  display: none;
+}
+
 #main-title {
   height: 140px;
   background-color: rgba(99, 115, 122, 0.8);
