@@ -31,8 +31,8 @@ module.exports = {
         return b.votes - a.votes
       })
 
-      var updated20 = updatedLogs.slice(0, 21)
-      var topVoted20 = topVotedLogs.slice(0, 21)
+      var updated10 = updatedLogs.slice(0, 10)
+      var topVoted10 = topVotedLogs.slice(0, 10)
 
       // check if this is a logged in user or not
       if (req.session.passport) {
@@ -60,8 +60,8 @@ module.exports = {
           user: req.session.passport, 
           username: username, 
           avatar: avatar, 
-          updated20: updated20, 
-          topVoted20: topVoted20, 
+          updated20: updated10, 
+          topVoted20: topVoted10, 
           moment: moment 
         }
 
