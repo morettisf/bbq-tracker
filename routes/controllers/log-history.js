@@ -25,6 +25,7 @@ module.exports = {
         error: req.query.error, 
         message: req.query.message || null, 
         logList: logsSorted, 
+        logs: logs,
         user: req.session.passport, 
         moment: moment,
         username: username, 
