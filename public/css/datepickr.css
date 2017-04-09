@@ -1,3 +1,9 @@
+.datepickr-wrapper {
+  position: relative;
+  margin-top: -20px;
+}
+ 
+
 .datepickr-calendar {
 	font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;
 	font-size: 12px;

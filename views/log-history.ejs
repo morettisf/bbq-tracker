@@ -4,7 +4,7 @@
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel="stylesheet" type="text/css" href='/css/main.css'>
-  <link href='https://fonts.googleapis.com/css?family=Architects+Daughter|Roboto+Slab' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css?family=Nunito|Roboto+Slab" rel="stylesheet">  
   <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <title><%= title %></title>
@@ -29,47 +29,51 @@
       </select>
       <button type='button' id='log-action-btn'>Modify Selected</button>
     </section>
-    <table class='sortable'>
-      <tr>
-        <th id='select-th-log-history'>Select</th><th id='date-th-log-history'>Date</th><th>Session Name</th><th id='meat-th-log-history'>Meat</th><th id='temp-th-log-history'>Cook Temperature</th><th>My Rating</th><th id='votes-th-log-history'>Votes</th><th id='status-th-log-history'>Status</th>
-      </tr>
-      <% if (logList) { %>
-        <% logList.forEach(function(log) { %>
-          <tr id=<%= log._id %>>
-            <td id='select-td-log-history'><input type='checkbox' class='log-select' name='log-select'></td>
-            <td id='date-td-log-history'><% if (log.date) { %><%= moment(log.date).format('MMMM Do YYYY') %><% } %></td>
-            <td><a href='/view-log/<%= log._id %>'>
-            <% if (log.session_name === '') { %>
-              Unnamed Session
-            <% } %>
-              <%= log.session_name %></a></td><td id='meat-td-log-history'><%= log.meat %></td><td id='temp-td-log-history'><%= log.cook_temperature %></td>
-                <td 
-                  <% if (log.rating === 5) { %> sorttable_customkey='5'<% } %>
-                  <% if (log.rating === 4) { %> sorttable_customkey='4'<% } %>
-                  <% if (log.rating === 3) { %> sorttable_customkey='3'<% } %>
-                  <% if (log.rating === 2) { %> sorttable_customkey='2'<% } %>
-                  <% if (log.rating === 1) { %> sorttable_customkey='1'<% } %>
-                  <% if (log.rating === 0) { %> sorttable_customkey='0'<% } %>
-                  >
-                    <% if (log.rating === 5) { %><img src='/images/5.gif' alt='5 Stars'><% } %>
-                    <% if (log.rating === 4) { %><img src='/images/4.gif' alt='4 Stars'><% } %>
-                    <% if (log.rating === 3) { %><img src='/images/3.gif' alt='3 Stars'><% } %>
-                    <% if (log.rating === 2) { %><img src='/images/2.gif' alt='2 Stars'><% } %>
-                    <% if (log.rating === 1) { %><img src='/images/1.gif' alt='1 Stars'><% } %>
-                    <% if (log.rating === 0) { %><img src='/images/0.gif' alt='0 Stars'><% } %>
-                </td>
-            <td id='votes-td-log-history'><%= log.votes %></td>
-            <td id='status-td-log-history'>
-              <% if (log.status === 'Public') { %>
-                <a href='/public-log/<%= log._id %>'><%= log.status %></a>
-              <% } else { %>
-                <%= log.status %>
+    <% if (logList > 0) { %>
+      <table class='sortable'>
+        <tr>
+          <th id='select-th-log-history'>Select</th><th id='date-th-log-history'>Date</th><th>Session Name</th><th id='meat-th-log-history'>Meat</th><th id='temp-th-log-history'>Cook Temperature</th><th>My Rating</th><th id='votes-th-log-history'>Votes</th><th id='status-th-log-history'>Status</th>
+        </tr>
+        <% if (logList) { %>
+          <% logList.forEach(function(log) { %>
+            <tr id=<%= log._id %>>
+              <td id='select-td-log-history'><input type='checkbox' class='log-select' name='log-select'></td>
+              <td id='date-td-log-history'><% if (log.date) { %><%= moment(log.date).format('MMMM Do YYYY') %><% } %></td>
+              <td><a href='/view-log/<%= log._id %>'>
+              <% if (log.session_name === '') { %>
+                Unnamed Session
               <% } %>
-            </td>
-            </tr>
-        <% }) %>
-      <% } %>
-    </table>
+                <%= log.session_name %></a></td><td id='meat-td-log-history'><%= log.meat %></td><td id='temp-td-log-history'><%= log.cook_temperature %></td>
+                  <td 
+                    <% if (log.rating === 5) { %> sorttable_customkey='5'<% } %>
+                    <% if (log.rating === 4) { %> sorttable_customkey='4'<% } %>
+                    <% if (log.rating === 3) { %> sorttable_customkey='3'<% } %>
+                    <% if (log.rating === 2) { %> sorttable_customkey='2'<% } %>
+                    <% if (log.rating === 1) { %> sorttable_customkey='1'<% } %>
+                    <% if (log.rating === 0) { %> sorttable_customkey='0'<% } %>
+                    >
+                      <% if (log.rating === 5) { %><img src='/images/5.gif' alt='5 Stars'><% } %>
+                      <% if (log.rating === 4) { %><img src='/images/4.gif' alt='4 Stars'><% } %>
+                      <% if (log.rating === 3) { %><img src='/images/3.gif' alt='3 Stars'><% } %>
+                      <% if (log.rating === 2) { %><img src='/images/2.gif' alt='2 Stars'><% } %>
+                      <% if (log.rating === 1) { %><img src='/images/1.gif' alt='1 Stars'><% } %>
+                      <% if (log.rating === 0) { %><img src='/images/0.gif' alt='0 Stars'><% } %>
+                  </td>
+              <td id='votes-td-log-history'><%= log.votes %></td>
+              <td id='status-td-log-history'>
+                <% if (log.status === 'Public') { %>
+                  <a href='/public-log/<%= log._id %>'><%= log.status %></a>
+                <% } else { %>
+                  <%= log.status %>
+                <% } %>
+              </td>
+              </tr>
+          <% }) %>
+        <% } %>
+      </table>
+    <% } else { %>
+      <h2>No logs created yet...</h2>
+    <% } %>
   </main>
   <%- include footer.ejs -%>
 </body>

@@ -436,7 +436,7 @@ datepickr.init = function (element, instanceConfig) {
             self.currentDayView = date.current.day();
         }
 
-        // wrap();
+        wrap();
         buildCalendar();
         bind();
     };

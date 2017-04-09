@@ -6,7 +6,7 @@
   <meta name="description" content='BBQ Tracker keeps track of BBQ cook sessions, learning best practices of others, and sharing your own successes. '>
   <meta name="google-site-verification" content="95QFg5uDpijW38IPWdztB1BSUM_y2NWfw7_rHH_msP0" />
   <link rel="stylesheet" type="text/css" href='/css/main.css'>
-  <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Roboto+Slab" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito|Roboto+Slab" rel="stylesheet">
   <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <title><%= title %></title>
@@ -19,69 +19,50 @@
     <%- include header.ejs -%>
   </header>
   <main id='home-main'>
-    <h1>Public Logs</h1>
-    <section id='public-logs-updated'>
-      <div id='updates-table'>
-        <h2>Latest Updates</h2>
-        <table>
-          <tr>
-            <th>Username</th><th>Session Name</th><th id='updated-th'>Updated</th><th>Meat</th><th id='rating-th'>User's Rating</th>
-          </tr>
-          <% if (updated20) { %>
-            <% updated20.forEach(function(log) { %>
-              <tr id=<%= log._id %>>
-                <td><%= log.username %></td>
-                <td><a href='/public-log/<%= log._id %>'>
-                  <% if (log.session_name === '') { %>
-                    Unnamed Session
-                  <% } %>
-                  <%= log.session_name %></a>
-                </td>
-                <td id='updated-td'>
-                  <% if (log.updated) { %>
-                    <%= moment(log.updated).format('MMMM Do YYYY') %>
-                  <% } %>
-                </td>
-                <td><%= log.meat %></td>
-                <td id='rating-td'>
-                  <% if (log.rating === 5) { %><img src='/images/5.gif' alt='5 Stars'><% } %>
-                  <% if (log.rating === 4) { %><img src='/images/4.gif' alt='4 Stars'><% } %>
-                  <% if (log.rating === 3) { %><img src='/images/3.gif' alt='3 Stars'><% } %>
-                  <% if (log.rating === 2) { %><img src='/images/2.gif' alt='2 Stars'><% } %>
-                  <% if (log.rating === 1) { %><img src='/images/1.gif' alt='1 Stars'><% } %>
-                  <% if (log.rating === 0) { %><img src='/images/0.gif' alt='0 Stars'><% } %>
-                </td>
-              </tr>
-            <% }) %>
-          <% } %>
-        </table>
-        </div>
+    <section id='main-title'>
+      <img src='/images/bbq_tracker_logo_h.svg' id='cow-img'>
+      <h1>Tasty goodness awaits...</h1>
     </section>
-    <section id='top-voted-logs'>
-      <div id='votes-table'>
-        <h2>Top Pit Hits</h2>
-        <table>
-          <tr>
-            <th>Username</th><th>Session Name</th><th id='vote-meat-th'>Meat</th><th>Pit Hits</th>
-          </tr>
-          <% if (topVoted20) { %>
-            <% topVoted20.forEach(function(log) { %>
-              <tr id=<%= log._id %>>
-                <td><%= log.username %></td>
-                <td><a href='/public-log/<%= log._id %>'>
-                  <% if (log.session_name === '') { %>
-                    Unnamed Session
-                  <% } %>
-                  <%= log.session_name %></a>
-                </td>
-                <td id='vote-meat-td'><%= log.meat %></td>
-                <td><%= log.votes %></td>
-              </tr>
-            <% }) %>
-          <% } %>
-        </table>
+    <section id='main-info'>
+      <div class='main-info-bit'>
+        <div class='info-bit-content'>
+          <h2 class='mobileh2'>BBQ journal</h2>
+          <div class='img-wrapper'>
+            <img src='/images/smoker.svg' id='smoker-img'>
+          </div>
+          <div class='main-info-bit-text'><h2>BBQ journal</h2><p>Track cooks, store recipes, and experiment.</p>
+          </div>
+        </div>
+      </div>
+      <div class='main-info-bit'>
+        <div class='info-bit-content'>
+          <h2 class='mobileh2'>Easily to use</h2>
+          <div class='img-wrapper'>
+            <img src='/images/mobile-screenshot.png' id='mobile-img'>
+          </div>
+          <div class='main-info-bit-text'>
+            <h2>Easily to use</h2>
+            <p>As simple as:</p>
+            <p>1) Outlining Recipe<br>
+            2) Recording Steps<br>
+            3) Rating the cook</p>
+          </div>
+        </div>
+      </div>
+      <div class='main-info-bit'>
+        <div class='info-bit-content'>
+          <h2 class='mobileh2'>A social pit</h2>
+          <div class='img-wrapper'>
+            <img src='/images/vote.svg' id='vote-img'>
+          </div>
+          <div class='main-info-bit-text'>
+            <h2>A social pit</h2>
+            <p>Share public logs<br>Vote up favorites!</p>
+          </div>
+        </div>
       </div>
     </section>
+    <%- include publiclogs.ejs -%>
   </main>
   <%- include footer.ejs -%>
 </body>
