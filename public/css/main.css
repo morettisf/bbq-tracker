@@ -171,11 +171,8 @@ select {
   text-align: center;
 }
 
-#main-info img {
-}
-
 .img-wrapper {
-  width: 70%;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -223,6 +220,7 @@ video {
     1px -1px 0 #000,
     -1px 1px 0 #000,
      1px 1px 0 #000;
+  font-family: 'Roboto Slab', serif;
 }
 
 #home-main a {
@@ -1139,6 +1137,12 @@ br {
     width: 350px;
   }
 
+  .img-wrapper {
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 }
 
 @media (min-width: 768px) {
@@ -1178,10 +1182,6 @@ br {
 
   .main-info-bit {
     padding: 20px;
-  }
-
-  .img-wrapper {
-    width: 40%;
   }
 
   #home-main p {
