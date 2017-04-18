@@ -1302,7 +1302,7 @@ br {
   }
 
   #recipe-guideline-box {
-    margin-left: 20px;
+    margin-left: 15px;
   }
 
   input[type='text'], select {
@@ -1331,12 +1331,17 @@ br {
   }
 
   #recipe-list {
-    width: 625px;
+    width: 700px;
   }
 
   #log-main, #about-main, #account-main, #reg-main, #sign-in-main, #log-history-main {
     padding-left: 20px;
     padding-right: 20px; 
+  }
+
+  #vote-area {
+    right: unset;
+    left: 470px;
   }
 
 }
@@ -1595,25 +1600,25 @@ br {
   }
 
   #other-ingredients-box, #recipe-guideline-box {
-    width: 490px;
+    width: 460px;
   }
 
   .pic {
-    max-width: 1000px;
+    max-width: 940px;
     box-sizing: border-box;
   }
 
   #vote-area {
     right: unset;
-    left: 780px;
+    left: 720px;
   }
 
   #recipe-list {
-    width: 1025px;
+    width: 940px;
   }
 
   #final-comments, #status-box {
-    width: 1000px;
+    width: 940px;
   }
 
 }
