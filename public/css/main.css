@@ -1249,6 +1249,10 @@ br {
     margin-top: 30px;
   }
 
+  #vote-area {
+    right: 20px;
+  }
+
   #vote-area img {
     width: 180px;
     height: 152px;
@@ -1290,12 +1294,49 @@ br {
     margin-bottom: 10px;
   }
 
-  #other-ingredients, #recipe-guideline, #final-comments, #status-box {
+  #other-ingredients-box, #recipe-guideline-box {
+    width: 300px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  #recipe-guideline-box {
+    margin-left: 20px;
+  }
+
+  input[type='text'], select {
+    width: 220px;
+    height: 25px;
+  }
+
+  #slider-group {
+    width: 220px;
+  }
+
+  input[type='range'] {
+    width: 185px;
+  }
+
+  label {
+    width: 380px;
+  }
+
+  #final-comments, #status-box {
     width: 600px;
   }
 
   #status-box {
     box-sizing: border-box;
+  }
+
+  #recipe-list {
+    width: 625px;
+  }
+
+  #log-main, #about-main, #account-main, #reg-main, #sign-in-main, #log-history-main {
+    padding-left: 20px;
+    padding-right: 20px; 
   }
 
 }
@@ -1407,7 +1448,8 @@ br {
   }
 
   #top-voted-logs {
-    margin-top: 60px;
+    margin-top: 40px;
+    margin-bottom: 40px;
   }
 
   input[type=range]::-webkit-slider-thumb {
@@ -1468,12 +1510,13 @@ br {
 
   #non-mobile-right ul {
     float: right;
-    margin-top: 22px;
+    margin-top: 10px;
     margin-right: 20px;
     padding-left: 20px;
   }
 
   #non-mobile-right li {
+    margin-top: 8px;
     text-align: right;
   }
 
@@ -1549,6 +1592,23 @@ br {
 
   #new-log-btn {
     margin-top: 40px;
+  }
+
+  #other-ingredients-box, #recipe-guideline-box {
+    width: 500px;
+  }
+
+  .pic {
+    max-width: 1000px;
+  }
+
+  #vote-area {
+    right: unset;
+    left: 800px;
+  }
+
+  #recipe-list {
+    width: 1025px;
   }
 
 }

@@ -8,8 +8,9 @@
     "test": "NODE_ENV=test mocha",
     "build": "browserify client.js -t babelify | uglifyjs -o public/js/bundle.js",
     "start": "node server.js",
-    "watch": "watchify client.js -t babelify -o public/js/bundle.js --debug --verbose",
-    "watch-server": "nodemon --watch routes ./server.js"
+    "watchjs": "watchify client.js -t babelify -do public/js/bundle.js",
+    "watch-server": "nodemon --watch routes ./server.js",
+    "watch": "npm run watchjs & npm run watch-server"
   },
   "author": "",
   "license": "ISC",

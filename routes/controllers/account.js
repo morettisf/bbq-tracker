@@ -25,10 +25,6 @@ module.exports = {
         disable = true
       }
 
-      else {
-        username = null
-      }
-
       var ejs = { 
         title: 'My Account | BBQ Tracker', 
         user: req.session.passport, 
