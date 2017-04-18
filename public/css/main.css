@@ -672,7 +672,7 @@ input[type=range]:focus::-ms-fill-upper {
   box-sizing: border-box;
   resize: vertical;
   width: 100%;
-  height: 175px;
+  height: 50px;
 }
 
 #rating-label {
@@ -1295,7 +1295,7 @@ br {
   }
 
   #other-ingredients-box, #recipe-guideline-box {
-    width: 300px;
+    width: 340px;
     display: inline-block;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -1323,7 +1323,7 @@ br {
   }
 
   #final-comments, #status-box {
-    width: 600px;
+    width: 100%;
   }
 
   #status-box {
@@ -1595,11 +1595,12 @@ br {
   }
 
   #other-ingredients-box, #recipe-guideline-box {
-    width: 500px;
+    width: 490px;
   }
 
   .pic {
     max-width: 1000px;
+    box-sizing: border-box;
   }
 
   #vote-area {
@@ -1609,6 +1610,10 @@ br {
 
   #recipe-list {
     width: 1025px;
+  }
+
+  #final-comments, #status-box {
+    width: 1000px;
   }
 
 }
