@@ -18,7 +18,7 @@
 
 var stIsIE = /*@cc_on!@*/false;
 
-sorttable = {
+var sorttable = {
   init: function() {
     // quit if this function has already been called
     if (arguments.callee.done) return;

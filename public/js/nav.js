@@ -1,5 +1,3 @@
-'use strict'
-
 var hamburger = document.querySelector('#hamburger')
 
 if (hamburger) {

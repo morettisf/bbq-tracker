@@ -536,6 +536,13 @@ ol {
   width: 75px;
   height: 75px;
 }
+
+.non-inline-block-label {
+  display: unset;
+}
+
+
+
 /* Temperature Range Slider */
 
 #slider-group {
