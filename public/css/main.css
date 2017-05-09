@@ -1511,6 +1511,7 @@ br {
     margin-top: 0;
     margin-bottom: 0;
     float: left;
+    min-width: 400px;
   }
 
   #non-mobile-top-left li {
