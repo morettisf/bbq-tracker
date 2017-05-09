@@ -1511,7 +1511,7 @@ br {
     margin-top: 0;
     margin-bottom: 0;
     float: left;
-    min-width: 400px;
+    width: 360px;
   }
 
   #non-mobile-top-left li {
@@ -1523,6 +1523,8 @@ br {
 
   #non-mobile-right ul {
     float: right;
+    list-style: none;
+    text-decoration: none;
     margin-top: 10px;
     margin-right: 20px;
     padding-left: 20px;
