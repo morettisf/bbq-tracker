@@ -1504,7 +1504,7 @@ br {
     display: block;
   }
 
-  #non-mobile-top ul {
+  #non-mobile-top-left {
     list-style: none;
     text-decoration: none;
     height: 100px;
