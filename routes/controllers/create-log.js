@@ -29,8 +29,6 @@ module.exports = {
 
   post: function(req, res, next) {
 
-    // console.log(req)
-
     var userId = req.session.passport.user
 
     if (req.files) {

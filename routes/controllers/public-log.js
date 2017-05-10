@@ -78,21 +78,23 @@ module.exports = {
           logAvatar = user[0].avatar
           authorId = user[0]._id
 
-          user[0].logs.forEach(function(log) {
-            if (log._id.toString() === logId) {
-              selectedLog = log
+          for (var i = 0; i < user[0].logs.length; i++) {
+            if (user[0].logs[i]._id.toString() === logId) {
+              selectedLog = user[0].logs[i]
+              break
             }
-          })
+          }
 
           // *** check if log is Public or not before displaying ***
           if (selectedLog.status === 'Public') {
 
             // see if user has voted for visited log or not. If so, disable voting.
-            selectedLog.voters.forEach(function(voter) {
-              if (userId === voter.voter_id) {
+            for (var i = 0; i < selectedLog.voters.length; i++) {
+              if (userId === selectedLog.voters[i].voter_id) {
                 votingStatus = false
+                break
               }
-            })
+            }
 
             // remove voting ability if logged in user same as public log author
             if (userId === authorId) {
@@ -159,18 +161,20 @@ module.exports = {
 
       var logs = user.logs
 
-      logs.forEach(function(log) {
-        if (logId === log._id.toString()) {
-          pastVoters = log.voters
-          logObject = log
+      for (var i = 0; i < logs.length; i++) {
+        if (logId === logs[i]._id.toString()) {
+          pastVoters = logs[i].voters
+          logObject = logs[i]
+          break
         }
-      })
+      }
 
-      pastVoters.forEach(function(pastVoter) {
-        if (voter.voter_id === pastVoter.voter_id) {
+      for (var i = 0; i < pastVoters.length; i++) {
+        if (voter.voter_id === pastVoters[i].voter_id) {
           res.status(500)
+          break
         }
-      })
+      }
               
       logObject.votes++
       logObject.voters.push(voter)
