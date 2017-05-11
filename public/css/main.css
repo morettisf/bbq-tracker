@@ -24,7 +24,13 @@ h1, h2, h3 {
   position: relative;
   overflow: hidden;
   color: black;
-  margin: 60px 10px 10px 10px;
+  padding: 10px 10px 0 10px;
+  margin-top: 60px;
+}
+
+#log-main {
+  background-image: url('../images/table-cloth-700.jpg');
+  background-repeat: repeat;
 }
 
 #reg-main, #sign-in-main {
@@ -340,6 +346,22 @@ table img, #public-rating img {
   height: 25px;
   margin: 10px;
   cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.1s ease-in-out;
+}
+
+#x {
+  position: absolute;
+  right: 0;
+  height: 25px;
+  margin: 10px 17px 10px 10px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.hide-nav {
+  opacity: 0 !important;
 }
 
 .visible {
@@ -415,6 +437,15 @@ table img, #public-rating img {
 
 /***** Logs *****/
 
+.form-wrap, .form-wrap-step {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
 .pics-upload-box {
   display: none;
 }
@@ -460,6 +491,7 @@ label {
   white-space: nowrap;
   margin-top: 10px;
   width: 100%;
+  font-weight: 600;
 }
 
 #other-ingredients-box label, #recipe-guideline-box label, #final-comments-label {
@@ -469,7 +501,7 @@ label {
 input[type='text'], select {
   -webkit-appearance: none;
   box-sizing: border-box;
-  width: 170px;
+  width: 140px;
   float: right;
 }
 
@@ -555,6 +587,7 @@ ol {
 input[type=range] {
   -webkit-appearance: none;
   margin: 9.7px 0;
+  width: 105px;
 }
 input[type=range]:focus {
   outline: none;
@@ -687,9 +720,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .step-box {
-  border: 1px solid black;
-  padding: 15px;
-  margin-top: 10px;
+  background-color: white;
 }
 
 .step-notes {
@@ -736,7 +767,7 @@ input[type=range]:focus::-ms-fill-upper {
   display: block;
   clear: both;
   margin-top: 25px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 #save:active, #update:active {
@@ -746,8 +777,8 @@ input[type=range]:focus::-ms-fill-upper {
 
 #vote-area {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 10px;
 }
 
 #vote-area img {
@@ -1111,6 +1142,10 @@ br {
     width: 152px;
   }
 
+  #left-nav li {
+    margin-bottom: 30px;
+  }
+
 }
 
 @media (min-width: 414px) {
@@ -1136,12 +1171,32 @@ br {
     height: 102px;
   }
 
+  #left-nav {
+    padding-left: 30px;
+  }
+
+  #left-nav li {
+    margin-bottom: 40px;
+  }
+
+  #right-nav-area {
+    margin-right: 10px;
+  }
+
+  #right-nav-area li {
+    margin-bottom: 25px;
+  }
+
 }
 
 @media (min-width: 450px) {
 
   label {
     width: 350px;
+  }
+
+  .form-wrap {
+    width: fit-content;
   }
 
   .img-wrapper {
@@ -1302,10 +1357,8 @@ br {
   }
 
   #other-ingredients-box, #recipe-guideline-box {
-    width: 340px;
+    width: 330px;
     display: inline-block;
-    margin-top: 10px;
-    margin-bottom: 10px;
   }
 
   #recipe-guideline-box {
@@ -1338,7 +1391,7 @@ br {
   }
 
   #recipe-list {
-    width: 700px;
+    width: 720px;
   }
 
   #log-main, #about-main, #account-main, #reg-main, #sign-in-main, #log-history-main {
@@ -1349,6 +1402,14 @@ br {
   #vote-area {
     right: unset;
     left: 470px;
+  }
+
+  .form-wrap, .form-wrap-step {
+    padding: 20px;
+  }
+
+  #final-comments, #status-box {
+    width: 680px;
   }
 
 }
@@ -1425,6 +1486,10 @@ br {
     margin-left: 125px;
   }
 
+  #vote-area {
+    top: 20px;
+  }
+
   #vote-img {
     width: 370px;
     margin-left: 65px;
@@ -1437,12 +1502,13 @@ br {
     margin: 9px 5px 5px 12px;
   }
 
-  #hamburger {
+  #hamburger, #x {
     display: none;
   }
 
   #log-main, #about-main, #account-main, #reg-main, #sign-in-main {
-    margin: 80px 20px 20px 20px;
+    margin: 80px 0 0 0;
+    padding: 40px 20px 20px 20px;
     font-size: 1em;
   }
 
@@ -1610,7 +1676,7 @@ br {
   }
 
   #other-ingredients-box, #recipe-guideline-box {
-    width: 460px;
+    width: 450px;
   }
 
   .pic {
@@ -1624,11 +1690,11 @@ br {
   }
 
   #recipe-list {
-    width: 940px;
+    width: 960px;
   }
 
   #final-comments, #status-box {
-    width: 940px;
+    width: 920px;
   }
 
 }

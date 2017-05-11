@@ -17,96 +17,100 @@
   <main id='log-main'>
     <h1><%= h1 %></h1>
     <section>
-      <div id='date'>
-        <label for='date'>Date
-          <input type='text' name='date' id='date-select' readonly='true'>
-        </label>
-      </div>
-      <div id='session-box'>
-        <label for='session-name'>Session Name
-          <input type='text' id='session-name' placeholder='Brisket in May'>
-        </label>
-      </div>
-      <div id='bbq-cooker'>
-        <label for='cooking-device'>Cooking Device
-          <select id='cooking-device'>
-            <% logOptions.device.forEach(function(device) { %>
-              <option value='<%= device %>'><%= device %></option>
-            <% }) %>
-          </select>
-        <div id='device-other-box' class='hidden'>
-          <label for='custom-cooking-device'> Device Name
-            <input type='text' placeholder='Custom' id='device-other-text'>
+      <div class='form-wrap'>
+        <div id='date'>
+          <label for='date'>Date
+            <input type='text' name='date' id='date-select' readonly='true'>
           </label>
+        </div>
+        <div id='session-box'>
+          <label for='session-name'>Session Name
+            <input type='text' id='session-name' placeholder='Brisket in May'>
+          </label>
+        </div>
+        <div id='bbq-cooker'>
+          <label for='cooking-device'>Cooking Device
+            <select id='cooking-device'>
+              <% logOptions.device.forEach(function(device) { %>
+                <option value='<%= device %>'><%= device %></option>
+              <% }) %>
+            </select>
+          <div id='device-other-box' class='hidden'>
+            <label for='custom-cooking-device'> Device Name
+              <input type='text' placeholder='Custom' id='device-other-text'>
+            </label>
+            </div>
+          </label>
+        </div>
+        <div id='meat'>
+          <label for='meat'>Meat Type
+            <select id='meat-type'>
+              <% logOptions.meat.forEach(function(meatType) { %>
+                <option value='<%= meatType %>'><%= meatType %></option>
+              <% }) %>
+            </select>
+          </label>
+          <div>
+            <label for='meat-weight'>Meat Weight
+              <input type='text' name='meat-weight' id='weight' placeholder='5 lbs'>
+            </label>
           </div>
-        </label>
-      </div>
-      <div id='meat'>
-        <label for='meat'>Meat Type
-          <select id='meat-type'>
-            <% logOptions.meat.forEach(function(meatType) { %>
-              <option value='<%= meatType %>'><%= meatType %></option>
-            <% }) %>
-          </select>
-        </label>
+          <div id='meat-other-box' class='hidden'>
+            <label for='other-meat'> Meat Type
+              <input type='text' placeholder='Custom' id='meat-other-text'>
+            </label>
+          </div>
+        </div>
+          <label for='meat-notes' id='meat-notes-label'>Meat Notes
+            <input type='text' name='meat-notes' id='meat-notes' placeholder='Prime cut of meat'>
+          </label>
+        <div id='cook-temperature'>
+          <label for='cook-temperature'>Cooking Temp
+            <div id='slider-group'>
+              <input id='temp-slider' type='range' min='100' max='500' step='5' value='225' oninput='window.outputUpdate(value)'>
+              <output for='temp-slider' id='temp-slider-output'>225</output>
+            </div>
+          </label>
+        </div>
+        <div id='estimated-time-box'>
+          <label for='estimated-time'>Estimated Time
+            <input type='text' name='estimated-time' id='estimated-time' placeholder='10 hours'>
+          </label>
+        </div>
+        <div id='fuel-box'>
+          <label for='fuel'>Fuel Type
+            <select id='fuel'>
+              <% logOptions.fuel.forEach(function(fuelType) { %>
+                <option value='<%= fuelType %>'><%= fuelType %></option>
+              <% }) %>
+            </select>
+          </label>
+        </div>
         <div>
-          <label for='meat-weight'>Meat Weight
-            <input type='text' name='meat-weight' id='weight' placeholder='5 lbs'>
+          <label for='fuel-brand'>Fuel Brand
+            <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs'>
           </label>
         </div>
-        <div id='meat-other-box' class='hidden'>
-          <label for='other-meat'> Meat Type
-            <input type='text' placeholder='Custom' id='meat-other-text'>
+        <div id='wood-box'>
+          <label for='wood'>Wood
+            <select id='wood'>
+              <% logOptions.wood.forEach(function(woodType) { %>
+                <option value='<%= woodType %>'><%= woodType %></option>
+              <% }) %>
+            </select>
+            <input type='text' placeholder='Other wood type' id='wood-other-text' class='hidden'>
           </label>
         </div>
       </div>
-        <label for='meat-notes' id='meat-notes-label'>Meat Notes
-          <input type='text' name='meat-notes' id='meat-notes' placeholder='Prime cut of meat'>
-        </label>
-      <div id='cook-temperature'>
-        <label for='cook-temperature'>Cooking Temp
-          <div id='slider-group'>
-            <input id='temp-slider' type='range' min='100' max='500' step='5' value='225' oninput='window.outputUpdate(value)'>
-            <output for='temp-slider' id='temp-slider-output'>225</output>
-          </div>
-        </label>
-      </div>
-      <div id='estimated-time-box'>
-        <label for='estimated-time'>Estimated Time
-          <input type='text' name='estimated-time' id='estimated-time' placeholder='10 hours'>
-        </label>
-      </div>
-      <div id='fuel-box'>
-        <label for='fuel'>Fuel Type
-          <select id='fuel'>
-            <% logOptions.fuel.forEach(function(fuelType) { %>
-              <option value='<%= fuelType %>'><%= fuelType %></option>
-            <% }) %>
-          </select>
-        </label>
-      </div>
-      <div>
-        <label for='fuel-brand'>Fuel Brand
-          <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs'>
-        </label>
-      </div>
-      <div id='wood-box'>
-        <label for='wood'>Wood
-          <select id='wood'>
-            <% logOptions.wood.forEach(function(woodType) { %>
-              <option value='<%= woodType %>'><%= woodType %></option>
-            <% }) %>
-          </select>
-          <input type='text' placeholder='Other wood type' id='wood-other-text' class='hidden'>
-        </label>
-      </div>
-      <div id='other-ingredients-box'>
-        <label for='other-ingredients' id='other-ingredients-label'>Other Ingredients</label>
-        <textarea id='other-ingredients' placeholder='List them out here'></textarea>
-      </div>
-      <div id='recipe-guideline-box'>
-        <label for='recipe-guideline' id='recipe-guideline-label'>Recipe Guideline</label>
-        <textarea id='recipe-guideline' placeholder='List planned recipe steps here'></textarea>
+      <div class='form-wrap'>
+        <div id='other-ingredients-box'>
+          <label for='other-ingredients' id='other-ingredients-label'>Other Ingredients</label>
+          <textarea id='other-ingredients' placeholder='List them out here'></textarea>
+        </div>
+        <div id='recipe-guideline-box'>
+          <label for='recipe-guideline' id='recipe-guideline-label'>Recipe Guideline</label>
+          <textarea id='recipe-guideline' placeholder='List planned recipe steps here'></textarea>
+        </div>
       </div>
     </section>
     <section id='recipe-area'>
@@ -114,29 +118,31 @@
       <div id='recipe-list'><ol></ol></div>
       <button type='button' id='add-step'>Add Step</button>
     </section>
-      <label for='My rating' id='rating-label'>My Rating</label>
-        <fieldset class='rating'>
-          <input type='radio' id='star5' name='rating' value='5'><label class='full' for='star5'></label>
-          <input type='radio' id='star4' name='rating' value='4'><label class='full' for='star4'></label>
-          <input type='radio' id='star3' name='rating' value='3'><label class='full' for='star3'></label>
-          <input type='radio' id='star2' name='rating' value='2'><label class='full' for='star2'></label>
-          <input type='radio' id='star1' name='rating' value='1'><label class='full' for='star1'></label>
-        </fieldset>
-      <div class='pics-upload-box'>
-        <div class='pic-upload'><label>Upload Picture 1</label><input id='file1' type='file' name='file1'></div>
-        <div class='pic-upload'><label>Upload Picture 2</label><input id='file2' type='file' name='file2'></div>
-        <div class='pic-upload'><label>Upload Picture 3</label><input id='file3' type='file' name='file3'></div>
-        <div class='pic-upload'><label>Upload Picture 4</label><input id='file4' type='file' name='file4'></div>
-        <div class='pic-upload'><label>Upload Picture 5</label><input id='file5' type='file' name='file5'></div>
-      </div>
-      <div id='final-comments-box'>
-        <label for='final-comments' id='final-comments-label'>Final Comments</label>
-        <textarea id='final-comments' placeholder='List final comments here'></textarea>
-      </div>
-    <fieldset id='status-box'>
-      <input type='radio' name='status' value='Private' checked='checked'>Private
-      <input type='radio' name='status' value='Public'>Public
-    </fieldset>
+      <div class='form-wrap'>
+        <label for='My rating' id='rating-label'>My Rating</label>
+          <fieldset class='rating'>
+            <input type='radio' id='star5' name='rating' value='5'><label class='full' for='star5'></label>
+            <input type='radio' id='star4' name='rating' value='4'><label class='full' for='star4'></label>
+            <input type='radio' id='star3' name='rating' value='3'><label class='full' for='star3'></label>
+            <input type='radio' id='star2' name='rating' value='2'><label class='full' for='star2'></label>
+            <input type='radio' id='star1' name='rating' value='1'><label class='full' for='star1'></label>
+          </fieldset>
+        <div class='pics-upload-box'>
+          <div class='pic-upload'><label>Upload Picture 1</label><input id='file1' type='file' name='file1'></div>
+          <div class='pic-upload'><label>Upload Picture 2</label><input id='file2' type='file' name='file2'></div>
+          <div class='pic-upload'><label>Upload Picture 3</label><input id='file3' type='file' name='file3'></div>
+          <div class='pic-upload'><label>Upload Picture 4</label><input id='file4' type='file' name='file4'></div>
+          <div class='pic-upload'><label>Upload Picture 5</label><input id='file5' type='file' name='file5'></div>
+        </div>
+        <div id='final-comments-box'>
+          <label for='final-comments' id='final-comments-label'>Final Comments</label>
+          <textarea id='final-comments' placeholder='List final comments here'></textarea>
+        </div>
+      <fieldset id='status-box'>
+        <input type='radio' name='status' value='Private' checked='checked'>Private
+        <input type='radio' name='status' value='Public'>Public
+      </fieldset>
+    </div>
     <button type='button' id='save'>Save Log</button>
   </main>
   <%- include footer.ejs -%>

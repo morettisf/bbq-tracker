@@ -32,116 +32,120 @@
       <img src='/images/vote.svg' alt='Pit Hit Votes'>
     </div>
     <section>
-      <div id='date'>
-        <label for='date'>Date
-          <input type='text' name='date' id='date-select' value='<% if (logInfo.date) { %><%= logInfo.date %><% } %>' readonly='true'>
-        </label>
-      </div>
-      <div id='session-box'>
-        <label for='session-name'>Session Name
-          <input type='text' id='session-name' placeholder='Brisket in May' value='<%= logInfo.session_name %>'>
-        </label>
-      </div>
-      <div id='bbq-cooker'>
-        <label for='cooking-device'>Cooking Device
-          <select id='cooking-device'>
-            <% logOptions.device.forEach(function(device) { %>
-              <option value='<%= device %>' 
-                  <% if (logInfo.cooking_device === device) { %> 
-                     selected='selected'
-                  <% } %>
-                    ><%= device %>
-              </option>
-            <% }) %>
-          </select>
-        </label>
-      </div>
-      <div id='device-other-box' <% if (!logInfo.device_other) { %> class='hidden'<% } %> >
-        <label for='custom-cooking-device'> Device Name
-          <input type='text' placeholder='Custom' id='device-other-text' value='<%= logInfo.device_other %>'>
-        </label>
-      </div>
-      <div id='meat'>
-        <label for='meat'>Meat Type
-          <select id='meat-type'>
-            <% logOptions.meat.forEach(function(meatType) { %>
-              <option value='<%= meatType %>' 
-                  <% if (logInfo.meat === meatType) { %> 
-                     selected='selected'
-                  <% } %>
-                    ><%= meatType %>
-              </option>
-            <% }) %>
-          </select>
-        </label>
-        <div>
-          <label for='meat-weight'>Meat Weight
-            <input type='text' name='meat-weight' id='weight' placeholder='5 lbs' value='<%= logInfo.weight %>'>
+      <div class='form-wrap'>
+        <div id='date'>
+          <label for='date'>Date
+            <input type='text' name='date' id='date-select' value='<% if (logInfo.date) { %><%= logInfo.date %><% } %>' readonly='true'>
           </label>
         </div>
-        <div id='meat-other-box' <% if (!logInfo.meat_other) { %> class='hidden'<% } %> >
-          <label for='other-meat'> Meat Type
-          <input type='text' placeholder='Other meat' id='meat-other-text' value='<%= logInfo.meat_other %>'>
+        <div id='session-box'>
+          <label for='session-name'>Session Name
+            <input type='text' id='session-name' placeholder='Brisket in May' value='<%= logInfo.session_name %>'>
           </label>
         </div>
+        <div id='bbq-cooker'>
+          <label for='cooking-device'>Cooking Device
+            <select id='cooking-device'>
+              <% logOptions.device.forEach(function(device) { %>
+                <option value='<%= device %>' 
+                    <% if (logInfo.cooking_device === device) { %> 
+                       selected='selected'
+                    <% } %>
+                      ><%= device %>
+                </option>
+              <% }) %>
+            </select>
+          </label>
         </div>
-        <label for='meat-notes'>Meat Notes
-          <input type='text' name='meat-notes' id='meat-notes' placeholder='Prime cut of meat' value='<%= logInfo.meat_notes %>'>
-        </label>
-      <div id='cook-temperature'>
-        <label for='cook-temperature'>Cooking Temp
-          <div id='slider-group'>
-            <input id='temp-slider' type='range' min='100' max='500' step='5' value='<%= logInfo.cook_temperature %>' oninput='window.outputUpdate(value)'>
-            <output for='temp-slider' id='temp-slider-output'><%= logInfo.cook_temperature %></output>
+        <div id='device-other-box' <% if (!logInfo.device_other) { %> class='hidden'<% } %> >
+          <label for='custom-cooking-device'> Device Name
+            <input type='text' placeholder='Custom' id='device-other-text' value='<%= logInfo.device_other %>'>
+          </label>
+        </div>
+        <div id='meat'>
+          <label for='meat'>Meat Type
+            <select id='meat-type'>
+              <% logOptions.meat.forEach(function(meatType) { %>
+                <option value='<%= meatType %>' 
+                    <% if (logInfo.meat === meatType) { %> 
+                       selected='selected'
+                    <% } %>
+                      ><%= meatType %>
+                </option>
+              <% }) %>
+            </select>
+          </label>
+          <div>
+            <label for='meat-weight'>Meat Weight
+              <input type='text' name='meat-weight' id='weight' placeholder='5 lbs' value='<%= logInfo.weight %>'>
+            </label>
           </div>
-        </label>
+          <div id='meat-other-box' <% if (!logInfo.meat_other) { %> class='hidden'<% } %> >
+            <label for='other-meat'> Meat Type
+            <input type='text' placeholder='Other meat' id='meat-other-text' value='<%= logInfo.meat_other %>'>
+            </label>
+          </div>
+          </div>
+          <label for='meat-notes'>Meat Notes
+            <input type='text' name='meat-notes' id='meat-notes' placeholder='Prime cut of meat' value='<%= logInfo.meat_notes %>'>
+          </label>
+        <div id='cook-temperature'>
+          <label for='cook-temperature'>Cooking Temp
+            <div id='slider-group'>
+              <input id='temp-slider' type='range' min='100' max='500' step='5' value='<%= logInfo.cook_temperature %>' oninput='window.outputUpdate(value)'>
+              <output for='temp-slider' id='temp-slider-output'><%= logInfo.cook_temperature %></output>
+            </div>
+          </label>
+        </div>
+        <div id='estimated-time-box'>
+          <label for='estimated-time'>Estimated Time
+            <input type='text' name='estimated-time' id='estimated-time' placeholder='10 hours' value='<%= logInfo.estimated_time %>'>
+          </label>
+        </div>
+        <div id='fuel-box'>
+          <label for='fuel'>Fuel Type
+            <select id='fuel'>
+              <% logOptions.fuel.forEach(function(fuelType) { %>
+                <option value='<%= fuelType %>' 
+                    <% if (logInfo.fuel === fuelType) { %> 
+                       selected='selected'
+                    <% } %>
+                      ><%= fuelType %>
+                </option>
+              <% }) %>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label for='fuel-brand'>Fuel Brand
+            <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs' value='<%= logInfo.brand %>'>
+          </label>
+        </div>
+        <div id='wood-box'>
+          <label for='wood'>Wood
+            <select id='wood'>
+              <% logOptions.wood.forEach(function(woodType) { %>
+                <option value='<%= woodType %>' 
+                    <% if (logInfo.wood === woodType) { %> 
+                       selected='selected'
+                    <% } %>
+                      ><%= woodType %>
+                </option>
+              <% }) %>
+            </select>
+            <input type='text' placeholder='Other wood type' id='wood-other-text' <% if (!logInfo.wood_other) { %>class='hidden'<% } %> value='<%= logInfo.wood_other %>'>
+          </label>
+        </div>
       </div>
-      <div id='estimated-time-box'>
-        <label for='estimated-time'>Estimated Time
-          <input type='text' name='estimated-time' id='estimated-time' placeholder='10 hours' value='<%= logInfo.estimated_time %>'>
-        </label>
-      </div>
-      <div id='fuel-box'>
-        <label for='fuel'>Fuel Type
-          <select id='fuel'>
-            <% logOptions.fuel.forEach(function(fuelType) { %>
-              <option value='<%= fuelType %>' 
-                  <% if (logInfo.fuel === fuelType) { %> 
-                     selected='selected'
-                  <% } %>
-                    ><%= fuelType %>
-              </option>
-            <% }) %>
-          </select>
-        </label>
-      </div>
-      <div>
-        <label for='fuel-brand'>Fuel Brand
-          <input type='text' name='fuel-brand' id='brand' placeholder='Stubbs' value='<%= logInfo.brand %>'>
-        </label>
-      </div>
-      <div id='wood-box'>
-        <label for='wood'>Wood
-          <select id='wood'>
-            <% logOptions.wood.forEach(function(woodType) { %>
-              <option value='<%= woodType %>' 
-                  <% if (logInfo.wood === woodType) { %> 
-                     selected='selected'
-                  <% } %>
-                    ><%= woodType %>
-              </option>
-            <% }) %>
-          </select>
-          <input type='text' placeholder='Other wood type' id='wood-other-text' <% if (!logInfo.wood_other) { %>class='hidden'<% } %> value='<%= logInfo.wood_other %>'>
-        </label>
-      </div>
-      <div id='other-ingredients-box'>
-        <label for='other-ingredients'>Other Ingredients</label>
-          <textarea id='other-ingredients' placeholder='List them out here'><%= logInfo.other_ingredients %></textarea>
-      </div>
-      <div id='recipe-guideline-box'>
-        <label for='recipe-guideline'>Recipe Guideline</label>
-          <textarea id='recipe-guideline' placeholder='List planned recipe steps here'><%= logInfo.recipe_guideline %></textarea>
+      <div class='form-wrap'>
+        <div id='other-ingredients-box'>
+          <label for='other-ingredients'>Other Ingredients</label>
+            <textarea id='other-ingredients' placeholder='List them out here'><%= logInfo.other_ingredients %></textarea>
+        </div>
+        <div id='recipe-guideline-box'>
+          <label for='recipe-guideline'>Recipe Guideline</label>
+            <textarea id='recipe-guideline' placeholder='List planned recipe steps here'><%= logInfo.recipe_guideline %></textarea>
+        </div>
       </div>
     </section>
     <section id='recipe-area'>
@@ -149,7 +153,7 @@
       <div id='recipe-list'>
         <ol>
           <% logInfo.steps.forEach(function(item) { %>
-            <li>
+            <li class='form-wrap-step'>
               <div class='step-box'>
                 <div class='step-notes'>
                   <textarea class='step-text' placeholder='Write step here'><%= item.step %></textarea>
@@ -173,6 +177,7 @@
       </div>
       <button type='button' id='add-step'>Add Step</button>
     </section>
+    <div class='form-wrap'>
       <label for='My rating' id='rating-label'>My Rating</label>
       <fieldset class='rating'>
         <input type='radio' id='star5' name='rating' value='5' <% if (logInfo.rating === 5) { %> checked='checked'<% } %>><label class='full' for='star5'></label>
@@ -201,9 +206,10 @@
         <textarea id='final-comments' placeholder='List final comments here'><%= logInfo.final %></textarea>
       </div>
       <fieldset id='status-box'>
-        <input type='radio' name='status' value='Private' <% if (logInfo.status === 'Private') { %> checked='checked'<% } %>>Private
-        <input type='radio' name='status' value='Public' <% if (logInfo.status === 'Public') { %> checked='checked'<% } %>>Public
+        <input type='radio' name='status' value='Private' <% if (logInfo.status === 'Private') { %> checked='checked'<% } %>>&nbsp;Private
+        <input type='radio' name='status' value='Public' <% if (logInfo.status === 'Public') { %> checked='checked'<% } %>>&nbsp;Public
       </fieldset>
+    </div>
     <button type='button' id='update'>Update Log</button>
   </main>
   <%- include footer.ejs -%>

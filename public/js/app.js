@@ -61,6 +61,7 @@ var list = document.querySelector('ol')
 if (addStepBtn) {
   addStepBtn.addEventListener('click', function() {
     var li = document.createElement('li')
+    li.classList.add('form-wrap-step')
     var stepHTML = "<div class='step-box'><div class='step-notes'><textarea class='step-text' placeholder='Write step here'></textarea></div><div class='complete-box'><label for='complete' class='non-inline-block-label'><input type='checkbox' class='complete-check' name='step-complete'>Complete</label><input type='time' class='time' name='time' value='09:00'></div><div class='complete-notes'><textarea class='complete-notes-text' placeholder='Write notes here'></textarea><button type='button' class='remove-step'>Remove Step</button></div></div>"
     li.innerHTML = stepHTML
 
