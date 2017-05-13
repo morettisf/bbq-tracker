@@ -84,7 +84,7 @@ select {
 }
 
 input[type='text'][disabled], textarea[disabled] {
-  color: black;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.8);
 }
 
 #log-main input[type='text']:focus, #log-main textarea:focus {
