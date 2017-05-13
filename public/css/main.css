@@ -1660,8 +1660,8 @@ br {
     margin-right: auto;
   }
 
-  #sign-in-main, #reg-main {
-    margin-top: 200px;
+  #reg-main, #sign-in-main {
+    margin-top: 125px;
   }
 
   #register form, #sign-in form {
