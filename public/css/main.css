@@ -73,6 +73,10 @@ h1, h2, h3 {
 
 input, select, textarea {
   font-size: 16px;
+  height: 30px;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid darkgrey;
 }
 
 select {
@@ -492,6 +496,8 @@ label {
   margin-top: 10px;
   width: 100%;
   font-weight: 600;
+  line-height: 30px;
+  vertical-align: middle;
 }
 
 #other-ingredients-box label, #recipe-guideline-box label, #final-comments-label {
@@ -582,6 +588,8 @@ ol {
   text-align: right;
   float: right;
   width: auto;
+  margin-top: -10px;
+  margin-bottom: -10px;
 }
 
 input[type=range] {
@@ -673,6 +681,11 @@ input[type=range]:focus::-ms-fill-upper {
   background: #6e8088;
 }
 
+#temp-slider {
+  border: none;
+  box-shadow: none;
+}
+
 #temp-slider-output {
   vertical-align: middle;
 }
@@ -738,6 +751,11 @@ input[type=range]:focus::-ms-fill-upper {
 .complete-box {
   width: 100%;
   margin-bottom: 10px;
+}
+
+.complete-box input[type='checkbox'] {
+  border: none;
+  box-shadow: none;
 }
 
 .time {
@@ -1367,7 +1385,6 @@ br {
 
   input[type='text'], select {
     width: 220px;
-    height: 25px;
   }
 
   #slider-group {
