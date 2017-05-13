@@ -509,6 +509,7 @@ input[type='text'], select {
   box-sizing: border-box;
   width: 140px;
   float: right;
+  padding: 4px;
 }
 
 input[type='checkbox'] {
