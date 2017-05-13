@@ -83,8 +83,8 @@ select {
   padding-left: 4px;
 }
 
-input[type="text"][disabled], textarea[disabled] {
-  color: darkgrey;
+input[type='text'][disabled], textarea[disabled] {
+  color: black;
 }
 
 #log-main input[type='text']:focus, #log-main textarea:focus {
