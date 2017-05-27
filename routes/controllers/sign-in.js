@@ -7,6 +7,10 @@ module.exports = {
 
   get: function(req, res, next) {
 
+    if (req.session.passport) {
+      res.redirect('/');
+    }
+    
     var ejs = {
       title: 'Sign In | BBQ Tracker', 
       user: req.session.passport, 

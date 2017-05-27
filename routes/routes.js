@@ -4,6 +4,8 @@ const passport = require('passport')
 const Index = require('./controllers/index')
 const Register = require('./controllers/register')
 const SignIn = require('./controllers/sign-in')
+const Forgot = require('./controllers/forgot')
+const Reset = require('./controllers/reset')
 const Account = require('./controllers/account')
 const CreateLog = require('./controllers/create-log')
 const ViewLog = require('./controllers/view-log')
@@ -73,6 +75,14 @@ module.exports = (app) => {
 
   app.post('/sign-in', SignIn.post)
 
+  app.get('/forgot', Forgot.get);
+
+  app.post('/forgot', Forgot.post);
+
+  app.get('/reset/:token', Reset.get);
+
+  app.post('/reset/:token', Reset.post);
+
   app.get('/account', isLoggedIn, Account.get)
 
   app.put('/account/username', Account.username)
@@ -88,7 +98,6 @@ module.exports = (app) => {
   app.get('/create-log', isLoggedIn, CreateLog.get)
 
   app.post('/create-log', upload.array('pics'), CreateLog.post)
-//  app.post('/create-log', CreateLog.post)
 
   app.get('/view-log/:log', isLoggedIn, ViewLog.get)
 

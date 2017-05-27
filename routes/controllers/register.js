@@ -1,10 +1,15 @@
 const User = require('../../models/users')
 const bcrypt = require('bcryptjs')
+const nodemailer = require('nodemailer');
 
 module.exports = {
 
   get: function(req, res, next) {
 
+    if (req.session.passport) {
+      res.redirect('/');
+    }
+    
     var ejs = {
       title: 'Register | BBQ Tracker', 
       user: req.session.passport, 
@@ -147,6 +152,7 @@ module.exports = {
                   userInfo.password = hash
                   User.create(userInfo)
                     .then(function(){
+                      introEmail(userInfo.email, userInfo.username)
                       req.session.message = 'Registration successful, now sign in'
                       res.redirect('/sign-in')
                     })
@@ -162,6 +168,24 @@ module.exports = {
 
       })
 
+    }
+
+    function introEmail(email, username, done) {
+      var smtpTransport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: 'grazingcattlebbq@gmail.com',
+          pass: process.env.EMAIL
+        }
+      });
+      var mailOptions = {
+        to: email,
+        from: 'grazingcattlebbq@gmail.com',
+        subject: 'Welcome to BBQTracker',
+        text: 'Hello ' + username + ',\n\n' +
+          "This is confirmation you've created an account on www.bbqtracker.com. If you need further assistance, feel free to reach out to grazingcattlebbq@gmail.com. Enjoy!\n"
+      };
+      smtpTransport.sendMail(mailOptions);
     }
 
   }

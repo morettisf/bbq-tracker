@@ -20,7 +20,7 @@ h1, h2, h3 {
   font-family: 'Roboto Slab', serif;
 }
 
-#log-main, #about-main, #account-main, #reg-main, #sign-in-main, #log-history-main {
+#log-main, #about-main, #account-main, #reg-main, #sign-in-main, #log-history-main, #forgot-main, #reset-main {
   position: relative;
   overflow: hidden;
   color: black;
@@ -33,7 +33,7 @@ h1, h2, h3 {
   background-repeat: repeat;
 }
 
-#reg-main, #sign-in-main {
+#reg-main, #sign-in-main, #forgot-main, #reset-main {
   margin-top: 70px;
 }
 
@@ -1048,13 +1048,13 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 /***** Register Page / Sign-In *****/
 
-#reg-main h1, #sign-in-main h1 {
+#reg-main h1, #sign-in-main h1, #forgot-main h1, #reset-main h1 {
   text-align: center;
   margin-top: 2px;
   margin-bottom: 2px;
 }
 
-#register form, #sign-in form {
+#register form, #sign-in form, #forgot form, #reset form {
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
@@ -1063,19 +1063,19 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   text-align: center;
 }
 
-#register input, #sign-in input {
+#register input, #sign-in input, #forgot input, #reset input {
   width: 100%;
   box-sizing: border-box;
   -webkit-appearance: none;
 }
 
-#sign-in-form label, #register-form label {
+#sign-in-form label, #register-form label, #forgot-form label, #reset-form label {
   width: 100%;
 }
 
-#reg-btn, #sign-in-btn {
+#reg-btn, #sign-in-btn  {
   font-family: 'Roboto Slab', serif;
-  font-size: 1.2em;
+  font-size: 1em;
   border: solid black 1px;
   padding: 5px 10px;
   border-radius: 0;
@@ -1084,7 +1084,41 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   background-color: #63737A;
   color: white;
   width: 100px !important;
+  height: 40px;
   margin: 20px auto;
+  cursor: pointer;
+}
+
+#forgot-btn {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1em;
+  border: solid black 1px;
+  padding: 5px 10px;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  background-color: #63737A;
+  color: white;
+  width: 170px !important;
+  height: 40px;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
+#reset-btn {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1em;
+  border: solid black 1px;
+  padding: 5px 10px;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  background-color: #63737A;
+  color: white;
+  width: 190px !important;
+  height: 40px;
+  margin: 20px auto;
+  cursor: pointer;
 }
 
 #sign-in-main p {
@@ -1369,17 +1403,8 @@ br {
     height: 125px;
   }
 
-  #register input, #sign-in input {
-    height: 30px;
-  }
-
-  #register input[type='submit'], #sign-in input[type='submit'] {
-    height: 48px;
-    font-size: 1em;
-  }
-
-  #reg-main h1, #sign-in-main h1 {
-    margin-top: 10px;
+  #reg-main h1, #sign-in-main h1, #forgot-main h1, #reset-main h1 {
+    margin-top: 30px;
     margin-bottom: 10px;
   }
 
@@ -1420,7 +1445,7 @@ br {
     width: 720px;
   }
 
-  #log-main, #about-main, #account-main, #reg-main, #sign-in-main, #log-history-main {
+  #log-main, #about-main, #account-main, #reg-main, #sign-in-main, #log-history-main, #forgot-main, #reset-main {
     padding-left: 20px;
     padding-right: 20px; 
   }
@@ -1532,7 +1557,7 @@ br {
     display: none;
   }
 
-  #log-main, #about-main, #account-main, #reg-main, #sign-in-main {
+  #log-main, #about-main, #account-main, #reg-main, #sign-in-main, #forgot-main, #reset-main {
     margin: 80px 0 0 0;
     padding: 40px 20px 20px 20px;
     font-size: 1em;
@@ -1658,19 +1683,16 @@ br {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: -20px;
   }
 
-  #reg-main, #sign-in-main {
-    margin-top: 125px;
+  #reg-main, #sign-in-main, #forgot-main, #reset-main {
+    margin-top: 80px;
   }
 
-  #register form, #sign-in form {
+  #register form, #sign-in form, #forgot form, #reset form {
     width: 33%;
-  }
-
-  #register input[type='submit'], #sign-in input[type='submit'] {
-    height: 48px;
-    font-size: 1.2em;
   }
 
   video {

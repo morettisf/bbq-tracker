@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta name='description' content='BBQ Tracker helps you manage cook sessions, recipes, and outcomes.'>
+  <link rel='stylesheet' type='text/css' href='/css/main.css'>
+  <link href="https://fonts.googleapis.com/css?family=Nunito|Roboto+Slab" rel="stylesheet">  
+  <link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <title><%= title %></title>
+</head>
+<body>
+  <%- include header.ejs -%>
+  <main id='forgot-main'>
+    <% if (message) { %>
+      <div class='message'><%= message %></div>
+    <% } %>
+    <% if (errors) { %>
+      <div class='error'><%= errors %></div>
+    <% } %>
+    <h1>Forgot Username &amp; Password Reset</h1>
+    <section id='forgot'>
+      <form id='forgot-form' action='/forgot' method='post'>
+        <label for='email'>Enter Your Email</label>
+        <input type='text' for='email' name='email'>
+        <input id='forgot-btn' type='submit' for='submit' value='Request Info'>
+      </form>
+    </section>
+  </main>
+  <%- include footer.ejs -%>
+</body>
+</html>

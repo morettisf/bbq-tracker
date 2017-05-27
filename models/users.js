@@ -8,7 +8,9 @@ const UserSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   avatar: { type: String },
-  logs: [logSchema]
+  logs: [logSchema],
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 })
 
 var User = mongoose.model('user', UserSchema)
