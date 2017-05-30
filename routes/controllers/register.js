@@ -25,15 +25,9 @@ module.exports = {
 
     var userInfo = { 
       username: req.body.username.toLowerCase(), 
-      email: req.body.email, 
+      email: req.body.email.toLowerCase(), 
       password: req.body.password, 
       avatar: '../images/cow.svg' 
-    }
-
-    var resInfo = { 
-      username: req.body.username.toLowerCase(), 
-      email: req.body.email, 
-      password: req.body.password 
     }
 
     var userNameReq = req.body.username.toLowerCase()
@@ -173,9 +167,12 @@ module.exports = {
     function introEmail(email, username, done) {
       var smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
-        auth: {
+        auth:{
+          type: 'OAuth2',
           user: 'grazingcattlebbq@gmail.com',
-          pass: process.env.EMAIL
+          clientId: process.env.CLIENT_ID,
+          clientSecret: process.env.CLIENT_SECRET,
+          refreshToken: process.env.REFRESH_TOKEN
         }
       });
       var mailOptions = {

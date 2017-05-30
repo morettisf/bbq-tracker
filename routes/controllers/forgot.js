@@ -54,9 +54,12 @@ module.exports = {
     function(token, user, done) {
       var smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
-        auth: {
+        auth:{
+          type: 'OAuth2',
           user: 'grazingcattlebbq@gmail.com',
-          pass: process.env.EMAIL
+          clientId: process.env.CLIENT_ID,
+          clientSecret: process.env.CLIENT_SECRET,
+          refreshToken: process.env.REFRESH_TOKEN
         }
       });
       var mailOptions = {
