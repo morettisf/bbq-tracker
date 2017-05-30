@@ -74,17 +74,24 @@ module.exports = {
       };
       smtpTransport.sendMail(mailOptions, function(err) {
 
-        let ejs = {
-          title: 'Forgot Username & Password | BBQTracker', 
-          user: req.session.passport, 
-          errors: null, 
-          message: 'An e-mail has been sent to ' + user.email, 
-          username: null, 
-          avatar: null
-        };
+        if (err) {
+          console.log('Error: ', err)
+        }
+        else {
+          console.log('Email Sent')
 
-        res.render('forgot', ejs);
-        done(err, 'done');
+          let ejs = {
+            title: 'Forgot Username & Password | BBQTracker', 
+            user: req.session.passport, 
+            errors: null, 
+            message: 'An e-mail has been sent to ' + user.email, 
+            username: null, 
+            avatar: null
+          };
+
+          res.render('forgot', ejs);
+          done(err, 'done');
+        }
       });
     }
   ], function(err) {

@@ -182,7 +182,14 @@ module.exports = {
         text: 'Hello ' + username + ',\n\n' +
           "This is confirmation you've created an account on www.bbqtracker.com. If you need further assistance, feel free to reach out to grazingcattlebbq@gmail.com. Enjoy!\n"
       };
-      smtpTransport.sendMail(mailOptions);
+      smtpTransport.sendMail(mailOptions, function(err, res) {
+        if (err) {
+          console.log('Error: ', err)
+        }
+        else {
+          console.log('Email Sent')
+        }
+      });
     }
 
   }
