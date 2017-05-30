@@ -1099,7 +1099,6 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   -webkit-border-radius: 0;
   background-color: #63737A;
   color: white;
-  width: 170px !important;
   height: 40px;
   margin: 20px auto;
   cursor: pointer;
@@ -1115,7 +1114,6 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   -webkit-border-radius: 0;
   background-color: #63737A;
   color: white;
-  width: 190px !important;
   height: 40px;
   margin: 20px auto;
   cursor: pointer;
@@ -1208,6 +1206,14 @@ br {
     margin-bottom: 30px;
   }
 
+  #forgot-btn {
+    width: 170px !important;
+  }
+
+  #reset-btn {
+    width: 190px !important;
+  }
+  
 }
 
 @media (min-width: 414px) {
