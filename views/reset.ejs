@@ -25,10 +25,8 @@
     <h1>Reset Your Password</h1>
     <section id='reset'>
       <form id='reset-form' action='/reset/<%= token %>' method='POST'>
-        <label for='password'>New Password</label>
-        <input id='reset-pw' type='password' for='password' name='password'>
-        <label for='confirm password'>Confirm Password</label>
-        <input id='reset-pw2' type='password' for='confirmpassword' name='password2'>
+        <input id='reset-pw' type='password' for='password' name='password' placeholder="New Password">
+        <input id='reset-pw2' type='password' for='confirmpassword' name='password2' placeholder="Confirm Password">
         <input id='reset-btn' type='submit' for='submit' value='Update Password'>
       </form>
     </section>

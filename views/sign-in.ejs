@@ -18,13 +18,11 @@
     <% if (errors) { %>
       <div class='error'><%= errors %></div>
     <% } %>
-    <h1>Sign In</h1>
     <section id='sign-in'>
+      <h1>Sign In</h1>
       <form id='sign-in-form' action='/sign-in' method='post'>
-        <label for='username'>Username</label>
-        <input id='sign-email' type='text' for='username' name='username' placeholder='BBQ123'>
-        <label for='password'>Password</label>
-        <input id='sign-pw' type='password' for='password' name='password'>
+        <input id='sign-email' type='text' for='username' name='username' placeholder='Username'>
+        <input id='sign-pw' type='password' for='password' name='password' placeholder='Password'>
         <input id='sign-in-btn' type='submit' for='submit' value='Submit'>
       </form>
       <a href='/forgot'><p>Forgot username or password?</p></a>

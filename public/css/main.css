@@ -20,7 +20,7 @@ h1, h2, h3 {
   font-family: 'Roboto Slab', serif;
 }
 
-#log-main, #about-main, #account-main, #reg-main, #sign-in-main, #log-history-main, #forgot-main, #reset-main {
+#log-main, #about-main, #account-main, #log-history-main, #forgot-main, #reset-main {
   position: relative;
   overflow: hidden;
   color: black;
@@ -29,12 +29,9 @@ h1, h2, h3 {
 }
 
 #log-main {
+  background-color: #f79f9b;
   background-image: url('../images/table-cloth-700.jpg');
   background-repeat: repeat;
-}
-
-#reg-main, #sign-in-main, #forgot-main, #reset-main {
-  margin-top: 70px;
 }
 
 #account-main ul {
@@ -1048,23 +1045,65 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 
 /***** Register Page / Sign-In *****/
 
-#reg-main h1, #sign-in-main h1, #forgot-main h1, #reset-main h1 {
-  text-align: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
+#reg-main, #sign-in-main, #forgot-main, #reset-main {
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+  color: black;
+  margin-top: 60px;
 }
 
-#register form, #sign-in form, #forgot form, #reset form {
+#reg-main, #sign-in-main {
+  background-image: url('/images/rib-rub.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#sign-in, #register {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  width: 75%;
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+#reg-main h1, #sign-in-main h1 {
+  margin-top: 0;
+}
+
+#reg-main h1, #sign-in-main h1, #forgot-main h1, #reset-main h1 {
+  text-align: center;
+  font-size: 1.8em;
+}
+
+#forgot form, #reset form {
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: -15px; 
   width: 50%;
+  max-width: 400px;
+  text-align: center;
+}
+
+#register form, #sign-in form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -15px; 
+  width: 70%;
+  max-width: 400px;
   text-align: center;
 }
 
 #register input, #sign-in input, #forgot input, #reset input {
   width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 4px;
+  height: 40px;
   box-sizing: border-box;
   -webkit-appearance: none;
 }
@@ -1085,7 +1124,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   color: white;
   width: 100px !important;
   height: 40px;
-  margin: 20px auto;
+  margin: 15px auto 20px !important;
   cursor: pointer;
 }
 
@@ -1409,8 +1448,8 @@ br {
     height: 125px;
   }
 
-  #reg-main h1, #sign-in-main h1, #forgot-main h1, #reset-main h1 {
-    margin-top: 30px;
+  #reg-main h1, #sign-in-main h1 {
+    margin-top: 10px;
     margin-bottom: 10px;
   }
 
@@ -1467,6 +1506,18 @@ br {
 
   #final-comments, #status-box {
     width: 680px;
+  }
+
+  #reg-btn {
+    margin: 15px auto 25px !important;
+  }
+
+  #sign-in-btn {
+    margin: 15px auto 20px !important;
+  }
+
+  #demo-box {
+    margin-bottom: 10px;
   }
 
 }
