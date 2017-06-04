@@ -1448,11 +1448,6 @@ br {
     height: 125px;
   }
 
-  #reg-main h1, #sign-in-main h1 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-
   #other-ingredients-box, #recipe-guideline-box {
     width: 330px;
     display: inline-block;
@@ -1506,18 +1501,6 @@ br {
 
   #final-comments, #status-box {
     width: 680px;
-  }
-
-  #reg-btn {
-    margin: 15px auto 25px !important;
-  }
-
-  #sign-in-btn {
-    margin: 15px auto 20px !important;
-  }
-
-  #demo-box {
-    margin-bottom: 10px;
   }
 
 }
@@ -1796,6 +1779,23 @@ br {
 
   #final-comments, #status-box {
     width: 920px;
+  }
+
+  #reg-main h1, #sign-in-main h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  #reg-btn {
+    margin: 15px auto 25px !important;
+  }
+
+  #sign-in-btn {
+    margin: 15px auto 20px !important;
+  }
+
+  #demo-box {
+    margin-bottom: 10px;
   }
 
 }
