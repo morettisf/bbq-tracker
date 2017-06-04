@@ -1748,10 +1748,6 @@ br {
     margin-top: 80px;
   }
 
-  #register form, #sign-in form, #forgot form, #reset form {
-    width: 33%;
-  }
-
   video {
     min-width: 100%;
   }
