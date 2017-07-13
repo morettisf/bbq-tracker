@@ -1,58 +1,8 @@
-<nav>
-  <div id='mobile-top'>
-    <a href='/'><img src='/images/bbq_tracker_logo_h.svg' alt='BBQ Tracker Logo' id='logo'></a>
-    <img src='/images/hamburger.svg' id='hamburger' alt='expanding menu button' id='hamburger'>
-    <img src='/images/x.svg' id='x' class='hidden' alt='close menu button'>
-    <div id='non-mobile-top'>
-      <ul id='non-mobile-top-left'>
-      <% if (!user) { %>
-        <a href='/sign-in'><li>Sign In / Demo</li></a>
-        <a href='/register'><li>Register</li></a>
-      <% } else { %>
-        <a href='/create-log'><li>Create BBQ Log</li></a>
-        <a href='/log-history'><li>Log History</li></a>
-      <% } %>
-      <a href='/about'><li id='about-li'>About</li></a>
-    </ul>
-      <% if (username) { %>
-        <div id='non-mobile-right'>
-          <ul>
-            <a href='/account'><li>Account Settings</li></a>
-            <a href='/logout' id='logout'><li>Logout</li></a>
-          </ul>
-          <div id='avatar-name'>
-            <img src='<%= avatar %>'>
-            <div id='username-non-mobile'><%= username %></div>
-          </div>
-        </div>
-      <% } %>   
-    </div>
-  </div>
-  <div id='mobile-out'>
-    <ul id='left-nav'>
-      <% if (!user) { %>
-        <a href='/sign-in'><li>Sign In / Demo</li></a>
-        <a href='/register'><li>Register</li></a>
-      <% } else { %>
-        <a href='/create-log'><li>Create BBQ Log</li></a>
-        <a href='/log-history'><li>Log History</li></a>
-      <% } %>
-      <a href='/about'><li>About</li></a>
-    </ul>
-    <% if (username) { %>
-      <div id='right-nav-area'>
-        <div id='username-menu'>
-          <img src='<%= avatar %>'>
-          <div id='username'><%= username %></div>
-        </div>
-        <div id='drop-down-options'>
-          <ul>
-            <a href='/account'><li>Account Settings</li></a>
-            <a href='/logout' id='logout'><li>Logout</li></a>
-          </ul>
-        </div>
-      </div>
-    <% } %>   
-  </div>
-</nav>
-
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta name="google-site-verification" content="95QFg5uDpijW38IPWdztB1BSUM_y2NWfw7_rHH_msP0" />
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600|Roboto+Slab" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel='stylesheet' type='text/css' href='/css/datepickr.css'>
+  <link rel="stylesheet" type="text/css" href='/css/main.css'>

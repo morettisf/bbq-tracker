@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <meta name='description' content='BBQ Tracker helps you manage cook sessions, recipes, and outcomes.'>
-  <link rel='stylesheet' type='text/css' href='/css/main.css'>
-  <link rel='stylesheet' type='text/css' href='/css/datepickr.css'>
-  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600|Roboto+Slab" rel="stylesheet">
-  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-  <link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <%- include header.ejs -%>
   <title><%= title %></title>
 </head>
 <body id='log-body'>
-  <%- include header.ejs -%>
+  <%- include nav.ejs -%>
   <main id='log-main'>
     <div id='profile-box'>
       <img src='<%= logAvatar %>' alt='avatar'>
