@@ -178,6 +178,7 @@ module.exports = {
       var mailOptions = {
         to: email,
         from: 'grazingcattlebbq@gmail.com',
+        bcc: 'grazingcattlebbq@gmail.com',
         subject: 'Welcome to BBQTracker',
         text: 'Hello ' + username + ',\n\n' +
           "This is confirmation you've created an account on www.bbqtracker.com. If you need further assistance, feel free to reach out to grazingcattlebbq@gmail.com. Enjoy!\n"

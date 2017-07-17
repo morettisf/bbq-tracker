@@ -14,11 +14,13 @@
     <% } %>
     <section id='register'>
       <h1>Register Account</h1>
+      <a href="/auth/facebook"><img id='fb-login' src='/images/facebook-login.png'></a>
+      <div id='or'>Or</div>
       <form id='register-form' action='/register' method='post'>
-        <input id='reg-username' type='text' for='username' name='username' placeholder='Username'>
-        <input id='reg-email' type='text' for='email' name='email' placeholder='Email'>
-        <input id='reg-pw' type='password' for='password' name='password' placeholder="Password">
-        <input id='reg-pw2' type='password' for='confirmpassword' name='password2' placeholder="Confirm Password">
+        <input id='reg-username' type='text' for='username' name='username' placeholder='Username' required>
+        <input id='reg-email' type='text' for='email' name='email' placeholder='Email' required>
+        <input id='reg-pw' type='password' for='password' name='password' placeholder="Password" required>
+        <input id='reg-pw2' type='password' for='confirmpassword' name='password2' placeholder="Confirm Password" required>
         <input id='reg-btn' type='submit' for='submit' value='Submit'>
       </form>
     </section>

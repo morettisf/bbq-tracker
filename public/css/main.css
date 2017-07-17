@@ -1057,6 +1057,7 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
   background-image: url('/images/rib-rub.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  padding-bottom: 400px;
 }
 
 #sign-in, #register {
@@ -1182,6 +1183,19 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 br {
    margin: 2px 0;
 }
+
+#fb-login {
+  display: block;
+  margin: 5px auto;
+}
+
+#or {
+  margin: 10px auto 5px;
+  text-align: center;
+}
+
+
+
 
 
 /***** Page Not Found *****/
@@ -1483,6 +1497,10 @@ br {
 
   #recipe-list {
     width: 720px;
+  }
+
+  #reg-main, #sign-in-main {
+    padding-bottom: 100px;
   }
 
   #log-main, #about-main, #account-main, #reg-main, #sign-in-main, #log-history-main, #forgot-main, #reset-main {
