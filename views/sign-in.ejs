@@ -15,7 +15,9 @@
     <% } %>
     <section id='sign-in'>
       <h1>Sign In</h1>
-      <a href="/auth/facebook"><img id='fb-login' src='/images/facebook-login.png'></a>
+      <a href="/auth/facebook">
+        <button class="loginBtn loginBtn--facebook">Login with Facebook</button>
+      </a>
       <div id='or'>Or</div>
       <form id='sign-in-form' action='/sign-in' method='post'>
         <input id='sign-email' type='text' for='username' name='username' placeholder='Username' required>

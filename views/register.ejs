@@ -14,7 +14,9 @@
     <% } %>
     <section id='register'>
       <h1>Register Account</h1>
-      <a href="/auth/facebook"><img id='fb-login' src='/images/facebook-login.png'></a>
+      <a href="/auth/facebook">
+        <button class="loginBtn loginBtn--facebook">Login with Facebook</button>
+      </a>
       <div id='or'>Or</div>
       <form id='register-form' action='/register' method='post'>
         <input id='reg-username' type='text' for='username' name='username' placeholder='Username' required>

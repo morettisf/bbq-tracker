@@ -146,7 +146,11 @@ module.exports = {
                   userInfo.password = hash
                   User.create(userInfo)
                     .then(function(){
-                      introEmail(userInfo.email, userInfo.username)
+                      
+                      if (process.env.NODE_ENV !== 'test') {
+                        introEmail(userInfo.email, userInfo.username)
+                      }
+
                       req.session.message = 'Registration successful, now sign in'
                       res.redirect('/sign-in')
                     })

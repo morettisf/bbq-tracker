@@ -147,7 +147,9 @@ passport.use(new FacebookStrategy({
                         // if successful, return the new user
                         else {
 
-                          introEmail(newUser.email, newUser.username)
+                          if (process.env.NODE_ENV !== 'test') {
+                            introEmail(userInfo.email, userInfo.username)
+                          }
 
                           return done(null, newUser);
                         }
