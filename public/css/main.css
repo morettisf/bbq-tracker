@@ -1192,7 +1192,6 @@ br {
 .loginBtn {
   box-sizing: border-box;
   position: relative;
-  margin: 0.2em;
   padding: 0 15px 0 46px;
   border: none;
   text-align: left;
@@ -1201,6 +1200,7 @@ br {
   border-radius: 0.2em;
   font-size: 16px;
   color: #FFF;
+  width: 220px;
   left: 50%;
   margin-left: -110px;
   margin-bottom: 5px;
