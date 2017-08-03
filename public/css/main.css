@@ -494,7 +494,6 @@ table img, #public-rating img {
 
 label {
   display: inline-block;
-  white-space: nowrap;
   margin-top: 10px;
   width: 100%;
   font-weight: 600;
@@ -1362,7 +1361,7 @@ br {
   }
 
   .form-wrap {
-    width: fit-content;
+    display: table;
   }
 
   .img-wrapper {
@@ -1858,6 +1857,16 @@ br {
 
   #demo-box {
     margin-bottom: 10px;
+  }
+
+  input[type='checkbox'] {
+    zoom: unset;
+    margin-right: 5px;
+  }
+
+  input[type='radio'] {
+    zoom: unset;
+    margin-right: 5px;
   }
 
 }
