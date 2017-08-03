@@ -1566,6 +1566,16 @@ br {
     width: 680px;
   }
 
+  input[type='checkbox'] {
+    zoom: unset;
+    margin-right: 5px;
+  }
+
+  input[type='radio'] {
+    zoom: unset;
+    margin-right: 5px;
+  }
+
 }
 
 
@@ -1774,7 +1784,6 @@ br {
     margin-right: 0;
     color: black;
     font-size: 1em;
-    margin-top: -12px;
   }
 
   #non-mobile-right img {
@@ -1858,16 +1867,6 @@ br {
 
   #demo-box {
     margin-bottom: 10px;
-  }
-
-  input[type='checkbox'] {
-    zoom: unset;
-    margin-right: 5px;
-  }
-
-  input[type='radio'] {
-    zoom: unset;
-    margin-right: 5px;
   }
 
 }
