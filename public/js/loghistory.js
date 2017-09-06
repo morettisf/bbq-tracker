@@ -7,12 +7,12 @@ if (modify) {
     var logs = document.querySelectorAll('.log-select')
     var selectedLogs = []
 
-    logs.forEach(function(log) {
-      if (log.checked) {
-        var id = log.closest('tr').getAttribute('id')
+    for (var i = 0; i < logs.length; i++) {
+      if (logs[i].checked) {
+        var id = logs[i].closest('tr').getAttribute('id')
         selectedLogs.push(id)
       }
-    })
+    }
 
       if (modOption === 'Copy') {
         copyLogs(selectedLogs)

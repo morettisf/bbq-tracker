@@ -167,11 +167,12 @@ if (save) {
 
     var radios = document.querySelectorAll('.rating input')
     var ratingSelected
-    radios.forEach(function(radio) {
-      if (radio.checked) {
-        ratingSelected = radio.value
+
+    for (var i = 0; i < radios.length; i++) {
+      if (radios[i].checked) {
+        ratingSelected = radios[i].value
       }
-    })
+    }
 
     if (!ratingSelected) {
       ratingSelected = 0
@@ -179,11 +180,12 @@ if (save) {
 
     var status = document.querySelectorAll('#status-box input')
     var statusSelected
-    status.forEach(function(item) {
-      if (item.checked) {
-        statusSelected = item.value
+
+    for (var i = 0; i < status.length; i++) {
+      if (status[i].checked) {
+        statusSelected = status[i].value
       }
-    })
+    }
 
     var formData = new FormData()
     var basicData = {
@@ -217,14 +219,25 @@ if (save) {
     var items = ol.getElementsByTagName('li')
     var stepInfo = []
     
-    Array.from(items).forEach(function(item) {
+    var stepBuild = Array.from(items)
+
+    for (var i = 0; i < stepBuild.length; i++) {
       var stepObject = {}
-      stepObject.step = item.querySelector('.step-text').value
-      stepObject.completed = item.querySelector('.complete-check').checked
-      stepObject.time = item.querySelector('.time').value
-      stepObject.notes = item.querySelector('.complete-notes-text').value
+      stepObject.step = stepBuild[i].querySelector('.step-text').value
+      stepObject.completed = stepBuild[i].querySelector('.complete-check').checked
+      stepObject.time = stepBuild[i].querySelector('.time').value
+      stepObject.notes = stepBuild[i].querySelector('.complete-notes-text').value
       stepInfo.push(stepObject)
-    })
+    }
+
+    // Array.from(items).forEach(function(item) {
+    //   var stepObject = {}
+    //   stepObject.step = item.querySelector('.step-text').value
+    //   stepObject.completed = item.querySelector('.complete-check').checked
+    //   stepObject.time = item.querySelector('.time').value
+    //   stepObject.notes = item.querySelector('.complete-notes-text').value
+    //   stepInfo.push(stepObject)
+    // })
 
     var logData = Object.assign({ steps: stepInfo }, basicData)
 
@@ -310,11 +323,12 @@ if (update) {
 
     var radios = document.querySelectorAll('.rating input')
     var ratingSelected
-    radios.forEach(function(radio) {
-      if (radio.checked) {
-        ratingSelected = radio.value
+
+    for (var i = 0; i < radios.length; i++) {
+      if (radios[i].checked) {
+        ratingSelected = radios[i].value
       }
-    })
+    }
 
     if (!ratingSelected) {
       ratingSelected = 0
@@ -322,11 +336,12 @@ if (update) {
 
     var status = document.querySelectorAll('#status-box input')
     var statusSelected
-    status.forEach(function(item) {
-      if (item.checked) {
-        statusSelected = item.value
+
+    for (var i = 0; i < status.length; i++) {
+      if (status[i].checked) {
+        statusSelected = status[i].value
       }
-    })
+    }
 
     var meat = document.querySelector('#meat-type').value
 
@@ -368,25 +383,47 @@ if (update) {
     var items = ol.getElementsByTagName('li')
     var stepInfo = []
     
-    Array.from(items).forEach(function(item) {
+    // Array.from(items).forEach(function(item) {
+    //   var stepObject = {}
+    //   stepObject.step = item.querySelector('.step-text').value
+    //   stepObject.completed = item.querySelector('.complete-check').checked
+    //   stepObject.time = item.querySelector('.time').value
+    //   stepObject.notes = item.querySelector('.complete-notes-text').value
+    //   stepInfo.push(stepObject)
+    // })
+
+    var stepBuild = Array.from(items)
+
+    for (var i = 0; i < stepBuild.length; i++) {
       var stepObject = {}
-      stepObject.step = item.querySelector('.step-text').value
-      stepObject.completed = item.querySelector('.complete-check').checked
-      stepObject.time = item.querySelector('.time').value
-      stepObject.notes = item.querySelector('.complete-notes').value
+      stepObject.step = stepBuild[i].querySelector('.step-text').value
+      stepObject.completed = stepBuild[i].querySelector('.complete-check').checked
+      stepObject.time = stepBuild[i].querySelector('.time').value
+      stepObject.notes = stepBuild[i].querySelector('.complete-notes-text').value
       stepInfo.push(stepObject)
-    })
+    }
+
 
     var displayedPics = document.querySelectorAll('.pic img')
     var displayedPicsArray = []
     
-    Array.from(displayedPics).forEach(function(displayedPic) {
+    var picTemp = Array.from(displayedPics)
+
+    for (var i = 0; i < picTemp.length; i++) {
       var picsObject = {}
-      var attr = displayedPic.getAttribute('src')
+      var attr = picTemp[i].getAttribute('src')
       var filename = attr.split('/').pop()
       picsObject.filename = filename
       displayedPicsArray.push(picsObject)
-    })
+    }
+
+    // Array.from(displayedPics).forEach(function(displayedPic) {
+    //   var picsObject = {}
+    //   var attr = displayedPic.getAttribute('src')
+    //   var filename = attr.split('/').pop()
+    //   picsObject.filename = filename
+    //   displayedPicsArray.push(picsObject)
+    // })
 
     var logData = Object.assign({ steps: stepInfo }, { pics: displayedPicsArray }, basicData)
     
@@ -450,11 +487,11 @@ if (update) {
           var status = document.querySelectorAll('#status-box input')
           var statusSelected
 
-          status.forEach(function(item) {
-            if (item.checked) {
-              statusSelected = item.value
+          for (var i = 0; i < status.length; i++) {
+            if (status[i].checked) {
+              statusSelected = status[i].value
             }
-          })
+          }
 
           if ((statusSelected === 'Private') && h3) {
             pubLink.removeChild(h3)
@@ -473,30 +510,41 @@ if (update) {
           var picsBox = document.querySelector('.pics-box')
           var logPics = document.querySelectorAll('.pic')
 
-          logPics.forEach(function(pic) {
-            pic.parentNode.removeChild(pic)
-          })
+          for (var i = 0; i < logPics.length; i++) {
+            logPics[i].parentNode.removeChild(logPics[i])
+          }
 
           var response = JSON.parse(res)
           var newPics = response.pics
 
+          // if (newPics) {
+          //   newPics.forEach(function(pic) {
+          //     var picDiv = document.createElement('div')
+          //     picDiv.classList.add('pic')
+
+          //     picsBox.appendChild(picDiv)
+          //     picDiv.innerHTML = "<img src='https://s3-us-west-1.amazonaws.com/bbqtracker/" + pic.filename + "'><button type='button' class='remove-pic'>Remove Picture</button>"
+          //   })
+          // }
+
           if (newPics) {
-            newPics.forEach(function(pic) {
+            for (var i = 0; i < newPics.length; i++) {
               var picDiv = document.createElement('div')
               picDiv.classList.add('pic')
 
               picsBox.appendChild(picDiv)
-              picDiv.innerHTML = "<img src='https://s3-us-west-1.amazonaws.com/bbqtracker/" + pic.filename + "'><button type='button' class='remove-pic'>Remove Picture</button>"
-            })
+              picDiv.innerHTML = "<img src='https://s3-us-west-1.amazonaws.com/bbqtracker/" + newPics[i].filename + "'><button type='button' class='remove-pic'>Remove Picture</button>"
+            }
           }
+          
 
           // add/remove file upload fields on update without page refresh
           var uploadBox = document.querySelector('.pics-upload-box')
           var uploadBtns = document.querySelectorAll('.pic-upload')
 
-          uploadBtns.forEach(function(btn) {
-            btn.parentNode.removeChild(btn)
-          })
+          for (var i = 0; i < uploadBtns.length; i++) {
+            uploadBtns[i].parentNode.removeChild(uploadBtns[i])
+          }
 
           for (var i = 1; i < 6; i++) {
             var uploadDiv = document.createElement('div')
@@ -578,11 +626,11 @@ function updateLog(logData) {
       var status = document.querySelectorAll('#status-box input')
       var statusSelected
 
-      status.forEach(function(item) {
-        if (item.checked) {
-          statusSelected = item.value
+      for (var i = 0; i < status.length; i++) {
+        if (status[i].checked) {
+          statusSelected = status[i].value
         }
-      })
+      }
 
       if ((statusSelected === 'Private') && h3) {
         pubLink.removeChild(h3)
