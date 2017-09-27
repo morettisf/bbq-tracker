@@ -12,7 +12,7 @@ const MongoStore = require('connect-mongo')(session) // stores session in mongo
 mongoose.Promise = global.Promise
 if (process.env.NODE_ENV !== 'test') { // package.json specifies a test database connection when running mocha
   // mongoose.connect('mongodb://localhost/bbq-tracker') // mongoose connects into mongo
-  mongoose.connect(process.env.MLAB_KEY)
+  mongoose.connect(process.env.MLAB_KEY, { server: { reconnectTries: Number.MAX_VALUE } })
 }
 
 app.use(express.static('public'))

@@ -14,8 +14,9 @@ const LogHistory = require('./controllers/log-history')
 const About = require('./controllers/about')
 
 const multer = require('multer')
-const multerS3 = require('multer-s3')
-const aws = require('aws-sdk');
+const multerS3 = require('multer-s3-transform')
+const aws = require('aws-sdk')
+const sharp = require('sharp')
 
 var awsAccessKey = process.env.AWS_KEY
 var awsSecretKey = process.env.AWS_SECRET
@@ -33,26 +34,28 @@ var upload = multer({
     s3: s3,
     bucket: 'bbqtracker',
     contentType: multerS3.AUTO_CONTENT_TYPE,
-
-    metadata: function (req, file, cb) {
-
-      cb(null, {fieldName: file.fieldname});
+    shouldTransform: function (req, file, cb) {
+      cb(null, /^image/i.test(file.mimetype))
     },
+    transforms: [{
+      id: 'original',
+      key: function (req, file, cb) {
+        let fileSplit = file.originalname.split('.')
 
-    key: function (req, file, cb) {
+        let filename = fileSplit.slice(0, fileSplit.length - 1)
+        filename.push(Date.now())
+        filename = filename.join('_') + '.' + fileSplit[fileSplit.length - 1]
 
-    let fileSplit = file.originalname.split('.')
-
-    let filename = fileSplit.slice(0, fileSplit.length - 1)
-    filename.push(Date.now())
-    filename = filename.join('_') + '.' + fileSplit[fileSplit.length - 1]
-
-      cb(null, filename)
-    }
+          cb(null, filename)
+        },
+      transform: function (req, file, cb) {
+        cb(null, sharp().resize(1000))
+      }
+    }]
   }),
   limits: { fileSize: 5000000 },
   fileFilter: function (req, file, cb) {
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
         return cb(new Error('Only image files are allowed!'));
     }
     cb(null, true)
