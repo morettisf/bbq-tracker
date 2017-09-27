@@ -37,8 +37,10 @@ module.exports = {
 
       var pics = req.files
 
-      for (i=0; i < pics.length; i++) {
-        info.pics.push({ filename: pics[i].key })
+      console.log(req.files)
+
+      for (var i=0; i < pics.length; i++) {
+        info.pics.push({ filename: pics[i].transforms[0].key })
       }
 
     }

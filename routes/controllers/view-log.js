@@ -73,8 +73,8 @@ module.exports = {
 
       var newPics = req.files
 
-      for (i=0; i < newPics.length; i++) {
-        info.pics.push({ filename: newPics[i].key })
+      for (var i=0; i < newPics.length; i++) {
+        info.pics.push({ filename: newPics[i].transforms[0].key })
       }
 
     }
