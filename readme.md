@@ -1,5 +1,5 @@
 # BBQ Tracker
-Full stack capstone project at Thinkful (http://thinkful.com/)
+Full Stack JavaScript App for BBQ Cooks
 
 ## Live Site
 http://www.bbqtracker.com
