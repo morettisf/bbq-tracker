@@ -8,6 +8,7 @@ const app = express()
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const MongoStore = require('connect-mongo')(session) // stores session in mongo
+const enforce = require('express-sslify');
 
 mongoose.Promise = global.Promise
 if (process.env.NODE_ENV !== 'test') { // package.json specifies a test database connection when running mocha
@@ -52,6 +53,8 @@ else if (process.env.NODE_ENV === 'test') {
 app.use((err, req, res, next) => { // middleware to handle errors. "Next" is a function to pass to next middleware in chain
   res.status(422).send({ error: err.message })
 })
+
+app.use(enforce.HTTPS({ trustProtoHeader: true }))
 
 routes(app)
 
