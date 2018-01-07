@@ -36,6 +36,8 @@ if (process.env.NODE_ENV !== 'test') {
     store: new MongoStore({ mongooseConnection: mongoose.createConnection(process.env.MLAB_KEY) })
   }))
 
+  app.use(enforce.HTTPS({ trustProtoHeader: true }))
+
 }
 
 else if (process.env.NODE_ENV === 'test') {
@@ -53,8 +55,6 @@ else if (process.env.NODE_ENV === 'test') {
 app.use((err, req, res, next) => { // middleware to handle errors. "Next" is a function to pass to next middleware in chain
   res.status(422).send({ error: err.message })
 })
-
-app.use(enforce.HTTPS({ trustProtoHeader: true }))
 
 routes(app)
 
