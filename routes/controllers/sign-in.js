@@ -108,7 +108,7 @@ passport.use(new FacebookStrategy({
 
     clientID        : 246036765904174,
     clientSecret    : process.env.FB_CLIENT_SECRET,
-    callbackURL     : 'https://bbqtracker.herokuapp.com/auth/facebook.callback',
+    callbackURL     : 'https://bbqtracker.herokuapp.com/auth/facebook/callback',
     profileFields: ['id', 'displayName', 'email', 'first_name', 'last_name']
 
     },
