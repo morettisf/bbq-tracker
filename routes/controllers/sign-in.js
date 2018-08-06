@@ -56,6 +56,8 @@ module.exports = {
             return next(err) 
           }
 
+          console.log(user)
+
           return res.redirect('log-history')
 
         })
