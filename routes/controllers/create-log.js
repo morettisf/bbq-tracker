@@ -54,7 +54,9 @@ module.exports = {
       if (err) throw err
 
       user.logs.push(info)
-      user.save()
+      user.save((err, res) => {
+        console.log(err)
+      })
 
       res.send('ok')
       

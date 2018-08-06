@@ -17,7 +17,7 @@ var logInfo = {
        completed: true,
        time: '12:00',
        notes: 'really good!' } ],
-  date: 'March-03-2017',
+  date: '2017-02-03T22:27:06.388Z',
   session_name: 'Whole Pig',
   cooking_device: 'Weber Smokey Mountain',
   device_other: '',
@@ -31,7 +31,7 @@ var logInfo = {
   brand: 'Stubbs',
   wood: 'Oak',
   wood_other: '',
-  rating: '4',
+  rating: 4,
   status: 'Public',
   username: 'c',
   updated: '2017-02-03T22:27:06.388Z',
@@ -67,7 +67,7 @@ var logInfoUpdate = {
   brand: 'Stubbs',
   wood: 'Oak',
   wood_other: '',
-  rating: '4',
+  rating: 4,
   status: 'Public',
   username: 'c',
   updated: '2017-02-03T22:27:06.388Z',
@@ -93,15 +93,11 @@ describe('Logged in', () => {
           agent.post('/sign-in')
           .send({ username: 'steve', password: 'bestpassword123' })
           .then(() => {
-            agent.get('/create-log')
-            .then(() => {
-              agent.post('/create-log')
-              .send(logInfo)
-              .then((res) => {
-                console.log(res.text)
-                // res.text.should.contain('log created')
-                done()
-              })
+            agent.post('/create-log')
+            .send(logInfo)
+            .then((res) => {
+              res.text.should.contain('ok')
+              done()
             })
           })
       })
@@ -116,18 +112,15 @@ describe('Logged in', () => {
           agent.post('/sign-in')
           .send({ username: 'steve', password: 'bestpassword123' })
           .then(() => {
-            agent.get('/create-log')
-            .then(() => {
-              agent.post('/create-log')
-              .send(logInfo)
-              .then(() => {
-                User.findOne({ username: 'steve' }, function(err, user) {
-                  var logId = user.logs[0]._id
-                  agent.get('/view-log/' + logId)
-                  .then((res) => {
-                    res.text.should.have.string('Saved BBQ Log')
-                    done()
-                  })
+            agent.post('/create-log')
+            .send(logInfo)
+            .then((res) => {
+              User.findOne({ username: 'steve' }, function(err, user) {
+                var logId = user.logs[0]._id
+                agent.get('/view-log/' + logId)
+                .then((res) => {
+                  res.text.should.have.string('Saved BBQ Log')
+                  done()
                 })
               })
             })
